@@ -43,6 +43,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.jadwal.index') }}" class="nav-link text-white @yield('table-jadwal')">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>
+                        Jadwal
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                     @csrf
                 </form>

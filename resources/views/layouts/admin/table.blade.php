@@ -11,43 +11,50 @@
     <div class="card">
         <!-- /.card-header -->
         <div class="card-body">
-            <div class="d-flex justify-content-end mb-3">
-                <!-- Tombol untuk membuka modal -->
-                <a role="button" class="btn btn-primary mx-1" data-toggle="modal" data-target="#modalFormCreate">Tambah</a>
+            <div class="d-flex justify-content-between">
+                <h4>Kelola Data Tabel</h4>
+                <div class="d-flex
+                justify-content-end mb-3">
+                    <!-- Tombol untuk membuka modal -->
+                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal" data-target="#modalFormCreate">Tambah</a>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modalFormCreate" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        @yield('formCreate')
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalFormCreate" tabindex="-1" role="dialog"
+                        aria-labelledby="modalFormLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            @yield('formCreate')
+                        </div>
                     </div>
-                </div>
 
-                <!-- Tombol untuk membuka modal -->
-                <a role="button" class="btn btn-primary mx-1" data-toggle="modal" data-target="#modalFormUpload">Upload</a>
+                    <!-- Tombol untuk membuka modal -->
+                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal"
+                        data-target="#modalFormUpload">Upload</a>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modalFormUpload" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        @yield('formUpload')
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalFormUpload" tabindex="-1" role="dialog"
+                        aria-labelledby="modalFormLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            @yield('formUpload')
+                        </div>
                     </div>
-                </div>
 
-                <!-- Tombol untuk membuka modal -->
-                <a role="button" class="btn btn-primary mx-1" data-toggle="modal" data-target="#modalFormDeleteAll">Hapus
-                    Semua</a>
+                    <!-- Tombol untuk membuka modal -->
+                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal"
+                        data-target="#modalFormDeleteAll">Hapus
+                        Semua</a>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modalFormDeleteAll" tabindex="-1" role="dialog"
-                    aria-labelledby="modalFormLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        @yield('formDeleteAll')
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalFormDeleteAll" tabindex="-1" role="dialog"
+                        aria-labelledby="modalFormLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            @yield('formDeleteAll')
+                        </div>
                     </div>
+
+
                 </div>
-
-
             </div>
+
             @if (session('sukses'))
                 <div class="alert alert-success" role="alert">
                     {{ session('sukses') }}
@@ -68,6 +75,7 @@
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
+                "paging": true,
                 // "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({

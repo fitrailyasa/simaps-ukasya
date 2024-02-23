@@ -30,7 +30,7 @@
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-success mr-2" data-bs-toggle="modal"
                                 data-bs-target=".formEdit{{ $user->id }}">
-                                Edit
+                                <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
                             <div class="modal fade formEdit{{ $user->id }}" tabindex="-1" role="dialog" aria-hidden="">
@@ -41,7 +41,7 @@
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
                                 data-bs-target=".bd-example-modal-sm{{ $user->id }}">
-                                Hapus
+                                <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
                             <div class="modal fade bd-example-modal-sm{{ $user->id }}" tabindex="-1" role="dialog"

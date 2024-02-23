@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/jadwal', [AdminJadwalController::class, 'store'])->name('jadwal.store');
     Route::put('/jadwal/{id}/update', [AdminJadwalController::class, 'update'])->name('jadwal.update'); 
     Route::delete('/jadwal/{id}/destroy', [AdminJadwalController::class, 'destroy'])->name('jadwal.destroy');
+    Route::post('/jadwal/upload', [AdminJadwalController::class, 'import'])->name('jadwal.import');
+    Route::delete('/jadwal/destroy-all', [AdminJadwalController::class, 'destroyAll'])->name('jadwal.destroy-all');
 
     // Timbang Ulang
     Route::get('/timbang-ulang', [AdminTimbangUlangController::class, 'index'])->name('timbang-ulang.index');

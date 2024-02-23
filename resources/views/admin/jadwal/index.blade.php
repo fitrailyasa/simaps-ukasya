@@ -1,19 +1,19 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Tanding')
+@section('title', 'Jadwal')
 
-@section('table-tanding', 'active')
+@section('table-jadwal', 'active')
 
 @section('formCreate')
-    @include('admin.tanding.create')
+    @include('admin.jadwal.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.tanding.upload')
+    @include('admin.jadwal.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.tanding.deleteAll')
+    @include('admin.jadwal.deleteAll')
 @endsection
 
 @section('table')
@@ -21,46 +21,57 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Tinggi Badan</th>
-                <th>Berat Badan</th>
-                <th>Kontingen</th>
-                <th>Kelas</th>
-                <th>Golongan</th>
+                <th>Partai</th>
+                {{-- <th>Tanggal</th> --}}
+                <th>Gelanggang</th>
+                <th>Babak</th>
+                <th>Kelompok</th>
+                <th>Pemain Biru</th>
+                <th>Partai Biru</th>
+                <th>Pemain Merah</th>
+                <th>Partai Merah</th>
+                <th>Status</th>
+                <th>Pemenang</th>
+                <th>Aktif</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($tandings as $tanding)
+            @foreach ($jadwals as $jadwal)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $tanding->nama }}</td>
-                    <td>{{ $tanding->jenis_kelamin }}</td>
-                    <td>{{ $tanding->tinggi_badan }} cm</td>
-                    <td>{{ $tanding->berat_badan }} kg</td>
-                    <td>{{ $tanding->kontingen }}</td>
-                    <td>{{ $tanding->kelas }}</td>
-                    <td>{{ $tanding->golongan }}</td>
+                    <td>{{ $jadwal->partai }}</td>
+                    {{-- <td>{{ $jadwal->tanggal }}</td> --}}
+                    <td>{{ $jadwal->gelanggang }}</td>
+                    <td>{{ $jadwal->babak }}</td>
+                    <td>{{ $jadwal->kelompok }}</td>
+                    <td class="bg-primary">{{ $jadwal->pemain_biru }}</td>
+                    <td class="bg-primary">{{ $jadwal->partai_biru }}</td>
+                    <td class="bg-danger">{{ $jadwal->pemain_merah }}</td>
+                    <td class="bg-danger">{{ $jadwal->partai_merah }}</td>
+                    <td>{{ $jadwal->status }}</td>
+                    <td>{{ $jadwal->pemenang }}</td>
+                    <td>{{ $jadwal->aktif }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-success mr-2" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $tanding->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $jadwal->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $tanding->id }}" tabindex="-1" role="dialog" aria-hidden="">
+                            <div class="modal fade bd-example-modal-sm{{ $jadwal->id }}" tabindex="-1" role="dialog"
+                                aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.tanding.edit')
+                                    @include('admin.jadwal.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $tanding->id }}">
+                                data-bs-target=".formEdit{{ $jadwal->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $tanding->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $jadwal->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -73,8 +84,7 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('admin.tanding.destroy', $tanding->id) }}"
-                                                method="POST">
+                                            <form action="{{ route('admin.jadwal.destroy', $jadwal->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="submit" class="btn btn-danger light" name=""
@@ -94,13 +104,18 @@
         <tfoot>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Tinggi Badan</th>
-                <th>Berat Badan</th>
-                <th>Kontingen</th>
-                <th>Kelas</th>
-                <th>Golongan</th>
+                <th>Partai</th>
+                {{-- <th>Tanggal</th> --}}
+                <th>Gelanggang</th>
+                <th>Babak</th>
+                <th>Kelompok</th>
+                <th>Pemain Biru</th>
+                <th>Partai Biru</th>
+                <th>Pemain Merah</th>
+                <th>Partai Merah</th>
+                <th>Status</th>
+                <th>Pemenang</th>
+                <th>Aktif</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
