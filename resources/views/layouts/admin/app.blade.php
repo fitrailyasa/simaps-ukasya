@@ -140,7 +140,8 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper mt-5 pt-3">
+        <div class="content-wrapper mt-5 pt-3"
+            style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">

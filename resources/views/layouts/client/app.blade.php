@@ -31,6 +31,7 @@
     <script src="https://kit.fontawesome.com/2a99f4df77.js" crossorigin="anonymous"></script>
 
     <!--Favicon-->
+    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" sizes="57x57"
         href="{{ asset('assets/favicon/apple-touch-icon-57x57.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
@@ -89,11 +90,11 @@
 
 <body class="hold-transition sidebar-mini layout-fixed bg-gradient">
 
-    @include('layouts.client.header')
+    {{-- @include('layouts.client.header') --}}
 
     @yield('content')
 
-    @include('layouts.client.footer')
+    {{-- @include('layouts.client.footer') --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -17,17 +17,23 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="hold-transition login-page">
-    {{-- style="background-image: url('{{ asset('assets/img/ipsi.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center; background-attachment: fixed;"> --}}
+<body class="hold-transition login-page"
+    style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                {{-- <h2>SIMAPS</h2> --}}
-                <img src="{{ asset('logo.png') }}" alt="" width="200" class="img img-fluid">
+                <div class="d-flex justify-content-around align-items-center">
+                    <div class="h1 m-0"><b>SIMAPS</b></div>
+                    <a class="btn btn-primary" href="{{ route('beranda') }}"><i
+                            class="fas fa-arrow-circle-right mr-1"></i>
+                        Penonton</a>
+                </div>
             </div>
             <div class="card-body">
-                {{-- <p class="login-box-msg">Sistem Manajemen Pencak Silat</p> --}}
+                <div class="text-center mb-4">
+                    <img src="{{ asset('logo.png') }}" alt="" width="200" class="img img-fluid">
+                </div>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
