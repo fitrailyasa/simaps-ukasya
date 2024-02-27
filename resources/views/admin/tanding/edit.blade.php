@@ -28,7 +28,7 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" id="jenis_kelamin"
                         class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                        <option value="{{ $tanding->jenis_kelamin }}">{{ $tanding->jenis_kelamin }}</option>
+                        <option selected value="{{ $tanding->jenis_kelamin }}">{{ $tanding->jenis_kelamin }}</option>
                         <option value="L">Laki-laki</option>
                         <option value="P">Perempuan</option>
                     </select>

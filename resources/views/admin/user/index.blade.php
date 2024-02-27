@@ -28,7 +28,7 @@
                     <td>{{ $user->roles->name }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
-                            <a role="button" class="btn-sm btn-success mr-2" data-bs-toggle="modal"
+                            <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
                                 data-bs-target=".formEdit{{ $user->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>

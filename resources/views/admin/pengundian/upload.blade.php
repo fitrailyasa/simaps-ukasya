@@ -24,7 +24,6 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             <a class="btn btn-success" href="{{ asset('assets/template/pengundian-template.xlsx') }}"
                 download="pengundian-template.xlsx">Download Format</a>
             <button type="submit" class="btn btn-primary">Simpan</button>

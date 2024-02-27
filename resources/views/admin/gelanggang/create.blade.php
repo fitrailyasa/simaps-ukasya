@@ -33,19 +33,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-2">
-                        <label class="form-label">Audio</label>
-                        <input type="file" class="form-control @error('audio') is-invalid @enderror"
-                            placeholder="audio" name="audio" id="audio" enabled>
-                        @error('audio')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-2">
                         <label class="form-label">Jenis</label>
-                        <input type="text" class="form-control @error('jenis') is-invalid @enderror"
-                            placeholder="jenis" name="jenis" id="jenis" required>
+                        <select name="jenis" id="jenis" class="form-select @error('jenis') is-invalid @enderror">
+                            <option value="Tanding">Tanding</option>
+                            <option value="Tunggal">Tunggal</option>
+                            <option value="Ganda">Ganda</option>
+                            <option value="Regu">Regu</option>
+                            <option value="Solo Kreatif">Solo Kreatif</option>
+                        </select>
                         @error('jenis')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -57,6 +52,16 @@
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror"
                             placeholder="jumlah" name="jumlah" id="jumlah" required>
                         @error('jumlah')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-2">
+                        <label class="form-label">Audio</label>
+                        <input type="file" class="form-control @error('audio') is-invalid @enderror"
+                            placeholder="audio" name="audio" id="audio" enabled>
+                        @error('audio')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

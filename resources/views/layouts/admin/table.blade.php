@@ -27,7 +27,7 @@
                     </div>
 
                     <!-- Tombol untuk membuka modal -->
-                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal"
+                    <a role="button" class="btn btn-success mx-1" data-toggle="modal"
                         data-target="#modalFormUpload">Upload</a>
 
                     <!-- Modal -->
@@ -39,7 +39,7 @@
                     </div>
 
                     <!-- Tombol untuk membuka modal -->
-                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal"
+                    <a role="button" class="btn btn-danger mx-1" data-toggle="modal"
                         data-target="#modalFormDeleteAll">Hapus
                         Semua</a>
 

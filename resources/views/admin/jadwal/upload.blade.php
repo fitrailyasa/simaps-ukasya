@@ -13,9 +13,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mb-1">
-                        <label class="form-label">Upload File (<a
-                                href="{{ asset('assets/template/jadwal-template.xlsx') }}"
-                                download="jadwal-template.xlsx">Download Format</a>)</label>
+                        <label class="form-label">Upload File</label>
                         <input type="file" class="form-control @error('file') is-invalid @enderror"
                             placeholder="file" name="file" id="file" required>
                         @error('file')
@@ -26,7 +24,9 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <a class="btn btn-success" href="{{ asset('assets/template/jadwal-template.xlsx') }}"
+                download="jadwal-template.xlsx">Download
+                Format</a>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
         </form>

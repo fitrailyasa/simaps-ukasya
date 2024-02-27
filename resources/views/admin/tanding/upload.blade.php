@@ -24,7 +24,6 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             <a class="btn btn-success" href="{{ asset('assets/template/tanding-template.xlsx') }}"
                 download="tanding-template.xlsx">Download
                 Format</a>
