@@ -1,19 +1,19 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Jadwal')
+@section('title', 'Gelanggang')
 
-@section('table-jadwal', 'active')
+@section('table-gelanggang', 'active')
 
 @section('formCreate')
-    @include('admin.jadwal.create')
+    @include('admin.gelanggang.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.jadwal.upload')
+    @include('admin.gelanggang.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.jadwal.deleteAll')
+    @include('admin.gelanggang.deleteAll')
 @endsection
 
 @section('table')
@@ -21,53 +21,44 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
-                <th>Gelanggang</th>
-                <th>Babak</th>
-                <th>Kelompok</th>
-                <th>Sudut Biru</th>
-                <th>Sudut Merah</th>
-                <th>Status</th>
-                <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Nama</th>
+                <th>Waktu</th>
+                <th>Audio</th>
+                <th>Jenis</th>
+                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($jadwals as $jadwal)
+            @foreach ($gelanggangs as $gelanggang)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwal->partai }}</td>
-                    {{-- <td>{{ $jadwal->tanggal }}</td> --}}
-                    <td>{{ $jadwal->gelanggang }}</td>
-                    <td>{{ $jadwal->babak }}</td>
-                    <td>{{ $jadwal->kelompok }}</td>
-                    <td class="bg-primary">{{ $jadwal->pemain_biru }} - {{ $jadwal->partai_biru }}</td>
-                    <td class="bg-danger">{{ $jadwal->pemain_merah }} - {{ $jadwal->partai_merah }}</td>
-                    <td>{{ $jadwal->status }}</td>
-                    <td>{{ $jadwal->pemenang }}</td>
-                    <td>{{ $jadwal->aktif }}</td>
+                    <td>{{ $gelanggang->nama }}</td>
+                    <td>{{ $gelanggang->waktu }} menit</td>
+                    <td><audio src="{{ asset($gelanggang->audio) }} ?? -" controls></audio></td>
+                    <td>{{ $gelanggang->jenis }}</td>
+                    <td><a class="btn-sm btn-primary" href="{{ $gelanggang->jumlah }}">{{ $gelanggang->jumlah }} jadwal</a>
+                    </td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-success mr-2" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $jadwal->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $gelanggang->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $jadwal->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade bd-example-modal-sm{{ $gelanggang->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.jadwal.edit')
+                                    @include('admin.gelanggang.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $jadwal->id }}">
+                                data-bs-target=".formEdit{{ $gelanggang->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $jadwal->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $gelanggang->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -80,7 +71,8 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('admin.jadwal.destroy', $jadwal->id) }}" method="POST">
+                                            <form action="{{ route('admin.gelanggang.destroy', $gelanggang->id) }}"
+                                                method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="submit" class="btn btn-danger light" name=""
@@ -100,16 +92,11 @@
         <tfoot>
             <tr>
                 <th>No</th>
-                <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
-                <th>Gelanggang</th>
-                <th>Babak</th>
-                <th>Kelompok</th>
-                <th>Sudut Biru</th>
-                <th>Sudut Merah</th>
-                <th>Status</th>
-                <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Nama</th>
+                <th>Waktu</th>
+                <th>Audio</th>
+                <th>Jenis</th>
+                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>

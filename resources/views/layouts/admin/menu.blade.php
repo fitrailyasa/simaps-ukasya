@@ -51,6 +51,22 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.gelanggang.index') }}" class="nav-link text-white @yield('table-gelanggang')">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Gelanggang
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.pengundian.index') }}" class="nav-link text-white @yield('table-pengundian')">
+                    <i class="nav-icon fas fa-random"></i>
+                    <p>
+                        Pengundian
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                     @csrf
                 </form>

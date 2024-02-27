@@ -6,8 +6,7 @@
 
 @section('content')
 
-    <div class="pt-5"
-        style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
+    <div class="pt-5" style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
         <div class="d-flex justify-content-center">
             <img src="{{ asset('assets/img/ipsi.png') }}" class="img-fluid" width="300px" alt="">
         </div>

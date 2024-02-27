@@ -26,8 +26,8 @@
                         <label class="form-label">Jenis Kelamin</label>
                         <select name="jenis_kelamin" id="jenis_kelamin"
                             class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
                         </select>
                         @error('jenis_kelamin')
                             <div class="invalid-feedback">{{ $message }}</div>

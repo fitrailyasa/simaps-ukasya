@@ -26,9 +26,12 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Jenis Kelamin</label>
-                    <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror"
-                        placeholder="jenis_kelamin" name="jenis_kelamin" id="jenis_kelamin"
-                        value="{{ $tanding->jenis_kelamin }}" required>
+                    <select name="jenis_kelamin" id="jenis_kelamin"
+                        class="form-select @error('jenis_kelamin') is-invalid @enderror">
+                        <option value="{{ $tanding->jenis_kelamin }}">{{ $tanding->jenis_kelamin }}</option>
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>
                     @error('jenis_kelamin')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

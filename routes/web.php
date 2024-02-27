@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\AdminJadwalController;
 use App\Http\Controllers\Admin\AdminTimbangUlangController;
 use App\Http\Controllers\Admin\AdminKontrolController;  
 use App\Http\Controllers\Admin\AdminMedaliController;  
-use App\Http\Controllers\Admin\AdminPengaturanController;  
+use App\Http\Controllers\Admin\AdminGelanggangController;  
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
@@ -55,12 +55,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/tanding/{id}/destroy', [AdminTandingController::class, 'destroy'])->name('tanding.destroy');
     Route::post('/tanding/upload', [AdminTandingController::class, 'import'])->name('tanding.import');
     Route::delete('/tanding/destroy-all', [AdminTandingController::class, 'destroyAll'])->name('tanding.destroy-all');
-
+    
     // Pengundian
     Route::get('/pengundian', [AdminPengundianController::class, 'index'])->name('pengundian.index');
     Route::post('/pengundian', [AdminPengundianController::class, 'store'])->name('pengundian.store');
     Route::put('/pengundian/{id}/update', [AdminPengundianController::class, 'update'])->name('pengundian.update');
     Route::delete('/pengundian/{id}/destroy', [AdminPengundianController::class, 'destroy'])->name('pengundian.destroy');
+    Route::post('/pengundian/upload', [AdminPengundianController::class, 'import'])->name('pengundian.import');
+    Route::delete('/pengundian/destroy-all', [AdminPengundianController::class, 'destroyAll'])->name('pengundian.destroy-all');
     
     // Bagan
     Route::get('/bagan', [AdminBaganController::class, 'index'])->name('bagan.index');
@@ -88,8 +90,13 @@ Route::middleware(['auth'])->group(function () {
     // Perolehan Medali
     Route::get('/medali', [AdminMedaliController::class, 'index'])->name('medali.index');
     
-    // Pengaturan
-    Route::get('/pengaturan', [AdminPengaturanController::class, 'index'])->name('pengaturan.index');
+    // gelanggang
+    Route::get('/gelanggang', [AdminGelanggangController::class, 'index'])->name('gelanggang.index');
+    Route::post('/gelanggang', [AdminGelanggangController::class, 'store'])->name('gelanggang.store');
+    Route::put('/gelanggang/{id}/update', [AdminGelanggangController::class, 'update'])->name('gelanggang.update'); 
+    Route::delete('/gelanggang/{id}/destroy', [AdminGelanggangController::class, 'destroy'])->name('gelanggang.destroy');
+    Route::post('/gelanggang/upload', [AdminGelanggangController::class, 'import'])->name('gelanggang.import');
+    Route::delete('/gelanggang/destroy-all', [AdminGelanggangController::class, 'destroyAll'])->name('gelanggang.destroy-all');
 
   });
 
