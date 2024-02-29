@@ -35,10 +35,26 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.pengundianTanding.index') }}" class="nav-link text-white @yield('table-pengundianTanding')">
+                    <i class="nav-icon fas fa-random"></i>
+                    <p>
+                        Pengundian Tanding
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('admin.tgr.index') }}" class="nav-link text-white @yield('table-tgr')">
                     <i class="nav-icon fas fa-flag"></i>
                     <p>
                         TGR
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.pengundianTGR.index') }}" class="nav-link text-white @yield('table-pengundianTGR')">
+                    <i class="nav-icon fas fa-random"></i>
+                    <p>
+                        Pengundian TGR
                     </p>
                 </a>
             </li>
@@ -55,14 +71,6 @@
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
                         Gelanggang
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.pengundian.index') }}" class="nav-link text-white @yield('table-pengundian')">
-                    <i class="nav-icon fas fa-random"></i>
-                    <p>
-                        Pengundian
                     </p>
                 </a>
             </li>

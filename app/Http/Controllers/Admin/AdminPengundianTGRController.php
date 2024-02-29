@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pengundian;
+use App\Models\PengundianTGR;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\PengundianImport;
+use App\Imports\PengundianTGRImport;
 
-class AdminPengundianController extends Controller
+class AdminPengundianTGRController extends Controller
 {
     public function index()
     {
-        $pengundians = Pengundian::latest('id')->get();
-        return view('admin.pengundian.index', compact('pengundians'));
+        $pengundianTGRs = PengundianTGR::latest('id')->get();
+        return view('admin.pengundianTGR.index', compact('pengundianTGRs'));
     }
 
     public function import(Request $request)
@@ -24,9 +24,9 @@ class AdminPengundianController extends Controller
 
         $file = $request->file('file');
 
-        Excel::import(new PengundianImport, $file);
+        Excel::import(new PengundianTGRImport, $file);
 
-        return redirect()->route('admin.pengundian.index')->with('sukses', 'Berhasil Import Data Undian!');
+        return redirect()->route('admin.pengundianTGR.index')->with('sukses', 'Berhasil Import Data Undian!');
     }
 
     public function store(Request $request)
@@ -40,9 +40,9 @@ class AdminPengundianController extends Controller
             'no_undian' => 'required|max:255',
         ]);
 
-        Pengundian::create($request->all());
+        PengundianTGR::create($request->all());
 
-        return redirect()->route('admin.pengundian.index')->with('sukses', 'Berhasil Tambah Undian!');
+        return redirect()->route('admin.pengundianTGR.index')->with('sukses', 'Berhasil Tambah Undian!');
     }
 
     public function update(Request $request, $id)
@@ -56,24 +56,24 @@ class AdminPengundianController extends Controller
             'no_undian' => 'required|max:255',
         ]);
 
-        $pengundian = Pengundian::findOrFail($id);
-        $pengundian->update($request->all());
+        $pengundianTGR = PengundianTGR::findOrFail($id);
+        $pengundianTGR->update($request->all());
 
-        return redirect()->route('admin.pengundian.index')->with('sukses', 'Berhasil Edit Undian!');
+        return redirect()->route('admin.pengundianTGR.index')->with('sukses', 'Berhasil Edit Undian!');
     }
 
     public function destroy($id)
     {
-        $pengundian = Pengundian::findOrFail($id);
-        $pengundian->delete();
+        $pengundianTGR = PengundianTGR::findOrFail($id);
+        $pengundianTGR->delete();
 
-        return redirect()->route('admin.pengundian.index')->with('sukses', 'Berhasil Hapus Undian!');
+        return redirect()->route('admin.pengundianTGR.index')->with('sukses', 'Berhasil Hapus Undian!');
     }
 
     public function destroyAll()
     {
-        Pengundian::truncate();
+        PengundianTGR::truncate();
 
-        return redirect()->route('admin.pengundian.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        return redirect()->route('admin.pengundianTGR.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
     }
 }

@@ -1,19 +1,19 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Pengundian')
+@section('title', 'Pengundian Tanding')
 
-@section('table-pengundian', 'active')
+@section('table-pengundianTanding', 'active')
 
 @section('formCreate')
-    @include('admin.pengundian.create')
+    @include('admin.pengundianTanding.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.pengundian.upload')
+    @include('admin.pengundianTanding.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.pengundian.deleteAll')
+    @include('admin.pengundianTanding.deleteAll')
 @endsection
 
 @section('table')
@@ -22,44 +22,36 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Golongan</th>
-                <th>Kelas/Kategori</th>
-                <th>Jenis Kelamin</th>
-                <th>Kontingen</th>
                 <th>No. Undian</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($pengundians as $pengundian)
+            @foreach ($pengundianTandings as $pengundianTanding)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengundian->nama }}</td>
-                    <td>{{ $pengundian->golongan }}</td>
-                    <td>{{ $pengundian->kelas_kategori }}</td>
-                    <td>{{ $pengundian->jenis_kelamin }}</td>
-                    <td>{{ $pengundian->kontingen }}</td>
-                    <td>{{ $pengundian->no_undian }}</td>
+                    <td>{{ $pengundianTanding->nama }}</td>
+                    <td>{{ $pengundianTanding->no_undian }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $pengundian->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $pengundianTanding->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $pengundian->id }}" tabindex="-1" role="dialog"
-                                aria-hidden="">
+                            <div class="modal fade bd-example-modal-sm{{ $pengundianTanding->id }}" tabindex="-1"
+                                role="dialog" aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.pengundian.edit')
+                                    @include('admin.pengundianTanding.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $pengundian->id }}">
+                                data-bs-target=".formEdit{{ $pengundianTanding->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $pengundian->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $pengundianTanding->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -72,7 +64,8 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('admin.pengundian.destroy', $pengundian->id) }}"
+                                            <form
+                                                action="{{ route('admin.pengundianTanding.destroy', $pengundianTanding->id) }}"
                                                 method="POST">
                                                 @method('DELETE')
                                                 @csrf
@@ -94,10 +87,6 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Golongan</th>
-                <th>Kelas/Kategori</th>
-                <th>Jenis Kelamin</th>
-                <th>Kontingen</th>
                 <th>No. Undian</th>
                 <th>Aksi</th>
             </tr>

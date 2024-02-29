@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePengundianTable extends Migration
+class CreatePengundianTandingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePengundianTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengundian', function (Blueprint $table) {
+        Schema::create('pengundian_tanding', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('golongan');
-            $table->string('kelas_kategori');
-            $table->string('jenis_kelamin');
-            $table->string('kontingen');
             $table->string('no_undian')->nullable();
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ class CreatePengundianTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengundian');
+        Schema::dropIfExists('pengundian_tanding');
     }
 }
