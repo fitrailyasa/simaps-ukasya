@@ -12,4 +12,9 @@ class Tanding extends Model
     protected $table = 'tanding';
     protected $fillable = ['nama', 'jenis_kelamin', 'tinggi_badan', 'berat_badan', 'kontingen', 'golongan', 'kelas'];
 
+    public function pengundianTanding()
+    {
+        return $this->hasMany(PengundianTanding::class);
+    }
+
 }

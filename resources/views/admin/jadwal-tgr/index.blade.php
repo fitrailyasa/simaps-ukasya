@@ -1,19 +1,19 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Jadwal')
+@section('title', 'Jadwal TGR')
 
-@section('table-jadwal', 'active')
+@section('table-jadwal-tgr', 'active')
 
 @section('formCreate')
-    @include('admin.jadwal.create')
+    @include('admin.jadwal-tgr.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.jadwal.upload')
+    @include('admin.jadwal-tgr.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.jadwal.deleteAll')
+    @include('admin.jadwal-tgr.deleteAll')
 @endsection
 
 @section('table')
@@ -35,39 +35,39 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($jadwals as $jadwal)
+            @foreach ($jadwaltgrs as $jadwaltgr)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwal->partai }}</td>
-                    {{-- <td>{{ $jadwal->tanggal }}</td> --}}
-                    <td>{{ $jadwal->gelanggang }}</td>
-                    <td>{{ $jadwal->babak }}</td>
-                    <td>{{ $jadwal->kelompok }}</td>
-                    <td class="bg-primary">{{ $jadwal->pemain_biru }} - {{ $jadwal->partai_biru }}</td>
-                    <td class="bg-danger">{{ $jadwal->pemain_merah }} - {{ $jadwal->partai_merah }}</td>
-                    <td>{{ $jadwal->status }}</td>
-                    <td>{{ $jadwal->pemenang }}</td>
-                    <td>{{ $jadwal->aktif }}</td>
+                    <td>{{ $jadwaltgr->partai }}</td>
+                    {{-- <td>{{ $jadwaltgr->tanggal }}</td> --}}
+                    <td>{{ $jadwaltgr->gelanggang }}</td>
+                    <td>{{ $jadwaltgr->babak }}</td>
+                    <td>{{ $jadwaltgr->kelompok }}</td>
+                    <td class="bg-primary">{{ $jadwaltgr->pemain_biru }} - {{ $jadwaltgr->partai_biru }}</td>
+                    <td class="bg-danger">{{ $jadwaltgr->pemain_merah }} - {{ $jadwaltgr->partai_merah }}</td>
+                    <td>{{ $jadwaltgr->status }}</td>
+                    <td>{{ $jadwaltgr->pemenang }}</td>
+                    <td>{{ $jadwaltgr->aktif }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $jadwal->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $jadwaltgr->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $jadwal->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade bd-example-modal-sm{{ $jadwaltgr->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.jadwal.edit')
+                                    @include('admin.jadwal-tgr.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $jadwal->id }}">
+                                data-bs-target=".formEdit{{ $jadwaltgr->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $jadwal->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $jadwaltgr->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -80,7 +80,8 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('admin.jadwal.destroy', $jadwal->id) }}" method="POST">
+                                            <form action="{{ route('admin.jadwal-tgr.destroy', $jadwaltgr->id) }}"
+                                                method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="submit" class="btn btn-danger light" name=""

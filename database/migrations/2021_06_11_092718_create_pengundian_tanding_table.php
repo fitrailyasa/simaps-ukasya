@@ -15,7 +15,7 @@ class CreatePengundianTandingTable extends Migration
     {
         Schema::create('pengundian_tanding', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->foreignId('atlet_id');
             $table->string('no_undian')->nullable();
             $table->timestamps();
         });

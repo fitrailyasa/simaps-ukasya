@@ -1,19 +1,19 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Pengundian Tanding')
+@section('title', 'Jadwal Tanding')
 
-@section('table-pengundianTanding', 'active')
+@section('table-jadwal-tanding', 'active')
 
 @section('formCreate')
-    @include('admin.pengundianTanding.create')
+    @include('admin.jadwal-tanding.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.pengundianTanding.upload')
+    @include('admin.jadwal-tanding.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.pengundianTanding.deleteAll')
+    @include('admin.jadwal-tanding.deleteAll')
 @endsection
 
 @section('table')
@@ -21,37 +21,53 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>No. Undian</th>
+                <th>Partai</th>
+                {{-- <th>Tanggal</th> --}}
+                <th>Gelanggang</th>
+                <th>Babak</th>
+                <th>Kelompok</th>
+                <th>Sudut Biru</th>
+                <th>Sudut Merah</th>
+                <th>Status</th>
+                <th>Pemenang</th>
+                <th>Aktif</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($pengundianTandings as $pengundianTanding)
+            @foreach ($jadwaltandings as $jadwaltanding)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengundianTanding->nama }}</td>
-                    <td>{{ $pengundianTanding->no_undian }}</td>
+                    <td>{{ $jadwaltanding->partai }}</td>
+                    {{-- <td>{{ $jadwaltanding->tanggal }}</td> --}}
+                    <td>{{ $jadwaltanding->gelanggang }}</td>
+                    <td>{{ $jadwaltanding->babak }}</td>
+                    <td>{{ $jadwaltanding->kelompok }}</td>
+                    <td class="bg-primary">{{ $jadwaltanding->pemain_biru }} - {{ $jadwaltanding->partai_biru }}</td>
+                    <td class="bg-danger">{{ $jadwaltanding->pemain_merah }} - {{ $jadwaltanding->partai_merah }}</td>
+                    <td>{{ $jadwaltanding->status }}</td>
+                    <td>{{ $jadwaltanding->pemenang }}</td>
+                    <td>{{ $jadwaltanding->aktif }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $pengundianTanding->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $jadwaltanding->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $pengundianTanding->id }}" tabindex="-1"
+                            <div class="modal fade bd-example-modal-sm{{ $jadwaltanding->id }}" tabindex="-1"
                                 role="dialog" aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.pengundianTanding.edit')
+                                    @include('admin.jadwal-tanding.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $pengundianTanding->id }}">
+                                data-bs-target=".formEdit{{ $jadwaltanding->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $pengundianTanding->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $jadwaltanding->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -64,8 +80,7 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form
-                                                action="{{ route('admin.pengundianTanding.destroy', $pengundianTanding->id) }}"
+                                            <form action="{{ route('admin.jadwal-tanding.destroy', $jadwaltanding->id) }}"
                                                 method="POST">
                                                 @method('DELETE')
                                                 @csrf
@@ -86,8 +101,16 @@
         <tfoot>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>No. Undian</th>
+                <th>Partai</th>
+                {{-- <th>Tanggal</th> --}}
+                <th>Gelanggang</th>
+                <th>Babak</th>
+                <th>Kelompok</th>
+                <th>Sudut Biru</th>
+                <th>Sudut Merah</th>
+                <th>Status</th>
+                <th>Pemenang</th>
+                <th>Aktif</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>

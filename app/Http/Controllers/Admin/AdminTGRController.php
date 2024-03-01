@@ -26,7 +26,7 @@ class AdminTGRController extends Controller
 
         Excel::import(new TGRImport, $file);
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Import Data Atlit!');
+        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class AdminTGRController extends Controller
 
         TGR::create($request->all());
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Tambah Atlit!');
+        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
 
     public function update(Request $request, $id)
@@ -57,7 +57,7 @@ class AdminTGRController extends Controller
         $tgr = TGR::findOrFail($id);
         $tgr->update($request->all());
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Edit Atlit!');
+        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Edit Atlet!');
     }
 
     public function destroy($id)
@@ -65,13 +65,13 @@ class AdminTGRController extends Controller
         $tgr = TGR::findOrFail($id);
         $tgr->delete();
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Atlit!');
+        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Atlet!');
     }
 
     public function destroyAll()
     {
         TGR::truncate();
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlit!');
+        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
     }
 }

@@ -1,12 +1,12 @@
 <div class="modal-content">
     @if (auth()->user()->roles_id == 1)
-        <form method="POST" action="{{ route('admin.pengundianTGR.update', $pengundianTGR->id) }}"
+        <form method="POST" action="{{ route('admin.pengundian-tanding.update', $pengundiantanding->id) }}"
             enctype="multipart/form-data">
     @endif
     @csrf
     @method('PUT')
     <div class="modal-header">
-        <h5 class="modal-title" id="modalFormLabel">Edit Pengundian TGR
+        <h5 class="modal-title" id="modalFormLabel">Edit Pengundian Tanding
         </h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -16,10 +16,11 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="nama"
-                        name="nama" id="nama" value="{{ $pengundianTGR->nama }}" required>
-                    @error('nama')
+                    <label class="form-label">atlet_id</label>
+                    <input type="text" class="form-control @error('atlet_id') is-invalid @enderror"
+                        placeholder="atlet_id" name="atlet_id" id="atlet_id" value="{{ $pengundiantanding->atlet_id }}"
+                        required>
+                    @error('atlet_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -28,8 +29,8 @@
                 <div class="mb-2">
                     <label class="form-label">No Undian</label>
                     <input type="text" class="form-control @error('no_undian') is-invalid @enderror"
-                        placeholder="no_undian" name="no_undian" id="no_undian" value="{{ $pengundianTGR->no_undian }}"
-                        required>
+                        placeholder="no_undian" name="no_undian" id="no_undian"
+                        value="{{ $pengundiantanding->no_undian }}" required>
                     @error('no_undian')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

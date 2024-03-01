@@ -26,7 +26,7 @@ class AdminTandingController extends Controller
 
         Excel::import(new TandingImport, $file);
 
-        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Import Data Atlit!');
+        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Import Data Atlet!');
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class AdminTandingController extends Controller
 
         Tanding::create($request->all());
 
-        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Tambah Atlit!');
+        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
 
     public function update(Request $request, $id)
@@ -61,7 +61,7 @@ class AdminTandingController extends Controller
         $tanding = Tanding::findOrFail($id);
         $tanding->update($request->all());
 
-        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Edit Atlit!');
+        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Edit Atlet!');
     }
 
     public function destroy($id)
@@ -69,13 +69,13 @@ class AdminTandingController extends Controller
         $tanding = Tanding::findOrFail($id);
         $tanding->delete();
 
-        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Atlit!');
+        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Atlet!');
     }
 
     public function destroyAll()
     {
         Tanding::truncate();
 
-        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Atlit!');
+        return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
     }
 }

@@ -11,7 +11,7 @@ class PengundianTandingImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new PengundianTanding([
-            'nama' => $row['nama'],
+            'atlet_id' => $row['nama'],
             'no_undian' => $row['no_undian'],
         ]);
     }

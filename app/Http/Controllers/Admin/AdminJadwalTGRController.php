@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jadwal;
+use App\Models\JadwalTGR;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\JadwalImport;
+use App\Imports\JadwaltgrImport;
 
-class AdminjadwalController extends Controller
+class AdminJadwalTGRController extends Controller
 {
     public function index()
     {
-        $jadwals = Jadwal::latest('id')->get();
-        return view('admin.jadwal.index', compact('jadwals'));
+        $jadwaltgrs = JadwalTGR::latest('id')->get();
+        return view('admin.jadwal-tgr.index', compact('jadwaltgrs'));
     }
 
     public function import(Request $request)
@@ -24,9 +24,9 @@ class AdminjadwalController extends Controller
 
         $file = $request->file('file');
 
-        Excel::import(new JadwalImport, $file);
+        Excel::import(new JadwalTGRImport, $file);
 
-        return redirect()->route('admin.jadwal.index')->with('sukses', 'Berhasil Import Data Atlit!');
+        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
     }
 
     public function store(Request $request)
@@ -46,9 +46,9 @@ class AdminjadwalController extends Controller
             'aktif' => 'max:255'
         ]);
 
-        Jadwal::create($request->all());
+        JadwalTGR::create($request->all());
 
-        return redirect()->route('admin.jadwal.index')->with('sukses', 'Berhasil Tambah Atlit!');
+        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
 
     public function update(Request $request, $id)
@@ -68,24 +68,24 @@ class AdminjadwalController extends Controller
             'aktif' => 'max:255'
         ]);
 
-        $jadwal = Jadwal::findOrFail($id);
-        $jadwal->update($request->all());
+        $jadwaltgr = JadwalTGR::findOrFail($id);
+        $jadwaltgr->update($request->all());
 
-        return redirect()->route('admin.jadwal.index')->with('sukses', 'Berhasil Edit Atlit!');
+        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Edit Atlet!');
     }
 
     public function destroy($id)
     {
-        $jadwal = Jadwal::findOrFail($id);
-        $jadwal->delete();
+        $jadwaltgr = JadwalTGR::findOrFail($id);
+        $jadwaltgr->delete();
 
-        return redirect()->route('admin.jadwal.index')->with('sukses', 'Berhasil Hapus Atlit!');
+        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Atlet!');
     }
 
     public function destroyAll()
     {
-        Jadwal::truncate();
+        JadwalTGR::truncate();
 
-        return redirect()->route('admin.jadwal.index')->with('sukses', 'Berhasil Hapus Semua Data Atlit!');
+        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
     }
 }

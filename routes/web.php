@@ -14,7 +14,8 @@ use App\Http\Controllers\Admin\AdminTandingController;
 use App\Http\Controllers\Admin\AdminPengundianTandingController;
 use App\Http\Controllers\Admin\AdminPengundianTGRController;
 use App\Http\Controllers\Admin\AdminBaganController;
-use App\Http\Controllers\Admin\AdminJadwalController;
+use App\Http\Controllers\Admin\AdminJadwalTandingController;
+use App\Http\Controllers\Admin\AdminJadwalTGRController;
 use App\Http\Controllers\Admin\AdminTimbangUlangController;
 use App\Http\Controllers\Admin\AdminKontrolController;  
 use App\Http\Controllers\Admin\AdminMedaliController;  
@@ -58,20 +59,20 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/tanding/destroy-all', [AdminTandingController::class, 'destroyAll'])->name('tanding.destroy-all');
     
     // Pengundian Tanding
-    Route::get('/pengundianTanding', [AdminPengundianTandingController::class, 'index'])->name('pengundianTanding.index');
-    Route::post('/pengundianTanding', [AdminPengundianTandingController::class, 'store'])->name('pengundianTanding.store');
-    Route::put('/pengundianTanding/{id}/update', [AdminPengundianTandingController::class, 'update'])->name('pengundianTanding.update');
-    Route::delete('/pengundianTanding/{id}/destroy', [AdminPengundianTandingController::class, 'destroy'])->name('pengundianTanding.destroy');
-    Route::post('/pengundianTanding/upload', [AdminPengundianTandingController::class, 'import'])->name('pengundianTanding.import');
-    Route::delete('/pengundianTanding/destroy-all', [AdminPengundianTandingController::class, 'destroyAll'])->name('pengundianTanding.destroy-all');
+    Route::get('/pengundian-tanding', [AdminPengundianTandingController::class, 'index'])->name('pengundian-tanding.index');
+    Route::post('/pengundian-tanding', [AdminPengundianTandingController::class, 'store'])->name('pengundian-tanding.store');
+    Route::put('/pengundian-tanding/{id}/update', [AdminPengundianTandingController::class, 'update'])->name('pengundian-tanding.update');
+    Route::delete('/pengundian-tanding/{id}/destroy', [AdminPengundianTandingController::class, 'destroy'])->name('pengundian-tanding.destroy');
+    Route::post('/pengundian-tanding/upload', [AdminPengundianTandingController::class, 'import'])->name('pengundian-tanding.import');
+    Route::delete('/pengundian-tanding/destroy-all', [AdminPengundianTandingController::class, 'destroyAll'])->name('pengundian-tanding.destroy-all');
     
     // Pengundian TGR
-    Route::get('/pengundianTGR', [AdminPengundianTGRController::class, 'index'])->name('pengundianTGR.index');
-    Route::post('/pengundianTGR', [AdminPengundianTGRController::class, 'store'])->name('pengundianTGR.store');
-    Route::put('/pengundianTGR/{id}/update', [AdminPengundianTGRController::class, 'update'])->name('pengundianTGR.update');
-    Route::delete('/pengundianTGR/{id}/destroy', [AdminPengundianTGRController::class, 'destroy'])->name('pengundianTGR.destroy');
-    Route::post('/pengundianTGR/upload', [AdminPengundianTGRController::class, 'import'])->name('pengundianTGR.import');
-    Route::delete('/pengundianTGR/destroy-all', [AdminPengundianTGRController::class, 'destroyAll'])->name('pengundianTGR.destroy-all');
+    Route::get('/pengundian-tgr', [AdminPengundianTGRController::class, 'index'])->name('pengundian-tgr.index');
+    Route::post('/pengundian-tgr', [AdminPengundianTGRController::class, 'store'])->name('pengundian-tgr.store');
+    Route::put('/pengundian-tgr/{id}/update', [AdminPengundianTGRController::class, 'update'])->name('pengundian-tgr.update');
+    Route::delete('/pengundian-tgr/{id}/destroy', [AdminPengundianTGRController::class, 'destroy'])->name('pengundian-tgr.destroy');
+    Route::post('/pengundian-tgr/upload', [AdminPengundianTGRController::class, 'import'])->name('pengundian-tgr.import');
+    Route::delete('/pengundian-tgr/destroy-all', [AdminPengundianTGRController::class, 'destroyAll'])->name('pengundian-tgr.destroy-all');
     
     // Bagan
     Route::get('/bagan', [AdminBaganController::class, 'index'])->name('bagan.index');
@@ -79,13 +80,21 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bagan/{id}/update', [AdminBaganController::class, 'update'])->name('bagan.update');
     Route::delete('/bagan/{id}/destroy', [AdminBaganController::class, 'destroy'])->name('bagan.destroy');
     
-    // Jadwal
-    Route::get('/jadwal', [AdminJadwalController::class, 'index'])->name('jadwal.index');
-    Route::post('/jadwal', [AdminJadwalController::class, 'store'])->name('jadwal.store');
-    Route::put('/jadwal/{id}/update', [AdminJadwalController::class, 'update'])->name('jadwal.update'); 
-    Route::delete('/jadwal/{id}/destroy', [AdminJadwalController::class, 'destroy'])->name('jadwal.destroy');
-    Route::post('/jadwal/upload', [AdminJadwalController::class, 'import'])->name('jadwal.import');
-    Route::delete('/jadwal/destroy-all', [AdminJadwalController::class, 'destroyAll'])->name('jadwal.destroy-all');
+    // Jadwal Tanding
+    Route::get('/jadwal-tanding', [AdminJadwalTandingController::class, 'index'])->name('jadwal-tanding.index');
+    Route::post('/jadwal-tanding', [AdminJadwalTandingController::class, 'store'])->name('jadwal-tanding.store');
+    Route::put('/jadwal-tanding/{id}/update', [AdminJadwalTandingController::class, 'update'])->name('jadwal-tanding.update'); 
+    Route::delete('/jadwal-tanding/{id}/destroy', [AdminJadwalTandingController::class, 'destroy'])->name('jadwal-tanding.destroy');
+    Route::post('/jadwal-tanding/upload', [AdminJadwalTandingController::class, 'import'])->name('jadwal-tanding.import');
+    Route::delete('/jadwal-tanding/destroy-all', [AdminJadwalTandingController::class, 'destroyAll'])->name('jadwal-tanding.destroy-all');
+    
+    // Jadwal TGR
+    Route::get('/jadwal-tgr', [AdminJadwalTGRController::class, 'index'])->name('jadwal-tgr.index');
+    Route::post('/jadwal-tgr', [AdminJadwalTGRController::class, 'store'])->name('jadwal-tgr.store');
+    Route::put('/jadwal-tgr/{id}/update', [AdminJadwalTGRController::class, 'update'])->name('jadwal-tgr.update'); 
+    Route::delete('/jadwal-tgr/{id}/destroy', [AdminJadwalTGRController::class, 'destroy'])->name('jadwal-tgr.destroy');
+    Route::post('/jadwal-tgr/upload', [AdminJadwalTGRController::class, 'import'])->name('jadwal-tgr.import');
+    Route::delete('/jadwal-tgr/destroy-all', [AdminJadwalTGRController::class, 'destroyAll'])->name('jadwal-tgr.destroy-all');
 
     // Timbang Ulang
     Route::get('/timbang-ulang', [AdminTimbangUlangController::class, 'index'])->name('timbang-ulang.index');

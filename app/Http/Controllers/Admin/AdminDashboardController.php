@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
 use App\Models\Tanding;
 use App\Models\TGR;
+use App\Models\JadwalTanding;
+use App\Models\JadwalTGR;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,10 +14,10 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $user = User::all()->count();   
         $tanding = Tanding::all()->count();
         $tgr = TGR::all()->count();
-        $jadwal = 10;
-        return view('admin.dashboard', compact('user', 'tanding', 'tgr', 'jadwal'));
+        $jadwaltanding = JadwalTanding::all()->count();
+        $jadwaltgr = JadwalTGR::all()->count(); 
+        return view('admin.dashboard', compact('tanding', 'tgr', 'jadwaltanding', 'jadwaltgr'));
     }
 }

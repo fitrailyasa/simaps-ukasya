@@ -1,6 +1,6 @@
     <div class="modal-content">
         @if (auth()->user()->roles_id == 1)
-            <form method="POST" action="{{ route('admin.pengundianTGR.import') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.pengundian-tgr.import') }}" enctype="multipart/form-data">
         @endif
         @csrf
         <div class="modal-header">
@@ -24,8 +24,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="btn btn-success" href="{{ asset('assets/template/pengundianTGR-template.xlsx') }}"
-                download="pengundianTGR-template.xlsx">Download Format</a>
+            <a class="btn btn-success" href="{{ asset('assets/template/pengundian-tgr-template.xlsx') }}"
+                download="pengundian-tgr-template.xlsx">Download Format</a>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
         </form>

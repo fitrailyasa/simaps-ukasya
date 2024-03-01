@@ -2,15 +2,15 @@
 
 namespace App\Imports;
 
-use App\Models\Jadwal;
+use App\Models\JadwalTanding;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class JadwalImport implements ToModel, WithHeadingRow
+class JadwalTandingImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
-        return new Jadwal([
+        return new JadwalTanding([
             'partai' => $row['partai'],
             'tanggal' => $row['tanggal'],
             'gelanggang' => $row['gelanggang'],

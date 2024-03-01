@@ -1,5 +1,5 @@
 <div class="modal-content">
-    <form method="POST" action="{{ route('admin.jadwal.destroy-all') }}">
+    <form method="POST" action="{{ route('admin.jadwal-tgr.destroy-all') }}">
         @csrf
         @method('delete')
         <div class="modal-header">

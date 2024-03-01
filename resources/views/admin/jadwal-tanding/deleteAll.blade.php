@@ -1,5 +1,5 @@
 <div class="modal-content">
-    <form method="POST" action="{{ route('admin.pengundianTanding.destroy-all') }}">
+    <form method="POST" action="{{ route('admin.jadwal-tanding.destroy-all') }}">
         @csrf
         @method('delete')
         <div class="modal-header">

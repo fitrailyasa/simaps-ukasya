@@ -11,7 +11,7 @@ class PengundianTGRImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new PengundianTGR([
-            'nama' => $row['nama'],
+            'atlet_id' => $row['nama'],
             'no_undian' => $row['no_undian'],
         ]);
     }

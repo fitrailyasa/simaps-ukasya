@@ -35,10 +35,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.pengundianTanding.index') }}" class="nav-link text-white @yield('table-pengundianTanding')">
+                <a href="{{ route('admin.pengundian-tanding.index') }}" class="nav-link text-white @yield('table-pengundian-tanding')">
                     <i class="nav-icon fas fa-random"></i>
                     <p>
                         Pengundian Tanding
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.jadwal-tanding.index') }}" class="nav-link text-white @yield('table-jadwal-tanding')">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>
+                        Jadwal Tanding
                     </p>
                 </a>
             </li>
@@ -51,7 +59,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.pengundianTGR.index') }}" class="nav-link text-white @yield('table-pengundianTGR')">
+                <a href="{{ route('admin.pengundian-tgr.index') }}" class="nav-link text-white @yield('table-pengundian-tgr')">
                     <i class="nav-icon fas fa-random"></i>
                     <p>
                         Pengundian TGR
@@ -59,10 +67,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.jadwal.index') }}" class="nav-link text-white @yield('table-jadwal')">
+                <a href="{{ route('admin.jadwal-tgr.index') }}" class="nav-link text-white @yield('table-jadwal-tgr')">
                     <i class="nav-icon fas fa-calendar"></i>
                     <p>
-                        Jadwal
+                        Jadwal TGR
                     </p>
                 </a>
             </li>

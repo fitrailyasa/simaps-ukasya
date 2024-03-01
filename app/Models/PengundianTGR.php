@@ -10,6 +10,11 @@ class PengundianTGR extends Model
     use HasFactory;
 
     protected $table = 'pengundian_tgr';
-    protected $fillable = ['nama', 'no_undian'];    
+    protected $fillable = ['atlet_id', 'no_undian'];
+
+    public function tgr()
+    {
+        return $this->belongsTo(TGR::class, 'atlet_id', 'id');
+    }
 
 }

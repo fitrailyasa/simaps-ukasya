@@ -1,6 +1,6 @@
     <div class="modal-content">
         @if (auth()->user()->roles_id == 1)
-            <form method="POST" action="{{ route('admin.pengundianTanding.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.pengundian-tanding.store') }}" enctype="multipart/form-data">
         @endif
         @csrf
         <div class="modal-header">
@@ -13,10 +13,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-2">
-                        <label class="form-label">Nama</label>
-                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                            placeholder="nama" name="nama" id="nama" required>
-                        @error('nama')
+                        <label class="form-label">Atlet</label>
+                        <select class="form-select @error('atlet_id') is-invalid @enderror" name="atlet_id"
+                            id="atlet_id" required>
+                            <option selected disabled>Select Atlet</option>
+                            @foreach ($tandings as $tanding)
+                                <option value="{{ $tanding->id }}">{{ $tanding->nama }}</option>
+                            @endforeach
+                        </select>
+                        @error('atlet_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

@@ -2,18 +2,18 @@
 
 @section('title', 'Pengundian TGR')
 
-@section('table-pengundianTGR', 'active')
+@section('table-pengundian-tgr', 'active')
 
 @section('formCreate')
-    @include('admin.pengundianTGR.create')
+    @include('admin.pengundian-tgr.create')
 @endsection
 
 @section('formUpload')
-    @include('admin.pengundianTGR.upload')
+    @include('admin.pengundian-tgr.upload')
 @endsection
 
 @section('formDeleteAll')
-    @include('admin.pengundianTGR.deleteAll')
+    @include('admin.pengundian-tgr.deleteAll')
 @endsection
 
 @section('table')
@@ -27,31 +27,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pengundianTGRs as $pengundianTGR)
+            @foreach ($pengundiantgrs as $pengundiantgr)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengundianTGR->nama }}</td>
-                    <td>{{ $pengundianTGR->no_undian }}</td>
+                    <td>{{ $pengundiantgr->tgr->nama ?? '-' }}</td>
+                    <td>{{ $pengundiantgr->no_undian }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
-                                data-bs-target=".bd-example-modal-sm{{ $pengundianTGR->id }}">
+                                data-bs-target=".bd-example-modal-sm{{ $pengundiantgr->id }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-sm{{ $pengundianTGR->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade bd-example-modal-sm{{ $pengundiantgr->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog" role="document">
-                                    @include('admin.pengundianTGR.edit')
+                                    @include('admin.pengundian-tgr.edit')
                                 </div>
                             </div>
                             <!-- Button trigger modal -->
                             <a role="button" class="btn-sm btn-danger delete-button" data-bs-toggle="modal"
-                                data-bs-target=".formEdit{{ $pengundianTGR->id }}">
+                                data-bs-target=".formEdit{{ $pengundiantgr->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade formEdit{{ $pengundianTGR->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade formEdit{{ $pengundiantgr->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="">
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
@@ -64,7 +64,7 @@
                                         <div class="modal-body">Apakah anda yakin ingin menghapus
                                             @yield('title')?</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('admin.pengundianTGR.destroy', $pengundianTGR->id) }}"
+                                            <form action="{{ route('admin.pengundian-tgr.destroy', $pengundiantgr->id) }}"
                                                 method="POST">
                                                 @method('DELETE')
                                                 @csrf

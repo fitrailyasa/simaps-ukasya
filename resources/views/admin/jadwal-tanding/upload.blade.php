@@ -1,10 +1,10 @@
     <div class="modal-content">
         @if (auth()->user()->roles_id == 1)
-            <form method="POST" action="{{ route('admin.pengundianTanding.import') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.jadwal-tanding.import') }}" enctype="multipart/form-data">
         @endif
         @csrf
         <div class="modal-header">
-            <h5 class="modal-title" id="modalFormLabel">Upload Pengundian Tanding</h5>
+            <h5 class="modal-title" id="modalFormLabel">Upload Jadwal</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -24,8 +24,9 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="btn btn-success" href="{{ asset('assets/template/pengundianTanding-template.xlsx') }}"
-                download="pengundianTanding-template.xlsx">Download Format</a>
+            <a class="btn btn-success" href="{{ asset('assets/template/jadwal-tanding-template.xlsx') }}"
+                download="jadwal-tanding-template.xlsx">Download
+                Format</a>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
         </form>
