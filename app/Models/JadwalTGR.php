@@ -12,4 +12,8 @@ class JadwalTGR extends Model
     protected $table = 'jadwal_tgr';
     protected $fillable = ['partai', 'tanggal', 'gelanggang', 'babak', 'kelompok', 'pemain_biru', 'partai_biru', 'pemain_merah', 'partai_merah', 'status', 'pemenang', 'aktif'];    
 
+    public function Gelanggang()    
+    {
+        return $this->belongsTo(Gelanggang::class, 'gelanggang');
+    }
 }

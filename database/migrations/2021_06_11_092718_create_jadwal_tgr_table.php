@@ -17,7 +17,7 @@ class CreateJadwalTGRTable extends Migration
             $table->id();
             $table->string('partai');
             $table->string('tanggal');
-            $table->string('gelanggang');    
+            $table->foreignId('gelanggang');    
             $table->string('babak');
             $table->string('kelompok');
             $table->string('pemain_biru');

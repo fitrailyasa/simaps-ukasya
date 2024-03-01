@@ -12,7 +12,7 @@ class PengundianTanding extends Model
     protected $table = 'pengundian_tanding';
     protected $fillable = ['atlet_id', 'no_undian'];
 
-    public function tanding()
+    public function Tanding()
     {
         return $this->belongsTo(Tanding::class, 'atlet_id', 'id');
     }

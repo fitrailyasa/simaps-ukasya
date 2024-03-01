@@ -12,7 +12,7 @@ class PengundianTGR extends Model
     protected $table = 'pengundian_tgr';
     protected $fillable = ['atlet_id', 'no_undian'];
 
-    public function tgr()
+    public function TGR()
     {
         return $this->belongsTo(TGR::class, 'atlet_id', 'id');
     }

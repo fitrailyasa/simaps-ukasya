@@ -12,7 +12,7 @@ class TGR extends Model
     protected $table = 'tgr';
     protected $fillable = ['nama', 'jenis_kelamin', 'kontingen', 'golongan', 'kategori'];
 
-    public function pengundianTGR()
+    public function PengundianTGR()
     {
         return $this->hasMany(PengundianTGR::class);
     }

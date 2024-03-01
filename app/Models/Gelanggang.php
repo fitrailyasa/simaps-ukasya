@@ -12,4 +12,13 @@ class Gelanggang extends Model
     protected $table = 'gelanggang';
     protected $fillable = ['nama', 'waktu', 'audio', 'jenis', 'jumlah'];    
 
+    public function JadwalTGR()
+    {
+        return $this->hasMany(JadwalTGR::class);
+    }
+
+    public function JadwalTanding()
+    {
+        return $this->hasMany(JadwalTanding::class);  
+    }
 }

@@ -30,7 +30,7 @@
             @foreach ($pengundiantgrs as $pengundiantgr)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengundiantgr->tgr->nama ?? '-' }}</td>
+                    <td>{{ $pengundiantgr->TGR->nama ?? '-' }}</td>
                     <td>{{ $pengundiantgr->no_undian }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)

@@ -38,16 +38,16 @@
             @foreach ($jadwaltgrs as $jadwaltgr)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwaltgr->partai }}</td>
-                    {{-- <td>{{ $jadwaltgr->tanggal }}</td> --}}
-                    <td>{{ $jadwaltgr->gelanggang }}</td>
-                    <td>{{ $jadwaltgr->babak }}</td>
-                    <td>{{ $jadwaltgr->kelompok }}</td>
-                    <td class="bg-primary">{{ $jadwaltgr->pemain_biru }} - {{ $jadwaltgr->partai_biru }}</td>
-                    <td class="bg-danger">{{ $jadwaltgr->pemain_merah }} - {{ $jadwaltgr->partai_merah }}</td>
-                    <td>{{ $jadwaltgr->status }}</td>
-                    <td>{{ $jadwaltgr->pemenang }}</td>
-                    <td>{{ $jadwaltgr->aktif }}</td>
+                    <td>{{ $jadwaltgr->partai ?? '-' }}</td>
+                    {{-- <td>{{ $jadwaltgr->tanggal ?? '-' }}</td> --}}
+                    <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->babak ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->kelompok ?? '-' }}</td>
+                    <td class="bg-primary">{{ $jadwaltgr->pemain_biru ?? '-' }} - {{ $jadwaltgr->partai_biru ?? '-' }}</td>
+                    <td class="bg-danger">{{ $jadwaltgr->pemain_merah ?? '-' }} - {{ $jadwaltgr->partai_merah ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->status ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->pemenang ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->aktif ?? '-' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"

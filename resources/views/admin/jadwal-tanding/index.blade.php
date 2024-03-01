@@ -38,16 +38,16 @@
             @foreach ($jadwaltandings as $jadwaltanding)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwaltanding->partai }}</td>
-                    {{-- <td>{{ $jadwaltanding->tanggal }}</td> --}}
-                    <td>{{ $jadwaltanding->gelanggang }}</td>
-                    <td>{{ $jadwaltanding->babak }}</td>
-                    <td>{{ $jadwaltanding->kelompok }}</td>
-                    <td class="bg-primary">{{ $jadwaltanding->pemain_biru }} - {{ $jadwaltanding->partai_biru }}</td>
-                    <td class="bg-danger">{{ $jadwaltanding->pemain_merah }} - {{ $jadwaltanding->partai_merah }}</td>
-                    <td>{{ $jadwaltanding->status }}</td>
-                    <td>{{ $jadwaltanding->pemenang }}</td>
-                    <td>{{ $jadwaltanding->aktif }}</td>
+                    <td>{{ $jadwaltanding->partai ?? '-' }}</td>
+                    {{-- <td>{{ $jadwaltanding->tanggal ?? '-' }}</td> --}}
+                    <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->babak ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->kelompok ?? '-' }}</td>
+                    <td class="bg-primary">{{ $jadwaltanding->pemain_biru }} - {{ $jadwaltanding->partai_biru ?? '-' }}</td>
+                    <td class="bg-danger">{{ $jadwaltanding->pemain_merah }} - {{ $jadwaltanding->partai_merah ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->status ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->pemenang ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->aktif ?? '-' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
