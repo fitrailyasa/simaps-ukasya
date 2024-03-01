@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Partai</label>
-                    <input type="text" class="form-control @error('partai') is-invalid @enderror"
+                    <input type="number" class="form-control @error('partai') is-invalid @enderror"
                         placeholder="partai" name="partai" id="partai" value="{{ $jadwaltanding->partai }}"
                         required>
                     @error('partai')
@@ -27,21 +27,16 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Tanggal</label>
-                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
-                        placeholder="tanggal" name="tanggal" id="tanggal" value="{{ $jadwaltanding->tanggal }}"
-                        required>
-                    @error('tanggal')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-2">
                     <label class="form-label">Gelanggang</label>
-                    <input type="text" class="form-control @error('gelanggang') is-invalid @enderror"
-                        placeholder="gelanggang" name="gelanggang" id="gelanggang"
-                        value="{{ $jadwaltanding->gelanggang }}" required>
+                    <select class="form-select @error('gelanggang') is-invalid @enderror" name="gelanggang"
+                        id="gelanggang" required>
+                        @foreach ($gelanggangs as $gelanggang)
+                            <option value="{{ $gelanggang->id }}"
+                                {{ $gelanggang->id == $jadwaltanding->gelanggang_id ? 'selected' : '' }}>
+                                {{ $gelanggang->nama }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('gelanggang')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -50,8 +45,14 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Babak</label>
-                    <input type="text" class="form-control @error('babak') is-invalid @enderror" placeholder="babak"
-                        name="babak" id="babak" value="{{ $jadwaltanding->babak }}" required>
+                    <select class="form-select @error('babak') is-invalid @enderror" name="babak" id="babak"
+                        required>
+                        <option selected>{{ $jadwaltanding->babak }}</option>
+                        <option value="Penyisihan">Penyisihan</option>
+                        <option value="Perempat Final">Perempat Final</option>
+                        <option value="Semi Final">Semi Final</option>
+                        <option value="Final">Final</option>
+                    </select>
                     @error('babak')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -70,77 +71,59 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Pemain Biru</label>
-                    <input type="text" class="form-control @error('pemain_biru') is-invalid @enderror"
-                        placeholder="pemain_biru" name="pemain_biru" id="pemain_biru"
-                        value="{{ $jadwaltanding->pemain_biru }}" required>
-                    @error('pemain_biru')
+                    <label class="form-label">Sudut Biru</label>
+                    <select class="form-select @error('sudut_biru') is-invalid @enderror" name="sudut_biru"
+                        id="sudut_biru" required>
+                        @foreach ($pengundiantandings as $pengundiantanding)
+                            <option value="{{ $pengundiantanding->no_undian }}"
+                                {{ $pengundiantanding->no_undian == $jadwaltanding->sudut_biru ? 'selected' : '' }}>
+                                {{ $pengundiantanding->Tanding->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('sudut_biru')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Partai Biru</label>
-                    <input type="text" class="form-control @error('partai_biru') is-invalid @enderror"
-                        placeholder="partai_biru" name="partai_biru" id="partai_biru"
-                        value="{{ $jadwaltanding->partai_biru }}" required>
-                    @error('partai_biru')
+                    <label class="form-label">Sudut Merah</label>
+                    <select class="form-select @error('sudut_merah') is-invalid @enderror" name="sudut_merah"
+                        id="sudut_merah" required>
+                        @foreach ($pengundiantandings as $pengundiantanding)
+                            <option value="{{ $pengundiantanding->no_undian }}"
+                                {{ $pengundiantanding->no_undian == $jadwaltanding->sudut_merah ? 'selected' : '' }}>
+                                {{ $pengundiantanding->Tanding->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('sudut_merah')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Pemain Merah</label>
-                    <input type="text" class="form-control @error('pemain_merah') is-invalid @enderror"
-                        placeholder="pemain_merah" name="pemain_merah" id="pemain_merah"
-                        value="{{ $jadwaltanding->pemain_merah }}" required>
-                    @error('pemain_merah')
+                    <label class="form-label">Sudut Selanjutnya</label>
+                    <select class="form-select @error('next_sudut') is-invalid @enderror" name="next_sudut"
+                        id="next_sudut" required>
+                        <option selected>{{ $jadwaltanding->next_sudut == 1 ? 'Sudut Biru' : 'Sudut Merah' }}</option>
+                        <option value="1">Sudut Biru</option>
+                        <option value="2">Sudut Merah</option>
+                    </select>
+                    @error('next_sudut')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Partai Merah</label>
-                    <input type="text" class="form-control @error('partai_merah') is-invalid @enderror"
-                        placeholder="partai_merah" name="partai_merah" id="partai_merah"
-                        value="{{ $jadwaltanding->partai_merah }}" required>
-                    @error('partai_merah')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-2">
-                    <label class="form-label">Status</label>
-                    <input type="text" class="form-control @error('status') is-invalid @enderror"
-                        placeholder="status" name="status" id="status" value="{{ $jadwaltanding->status }}"
-                        required>
-                    @error('status')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-2">
-                    <label class="form-label">Pemenang</label>
-                    <input type="text" class="form-control @error('pemenang') is-invalid @enderror"
-                        placeholder="pemenang" name="pemenang" id="pemenang"
-                        value="{{ $jadwaltanding->pemenang }}" required>
-                    @error('pemenang')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-2">
-                    <label class="form-label">Aktif</label>
-                    <input type="text" class="form-control @error('aktif') is-invalid @enderror"
-                        placeholder="aktif" name="aktif" id="aktif" value="{{ $jadwaltanding->aktif }}"
-                        required>
-                    @error('aktif')
+                    <label class="form-label">Next Partai</label>
+                    <input type="number" class="form-control @error('next_partai') is-invalid @enderror"
+                        placeholder="next_partai" name="next_partai" id="next_partai"
+                        value="{{ $jadwaltanding->next_partai }}" required>
+                    @error('next_partai')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

@@ -16,10 +16,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">atlet_id</label>
-                    <input type="text" class="form-control @error('atlet_id') is-invalid @enderror"
-                        placeholder="atlet_id" name="atlet_id" id="atlet_id" value="{{ $pengundiantanding->atlet_id }}"
-                        required>
+                    <label class="form-label">Atlet</label>
+                    <select class="form-select @error('atlet_id') is-invalid @enderror" name="atlet_id" id="atlet_id"
+                        value="{{ $pengundiantanding->atlet_id }}" disabled>
+                        <option selected disabled>{{ $pengundiantanding->Tanding->nama }}</option>
+                        @foreach ($tandings as $tanding)
+                            <option value="{{ $tanding->id }}">{{ $tanding->nama }}</option>
+                        @endforeach
+                    </select>
                     @error('atlet_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -28,7 +32,7 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">No Undian</label>
-                    <input type="text" class="form-control @error('no_undian') is-invalid @enderror"
+                    <input type="number" class="form-control @error('no_undian') is-invalid @enderror"
                         placeholder="no_undian" name="no_undian" id="no_undian"
                         value="{{ $pengundiantanding->no_undian }}" required>
                     @error('no_undian')

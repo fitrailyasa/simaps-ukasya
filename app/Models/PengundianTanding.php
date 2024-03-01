@@ -17,4 +17,9 @@ class PengundianTanding extends Model
         return $this->belongsTo(Tanding::class, 'atlet_id', 'id');
     }
 
+    public function JadwalTanding()
+    {
+        return $this->hasMany(JadwalTanding::class);
+    }
+
 }

@@ -12,17 +12,12 @@ class JadwalTandingImport implements ToModel, WithHeadingRow
     {
         return new JadwalTanding([
             'partai' => $row['partai'],
-            'tanggal' => $row['tanggal'],
             'gelanggang' => $row['gelanggang'],
             'babak' => $row['babak'],
-            'kelompok' => $row['kelompok'],
-            'pemain_biru' => $row['pemain_biru'],
-            'partai_biru' => $row['partai_biru'],
-            'pemain_merah' => $row['pemain_merah'],
-            'partai_merah' => $row['partai_merah'],
-            'status' => $row['status'],
-            'pemenang' => $row['pemenang'],
-            'aktif' => $row['aktif'],
+            'sudut_biru' => $row['sudut_biru'], 
+            'sudut_merah' => $row['sudut_merah'],
+            'next_sudut' => $row['next_sudut'],
+            'next_partai' => $row['next_partai'],
         ]);
     }
 }

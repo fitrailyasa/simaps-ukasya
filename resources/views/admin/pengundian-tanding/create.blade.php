@@ -16,7 +16,7 @@
                         <label class="form-label">Atlet</label>
                         <select class="form-select @error('atlet_id') is-invalid @enderror" name="atlet_id"
                             id="atlet_id" required>
-                            <option selected disabled>Select Atlet</option>
+                            <option selected disabled>Pilih Atlet</option>
                             @foreach ($tandings as $tanding)
                                 <option value="{{ $tanding->id }}">{{ $tanding->nama }}</option>
                             @endforeach
@@ -29,7 +29,7 @@
                 <div class="col-md-6">
                     <div class="mb-2">
                         <label class="form-label">No Undian</label>
-                        <input type="text" class="form-control @error('no_undian') is-invalid @enderror"
+                        <input type="number" class="form-control @error('no_undian') is-invalid @enderror"
                             placeholder="no_undian" name="no_undian" id="no_undian" required>
                         @error('no_undian')
                             <div class="invalid-feedback">{{ $message }}</div>

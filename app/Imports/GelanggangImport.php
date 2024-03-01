@@ -15,7 +15,6 @@ class GelanggangImport implements ToModel, WithHeadingRow
             'waktu' => $row['waktu'],
             'audio' => $row['audio'],
             'jenis' => $row['jenis'],
-            'jumlah' => $row['jumlah'],
         ]);
     }
 }

@@ -10,15 +10,15 @@ class Gelanggang extends Model
     use HasFactory;
 
     protected $table = 'gelanggang';
-    protected $fillable = ['nama', 'waktu', 'audio', 'jenis', 'jumlah'];    
+    protected $fillable = ['nama', 'waktu', 'audio', 'jenis', 'jumlah_tanding', 'jumlah_tgr'];      
 
     public function JadwalTGR()
     {
-        return $this->hasMany(JadwalTGR::class);
+        return $this->hasMany(JadwalTGR::class, 'jumlah_tgr');
     }
 
     public function JadwalTanding()
     {
-        return $this->hasMany(JadwalTanding::class);  
+        return $this->hasMany(JadwalTanding::class, 'jumlah_tanding');  
     }
 }

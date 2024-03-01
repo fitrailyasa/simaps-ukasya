@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
+use App\Models\PengundianTanding; 
+use App\Models\Gelanggang;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\JadwalTandingImport;
@@ -12,8 +14,10 @@ class AdminJadwalTandingController extends Controller
 {
     public function index()
     {
+        $gelanggangs = Gelanggang::all();
+        $pengundiantandings = PengundianTanding::latest('id')->get();
         $jadwaltandings = JadwalTanding::latest('id')->get();
-        return view('admin.jadwal-tanding.index', compact('jadwaltandings'));
+        return view('admin.jadwal-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings'));
     }
 
     public function import(Request $request)
@@ -33,17 +37,13 @@ class AdminJadwalTandingController extends Controller
     {
         $request->validate([
             'partai' => 'required|max:255',
-            'tanggal' => 'required|max:255',
             'gelanggang' => 'required|max:255',
             'babak' => 'required|max:255',
-            'kelompok' => 'required|max:255',
-            'pemain_biru' => 'required|max:255',
-            'partai_biru' => 'required|max:255',
-            'pemain_merah' => 'required|max:255',
-            'partai_merah' => 'required|max:255',
-            'status' => 'max:255',
-            'pemenang' => 'max:255',
-            'aktif' => 'max:255'
+            'kelompok' => 'max:255',
+            'sudut_biru' => 'required|max:255',
+            'sudut_merah' => 'required|max:255',
+            'next_sudut' => 'required|max:255',
+            'next_partai' => 'required|max:255',
         ]);
 
         JadwalTanding::create($request->all());
@@ -55,17 +55,13 @@ class AdminJadwalTandingController extends Controller
     {
         $request->validate([
             'partai' => 'required|max:255',
-            'tanggal' => 'required|max:255',
             'gelanggang' => 'required|max:255',
             'babak' => 'required|max:255',
-            'kelompok' => 'required|max:255',
-            'pemain_biru' => 'required|max:255',
-            'partai_biru' => 'required|max:255',
-            'pemain_merah' => 'required|max:255',
-            'partai_merah' => 'required|max:255',
-            'status' => 'max:255',
-            'pemenang' => 'max:255',
-            'aktif' => 'max:255'
+            'kelompok' => 'max:255',
+            'sudut_biru' => 'required|max:255',
+            'sudut_merah' => 'required|max:255',
+            'next_sudut' => 'required|max:255',
+            'next_partai' => 'required|max:255',
         ]);
 
         $jadwaltanding = JadwalTanding::findOrFail($id);

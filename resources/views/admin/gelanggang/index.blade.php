@@ -25,7 +25,7 @@
                 <th>Waktu</th>
                 <th>Audio</th>
                 <th>Jenis</th>
-                <th>Jumlah</th>
+                <th>jumlah</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -37,7 +37,8 @@
                     <td>{{ $gelanggang->waktu }} menit</td>
                     <td><audio src="{{ asset($gelanggang->audio) }} ?? -" controls></audio></td>
                     <td>{{ $gelanggang->jenis }}</td>
-                    <td><a class="btn-sm btn-primary" href="{{ $gelanggang->jumlah }}">{{ $gelanggang->jumlah }} jadwal</a>
+                    <td><a class="btn-sm btn-primary"
+                            href="{{ $gelanggang->jumlah_tanding }}">{{ $gelanggang->jumlah_tanding }} jadwal</a>
                     </td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
@@ -96,7 +97,7 @@
                 <th>Waktu</th>
                 <th>Audio</th>
                 <th>Jenis</th>
-                <th>Jumlah</th>
+                <th>jumlah</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>

@@ -36,7 +36,8 @@ class AdminGelanggangController extends Controller
             'waktu' => 'required|max:255',
             'audio' => 'max:255',
             'jenis' => 'required|max:255',
-            'jumlah' => 'required|max:255'
+            'jumlah_tanding' => 'required|max:255',
+            'jumlah_tgr' => 'required|max:255',
         ]);
 
         Gelanggang::create($request->all());
@@ -51,7 +52,8 @@ class AdminGelanggangController extends Controller
             'waktu' => 'required|max:255',
             'audio' => 'max:255',
             'jenis' => 'required|max:255',
-            'jumlah' => 'required|max:255'
+            'jumlah_tanding' => 'required|max:255',
+            'jumlah_tgr' => 'required|max:255',
         ]);
 
         $gelanggang = Gelanggang::findOrFail($id);

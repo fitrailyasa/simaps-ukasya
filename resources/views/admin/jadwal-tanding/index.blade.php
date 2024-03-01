@@ -22,15 +22,13 @@
             <tr>
                 <th>No</th>
                 <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
                 <th>Gelanggang</th>
                 <th>Babak</th>
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Status</th>
                 <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -39,15 +37,15 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jadwaltanding->partai ?? '-' }}</td>
-                    {{-- <td>{{ $jadwaltanding->tanggal ?? '-' }}</td> --}}
                     <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltanding->babak ?? '-' }}</td>
                     <td>{{ $jadwaltanding->kelompok ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltanding->pemain_biru }} - {{ $jadwaltanding->partai_biru ?? '-' }}</td>
-                    <td class="bg-danger">{{ $jadwaltanding->pemain_merah }} - {{ $jadwaltanding->partai_merah ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->status ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->pemenang ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->aktif ?? '-' }}</td>
+                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }} -
+                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }}</td>
+                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }} -
+                        {{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->pemenang ?? 'Belum Bertanding' }}</td>
+                    <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
@@ -102,15 +100,13 @@
             <tr>
                 <th>No</th>
                 <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
                 <th>Gelanggang</th>
                 <th>Babak</th>
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Status</th>
                 <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>

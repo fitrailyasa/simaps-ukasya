@@ -52,10 +52,22 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">Jumlah</label>
-                    <input type="number" class="form-control @error('jumlah') is-invalid @enderror"
-                        placeholder="jumlah" name="jumlah" id="jumlah" value="{{ $gelanggang->jumlah }}" required>
-                    @error('jumlah')
+                    <label class="form-label">jumlah_tanding</label>
+                    <input type="number" class="form-control @error('jumlah_tanding') is-invalid @enderror"
+                        placeholder="jumlah_tanding" name="jumlah_tanding" id="jumlah_tanding"
+                        value="{{ $gelanggang->jumlah_tanding }}" required>
+                    @error('jumlah_tanding')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-2">
+                    <label class="form-label">jumlah_tgr</label>
+                    <input type="number" class="form-control @error('jumlah_tgr') is-invalid @enderror"
+                        placeholder="jumlah_tgr" name="jumlah_tgr" id="jumlah_tgr"
+                        value="{{ $gelanggang->jumlah_tgr }}" required>
+                    @error('jumlah_tgr')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

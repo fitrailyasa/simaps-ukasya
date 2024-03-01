@@ -17,4 +17,9 @@ class PengundianTGR extends Model
         return $this->belongsTo(TGR::class, 'atlet_id', 'id');
     }
 
+    public function JadwalTGR()
+    {
+        return $this->hasMany(JadwalTGR::class);
+    }
+
 }

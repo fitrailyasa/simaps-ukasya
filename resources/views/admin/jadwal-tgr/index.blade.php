@@ -22,15 +22,13 @@
             <tr>
                 <th>No</th>
                 <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
                 <th>Gelanggang</th>
                 <th>Babak</th>
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Status</th>
                 <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -39,15 +37,15 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jadwaltgr->partai ?? '-' }}</td>
-                    {{-- <td>{{ $jadwaltgr->tanggal ?? '-' }}</td> --}}
                     <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltgr->babak ?? '-' }}</td>
                     <td>{{ $jadwaltgr->kelompok ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltgr->pemain_biru ?? '-' }} - {{ $jadwaltgr->partai_biru ?? '-' }}</td>
-                    <td class="bg-danger">{{ $jadwaltgr->pemain_merah ?? '-' }} - {{ $jadwaltgr->partai_merah ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->status ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->pemenang ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->aktif ?? '-' }}</td>
+                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }} -
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }}</td>
+                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }} -
+                        {{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->pemenang ?? 'Belum BerTGR' }}</td>
+                    <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
@@ -102,15 +100,13 @@
             <tr>
                 <th>No</th>
                 <th>Partai</th>
-                {{-- <th>Tanggal</th> --}}
                 <th>Gelanggang</th>
                 <th>Babak</th>
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Status</th>
                 <th>Pemenang</th>
-                <th>Aktif</th>
+                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
