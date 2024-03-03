@@ -45,7 +45,7 @@
                     <label class="form-label">Babak</label>
                     <select class="form-select @error('babak') is-invalid @enderror" name="babak" id="babak"
                         required>
-                        <option selected>{{ $jadwaltgr->babak }}</option>
+                        <option selected>{{ $jadwaltgr->babak ?? '-' }}</option>
                         <option value="Penyisihan">Penyisihan</option>
                         <option value="Perempat Final">Perempat Final</option>
                         <option value="Semi Final">Semi Final</option>
@@ -75,7 +75,7 @@
                         @foreach ($pengundiantgrs as $pengundiantgr)
                             <option value="{{ $pengundiantgr->no_undian }}"
                                 {{ $pengundiantgr->no_undian == $jadwaltgr->sudut_biru ? 'selected' : '' }}>
-                                {{ $pengundiantgr->tgr->nama }}
+                                {{ $pengundiantgr->TGR->nama }}
                             </option>
                         @endforeach
                     </select>
@@ -92,7 +92,7 @@
                         @foreach ($pengundiantgrs as $pengundiantgr)
                             <option value="{{ $pengundiantgr->no_undian }}"
                                 {{ $pengundiantgr->no_undian == $jadwaltgr->sudut_merah ? 'selected' : '' }}>
-                                {{ $pengundiantgr->tgr->nama }}
+                                {{ $pengundiantgr->TGR->nama }}
                             </option>
                         @endforeach
                     </select>

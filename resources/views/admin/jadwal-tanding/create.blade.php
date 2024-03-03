@@ -28,7 +28,7 @@
                             id="gelanggang" required>
                             <option selected disabled>Pilih Gelanggang</option>
                             @foreach ($gelanggangs as $gelanggang)
-                                <option value="{{ $gelanggang->id }}">{{ $gelanggang->nama }}</option>
+                                <option value="{{ $gelanggang->id }}">{{ $gelanggang->nama ?? '-' }}</option>
                             @endforeach
                         </select>
                         @error('gelanggang')
@@ -70,7 +70,7 @@
                             <option selected disabled>Pilih Atlet</option>
                             @foreach ($pengundiantandings as $pengundiantanding)
                                 <option value="{{ $pengundiantanding->no_undian }}">
-                                    {{ $pengundiantanding->Tanding->nama }}
+                                    {{ $pengundiantanding->Tanding->nama ?? '-' }}
                                 </option>
                             @endforeach
                         </select>
@@ -87,7 +87,7 @@
                             <option selected disabled>Pilih Atlet</option>
                             @foreach ($pengundiantandings as $pengundiantanding)
                                 <option value="{{ $pengundiantanding->no_undian }}">
-                                    {{ $pengundiantanding->Tanding->nama }}
+                                    {{ $pengundiantanding->Tanding->nama ?? '-' }}
                                 </option>
                             @endforeach
                         </select>

@@ -27,4 +27,9 @@ class JadwalTGR extends Model
         return $this->belongsTo(PengundianTGR::class, 'sudut_merah', 'id');
     }
 
+    public function PemenangTGR()
+    {
+        return $this->belongsTo(PengundianTGR::class, 'pemenang', 'id');
+    }
+
 }

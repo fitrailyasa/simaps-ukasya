@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gelanggang;
+use App\Models\JadwalTanding;
+use App\Models\JadwalTGR;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\GelanggangImport;
@@ -13,7 +15,8 @@ class AdminGelanggangController extends Controller
     public function index()
     {
         $gelanggangs = Gelanggang::all();
-        return view('admin.gelanggang.index', compact('gelanggangs'));
+        $jumlah_jadwal = Gelanggang::all()->count();
+        return view('admin.gelanggang.index', compact('gelanggangs', 'jumlah_jadwal'));
     }
 
     public function import(Request $request)
@@ -36,8 +39,8 @@ class AdminGelanggangController extends Controller
             'waktu' => 'required|max:255',
             'audio' => 'max:255',
             'jenis' => 'required|max:255',
-            'jumlah_tanding' => 'required|max:255',
-            'jumlah_tgr' => 'required|max:255',
+            'jumlah_tanding' => 'max:255',
+            'jumlah_tgr' => 'max:255',
         ]);
 
         Gelanggang::create($request->all());
@@ -52,8 +55,8 @@ class AdminGelanggangController extends Controller
             'waktu' => 'required|max:255',
             'audio' => 'max:255',
             'jenis' => 'required|max:255',
-            'jumlah_tanding' => 'required|max:255',
-            'jumlah_tgr' => 'required|max:255',
+            'jumlah_tanding' => 'max:255',
+            'jumlah_tgr' => 'max:255',
         ]);
 
         $gelanggang = Gelanggang::findOrFail($id);

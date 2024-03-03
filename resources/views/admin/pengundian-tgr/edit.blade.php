@@ -19,7 +19,7 @@
                     <label class="form-label">Atlet</label>
                     <select class="form-select @error('atlet_id') is-invalid @enderror" name="atlet_id" id="atlet_id"
                         value="{{ $pengundiantgr->atlet_id }}" disabled>
-                        <option selected disabled>{{ $pengundiantgr->TGR->nama }}</option>
+                        <option selected disabled>{{ $pengundiantgr->TGR->nama ?? 'Pilih Atlet' }}</option>
                         @foreach ($tgrs as $tgr)
                             <option value="{{ $tgr->id }}">{{ $tgr->nama }}</option>
                         @endforeach
@@ -33,8 +33,8 @@
                 <div class="mb-2">
                     <label class="form-label">No Undian</label>
                     <input type="number" class="form-control @error('no_undian') is-invalid @enderror"
-                        placeholder="no_undian" name="no_undian" id="no_undian" value="{{ $pengundiantgr->no_undian }}"
-                        required>
+                        placeholder="no_undian" name="no_undian" id="no_undian"
+                        value="{{ $pengundiantgr->no_undian ?? 0 }}" required>
                     @error('no_undian')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -20,8 +20,8 @@ class GelanggangSeeder extends Seeder
                 'waktu' => 3,
                 'audio' => 'audio.mp3',
                 'jenis' => 'Tanding',
-                'jumlah_tanding' => NULL,
-                'jumlah_tgr' => NULL
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
             ],
             [
                 'id' => 2,
@@ -29,8 +29,8 @@ class GelanggangSeeder extends Seeder
                 'waktu' => 3,
                 'audio' => 'audio.mp3',
                 'jenis' => 'Tunggal',
-                'jumlah_tanding' => NULL,
-                'jumlah_tgr' => NULL
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
             ],
             [
                 'id' => 3,
@@ -38,8 +38,8 @@ class GelanggangSeeder extends Seeder
                 'waktu' => 3,
                 'audio' => 'audio.mp3',
                 'jenis' => 'Ganda',
-                'jumlah_tanding' => NULL,
-                'jumlah_tgr' => NULL
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
             ],
             [
                 'id' => 4,
@@ -47,8 +47,8 @@ class GelanggangSeeder extends Seeder
                 'waktu' => 3,
                 'audio' => 'audio.mp3',
                 'jenis' => 'Regu',
-                'jumlah_tanding' => NULL,
-                'jumlah_tgr' => NULL
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
             ]
         ];
         Gelanggang::query()->insert($Gelanggang);

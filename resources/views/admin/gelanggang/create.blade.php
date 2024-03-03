@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-2">
-                        <label class="form-label">jumlah_tanding</label>
+                        <label class="form-label">Jumlah Jadwal Tanding</label>
                         <input type="number" class="form-control @error('jumlah_tanding') is-invalid @enderror"
                             placeholder="jumlah_tanding" name="jumlah_tanding" id="jumlah_tanding" required>
                         @error('jumlah_tanding')
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-2">
-                        <label class="form-label">jumlah_tgr</label>
+                        <label class="form-label">Jumlah Jadwal TGR</label>
                         <input type="number" class="form-control @error('jumlah_tgr') is-invalid @enderror"
                             placeholder="jumlah_tgr" name="jumlah_tgr" id="jumlah_tgr" required>
                         @error('jumlah_tgr')

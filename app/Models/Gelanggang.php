@@ -14,11 +14,12 @@ class Gelanggang extends Model
 
     public function JadwalTGR()
     {
-        return $this->hasMany(JadwalTGR::class, 'jumlah_tgr');
+        return $this->hasMany(JadwalTGR::class);
     }
 
     public function JadwalTanding()
     {
-        return $this->hasMany(JadwalTanding::class, 'jumlah_tanding');  
+        return $this->hasMany(JadwalTanding::class);  
     }
+
 }

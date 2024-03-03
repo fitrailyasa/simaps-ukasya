@@ -35,10 +35,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $gelanggang->nama }}</td>
                     <td>{{ $gelanggang->waktu }} menit</td>
-                    <td><audio src="{{ asset($gelanggang->audio) }} ?? -" controls></audio></td>
+                    <td><audio src="{{ asset($gelanggang->audio ?? '') }}" controls></audio></td>
                     <td>{{ $gelanggang->jenis }}</td>
-                    <td><a class="btn-sm btn-primary"
-                            href="{{ $gelanggang->jumlah_tanding }}">{{ $gelanggang->jumlah_tanding }} jadwal</a>
+                    <td><a class="btn-sm btn-primary" href="#">{{ $jumlah_jadwal }} jadwal</a>
                     </td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)

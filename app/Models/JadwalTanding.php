@@ -27,4 +27,9 @@ class JadwalTanding extends Model
         return $this->belongsTo(PengundianTanding::class, 'sudut_merah', 'id');
     }
 
+    public function PemenangTanding()
+    {
+        return $this->belongsTo(PengundianTanding::class, 'pemenang', 'id');
+    }
+
 }

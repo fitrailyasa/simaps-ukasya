@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $tgr->nama }}</td>
-                    <td>{{ $tgr->jenis_kelamin }}</td>
+                    <td>{{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</td>
                     <td>{{ $tgr->kontingen }}</td>
                     <td>{{ $tgr->kategori }}</td>
                     <td>{{ $tgr->golongan }}</td>

@@ -18,7 +18,7 @@
                 <div class="mb-2">
                     <label class="form-label">Nama</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="nama"
-                        name="nama" id="nama" value="{{ $gelanggang->nama }}" required>
+                        name="nama" id="nama" value="{{ $gelanggang->nama ?? '-' }}" required>
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -28,7 +28,7 @@
                 <div class="mb-2">
                     <label class="form-label">Waktu</label>
                     <input type="number" class="form-control @error('waktu') is-invalid @enderror" placeholder="waktu"
-                        name="waktu" id="waktu" value="{{ $gelanggang->waktu }}" required>
+                        name="waktu" id="waktu" value="{{ $gelanggang->waktu ?? 0 }}" required>
                     @error('waktu')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -38,7 +38,8 @@
                 <div class="mb-2">
                     <label class="form-label">Jenis</label>
                     <select name="jenis" id="jenis" class="form-select @error('jenis') is-invalid @enderror">
-                        <option selected value="{{ $gelanggang->jenis }}">{{ $gelanggang->jenis }}</option>
+                        <option selected value="{{ $gelanggang->jenis }}">{{ $gelanggang->jenis ?? 'Pilih Jenis' }}
+                        </option>
                         <option value="Tanding">Tanding</option>
                         <option value="Tunggal">Tunggal</option>
                         <option value="Ganda">Ganda</option>
@@ -52,10 +53,10 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">jumlah_tanding</label>
+                    <label class="form-label">Jumlah Jadwal Tanding</label>
                     <input type="number" class="form-control @error('jumlah_tanding') is-invalid @enderror"
                         placeholder="jumlah_tanding" name="jumlah_tanding" id="jumlah_tanding"
-                        value="{{ $gelanggang->jumlah_tanding }}" required>
+                        value="{{ $gelanggang->jumlah_tanding ?? 0 }}" required>
                     @error('jumlah_tanding')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -63,10 +64,10 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-2">
-                    <label class="form-label">jumlah_tgr</label>
+                    <label class="form-label">Jumlah Jadwal TGR</label>
                     <input type="number" class="form-control @error('jumlah_tgr') is-invalid @enderror"
                         placeholder="jumlah_tgr" name="jumlah_tgr" id="jumlah_tgr"
-                        value="{{ $gelanggang->jumlah_tgr }}" required>
+                        value="{{ $gelanggang->jumlah_tgr ?? 0 }}" required>
                     @error('jumlah_tgr')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -78,7 +79,7 @@
                     <p>{{ $gelanggang->audio }} : <audio class="form-control" src="{{ asset($gelanggang->audio) }}"
                             controls></audio></p>
                     <input type="file" class="form-control @error('audio') is-invalid @enderror" placeholder="audio"
-                        name="audio" id="audio" value="{{ $gelanggang->audio }}" enabled>
+                        name="audio" id="audio" value="{{ $gelanggang->audio ?? '-' }}" enabled>
                     @error('audio')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

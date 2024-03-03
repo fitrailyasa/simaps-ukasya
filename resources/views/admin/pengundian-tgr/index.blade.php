@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pengundiantgr->TGR->nama ?? '-' }}</td>
-                    <td>{{ $pengundiantgr->no_undian }}</td>
+                    <td>{{ $pengundiantgr->no_undian ?? '-' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"

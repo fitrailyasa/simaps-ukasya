@@ -47,7 +47,7 @@
                     <label class="form-label">Babak</label>
                     <select class="form-select @error('babak') is-invalid @enderror" name="babak" id="babak"
                         required>
-                        <option selected>{{ $jadwaltanding->babak }}</option>
+                        <option selected>{{ $jadwaltanding->babak ?? '-' }}</option>
                         <option value="Penyisihan">Penyisihan</option>
                         <option value="Perempat Final">Perempat Final</option>
                         <option value="Semi Final">Semi Final</option>
