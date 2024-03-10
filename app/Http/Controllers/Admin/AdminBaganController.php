@@ -10,10 +10,16 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminBaganController extends Controller
 {
-    public function index()
+    public function tanding()
     {
-        $pengundianTanding = PengundianTanding::all();
-        return view('admin.bagan.index', compact('pengundianTanding'));
+        $pengundiantanding = PengundianTanding::all();
+        return view('admin.bagan.tanding', compact('pengundiantanding'));
+    }
+
+    public function tgr()
+    {
+        $pengundiantgr = PengundianTGR::all();
+        return view('admin.bagan.tgr', compact('pengundiantgr'));
     }
 
 }

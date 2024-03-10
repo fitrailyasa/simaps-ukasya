@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.admin.bagan')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bagan</title>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+@section('title', 'Bagan Tanding')
+
+@section('table-bagan-tanding', 'active')
+
+@section('style')
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/bagan/css/jquery.bracket-world.css') }}" rel="stylesheet">
-</head>
+@endsection
 
-<body>
-    </div>
-    </div>
+@section('content')
     <div id="bracket2" class="bracket"></div>
+@endsection
+
+@section('script')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/bagan/js/jquery.bracket-world.min.js') }}"></script>
@@ -93,30 +92,30 @@
             /*var theBracket = $('#bracket2').bracket({teams:6, height:'590px'});
             theBracket.data("bracket").setVertical().zoomIn(0.6).setTeams(
             [
-            	{
-            		name:'Texas',
-            		seed:'5'
-            	},
-            	{
-            		name:'Kansas',
-            		seed:'4'
-            	},
-            	{
-            		name:'Kansas State',
-            		seed:'1'
-            	},
-            	{
-            		name:'Baylor',
-            		seed:'6'
-            	},
-            	{
-            		name:'Texas Tech',
-            		seed:'3'
-            	},
-            	{
-            		name:'TCU',
-            		seed:'2'
-            	}
+                {
+                    name:'Texas',
+                    seed:'5'
+                },
+                {
+                    name:'Kansas',
+                    seed:'4'
+                },
+                {
+                    name:'Kansas State',
+                    seed:'1'
+                },
+                {
+                    name:'Baylor',
+                    seed:'6'
+                },
+                {
+                    name:'Texas Tech',
+                    seed:'3'
+                },
+                {
+                    name:'TCU',
+                    seed:'2'
+                }
             ]);*/
 
             $('#bracket3, #bracket4').bracket({
@@ -141,6 +140,4 @@
             } else $('#main-title').height(minHeight);
         }
     </script>
-</body>
-
-</html>
+@endsection

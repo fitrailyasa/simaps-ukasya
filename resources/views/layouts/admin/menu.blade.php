@@ -11,22 +11,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('beranda') }}" class="nav-link text-white">
-                    <i class="nav-icon fas fa-home"></i>
-                    <p>
-                        Home
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.user.index') }}" class="nav-link text-white @yield('table-user')">
-                    <i class="nav-icon fas fa-users"></i>
-                    <p>
-                        User
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="{{ route('admin.tanding.index') }}" class="nav-link text-white @yield('table-tanding')">
                     <i class="nav-icon fas fa-tv"></i>
                     <p>
@@ -39,6 +23,14 @@
                     <i class="nav-icon fas fa-random"></i>
                     <p>
                         Pengundian Tanding
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.bagan.tanding') }}" class="nav-link text-white @yield('table-bagan-tanding')">
+                    <i class="nav-icon fas fa-chart-bar"></i>
+                    <p>
+                        Bagan Tanding
                     </p>
                 </a>
             </li>
@@ -67,6 +59,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.bagan.tgr') }}" class="nav-link text-white @yield('table-bagan-tgr')">
+                    <i class="nav-icon fas fa-chart-bar"></i>
+                    <p>
+                        Bagan TGR
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('admin.jadwal-tgr.index') }}" class="nav-link text-white @yield('table-jadwal-tgr')">
                     <i class="nav-icon fas fa-calendar"></i>
                     <p>
@@ -79,6 +79,14 @@
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
                         Gelanggang
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.user.index') }}" class="nav-link text-white @yield('table-user')">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                        User
                     </p>
                 </a>
             </li>

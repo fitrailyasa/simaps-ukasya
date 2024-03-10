@@ -75,7 +75,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/pengundian-tgr/destroy-all', [AdminPengundianTGRController::class, 'destroyAll'])->name('pengundian-tgr.destroy-all');
     
     // Bagan
-    Route::get('/bagan', [AdminBaganController::class, 'index'])->name('bagan.index');
+    Route::get('/bagan-tanding', [AdminBaganController::class, 'tanding'])->name('bagan.tanding');
+    Route::get('/bagan-tgr', [AdminBaganController::class, 'tgr'])->name('bagan.tgr');
     
     // Jadwal Tanding
     Route::get('/jadwal-tanding', [AdminJadwalTandingController::class, 'index'])->name('jadwal-tanding.index');

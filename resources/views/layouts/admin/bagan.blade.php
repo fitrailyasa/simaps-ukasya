@@ -64,6 +64,7 @@
     <meta name="msapplication-wide310x150logo" content="{{ asset('assets/favicon/mstile-310x150.png') }}" />
     <meta name="msapplication-square310x310logo" content="{{ asset('assets/favicon/mstile-310x310.png') }}" />
 
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -127,8 +128,7 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper mt-5 pt-3"
-            style="background-image: url('{{ asset('assets/img/bg.jpg') }}'); background-size: 165%; background-repeat: no-repeat; background-position: right;">
+        <div class="content-wrapper mt-5 pt-3">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
@@ -158,6 +158,8 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <footer class="main-footer 
+
         <footer class="main-footer fixed-bottom">
             <strong>Copyright &copy; 2024 <a href="#">SIMAPS</a>.</strong>
             All rights reserved.
@@ -205,6 +207,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+
     @yield('script')
 </body>
 
