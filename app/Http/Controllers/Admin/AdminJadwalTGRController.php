@@ -24,11 +24,12 @@ class AdminJadwalTGRController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
+            'kelompok' => 'required|max:255',
         ]);
 
         $file = $request->file('file');
 
-        Excel::import(new JadwalTGRImport, $file);
+        Excel::import(new JadwalTGRImport($request->kelompok), $file);
 
         return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
     }

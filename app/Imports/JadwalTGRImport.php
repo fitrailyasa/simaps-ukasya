@@ -9,6 +9,13 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class JadwalTGRImport implements ToModel, WithHeadingRow
 {
+    public $kelompok;
+
+    public function __construct($kelompok)
+    {
+        $this->kelompok = $kelompok;
+    }
+
     public function model(array $row)
     {
         $gelanggang = Gelanggang::where('nama', $row['gelanggang'])->first();
@@ -23,6 +30,7 @@ class JadwalTGRImport implements ToModel, WithHeadingRow
             'partai' => $row['partai'],
             'gelanggang' => $gelanggang->id,
             'babak' => $row['babak'],
+            'kelompok' => $this->kelompok,
             'sudut_biru' => $row['sudut_biru'], 
             'sudut_merah' => $row['sudut_merah'],
             'next_sudut' => $row['next_sudut'],

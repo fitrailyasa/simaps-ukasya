@@ -13,6 +13,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mb-1">
+                        <label class="form-label">Kelompok</label>
+                        <input type="text" class="form-control @error('kelompok') is-invalid @enderror"
+                            placeholder="kelompok" name="kelompok" id="kelompok" required>
+                        @error('kelompok')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-1">
                         <label class="form-label">Upload File</label>
                         <input type="file" class="form-control @error('file') is-invalid @enderror"
                             placeholder="file" name="file" id="file" required>

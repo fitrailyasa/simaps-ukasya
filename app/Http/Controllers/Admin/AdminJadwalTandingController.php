@@ -24,11 +24,12 @@ class AdminJadwalTandingController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
+            'kelompok' => 'required|max:255',
         ]);
 
         $file = $request->file('file');
 
-        Excel::import(new JadwalTandingImport, $file);
+        Excel::import(new JadwalTandingImport($request->kelompok), $file);
 
         return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Atlet!');
     }
