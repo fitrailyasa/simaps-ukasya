@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\JadwalTanding;
+use App\Models\Gelanggang;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -10,9 +11,17 @@ class JadwalTandingImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
+        $gelanggang = Gelanggang::where('nama', $row['gelanggang'])->first();
+
+        if (!$gelanggang) {
+            $gelanggang = Gelanggang::create([
+                'nama' => $row['gelanggang'],
+            ]);
+        }
+
         return new JadwalTanding([
             'partai' => $row['partai'],
-            'gelanggang' => $row['gelanggang'],
+            'gelanggang' => $gelanggang->id,
             'babak' => $row['babak'],
             'sudut_biru' => $row['sudut_biru'], 
             'sudut_merah' => $row['sudut_merah'],

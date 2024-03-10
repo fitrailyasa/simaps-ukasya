@@ -105,9 +105,15 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Golongan</label>
-                    <input type="text" class="form-control @error('golongan') is-invalid @enderror"
-                        placeholder="golongan" name="golongan" id="golongan" value="{{ $tanding->golongan }}"
-                        required>
+                    <select name="golongan" id="golongan" class="form-select @error('golongan') is-invalid @enderror">
+                        <option selected value="{{ $tanding->golongan }}">{{ $tanding->golongan }}</option>
+                        <option value="Usia Dini 1">Usia Dini 1</option>
+                        <option value="Usia Dini 2">Usia Dini 2</option>
+                        <option value="Pra Remaja">Pra Remaja</option>
+                        <option value="Remaja">Remaja</option>
+                        <option value="Dewasa">Dewasa</option>
+                        <option value="Master">Master</option>
+                    </select>
                     @error('golongan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

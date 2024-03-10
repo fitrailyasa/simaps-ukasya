@@ -108,7 +108,8 @@
                     <label class="form-label">Sudut Selanjutnya</label>
                     <select class="form-select @error('next_sudut') is-invalid @enderror" name="next_sudut"
                         id="next_sudut" required>
-                        <option selected>{{ $jadwaltanding->next_sudut == 1 ? 'Sudut Biru' : 'Sudut Merah' }}</option>
+                        <option selected value="{{ $jadwaltanding->next_sudut }}">
+                            {{ $jadwaltanding->next_sudut == 1 ? 'Sudut Biru' : 'Sudut Merah' }}</option>
                         <option value="1">Sudut Biru</option>
                         <option value="2">Sudut Merah</option>
                     </select>

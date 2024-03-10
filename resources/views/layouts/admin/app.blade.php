@@ -141,7 +141,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper mt-5 pt-3"
-            style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
+            style="background-image: url('{{ asset('assets/img/bg.jpg') }}'); background-size: 165%; background-repeat: no-repeat; background-position: right;">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">

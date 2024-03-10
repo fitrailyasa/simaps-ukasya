@@ -40,12 +40,13 @@
                     <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltgr->babak ?? '-' }}</td>
                     <td>{{ $jadwaltgr->kelompok ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }} -
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }}</td>
-                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }} -
-                        {{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->PemenangTGR->TGR->nama ?? '-' }} -
-                        {{ $jadwaltgr->PemenangTGR->TGR->kontingen ?? 'Belum Bertanding' }}</td>
+                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
+                        ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }})</td>
+                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
+                        ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})</td>
+                    <td>{{ $jadwaltgr->PemenangTGR->TGR->nama ?? '' }}
+                        ({{ $jadwaltgr->PemenangTGR->TGR->kontingen ?? 'Belum Bertanding' }})
+                    </td>
                     <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)

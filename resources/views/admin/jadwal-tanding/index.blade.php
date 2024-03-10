@@ -40,12 +40,13 @@
                     <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltanding->babak ?? '-' }}</td>
                     <td>{{ $jadwaltanding->kelompok ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }} -
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }}</td>
-                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }} -
-                        {{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->PemenangTanding->Tanding->nama ?? '-' }} -
-                        {{ $jadwaltanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }}</td>
+                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
+                        ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})</td>
+                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
+                    <td>{{ $jadwaltanding->PemenangTanding->Tanding->nama ?? '' }}
+                        ({{ $jadwaltanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }})
+                    </td>
                     <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)

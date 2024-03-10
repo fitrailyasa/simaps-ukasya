@@ -28,7 +28,8 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" id="jenis_kelamin"
                         class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                        <option selected value="{{ $tgr->jenis_kelamin }}">{{ $tgr->jenis_kelamin }}</option>
+                        <option selected value="{{ $tgr->jenis_kelamin }}">
+                            {{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</option>
                         <option value="L">Putra</option>
                         <option value="P">Putri</option>
                     </select>
@@ -50,8 +51,13 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Kategori</label>
-                    <input type="text" class="form-control @error('kategori') is-invalid @enderror"
-                        placeholder="kategori" name="kategori" id="kategori" value="{{ $tgr->kategori }}" required>
+                    <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid @enderror">
+                        <option selected value="{{ $tgr->kategori }}">{{ $tgr->kategori }}</option>
+                        <option value="Tunggal">Tunggal</option>
+                        <option value="Ganda">Ganda</option>
+                        <option value="Regu">Regu</option>
+                        <option value="Solo Kreatif">Solo Kreatif</option>
+                    </select>
                     @error('kategori')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -60,8 +66,15 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Golongan</label>
-                    <input type="text" class="form-control @error('golongan') is-invalid @enderror"
-                        placeholder="golongan" name="golongan" id="golongan" value="{{ $tgr->golongan }}" required>
+                    <select name="golongan" id="golongan" class="form-select @error('golongan') is-invalid @enderror">
+                        <option selected value="{{ $tgr->golongan }}">{{ $tgr->golongan }}</option>
+                        <option value="Usia Dini 1">Usia Dini 1</option>
+                        <option value="Usia Dini 2">Usia Dini 2</option>
+                        <option value="Pra Remaja">Pra Remaja</option>
+                        <option value="Remaja">Remaja</option>
+                        <option value="Dewasa">Dewasa</option>
+                        <option value="Master">Master</option>
+                    </select>
                     @error('golongan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
