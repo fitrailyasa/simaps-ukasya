@@ -77,7 +77,7 @@
                         @foreach ($pengundiantandings as $pengundiantanding)
                             <option value="{{ $pengundiantanding->no_undian }}"
                                 {{ $pengundiantanding->no_undian == $jadwaltanding->sudut_biru ? 'selected' : '' }}>
-                                {{ $pengundiantanding->Tanding->nama }}
+                                {{ $pengundiantanding->Tanding->nama ?? '-' }}
                             </option>
                         @endforeach
                     </select>
@@ -94,7 +94,7 @@
                         @foreach ($pengundiantandings as $pengundiantanding)
                             <option value="{{ $pengundiantanding->no_undian }}"
                                 {{ $pengundiantanding->no_undian == $jadwaltanding->sudut_merah ? 'selected' : '' }}>
-                                {{ $pengundiantanding->Tanding->nama }}
+                                {{ $pengundiantanding->Tanding->nama ?? '-' }}
                             </option>
                         @endforeach
                     </select>
@@ -136,4 +136,6 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
     </form>
+</div>
+</div>
 </div>

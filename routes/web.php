@@ -76,9 +76,6 @@ Route::middleware(['auth'])->group(function () {
     
     // Bagan
     Route::get('/bagan', [AdminBaganController::class, 'index'])->name('bagan.index');
-    Route::post('/bagan', [AdminBaganController::class, 'store'])->name('bagan.store');
-    Route::put('/bagan/{id}/update', [AdminBaganController::class, 'update'])->name('bagan.update');
-    Route::delete('/bagan/{id}/destroy', [AdminBaganController::class, 'destroy'])->name('bagan.destroy');
     
     // Jadwal Tanding
     Route::get('/jadwal-tanding', [AdminJadwalTandingController::class, 'index'])->name('jadwal-tanding.index');

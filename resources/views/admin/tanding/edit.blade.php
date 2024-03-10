@@ -28,7 +28,9 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" id="jenis_kelamin"
                         class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                        <option selected value="{{ $tanding->jenis_kelamin }}">{{ $tanding->jenis_kelamin }}</option>
+                        <option selected>
+                            {{ $tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</option>
+                        </option>
                         <option value="L">Putra</option>
                         <option value="P">Putri</option>
                     </select>
@@ -40,7 +42,7 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Tinggi Badan</label>
-                    <input type="text" class="form-control @error('tinggi_badan') is-invalid @enderror"
+                    <input type="number" class="form-control @error('tinggi_badan') is-invalid @enderror"
                         placeholder="tinggi_badan" name="tinggi_badan" id="tinggi_badan"
                         value="{{ $tanding->tinggi_badan }}" required>
                     @error('tinggi_badan')
@@ -51,7 +53,7 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <label class="form-label">Berat Badan</label>
-                    <input type="text" class="form-control @error('berat_badan') is-invalid @enderror"
+                    <input type="number" class="form-control @error('berat_badan') is-invalid @enderror"
                         placeholder="berat_badan" name="berat_badan" id="berat_badan"
                         value="{{ $tanding->berat_badan }}" required>
                     @error('berat_badan')

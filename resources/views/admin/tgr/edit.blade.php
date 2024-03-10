@@ -28,7 +28,7 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" id="jenis_kelamin"
                         class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                        <option selected value="{{ $tgr->jenis_kelamin }}">
+                        <option selected>
                             {{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</option>
                         <option value="L">Putra</option>
                         <option value="P">Putri</option>

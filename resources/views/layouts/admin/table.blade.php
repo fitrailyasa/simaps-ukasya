@@ -15,42 +15,12 @@
                 <h4>Kelola Data Tabel</h4>
                 <div class="d-flex
                 justify-content-end mb-3">
-                    <!-- Tombol untuk membuka modal -->
-                    <a role="button" class="btn btn-primary mx-1" data-toggle="modal" data-target="#modalFormCreate">Tambah</a>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalFormCreate" tabindex="-1" role="dialog"
-                        aria-labelledby="modalFormLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            @yield('formCreate')
-                        </div>
-                    </div>
+                    @yield('formCreate')
 
-                    <!-- Tombol untuk membuka modal -->
-                    <a role="button" class="btn btn-success mx-1" data-toggle="modal"
-                        data-target="#modalFormUpload">Upload</a>
+                    @yield('formUpload')
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalFormUpload" tabindex="-1" role="dialog"
-                        aria-labelledby="modalFormLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            @yield('formUpload')
-                        </div>
-                    </div>
-
-                    <!-- Tombol untuk membuka modal -->
-                    <a role="button" class="btn btn-danger mx-1" data-toggle="modal"
-                        data-target="#modalFormDeleteAll">Hapus
-                        Semua</a>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalFormDeleteAll" tabindex="-1" role="dialog"
-                        aria-labelledby="modalFormLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            @yield('formDeleteAll')
-                        </div>
-                    </div>
-
+                    @yield('formDeleteAll')
 
                 </div>
             </div>

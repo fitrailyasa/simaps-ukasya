@@ -75,7 +75,7 @@
                         @foreach ($pengundiantgrs as $pengundiantgr)
                             <option value="{{ $pengundiantgr->no_undian }}"
                                 {{ $pengundiantgr->no_undian == $jadwaltgr->sudut_biru ? 'selected' : '' }}>
-                                {{ $pengundiantgr->TGR->nama }}
+                                {{ $pengundiantgr->TGR->nama ?? '-' }}
                             </option>
                         @endforeach
                     </select>
@@ -92,7 +92,7 @@
                         @foreach ($pengundiantgrs as $pengundiantgr)
                             <option value="{{ $pengundiantgr->no_undian }}"
                                 {{ $pengundiantgr->no_undian == $jadwaltgr->sudut_merah ? 'selected' : '' }}>
-                                {{ $pengundiantgr->TGR->nama }}
+                                {{ $pengundiantgr->TGR->nama ?? '-' }}
                             </option>
                         @endforeach
                     </select>
@@ -134,4 +134,6 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
     </form>
+</div>
+</div>
 </div>

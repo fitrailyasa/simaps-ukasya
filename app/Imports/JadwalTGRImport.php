@@ -23,6 +23,11 @@ class JadwalTGRImport implements ToModel, WithHeadingRow
         if (!$gelanggang) {
             $gelanggang = Gelanggang::create([
                 'nama' => $row['gelanggang'],
+                'waktu' => 3,
+                'audio' => 'audio.mp3',
+                'jenis' => 'Tunggal',
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
             ]);
         }
 
