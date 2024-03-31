@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class Juri
+class Operator
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class Juri
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && auth()->user()->roles_id == 4) {
+        if (Auth::check() && auth()->user()->roles_id == 2) {
             return $next($request);
         } else {
             return redirect('login');
