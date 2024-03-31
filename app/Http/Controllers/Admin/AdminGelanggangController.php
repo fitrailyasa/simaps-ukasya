@@ -15,8 +15,7 @@ class AdminGelanggangController extends Controller
     public function index()
     {
         $gelanggangs = Gelanggang::all();
-        $jumlah_jadwal = Gelanggang::all()->count();
-        return view('admin.gelanggang.index', compact('gelanggangs', 'jumlah_jadwal'));
+        return view('admin.gelanggang.index', compact('gelanggangs'));
     }
 
     public function import(Request $request)
