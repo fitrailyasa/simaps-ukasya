@@ -34,17 +34,16 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password')
             ],
             [
-                'name' => 'Juri',
-                'email' => 'juri@simaps.com',
-                'roles_id' => 2,
-                'gelanggang' => 1,
-                'status' => 1,
-                'password' => Hash::make('password')
-            ],
-            [
                 'name' => 'Dewan',
                 'email' => 'dewan@simaps.com',
                 'roles_id' => 3,
+                'gelanggang' => 1,
+                'status' => 1,
+                'password' => Hash::make('password')
+            ],[
+                'name' => 'Juri',
+                'email' => 'juri@simaps.com',
+                'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 1,
                 'password' => Hash::make('password')

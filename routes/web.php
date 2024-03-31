@@ -103,10 +103,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Kontrol
     Route::get('/kontrol', [AdminKontrolController::class, 'index'])->name('kontrol.index');
-    
-    // Perolehan Medali
-    Route::get('/medali', [AdminMedaliController::class, 'index'])->name('medali.index');
-    
+   
     // gelanggang
     Route::get('/gelanggang', [AdminGelanggangController::class, 'index'])->name('gelanggang.index');
     Route::post('/gelanggang', [AdminGelanggangController::class, 'store'])->name('gelanggang.store');
@@ -123,10 +120,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     
     // User
-    Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
-    Route::post('/user', [AdminUserController::class, 'store'])->name('user.store');
-    Route::put('/user/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
-    Route::delete('/user/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
+    // Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
+    // Route::post('/user', [AdminUserController::class, 'store'])->name('user.store');
+    // Route::put('/user/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
+    // Route::delete('/user/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
     
     // TGR
     Route::get('/tgr', [AdminTGRController::class, 'index'])->name('tgr.index');
@@ -189,17 +186,6 @@ Route::middleware(['auth'])->group(function () {
     // Kontrol
     Route::get('/kontrol', [AdminKontrolController::class, 'index'])->name('kontrol.index');
     
-    // Perolehan Medali
-    Route::get('/medali', [AdminMedaliController::class, 'index'])->name('medali.index');
-    
-    // gelanggang
-    Route::get('/gelanggang', [AdminGelanggangController::class, 'index'])->name('gelanggang.index');
-    Route::post('/gelanggang', [AdminGelanggangController::class, 'store'])->name('gelanggang.store');
-    Route::put('/gelanggang/{id}/update', [AdminGelanggangController::class, 'update'])->name('gelanggang.update'); 
-    Route::delete('/gelanggang/{id}/destroy', [AdminGelanggangController::class, 'destroy'])->name('gelanggang.destroy');
-    Route::post('/gelanggang/upload', [AdminGelanggangController::class, 'import'])->name('gelanggang.import');
-    Route::delete('/gelanggang/destroy-all', [AdminGelanggangController::class, 'destroyAll'])->name('gelanggang.destroy-all');
-
   });
 
   // CMS Dewan
