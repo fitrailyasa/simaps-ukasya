@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\JadwalTanding;
+use App\Models\Gelanggang;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+
+class JadwalTandingImport implements ToModel, WithHeadingRow
+{
+    public $kelompok;
+
+    public function __construct($kelompok)
+    {
+        $this->kelompok = $kelompok;
+    }
+
+    public function model(array $row)
+    {
+        $gelanggang = Gelanggang::where('nama', $row['gelanggang'])->first();
+
+        if (!$gelanggang) {
+            $gelanggang = Gelanggang::create([
+                'nama' => $row['gelanggang'],
+                'waktu' => 3,
+                'audio' => 'audio.mp3',
+                'jenis' => 'Tunggal',
+                'jumlah_tanding' => 0,
+                'jumlah_tgr' => 0
+            ]);
+        }
+
+        return new JadwalTanding([
+            'partai' => $row['partai'],
+            'gelanggang' => $gelanggang->id,
+            'babak' => $row['babak'],
+            'kelompok' => $this->kelompok,
+            'sudut_biru' => $row['sudut_biru'], 
+            'sudut_merah' => $row['sudut_merah'],
+            'next_sudut' => $row['next_sudut'],
+            'next_partai' => $row['next_partai'],
+        ]);
+    }
+}
