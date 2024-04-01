@@ -49,7 +49,7 @@
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-eye-slash toggle-password" style="cursor: pointer;"></span>
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
@@ -74,20 +74,6 @@
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-    <!-- Script to toggle password visibility -->
-    <script>
-        $(document).ready(function() {
-            $(".toggle-password").click(function() {
-                $(this).toggleClass("fa-eye fa-eye-slash");
-                var input = $($(this).parent().parent().prev());
-                if (input.attr("type") === "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

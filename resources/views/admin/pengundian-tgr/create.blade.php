@@ -6,7 +6,9 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            @if (auth()->user()->roles_id == 1)
                 <form method="POST" action="{{ route('admin.pengundian-tgr.store') }}" enctype="multipart/form-data">
+            @endif
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFormLabel">Tambah Pengundian TGR</h5>

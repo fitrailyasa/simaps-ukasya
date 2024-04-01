@@ -10,48 +10,6 @@
 @endsection
 
 @section('content')
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="col-3">
-            <div class="row">
-                <div class="form-group">
-                    <label class="form-label" for="">Pilih</label>
-                    <select class="form-select" name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="row">
-                <div class="form-group">
-                    <label class="form-label" for="">Pilih</label>
-                    <select class="form-select" name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="row">
-                <div class="form-group">
-                    <label class="form-label" for="">Pilih</label>
-                    <select class="form-select" name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center mb-3">
-        <button type="button" class="btn mx-1 btn-primary">Generate</button>
-        <button type="button" class="btn mx-1 btn-success">Print</button>
-    </div>
     <div id="bracket2" class="bracket"></div>
 @endsection
 

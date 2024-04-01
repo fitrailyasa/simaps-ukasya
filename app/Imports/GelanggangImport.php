@@ -13,6 +13,7 @@ class GelanggangImport implements ToModel, WithHeadingRow
         return new Gelanggang([
             'nama' => $row['nama'],
             'waktu' => $row['waktu'],
+            'audio' => $row['audio'],
             'jenis' => $row['jenis'],
         ]);
     }

@@ -41,23 +41,7 @@ class AdminTandingController extends Controller
             'golongan' => 'required|max:255'
         ]);
 
-        $tanding = Tanding::create([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
-            'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
-            'golongan' => $request->golongan,
-        ]);
-
-        if ($request->hasFile('img')) {
-            $img = $request->file('img');
-            $file_name = time() . '_' . $tanding->nama . '.' . $img->getClientOriginalExtension();
-            $tanding->img = $file_name;
-            $tanding->update();
-            $img->move('../public/assets/img/', $file_name);
-        }
+        Tanding::create($request->all());
 
         return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
@@ -75,23 +59,7 @@ class AdminTandingController extends Controller
         ]);
 
         $tanding = Tanding::findOrFail($id);
-        $tanding->update([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
-            'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
-            'golongan' => $request->golongan,
-        ]);
-
-        if ($request->hasFile('img')) {
-            $img = $request->file('img');
-            $file_name = time() . '_' . $tanding->nama . '.' . $img->getClientOriginalExtension();
-            $tanding->img = $file_name;
-            $tanding->update();
-            $img->move('../public/assets/img/', $file_name);
-        }
+        $tanding->update($request->all());
 
         return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Edit Atlet!');
     }

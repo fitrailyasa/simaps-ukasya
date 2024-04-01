@@ -13,7 +13,8 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h4>Kelola Data Tabel</h4>
-                <div class="d-flex justify-content-end mb-3">
+                <div class="d-flex
+                justify-content-end mb-3">
 
                     @yield('formCreate')
 
@@ -42,28 +43,10 @@
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
-                "paging": false,
-                "buttons": [{
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                ]
+                "paging": true,
+                // "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,

@@ -17,7 +17,10 @@ class CreateGelanggangTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('waktu');
-            $table->string('jenis');  
+            $table->string('audio')->nullable();
+            $table->string('jenis');
+            $table->integer('jumlah_tanding')->default(0);    
+            $table->integer('jumlah_tgr')->default(0);    
             $table->timestamps();
         });
     }
