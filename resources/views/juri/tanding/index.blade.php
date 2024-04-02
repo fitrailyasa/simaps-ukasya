@@ -2,19 +2,14 @@
 @section('title', 'Tanding')
 @section('content')
     <div
-    class="p-3 container"
+    class="p-3 "
     style="
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
-        -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
         position: relative;
         margin-top: -48px;
     "
 >
     <img class="juri-bg" src="{{url("/assets/img/ipsi.png")}} " style="position: absolute;
-    height:80%;width:80%0px; opacity:20%; left: 0; right: 0; top: 0; bottom: 0;
+    height:80%;width:40%; opacity:20%; left: 0; right: 0; top: 0; bottom: 0;
     margin: auto" alt="">
     <div class="row justify-content-md-center m-2">
         <div class="col-md-4 d-flex justify-content-center">
@@ -45,24 +40,25 @@
                         <tr>
                             <th
                                 scope="col"
-                                class="col-md-5 bg-danger text-center text-white tabel-head"
-                                style="border: 2px solid #000;"
+                                class="bg-danger text-center text-white tabel-head mw-40"
+                                style="border: 2px solid #000; width:40%"
                             >
                                 Nilai
                             </th>
                             <th
                                 scope="col"
-                                class="col-md-2 text-center"
-                                style="border: 2px solid #000;"
+                                class="text-center mw-20"
+                                style="border: 2px solid #000; width:20%"
                             >
                                 Babak
                             </th>
                             <th
                                 scope="col"
-                                class="col-md-5 text-center text-white tabel-head"
+                                class="text-center text-white tabel-head mw-40"
                                 style="
                                     background-color: #0053a6;
                                     border: 2px solid #000;
+                                    width:40%
                                 "
                             >
                                 Nilai
@@ -127,9 +123,9 @@
         </div>
     </div>
     <div class="row m-3">
-        <div class="col d-flex">
-            <div class="poin col-md-6">
-                <div class="">
+        <div class="col d-flex justify-content-between">
+            <div class="poin p-1 m-1" style="width: 50%"">
+                <div class="poin p-1 m-1" style="width: 100%">
                     <button
                         class="btn btn-danger text-white p-3 mb-2 tombol-pukulan-a"
                         style="width: 100%; border-radius: 10px"
@@ -138,7 +134,7 @@
                         Pukulan
                     </button>
                 </div>
-                <div class="">
+                <div class="poin p-1 m-1" style="width: 100%">
                     <button
                         class="btn btn-danger text-white p-3 tombol-tendangan-a"
                         style="width: 100%; border-radius: 10px"
@@ -147,41 +143,41 @@
                     </button>
                 </div>
             </div>
-            <div class="hapus-poin col-xl-6 d-flex ">
-                <div class="tombol-hapus-a">
+            <div class="hapus-poin d-flex  p-1 m-1 " style="width: 200px;">
+                <div class="tombol-hapus-a" style="width: 100%; height:100%">
                     <button
-                        class="btn btn-danger text-white p-3"
-                        style="width: 200%; height: 100%; border-radius: 10px"
+                        class="btn btn-danger text-white "
+                        style="border-radius: 10px; width:100% !important; height:100% !important;"
                     >
                         Hapus
                     </button>
                 </div>
             </div>
         </div>
-        <div class="col d-flex">
-            <div class="hapus-poin col-xl-6 d-flex">
-                <div class="tombol-hapus-b">
+        <div class="col d-flex justify-content-between">
+            <div class="hapus-poin d-flex justify-content-start p-1 m-1" style="width:200px">
+                <div class="tombol-hapus-b" style="margin:0 !important;width: 100%; height:100%">
                     <button
-                        class="btn btn-primary text-white p-3"
-                        style="width: 200%; height: 100%; border-radius: 10px"
+                        class="btn btn-biru text-white"
+                        style=" border-radius: 10px; height:100% ;width:100% ;background-color: #0053a6;"
                     >
                         Hapus
                     </button>
                 </div>
             </div>
-            <div class="poin col-xl-6">
-                <div class="">
+            <div class="poin p-1 m-1" style="width: 50%">
+                <div class="" style="width: 100%; height:50%">
                     <button
-                        class="btn btn-primary text-white p-3 mb-2 tombol-pukulan-b"
-                        style="width: 100%; border-radius: 10px"
+                        class="btn btn-biru text-white p-3 mb-2 tombol-pukulan-b"
+                        style="width: 100%; border-radius: 10px;background-color: #0053a6;"
                     >
                         Pukulan
                     </button>
                 </div>
-                <div class="">
+                <div class="" style="width: 100%; height:50%">
                     <button
-                        class="btn btn-primary text-white p-3 tombol-tendangan-b"
-                        style="width: 100%; border-radius: 10px"
+                        class="btn btn-biru text-white p-3 tombol-tendangan-b"
+                        style="width: 100%; border-radius: 10px ;background-color: #0053a6;"
                     >
                         Tendangan
                     </button>

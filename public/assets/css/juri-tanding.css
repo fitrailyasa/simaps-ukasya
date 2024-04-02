@@ -1,22 +1,16 @@
-@media only screen and (max-width: 554px) {
-    .juri-bg {
-        position: absolute;
-        height: 60% !important;
-        width: 60% !important;
-        opacity: 20%;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-    }
-}
-@media only screen and (min-width: 1200px) {
-    .tombol-hapus-b {
-        margin-left: 90px !important;
-    }
-}
-
 .babak-active {
     background-color: #f0d500 !important;
+}
+
+.btn-biru:hover {
+    background-color: #007bff !important;
+}
+
+.btn-biru:active {
+    background-color: #0053a6 !important;
+    transform: translateY(1px) !important;
+}
+.btn-danger:active {
+    background-color: #db3545 !important;
+    transform: translateY(1px) !important;
 }

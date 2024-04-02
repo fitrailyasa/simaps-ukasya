@@ -177,7 +177,7 @@
             <!-- Content Wrapper. Contains page content -->
             <div
                 class="content-wrapper"
-                style="background-image: url('{{ asset('assets/img/bg.jpg') }}'); background-size: 110%; background-repeat: no-repeat; margin: 0;"
+                style="margin: 0; right:0 background-color: #ffffff;"
             >
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -215,16 +215,6 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer fixed-bottom" style="margin-left: 0">
-                <strong>Copyright &copy; 2024 <a href="#">SIMAPS</a>.</strong>
-                All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
         </div>
         <!-- ./wrapper -->
 
