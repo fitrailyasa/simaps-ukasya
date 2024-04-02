@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminDataApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +13,3 @@ use App\Http\Controllers\Admin\AdminDataApiController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::resource('data', AdminDataApiController::class, ['only', ['index', 'store', 'edit', 'update', 'destroy']]);
