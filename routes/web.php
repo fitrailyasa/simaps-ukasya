@@ -29,7 +29,6 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
   Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-  Route::get('/tanding', [JuriTandingController::class, 'index'])->name('tanding');
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
