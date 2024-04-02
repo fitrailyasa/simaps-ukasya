@@ -16,12 +16,12 @@
             <h3 class="fw-bold">Juri 1</h3>
         </div>
     </div>
-    <div class="m-1 p-1 mt-4  d-flex justify-content-between flex-row">
-        <div class="ml-5">
-            <h5 class="fw-bold bg-danger p-3 rounded">Kontingen A</h5>
+    <div class="d-flex flex-row justify-content-between  p-1 m-1 " style="width:100%">
+        <div class="ml-4">
+            <h5 class="fw-bold bg-danger p-3 rounded kontingen">Kontingen A</h5>
         </div>
-        <div class="mr-5">
-            <h5 class="fw-bold  p-3 rounded text-white" style="background-color: #0053a6;">Kontingen B</h5>
+        <div class="mr-4">
+            <h5 class="fw-bold  p-3 rounded text-white kontingen" style="background-color: #0053a6;">Kontingen B</h5>
         </div>
     </div>
     <div class="row m-3">

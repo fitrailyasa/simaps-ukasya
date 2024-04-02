@@ -1,3 +1,9 @@
+@media only screen and (max-width: 400px) {
+    .kontingen {
+        font-size: 0.8rem;
+    }
+}
+
 .babak-active {
     background-color: #f0d500 !important;
 }
