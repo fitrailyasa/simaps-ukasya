@@ -6,6 +6,7 @@ use App\Models\Tanding;
 use App\Models\TGR;
 use App\Models\JadwalTanding;
 use App\Models\JadwalTGR;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

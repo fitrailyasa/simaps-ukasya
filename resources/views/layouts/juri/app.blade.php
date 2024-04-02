@@ -6,6 +6,7 @@
         <title>Juri | @yield('title')</title>
 
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
+        <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
 
         <!-- Google Font: Source Sans Pro -->
         <link
@@ -194,7 +195,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="#">Juri</a>
                                     </li>
-                                    <li class="breadcrumb-item active">
+                                    <li class="breadcrumb-item active fw-bold">
                                         @yield('title')
                                     </li>
                                 </ol>
@@ -208,7 +209,7 @@
                 <!-- /.content-header -->
 
                 <!-- Main content -->
-                <section class="content">
+                <section class="content" style="position: relative">
                     <div class="container-fluid mb-5">@yield('content')</div>
                     <!-- /.container-fluid -->
                 </section>

@@ -20,3 +20,10 @@
     background-color: #db3545 !important;
     transform: translateY(1px) !important;
 }
+
+.tombol-tunggal:hover {
+    background-color: rgb(46, 111, 0) !important;
+}
+.tombol-tunggal:active {
+    transform: translateY(1px) !important;
+}

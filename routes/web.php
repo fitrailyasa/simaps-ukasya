@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\JuriTandingController;
+
+
+use App\Http\Controllers\Juri\JuriGandaController;
+use App\Http\Controllers\Juri\JuriReguController;
+use App\Http\Controllers\Juri\JuriTandingController;
+use App\Http\Controllers\Juri\JuriTunggalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -200,6 +205,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tanding', [JuriTandingController::class, 'index'])->name('tanding');
+    Route::get('/tunggal', [JuriTunggalController::class, 'index'])->name('tunggal');
+    Route::get('/regu', [JuriReguController::class, 'index'])->name('regu');
   });
 
 });
