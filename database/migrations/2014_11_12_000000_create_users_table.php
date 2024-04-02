@@ -15,14 +15,23 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('img')->nullable();
-            $table->string('no_hp')->nullable();
+            $table->foreignId('gelanggang')->nullable();
+            $table->integer('status')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('roles_id')->nullable()->default(99);
             $table->foreign('roles_id')->references('id')->on('roles')
             ->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
         });
     }
 

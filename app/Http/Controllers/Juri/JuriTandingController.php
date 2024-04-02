@@ -4,16 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tanding;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TandingImport;
 
-class AdminTandingController extends Controller
+class JuriTandingController extends Controller
 {
     public function index()
     {
-        $tandings = Tanding::latest('id')->get();
-        return view('admin.tanding.index', compact('tandings'));
+        $user = Auth::user();
+        return view('juri.tanding.index', compact('user'));
     }
 
     public function import(Request $request)
@@ -41,23 +43,7 @@ class AdminTandingController extends Controller
             'golongan' => 'required|max:255'
         ]);
 
-        $tanding = Tanding::create([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
-            'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
-            'golongan' => $request->golongan,
-        ]);
-
-        if ($request->hasFile('img')) {
-            $img = $request->file('img');
-            $file_name = time() . '_' . $tanding->nama . '.' . $img->getClientOriginalExtension();
-            $tanding->img = $file_name;
-            $tanding->update();
-            $img->move('../public/assets/img/', $file_name);
-        }
+        Tanding::create($request->all());
 
         return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
@@ -75,23 +61,7 @@ class AdminTandingController extends Controller
         ]);
 
         $tanding = Tanding::findOrFail($id);
-        $tanding->update([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
-            'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
-            'golongan' => $request->golongan,
-        ]);
-
-        if ($request->hasFile('img')) {
-            $img = $request->file('img');
-            $file_name = time() . '_' . $tanding->nama . '.' . $img->getClientOriginalExtension();
-            $tanding->img = $file_name;
-            $tanding->update();
-            $img->move('../public/assets/img/', $file_name);
-        }
+        $tanding->update($request->all());
 
         return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Edit Atlet!');
     }

@@ -18,24 +18,34 @@ class UserSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Operator',
-                'email' => 'operator@simaps.com',
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
                 'roles_id' => 1,
-                'no_hp' => '081234567890',
+                'gelanggang' => 1,
+                'status' => 1,
                 'password' => Hash::make('password')
             ],
             [
-                'name' => 'Juri',
-                'email' => 'juri@simaps.com',
+                'name' => 'Operator',
+                'email' => 'operator@simaps.com',
                 'roles_id' => 2,
-                'no_hp' => '081234567890',
+                'gelanggang' => 1,
+                'status' => 1,
                 'password' => Hash::make('password')
             ],
             [
                 'name' => 'Dewan',
                 'email' => 'dewan@simaps.com',
                 'roles_id' => 3,
-                'no_hp' => '081234567890',
+                'gelanggang' => 1,
+                'status' => 1,
+                'password' => Hash::make('password')
+            ],[
+                'name' => 'Juri',
+                'email' => 'juri@simaps.com',
+                'roles_id' => 4,
+                'gelanggang' => 1,
+                'status' => 1,
                 'password' => Hash::make('password')
             ],
         ];

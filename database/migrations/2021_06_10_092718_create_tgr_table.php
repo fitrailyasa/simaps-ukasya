@@ -16,6 +16,7 @@ class CreateTgrTable extends Migration
         Schema::create('tgr', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('img')->nullable();
             $table->string('jenis_kelamin');
             $table->string('kontingen');    
             $table->string('kategori');

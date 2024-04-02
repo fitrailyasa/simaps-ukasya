@@ -39,7 +39,21 @@ class AdminTGRController extends Controller
             'golongan' => 'required|max:255'
         ]);
 
-        TGR::create($request->all());
+        $tgr = TGR::create([
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kontingen' => $request->kontingen,
+            'kategori' => $request->kategori,
+            'golongan' => $request->golongan,
+        ]);
+
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            $file_name = time() . '_' . $tgr->nama . '.' . $img->getClientOriginalExtension();
+            $tgr->img = $file_name;
+            $tgr->save();
+            $img->move('../public/assets/img/', $file_name);
+        }
 
         return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Tambah Atlet!');
     }
@@ -55,7 +69,21 @@ class AdminTGRController extends Controller
         ]);
 
         $tgr = TGR::findOrFail($id);
-        $tgr->update($request->all());
+        $tgr->update([
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kontingen' => $request->kontingen,
+            'kategori' => $request->kategori,
+            'golongan' => $request->golongan,
+        ]);
+
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            $file_name = time() . '_' . $tgr->nama . '.' . $img->getClientOriginalExtension();
+            $tgr->img = $file_name;
+            $tgr->save();
+            $img->move('../public/assets/img/', $file_name);
+        }
 
         return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Edit Atlet!');
     }

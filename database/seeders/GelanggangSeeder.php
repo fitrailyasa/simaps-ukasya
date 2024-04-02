@@ -18,37 +18,25 @@ class GelanggangSeeder extends Seeder
                 'id' => 1,
                 'nama' => 'ARENA A',
                 'waktu' => 3,
-                'audio' => 'audio.mp3',
                 'jenis' => 'Tanding',
-                'jumlah_tanding' => 0,
-                'jumlah_tgr' => 0
             ],
             [
                 'id' => 2,
                 'nama' => 'ARENA B',
                 'waktu' => 3,
-                'audio' => 'audio.mp3',
                 'jenis' => 'Tunggal',
-                'jumlah_tanding' => 0,
-                'jumlah_tgr' => 0
             ],
             [
                 'id' => 3,
                 'nama' => 'ARENA C',
                 'waktu' => 3,
-                'audio' => 'audio.mp3',
                 'jenis' => 'Ganda',
-                'jumlah_tanding' => 0,
-                'jumlah_tgr' => 0
             ],
             [
                 'id' => 4,
                 'nama' => 'ARENA D',
                 'waktu' => 3,
-                'audio' => 'audio.mp3',
                 'jenis' => 'Regu',
-                'jumlah_tanding' => 0,
-                'jumlah_tgr' => 0
             ]
         ];
         Gelanggang::query()->insert($Gelanggang);
