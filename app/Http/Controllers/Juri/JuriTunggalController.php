@@ -13,54 +13,9 @@ class JuriTunggalController extends Controller
      */
     public function index()
     {
-        return view("juri.tunggal.index");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Juri $juri)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Juri $juri)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Juri $juri)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Juri $juri)
-    {
-        //
+        $total_score = number_format(9.9, 2);
+        $flow_score = 0;
+        $accuracy_total_score = 0;
+        return view("juri.tunggal.index", ["total_score"=> $total_score,'accuracy_score'=>$accuracy_total_score,'flow_score'=> $flow_score]);
     }
 }

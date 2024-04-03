@@ -20,12 +20,12 @@
         </div>
         <div class="row-2 border border-secondary mt-1">
             <H6 class="fw-bold" style="height: 100%; margin-top: 25%;padding-bottom: 17.7%">
-                ATTACK DEFENSE TECHNIQUE ( 0.01 - 0.30 )
+                FIRMNESS AND HARMONY ( 0.01 - 0.30 )
             </H6>
         </div>
         <div class="row-3 border border-secondary mt-1">
             <H6 class="fw-bold" style="height: 100%; margin-top: 25%;padding-bottom: 17.7%">
-                ATTACK DEFENSE TECHNIQUE ( 0.01 - 0.30 )
+                SOULFULNESS ( 0.01 - 0.30 )
             </H6>
         </div>
             
@@ -33,296 +33,125 @@
         <div class="main text-center  score-detail d-flex flex-column" style="width: 68%;height: 100%; " >
             <div class="row-1 border border-secondary" style="height: 100%;padding-bottom: 1.7% !important">
                 <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important ;">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.01
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.02
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.03
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.04
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.05
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.06
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.07
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.08
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.09
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.10
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark att-btn-10" style="font-size: 1.2rem; width:10%">
+                                    0.10
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark att-btn-{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.0{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.11
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.12
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.13
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.14
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.15
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.16
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.17
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.18
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.19
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.20
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark att-btn-20" style="font-size: 1.2rem; width:10%">
+                                    0.20
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark att-btn-1{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.1{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.21
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.22
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.23
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.24
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.25
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.26
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.27
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.28
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.29
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.30
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark att-btn-30" style="font-size: 1.2rem; width:10%">
+                                    0.30
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark att-btn-2{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.2{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
         </div>
             <div class="row-2 border border-secondary" style="height: 100%;padding-bottom: 1.7% !important;margin-top: 6px">
                 <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.01
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.02
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.03
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.04
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.05
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.06
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.07
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.08
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.09
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.10
-                </span>
+                    @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark firm-btn-10" style="font-size: 1.2rem; width:10%">
+                                    0.10
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark firm-btn-{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.0{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.11
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.12
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.13
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.14
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.15
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.16
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.17
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.18
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.19
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.20
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark firm-btn-20" style="font-size: 1.2rem; width:10%">
+                                    0.20
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark firm-btn-1{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.1{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.21
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.22
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.23
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.24
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.25
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.26
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.27
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.28
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.29
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.30
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark firm-btn-30" style="font-size: 1.2rem; width:10%">
+                                    0.30
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark firm-btn-2{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.2{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             </div>
             <div class="row-3 border border-secondary" style="height: 100%;padding-bottom: 1.7% !important;margin-top: 6px">
                 <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.01
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.02
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.03
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.04
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.05
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.06
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.07
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.08
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.09
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.10
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark soul-btn-10" style="font-size: 1.2rem; width:10%">
+                                    0.10
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark soul-btn-{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.0{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.11
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.12
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.13
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.14
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.15
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.16
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.17
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.18
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.19
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.20
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark soul-btn-20" style="font-size: 1.2rem; width:10%">
+                                    0.20
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark soul-btn-1{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.1{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             <div class=" p-2 d-flex flex-row gap-2" style="width:100% !important">
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.21
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.22
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.23
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.24
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.25
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.26
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.27
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.28
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.29
-                </span>
-                <span class="border bg-abu border-dark" style="font-size: 1.2rem; width:10%">
-                    0.30
-                </span>
+                @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span class="border bg-abu border-dark soul-btn-30" style="font-size: 1.2rem; width:10%">
+                                    0.30
+                                </span>
+                            @else
+                                <span class="border bg-abu border-dark soul-btn-2{{$i}}" style="font-size: 1.2rem; width:10%">
+                                    0.2{{$i}}
+                                </span>
+                            @endif
+                        @endfor
             </div>
             </div>
         </div>

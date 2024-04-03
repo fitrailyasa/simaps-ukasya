@@ -132,7 +132,7 @@ Tunggal
                     class="aside fw-bold text-center border border-dark"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">8.90</span>
+                    <span style="color: #0053a6">{{$accuracy_score}}</span>
                 </div>
             </div>
             <div class="range-score d-flex gap-1">
@@ -170,7 +170,7 @@ Tunggal
                     class="aside fw-bold text-center border border-dark"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">8.90</span>
+                    <span style="color: #0053a6">{{$flow_score}}</span>
                 </div>
             </div>
             <div class="total-score d-flex gap-1">
@@ -184,7 +184,7 @@ Tunggal
                     class="aside fw-bold text-center border border-dark"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">8.90</span>
+                    <span style="color: #0053a6">{{$total_score}}</span>
                 </div>
             </div>
         </div>
