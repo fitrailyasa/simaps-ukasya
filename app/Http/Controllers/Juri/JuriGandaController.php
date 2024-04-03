@@ -11,6 +11,6 @@ class JuriGandaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('juri.regu.index', compact('user'));
+        return view('juri.ganda.index', compact('user'));
     }
 }

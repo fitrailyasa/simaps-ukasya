@@ -8,9 +8,6 @@
         margin-top: -48px;
     "
 >
-    <img class="juri-bg" src="{{url("/assets/img/ipsi.png")}} " style="position: absolute;
-    height:100%;width:50%; opacity:20%; left: 0; right: 0; top: 0; bottom: 0;
-    margin: auto" alt="">
     <div class="row justify-content-md-center m-2">
         <div class="col-md-4 d-flex justify-content-center">
             <h3 class="fw-bold">Juri 1</h3>

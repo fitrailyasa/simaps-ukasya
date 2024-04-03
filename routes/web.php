@@ -207,6 +207,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tanding', [JuriTandingController::class, 'index'])->name('tanding');
     Route::get('/tunggal', [JuriTunggalController::class, 'index'])->name('tunggal');
     Route::get('/regu', [JuriReguController::class, 'index'])->name('regu');
+    Route::get('/ganda', [JuriGandaController::class, 'index'])->name('ganda');
   });
 
 });

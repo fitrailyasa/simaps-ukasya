@@ -147,66 +147,23 @@ Tunggal
                     <div
                         class="score-detail d-flex gap-1 justify-content-center"
                     >
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.01
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.02
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.03
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.04
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.05
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.06
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.07
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.09
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.09
-                        </span>
-                        <span
-                            class="border border-dark p-1"
-                            style="background-color: #ececec"
-                        >
-                            0.10
-                        </span>
+                        @for ($i = 1; $i <= 10; $i++)
+                            @if ($i == 10)
+                                <span
+                                class="border border-dark p-1"
+                                style="background-color: #ececec"
+                                >
+                                0.10
+                                </span>
+                            @else
+                                <span
+                                class="border border-dark p-1"
+                                style="background-color: #ececec"
+                                >
+                                0.0{{$i}}
+                                </span>
+                            @endif
+                        @endfor
                     </div>
                 </div>
                 <div
