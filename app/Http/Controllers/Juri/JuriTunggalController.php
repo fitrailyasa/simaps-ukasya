@@ -11,6 +11,7 @@ class JuriTunggalController extends Controller
     /**
      * Display a listing of the resource.
      */
+     
     public function index()
     {
         $total_score = number_format(9.9, 2);
