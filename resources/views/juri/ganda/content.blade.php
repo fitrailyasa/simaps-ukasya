@@ -196,17 +196,17 @@
             <h4 class="fw-bold" style="color: #0053a6 !important;">0</h4>
         </div>
     </div>
-    <div class="footer d-flex gap-1 justify-content-start" style="width: 100%; height: 5vh !important;">
+    <div class="footer d-flex gap-1 justify-content-start" style="width: 100%; height: 7vh !important;">
         <div class="main-footer text-center  bg-abu border border-secondary pt-2"
-            style="width: 76.3%; margin-left: 0">
-            <h5 class="fw-bold">Total</h5>
+            style="width: 76.3%; margin-left: 0;">
+            <h5 class="fw-bold" style="margin-top: 0px !important">Total</h5>
         </div>
         <div class="score text-center  bg-abu border border-secondary d-flex justify-content-center pt-2"
             style="width: 6% !important;margin-top: 0 !important">
-            <div class="kotak bg-white border border-secondary mt-1" style="height: 15px;width:15px;"></div>
+            <div class="kotak bg-white border border-secondary mt-1" style="height: 10px;width:10px; ;margin-top: 0px !important"></div>
         </div>
         <div class="total-footer text-center bg-abu border border-secondary pt-2" style="width :17.3% ">
-            <h5 class="fw-bold">0</h5>
+            <h5 class="fw-bold" style="margin-top: 0px !important">0</h5>
         </div>
     </div>
 </div>

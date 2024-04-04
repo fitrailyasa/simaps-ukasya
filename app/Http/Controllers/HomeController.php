@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -24,7 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.index');
+        $user = Auth::user();
+        if($user){
+            return view('client.index');
+        }else{
+
+            return view('client.penonton.index');
+        }
     }
 
 }
