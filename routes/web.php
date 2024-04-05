@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     // Pengundian Tanding
     Route::get('/pengundian-tanding', [AdminPengundianTandingController::class, 'index'])->name('pengundian-tanding.index');
     Route::post('/pengundian-tanding', [AdminPengundianTandingController::class, 'store'])->name('pengundian-tanding.store');
+    Route::get('/pengundian-tanding/table', [AdminPengundianTandingController::class, 'table'])->name('pengundian-tanding.table');
     Route::put('/pengundian-tanding/{id}/update', [AdminPengundianTandingController::class, 'update'])->name('pengundian-tanding.update');
     Route::delete('/pengundian-tanding/{id}/destroy', [AdminPengundianTandingController::class, 'destroy'])->name('pengundian-tanding.destroy');
     Route::post('/pengundian-tanding/upload', [AdminPengundianTandingController::class, 'import'])->name('pengundian-tanding.import');
@@ -80,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
     // Pengundian TGR
     Route::get('/pengundian-tgr', [AdminPengundianTGRController::class, 'index'])->name('pengundian-tgr.index');
     Route::post('/pengundian-tgr', [AdminPengundianTGRController::class, 'store'])->name('pengundian-tgr.store');
+    Route::get('/pengundian-tgr/table', [AdminPengundianTGRController::class, 'table'])->name('pengundian-tgr.table');
     Route::put('/pengundian-tgr/{id}/update', [AdminPengundianTGRController::class, 'update'])->name('pengundian-tgr.update');
     Route::delete('/pengundian-tgr/{id}/destroy', [AdminPengundianTGRController::class, 'destroy'])->name('pengundian-tgr.destroy');
     Route::post('/pengundian-tgr/upload', [AdminPengundianTGRController::class, 'import'])->name('pengundian-tgr.import');
@@ -111,9 +113,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/timbang-ulang/{id}/update', [AdminTimbangUlangController::class, 'update'])->name('timbang-ulang.update');
     Route::delete('/timbang-ulang/{id}/destroy', [AdminTimbangUlangController::class, 'destroy'])->name('timbang-ulang.destroy');
     
-    // Kontrol
-    Route::get('/kontrol', [AdminKontrolController::class, 'index'])->name('kontrol.index');
-   
     // gelanggang
     Route::get('/gelanggang', [AdminGelanggangController::class, 'index'])->name('gelanggang.index');
     Route::post('/gelanggang', [AdminGelanggangController::class, 'store'])->name('gelanggang.store');
@@ -128,12 +127,6 @@ Route::middleware(['auth'])->group(function () {
   Route::middleware([Operator::class])->name('op.')->prefix('op')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    
-    // User
-    // Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
-    // Route::post('/user', [AdminUserController::class, 'store'])->name('user.store');
-    // Route::put('/user/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
-    // Route::delete('/user/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
     
     // TGR
     Route::get('/tgr', [AdminTGRController::class, 'index'])->name('tgr.index');
