@@ -17,6 +17,13 @@ class AdminPengundianTandingController extends Controller
         $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
         return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings'));
     }
+    
+    public function table()
+    {
+        $tandings = Tanding::all();
+        $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
+        return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
+    }
 
     public function import(Request $request)
     {

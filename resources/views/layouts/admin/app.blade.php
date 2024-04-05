@@ -63,7 +63,7 @@
     <meta name="msapplication-square150x150logo" content="{{ asset('assets/favicon/mstile-150x150.png') }}" />
     <meta name="msapplication-wide310x150logo" content="{{ asset('assets/favicon/mstile-310x150.png') }}" />
     <meta name="msapplication-square310x310logo" content="{{ asset('assets/favicon/mstile-310x310.png') }}" />
-    
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -140,7 +140,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Admin</a></li>
                                 <li class="breadcrumb-item active">@yield('title')</li>
                             </ol>
                         </div><!-- /.col -->

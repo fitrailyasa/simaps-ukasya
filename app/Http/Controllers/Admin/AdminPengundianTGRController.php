@@ -18,6 +18,13 @@ class AdminPengundianTGRController extends Controller
         return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs'));
     }
 
+    public function table()
+    {
+        $tgrs = TGR::all();
+        $pengundiantgrs = PengundianTGR::latest('id')->get();
+        return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
+    }
+
     public function import(Request $request)
     {
         $request->validate([
