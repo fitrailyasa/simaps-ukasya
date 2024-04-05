@@ -31,7 +31,12 @@ class AdminJadwalTandingController extends Controller
 
         Excel::import(new JadwalTandingImport($request->kelompok), $file);
 
-        return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
     }
 
     public function store(Request $request)
@@ -49,7 +54,12 @@ class AdminJadwalTandingController extends Controller
 
         JadwalTanding::create($request->all());
 
-        return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -68,7 +78,12 @@ class AdminJadwalTandingController extends Controller
         $jadwaltanding = JadwalTanding::findOrFail($id);
         $jadwaltanding->update($request->all());
 
-        return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Edit Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
+        }
     }
 
     public function destroy($id)
@@ -76,13 +91,23 @@ class AdminJadwalTandingController extends Controller
         $jadwaltanding = JadwalTanding::findOrFail($id);
         $jadwaltanding->delete();
 
-        return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Data Jadwal!');
+        }
     }
 
     public function destroyAll()
     {
         JadwalTanding::truncate();
 
-        return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
+        }
     }
 }

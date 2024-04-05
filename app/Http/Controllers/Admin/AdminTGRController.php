@@ -26,7 +26,12 @@ class AdminTGRController extends Controller
 
         Excel::import(new TGRImport, $file);
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
+        }
     }
 
     public function store(Request $request)
@@ -34,16 +39,20 @@ class AdminTGRController extends Controller
         $request->validate([
             'nama' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
+            'tinggi_badan' => 'required|max:255',
+            'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kategori' => 'required|max:255', 
+            'kelas' => 'required|max:255', 
             'golongan' => 'required|max:255'
         ]);
 
         $tgr = TGR::create([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'tinggi_badan' => $request->tinggi_badan,
+            'berat_badan' => $request->berat_badan,
             'kontingen' => $request->kontingen,
-            'kategori' => $request->kategori,
+            'kelas' => $request->kelas,
             'golongan' => $request->golongan,
         ]);
 
@@ -51,11 +60,16 @@ class AdminTGRController extends Controller
             $img = $request->file('img');
             $file_name = time() . '_' . $tgr->nama . '.' . $img->getClientOriginalExtension();
             $tgr->img = $file_name;
-            $tgr->save();
+            $tgr->update();
             $img->move('../public/assets/img/', $file_name);
         }
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Tambah Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Tambah Data Atlet!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.tgr.index')->with('sukses', 'Berhasil Tambah Data Atlet!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -63,8 +77,10 @@ class AdminTGRController extends Controller
         $request->validate([
             'nama' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
+            'tinggi_badan' => 'required|max:255',
+            'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kategori' => 'required|max:255', 
+            'kelas' => 'required|max:255', 
             'golongan' => 'required|max:255'
         ]);
 
@@ -72,8 +88,10 @@ class AdminTGRController extends Controller
         $tgr->update([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'tinggi_badan' => $request->tinggi_badan,
+            'berat_badan' => $request->berat_badan,
             'kontingen' => $request->kontingen,
-            'kategori' => $request->kategori,
+            'kelas' => $request->kelas,
             'golongan' => $request->golongan,
         ]);
 
@@ -81,11 +99,16 @@ class AdminTGRController extends Controller
             $img = $request->file('img');
             $file_name = time() . '_' . $tgr->nama . '.' . $img->getClientOriginalExtension();
             $tgr->img = $file_name;
-            $tgr->save();
+            $tgr->update();
             $img->move('../public/assets/img/', $file_name);
         }
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Edit Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Edit Data Atlet!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.tgr.index')->with('sukses', 'Berhasil Edit Data Atlet!');
+        }
     }
 
     public function destroy($id)
@@ -93,13 +116,23 @@ class AdminTGRController extends Controller
         $tgr = TGR::findOrFail($id);
         $tgr->delete();
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Data Atlet!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.tgr.index')->with('sukses', 'Berhasil Hapus Data Atlet!');
+        }
     }
 
     public function destroyAll()
     {
         TGR::truncate();
 
-        return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
+        }
     }
 }

@@ -31,7 +31,12 @@ class AdminJadwalTGRController extends Controller
 
         Excel::import(new JadwalTGRImport($request->kelompok), $file);
 
-        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Import Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tgr.index')->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
     }
 
     public function store(Request $request)
@@ -49,7 +54,12 @@ class AdminJadwalTGRController extends Controller
 
         JadwalTGR::create($request->all());
 
-        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Tambah Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tgr.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -68,7 +78,12 @@ class AdminJadwalTGRController extends Controller
         $jadwaltgr = JadwalTGR::findOrFail($id);
         $jadwaltgr->update($request->all());
 
-        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Edit Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tgr.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
+        }
     }
 
     public function destroy($id)
@@ -76,13 +91,23 @@ class AdminJadwalTGRController extends Controller
         $jadwaltgr = JadwalTGR::findOrFail($id);
         $jadwaltgr->delete();
 
-        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Data Jadwal!');
+        }
     }
 
     public function destroyAll()
     {
         JadwalTGR::truncate();
 
-        return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.jadwal-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
+        }
     }
 }

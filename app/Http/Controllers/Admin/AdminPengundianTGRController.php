@@ -14,14 +14,14 @@ class AdminPengundianTGRController extends Controller
     public function index()
     {
         $tgrs = TGR::all();
-        $pengundiantgrs = PengundianTGR::latest('id')->get();
+        $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
         return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs'));
     }
-
+    
     public function table()
     {
         $tgrs = TGR::all();
-        $pengundiantgrs = PengundianTGR::latest('id')->get();
+        $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
     }
 
@@ -35,7 +35,12 @@ class AdminPengundianTGRController extends Controller
 
         Excel::import(new PengundianTGRImport, $file);
 
-        return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Import Data Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Import Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Import Data Undian!');
+        }
     }
 
     public function store(Request $request)
@@ -51,7 +56,7 @@ class AdminPengundianTGRController extends Controller
                 continue;
             }
 
-            $pengundiantgr = new Pengundiantgr();
+            $pengundiantgr = new PengundianTGR();
             $pengundiantgr->atlet_id = $atletId;
             $pengundiantgr->no_undian = $index + 1;
             $pengundiantgr->save();
@@ -59,7 +64,12 @@ class AdminPengundianTGRController extends Controller
             $existingAtletIds[] = $atletId;
         }
 
-        return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Data Undian!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -72,7 +82,12 @@ class AdminPengundianTGRController extends Controller
         $pengundiantgr = PengundianTGR::findOrFail($id);
         $pengundiantgr->update($request->all());
 
-        return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Edit Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Edit Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Edit Data Undian!');
+        }
     }
 
     public function destroy($id)
@@ -80,13 +95,23 @@ class AdminPengundianTGRController extends Controller
         $pengundiantgr = PengundianTGR::findOrFail($id);
         $pengundiantgr->delete();
 
-        return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Data Undian!');
+        }
     }
 
     public function destroyAll()
     {
         PengundianTGR::truncate();
 
-        return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        }
     }
 }

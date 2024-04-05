@@ -35,7 +35,12 @@ class AdminPengundianTandingController extends Controller
 
         Excel::import(new PengundianTandingImport, $file);
 
-        return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Import Data Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Import Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Import Data Undian!');
+        }
     }
 
     public function store(Request $request)
@@ -51,15 +56,20 @@ class AdminPengundianTandingController extends Controller
                 continue;
             }
 
-            $pengundianTanding = new PengundianTanding();
-            $pengundianTanding->atlet_id = $atletId;
-            $pengundianTanding->no_undian = $index + 1;
-            $pengundianTanding->save();
+            $pengundiantanding = new PengundianTanding();
+            $pengundiantanding->atlet_id = $atletId;
+            $pengundiantanding->no_undian = $index + 1;
+            $pengundiantanding->save();
 
             $existingAtletIds[] = $atletId;
         }
 
-        return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Data Undian!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -72,7 +82,12 @@ class AdminPengundianTandingController extends Controller
         $pengundiantanding = PengundianTanding::findOrFail($id);
         $pengundiantanding->update($request->all());
 
-        return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Edit Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Edit Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Edit Data Undian!');
+        }
     }
 
     public function destroy($id)
@@ -80,13 +95,23 @@ class AdminPengundianTandingController extends Controller
         $pengundiantanding = PengundianTanding::findOrFail($id);
         $pengundiantanding->delete();
 
-        return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Data Undian!');
+        }
     }
 
     public function destroyAll()
     {
         PengundianTanding::truncate();
 
-        return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        if(auth()->user()->roles_id == 1){
+            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        }
+        else if(auth()->user()->roles_id == 2){
+            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        }
     }
 }
