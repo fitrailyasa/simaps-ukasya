@@ -33,12 +33,24 @@ class AdminPengundianTGRController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'atlet_id' => 'required|max:255',
-            'no_undian' => 'required|max:255',
-        ]);
+        $tgrs = TGR::all();        
+        $existingAtletIds = PengundianTGR::pluck('atlet_id')->toArray();
+        $totalPeserta = $tgrs->count();        
 
-        PengundianTGR::create($request->all());
+        $shuffledAtletIds = $tgrs->pluck('id')->shuffle()->toArray();
+
+        foreach ($shuffledAtletIds as $index => $atletId) {
+            if (in_array($atletId, $existingAtletIds)) {
+                continue;
+            }
+
+            $pengundiantgr = new Pengundiantgr();
+            $pengundiantgr->atlet_id = $atletId;
+            $pengundiantgr->no_undian = $index + 1;
+            $pengundiantgr->save();
+
+            $existingAtletIds[] = $atletId;
+        }
 
         return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Undian!');
     }

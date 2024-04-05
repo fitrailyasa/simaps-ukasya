@@ -10,11 +10,11 @@
 
 {{-- @section('formUpload')
     @include('admin.pengundian-tgr.upload')
-@endsection
+@endsection --}}
 
 @section('formDeleteAll')
     @include('admin.pengundian-tgr.deleteAll')
-@endsection --}}
+@endsection
 
 @section('table')
     <table id="example1" class="table table-bordered table-striped">

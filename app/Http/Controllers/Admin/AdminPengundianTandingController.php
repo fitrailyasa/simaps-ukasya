@@ -33,12 +33,24 @@ class AdminPengundianTandingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'atlet_id' => 'required|max:255', 
-            'no_undian' => 'required|max:255',
-        ]);
+        $tandings = Tanding::all();        
+        $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();
+        $totalPeserta = $tandings->count();        
 
-        PengundianTanding::create($request->all());
+        $shuffledAtletIds = $tandings->pluck('id')->shuffle()->toArray();
+
+        foreach ($shuffledAtletIds as $index => $atletId) {
+            if (in_array($atletId, $existingAtletIds)) {
+                continue;
+            }
+
+            $pengundianTanding = new PengundianTanding();
+            $pengundianTanding->atlet_id = $atletId;
+            $pengundianTanding->no_undian = $index + 1;
+            $pengundianTanding->save();
+
+            $existingAtletIds[] = $atletId;
+        }
 
         return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Undian!');
     }
