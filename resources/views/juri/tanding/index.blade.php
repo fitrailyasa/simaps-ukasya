@@ -5,7 +5,6 @@
     class="p-3 "
     style="
         position: relative;
-        margin-top: -48px;
     "
 >
     <div class="row justify-content-md-center m-2">
@@ -13,20 +12,20 @@
             <h3 class="fw-bold">Juri 1</h3>
         </div>
     </div>
-    <div class="d-flex flex-row justify-content-between  p-1 m-1 " style="width:100%">
-        <div class="ml-4">
-            <h5 class="fw-bold bg-danger p-3 rounded kontingen">Kontingen A</h5>
+    
+    
+    <div class="d-flex flex-row justify-content-between  p-1 m-1 row" style="width:100%; margin-top: 76px !important; margin-bottom: -28px !important">
+        <div class=" col-md-3 text-center">
+            <h5 class="fw-bold bg-danger p-3 rounded kontingen ml-3">Kontingen A</h5>
         </div>
-        <div class="mr-4">
-            <h5 class="fw-bold  p-3 rounded text-white kontingen" style="background-color: #0053a6;">Kontingen B</h5>
+        <div class="col-md-3 d-flex justify-content-center">
+            <h4 class="fw-bold">Arena A</h4>
+        </div>
+        <div class="mr-4 col-md-3 text-center">
+            <h5 class="fw-bold mr-3 p-3 rounded text-white kontingen" style="background-color: #0053a6;">Kontingen B</h5>
         </div>
     </div>
-    <div class="row m-3">
-        <div class="row justify-content-md-center">
-            <div class="col-md-4 d-flex justify-content-center">
-                <h4 class="fw-bold">Arena A</h4>
-            </div>
-        </div>
+    <div class="row m-3" style="margin-top: 0px !important">
         <div class="row mt-5">
             <div class="col">
                 <table
@@ -121,7 +120,7 @@
     </div>
     <div class="row m-3">
         <div class="col d-flex justify-content-between">
-            <div class="poin p-1 m-1" style="width: 50%"">
+            <div class="poin p-1 m-1" style="width: 50%">
                 <div class="poin p-1 m-1" style="width: 100%">
                     <button
                         class="btn btn-danger text-white p-3 mb-2 tombol-pukulan-a"

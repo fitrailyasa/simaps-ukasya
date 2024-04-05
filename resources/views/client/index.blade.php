@@ -25,7 +25,7 @@
             <div class="card-header text-center">
                 <div class="d-flex justify-content-around align-items-center">
                     <div class="h1 m-0"><b>SIMAPS</b></div>
-                    <a class="btn btn-primary" href="{{ route('beranda') }}"><i
+                    <a class="btn btn-primary" href="{{ route('penonton') }}"><i
                             class="fas fa-arrow-circle-right mr-1"></i>
                         Penonton</a>
                 </div>

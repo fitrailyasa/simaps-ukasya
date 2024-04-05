@@ -1,11 +1,9 @@
 <?php
 
 
-
-use App\Http\Controllers\Juri\JuriGandaController;
-use App\Http\Controllers\Juri\JuriReguController;
-use App\Http\Controllers\Juri\JuriTandingController;
-use App\Http\Controllers\Juri\JuriTunggalController;
+use App\Http\Controllers\Penonton\KetuaPertandinganController;
+use App\Http\Controllers\Penonton\PenontonController;
+use App\Http\Controllers\Juri\JuriController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -29,6 +27,12 @@ use App\Http\Controllers\Admin\AdminMedaliController;
 use App\Http\Controllers\Admin\AdminGelanggangController;  
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
+//CMS KETUA PERTANDINGAN
+Route::get('/ketuapertandingan', [ketuaPertandinganController::class, 'index'])->name('ketuapertandingan');
+Route::get('/ketuapertandingan/tanding', [ketuaPertandinganController::class, 'tanding'])->name('ketuatanding');
+Route::get('/ketuapertandingan/tunggal', [ketuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
+//CMS PENONTON
+Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
 
 Auth::routes();
 
@@ -204,10 +208,10 @@ Route::middleware(['auth'])->group(function () {
   Route::middleware([Juri::class])->name('juri.')->prefix('juri')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/tanding', [JuriTandingController::class, 'index'])->name('tanding');
-    Route::get('/tunggal', [JuriTunggalController::class, 'index'])->name('tunggal');
-    Route::get('/regu', [JuriReguController::class, 'index'])->name('regu');
-    Route::get('/ganda', [JuriGandaController::class, 'index'])->name('ganda');
+    Route::get('/tanding', [JuriController::class, 'tanding'])->name('tanding');
+    Route::get('/tunggal', [JuriController::class, 'tunggal'])->name('tunggal');
+    Route::get('/regu', [JuriController::class, 'regu'])->name('regu');
+    Route::get('/ganda', [JuriController::class, 'ganda'])->name('ganda');
   });
 
 });

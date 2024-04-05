@@ -16,7 +16,6 @@
         'jenis' => 'GANDA',
     ])
     @include('juri.ganda.content')
-    @include('juri.ganda.footer')
 @endsection
 
 @section('script')

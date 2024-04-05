@@ -55,7 +55,7 @@ Tunggal
             </div>
             <div
                 class="tombol d-flex gap-1"
-                style="width: 100%; min-height: 50vh"
+                style="width: 100%; min-height: 40vh"
             >
                 <div
                     class="tombol-salah d-flex justify-content-center border border-secondary"

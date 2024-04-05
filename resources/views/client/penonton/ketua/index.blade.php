@@ -1,9 +1,4 @@
 @extends('layouts.client.app')
-
-@section('title', 'Beranda')
-
-{{-- @section('textHome', 'bg-warning rounded') --}}
-
 @section('content')
 
     <div class="pt-5"
@@ -12,7 +7,7 @@
             <img src="{{ asset('assets/img/ipsi.png') }}" class="img-fluid" width="300px" alt="">
         </div>
         <div class="text-center mb-3">
-            <h1 class="">Halaman Penonton</h1>
+            <h1 class="">Halaman Ketua Pertandingan</h1>
             <p>Selamat Datang di Aplikasi SIMAPS</p>
             <a href="#" class="btn btn-primary">Beranda</a>
             <a href="#" class="btn btn-primary">Arena A</a>

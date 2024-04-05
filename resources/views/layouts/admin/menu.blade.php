@@ -170,6 +170,23 @@
             </li>
         </ul>
     </nav>
+    @elseif (auth()->user()->roles_id == 4)
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                    @csrf
+                </form>
+                <a href="#" class="nav-link text-white @yield('')"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fas fa-sign-out"></i>
+                    <p>
+                        Logout
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
 @endif
 
 <!-- /.sidebar-menu -->
