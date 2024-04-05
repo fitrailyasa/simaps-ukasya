@@ -4,6 +4,18 @@
 
 @section('table-pengundian-tgr', 'active')
 
+@section('formCreate')
+    @include('admin.pengundian-tgr.create')
+@endsection
+
+{{-- @section('formUpload')
+    @include('admin.pengundian-tgr.upload')
+@endsection --}}
+
+@section('formDeleteAll')
+    @include('admin.pengundian-tgr.deleteAll')
+@endsection
+
 @section('table')
     <table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -25,8 +37,13 @@
                     <td>{{ $pengundiantgr->tgr->jenis_kelamin ?? '-' }}</td>
                     <td>{{ $pengundiantgr->tgr->count() ?? '-' }} Atlet</td>
                     <td class="manage-row">
-                        <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table') }}"><i
-                                class="fas fa-eye"></i></a>
+                        @if (auth()->user()->roles_id == 1)
+                            <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table') }}"><i
+                                    class="fas fa-eye"></i></a>
+                        @elseif (auth()->user()->roles_id == 2)
+                            <a class="btn-sm btn-primary" href="{{ route('op.pengundian-tgr.table') }}"><i
+                                    class="fas fa-eye"></i></a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

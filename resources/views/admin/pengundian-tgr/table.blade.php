@@ -4,18 +4,6 @@
 
 @section('table-pengundian-tgr', 'active')
 
-@section('formCreate')
-    @include('admin.pengundian-tgr.create')
-@endsection
-
-{{-- @section('formUpload')
-    @include('admin.pengundian-tgr.upload')
-@endsection --}}
-
-@section('formDeleteAll')
-    @include('admin.pengundian-tgr.deleteAll')
-@endsection
-
 @section('table')
     <table id="example1" class="table table-bordered table-striped">
         <thead>

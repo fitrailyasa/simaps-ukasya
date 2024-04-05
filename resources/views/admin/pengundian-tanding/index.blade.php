@@ -4,6 +4,18 @@
 
 @section('table-pengundian-tanding', 'active')
 
+@section('formCreate')
+    @include('admin.pengundian-tanding.create')
+@endsection
+
+{{-- @section('formUpload')
+    @include('admin.pengundian-tanding.upload')
+@endsection --}}
+
+@section('formDeleteAll')
+    @include('admin.pengundian-tanding.deleteAll')
+@endsection
+
 @section('table')
     <table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -25,8 +37,13 @@
                     <td>{{ $pengundiantanding->Tanding->jenis_kelamin ?? '-' }}</td>
                     <td>{{ $pengundiantanding->Tanding->count() ?? '-' }} Atlet</td>
                     <td class="manage-row">
-                        <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tanding.table') }}"><i
-                                class="fas fa-eye"></i></a>
+                        @if (auth()->user()->roles_id == 1)
+                            <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tanding.table') }}"><i
+                                    class="fas fa-eye"></i></a>
+                        @elseif (auth()->user()->roles_id == 2)
+                            <a class="btn-sm btn-primary" href="{{ route('op.pengundian-tanding.table') }}"><i
+                                    class="fas fa-eye"></i></a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

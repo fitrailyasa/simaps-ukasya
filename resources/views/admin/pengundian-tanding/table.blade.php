@@ -4,18 +4,6 @@
 
 @section('table-pengundian-tanding', 'active')
 
-@section('formCreate')
-    @include('admin.pengundian-tanding.create')
-@endsection
-
-{{-- @section('formUpload')
-    @include('admin.pengundian-tanding.upload')
-@endsection --}}
-
-@section('formDeleteAll')
-    @include('admin.pengundian-tanding.deleteAll')
-@endsection
-
 @section('table')
     <table id="example1" class="table table-bordered table-striped">
         <thead>
