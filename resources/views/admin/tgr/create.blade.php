@@ -48,6 +48,7 @@
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-select @error('jenis_kelamin') is-invalid @enderror">
+                                <option value="">-- Pilih Jenis Kelamin --</option>
                                 <option value="L">Putra</option>
                                 <option value="P">Putri</option>
                             </select>
@@ -71,6 +72,7 @@
                             <label class="form-label">Kategori</label>
                             <select name="kategori" id="kategori"
                                 class="form-select @error('kategori') is-invalid @enderror">
+                                <option value="">-- Pilih Kategori --</option>
                                 <option value="Tunggal">Tunggal</option>
                                 <option value="Ganda">Ganda</option>
                                 <option value="Regu">Regu</option>
@@ -86,6 +88,7 @@
                             <label class="form-label">Golongan</label>
                             <select name="golongan" id="golongan"
                                 class="form-select @error('golongan') is-invalid @enderror">
+                                <option value="">-- Pilih Golongan --</option>
                                 <option value="Usia Dini 1">Usia Dini 1</option>
                                 <option value="Usia Dini 2">Usia Dini 2</option>
                                 <option value="Pra Remaja">Pra Remaja</option>

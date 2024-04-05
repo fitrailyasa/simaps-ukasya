@@ -40,7 +40,7 @@
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
-                "paging": true,
+                "paging": false,
                 "buttons": [{
                         extend: 'excel',
                         text: '<i class="fas fa-file-excel"></i> Excel',
