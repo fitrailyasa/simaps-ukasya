@@ -30,6 +30,14 @@ class TGRSeeder extends Seeder
                 'golongan' => 'Remaja',
                 'kategori' => 'Tunggal',
             ],
+            [
+                'id' => 3,
+                'nama' => 'Mustavid 2',
+                'jenis_kelamin' => 'L',
+                'kontingen' => 'ASAD',
+                'golongan' => 'Dewasa',
+                'kategori' => 'Ganda',
+            ],
         ];
         TGR::query()->insert($TGR);
     }
