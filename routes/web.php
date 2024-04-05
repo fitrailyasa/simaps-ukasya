@@ -23,16 +23,17 @@ use App\Http\Controllers\Admin\AdminJadwalTandingController;
 use App\Http\Controllers\Admin\AdminJadwalTGRController;
 use App\Http\Controllers\Admin\AdminTimbangUlangController;
 use App\Http\Controllers\Admin\AdminKontrolController;  
-use App\Http\Controllers\Admin\AdminMedaliController;  
 use App\Http\Controllers\Admin\AdminGelanggangController;  
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
-//CMS KETUA PERTANDINGAN
-Route::get('/ketuapertandingan', [ketuaPertandinganController::class, 'index'])->name('ketuapertandingan');
-Route::get('/ketuapertandingan/tanding', [ketuaPertandinganController::class, 'tanding'])->name('ketuatanding');
-Route::get('/ketuapertandingan/tunggal', [ketuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
+
 //CMS PENONTON
 Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
+
+//CMS KETUA PERTANDINGAN
+Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');
+Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 'tanding'])->name('ketuatanding');
+Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
 
 Auth::routes();
 
