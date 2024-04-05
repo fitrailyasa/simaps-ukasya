@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Gelanggang;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class AdminUserController extends Controller
     {
         $roles = Role::all();
         $users = User::all();
-        return view('admin.user.index', compact('users', 'roles'));
+        $gelanggangs = Gelanggang::all();
+        return view('admin.user.index', compact('users', 'roles', 'gelanggangs'));
     }
 
     public function store(Request $request)
@@ -23,9 +25,10 @@ class AdminUserController extends Controller
             [
                 'name' => 'required|max:255',
                 'email' => 'required|max:255|unique:users,email',
-                'no_hp' => 'required',
+                'gelanggang' => 'required',
                 'password' => 'required',
-                'roles_id' => 'required'
+                'roles_id' => 'required',
+                'status' => 'required'
             ],
             [
                 'name.required' => 'name harus diisi!',
@@ -33,16 +36,17 @@ class AdminUserController extends Controller
                 'email.required' => 'Email harus diisi!',
                 'email.max' => 'Email maksimal 255 karakter!',
                 'email.unique' => 'Email sudah terdaftar!',
-                'no_hp.required' => 'No HP harus diisi!',
+                'gelanggang.required' => 'No HP harus diisi!',
                 'password.required' => 'Password harus diisi!',
-                'roles_id.required' => 'Roles harus diisi!'
+                'roles_id.required' => 'Roles harus diisi!',
+                'status.required' => 'Status harus diisi!'
             ]
         );
         
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'no_hp' => $request->no_hp,
+            'gelanggang' => $request->gelanggang,
             'password' => Hash::make($request->password),
             'roles_id' => $request->roles_id
         ]);
@@ -58,16 +62,18 @@ class AdminUserController extends Controller
             [
                 'name' => 'required|max:255',
                 'email' => 'required|max:255',
-                'no_hp' => 'required',
-                'roles_id' => 'required'
+                'gelanggang' => 'required',
+                'roles_id' => 'required',
+                'status' => 'required'
             ],
             [
                 'name.required' => 'name harus diisi!',
                 'name.max' => 'name maksimal 255 karakter!',
                 'email.required' => 'Email harus diisi!',
                 'email.max' => 'Email maksimal 255 karakter!',
-                'no_hp.required' => 'No HP harus diisi!',
-                'roles_id.required' => 'Roles harus diisi!'
+                'gelanggang.required' => 'No HP harus diisi!',
+                'roles_id.required' => 'Roles harus diisi!',
+                'status.required' => 'Status harus diisi!'
             ]
         );
 
@@ -76,9 +82,10 @@ class AdminUserController extends Controller
             [
                 'name' => $request->name,
                 'email' => $request->email,
-                'no_hp' => $request->no_hp,
+                'gelanggang' => $request->gelanggang,
                 'password' => Hash::make($request->password),
-                'roles_id' => $request->roles_id
+                'roles_id' => $request->roles_id,
+                'status' => $request->status
             ]
         );
         if (auth()->user()->roles_id == 1) {

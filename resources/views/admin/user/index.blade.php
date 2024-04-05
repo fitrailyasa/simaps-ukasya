@@ -4,6 +4,10 @@
 
 @section('table-user', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data User</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.user.create')
 @endsection
@@ -13,10 +17,12 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Nama</th>
                 <th>Email</th>
+                <th>Gelanggang</th>
                 <th>Role</th>
-                <th>More</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +31,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->Gelanggang->nama }}</td>
                     <td>{{ $user->roles->name }}</td>
+                    <td>{{ $user->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                     <td class="manage-row">
                         <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
                             data-bs-target=".formEdit{{ $user->id }}">
@@ -75,10 +83,12 @@
         <tfoot>
             <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Nama</th>
                 <th>Email</th>
+                <th>Gelanggang</th>
                 <th>Role</th>
-                <th>More</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </tfoot>
     </table>

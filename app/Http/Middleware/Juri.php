@@ -16,7 +16,7 @@ class Juri
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && auth()->user()->roles_id == 4) {
+        if (Auth::check() && auth()->user()->roles_id == 4 && auth()->user()->status == 1) {
             return $next($request);
         } else {
             return redirect('login');

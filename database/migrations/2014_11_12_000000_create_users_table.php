@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->foreignId('gelanggang')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->nullable()->default(0);
             $table->string('password');
             $table->unsignedBigInteger('roles_id')->nullable()->default(99);
             $table->foreign('roles_id')->references('id')->on('roles')

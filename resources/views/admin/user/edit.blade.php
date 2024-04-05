@@ -11,25 +11,47 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-2">
-                        <label class="form-label">Name</label>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror"
-                            placeholder="name" name="name" id="name" value="{{ $user->name }}" required>
+                            placeholder="nama" name="name" id="name" value="{{ $user->name }}" required>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="mb-2">
-                        <label class="form-label">No HP</label>
-                        <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                            placeholder="no_hp" name="no_hp" id="no_hp" value="{{ $user->no_hp }}" required>
-                        @error('no_hp')
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Gelanggang</label>
+                        <select class="form-select @error('gelanggang') is-invalid @enderror" name="gelanggang"
+                            id="gelanggang" required>
+                            @foreach ($gelanggangs as $gelanggang)
+                                <option value="{{ $gelanggang->id }}"
+                                    {{ $gelanggang->id == $user->gelanggang ? 'selected' : '' }}>
+                                    {{ $gelanggang->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('gelanggang')
                             <div class="invalid-feedback">{{ $message }}
                             </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select @error('status') is-invalid @enderror" name="status" id="status"
+                            required>
+                            <option selected value="{{ $user->status }}">
+                                {{ $user->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</option>
+                            <option value="0">Tidak Aktif</option>
+                            <option value="1">Aktif</option>
+                        </select>
+                        @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
