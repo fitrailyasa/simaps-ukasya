@@ -4,6 +4,10 @@
 
 @section('table-jadwal-tanding', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data Jadwal Tanding</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.jadwal-tanding.create')
 @endsection

@@ -12,16 +12,11 @@
         <!-- /.card-header -->
         <div class="card-body">
             <div class="d-flex justify-content-between">
-                <h4>Kelola Data Tabel</h4>
-                <div class="d-flex
-                justify-content-end mb-3">
-
+                @yield('topLeft')
+                <div class="d-flex justify-content-end mb-3">
                     @yield('formCreate')
-
                     @yield('formUpload')
-
                     @yield('formDeleteAll')
-
                 </div>
             </div>
 

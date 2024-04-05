@@ -4,13 +4,9 @@
 
 @section('table-pengundian-tgr', 'active')
 
-@section('formCreate')
+@section('topLeft')
     @include('admin.pengundian-tgr.create')
 @endsection
-
-{{-- @section('formUpload')
-    @include('admin.pengundian-tgr.upload')
-@endsection --}}
 
 @section('formDeleteAll')
     @include('admin.pengundian-tgr.deleteAll')

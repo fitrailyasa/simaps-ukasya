@@ -4,13 +4,9 @@
 
 @section('table-pengundian-tanding', 'active')
 
-@section('formCreate')
+@section('topLeft')
     @include('admin.pengundian-tanding.create')
 @endsection
-
-{{-- @section('formUpload')
-    @include('admin.pengundian-tanding.upload')
-@endsection --}}
 
 @section('formDeleteAll')
     @include('admin.pengundian-tanding.deleteAll')

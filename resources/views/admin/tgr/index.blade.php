@@ -4,6 +4,10 @@
 
 @section('table-tgr', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data Tabel TGR</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.tgr.create')
 @endsection

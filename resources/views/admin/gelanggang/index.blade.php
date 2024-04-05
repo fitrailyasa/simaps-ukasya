@@ -4,6 +4,10 @@
 
 @section('table-gelanggang', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data Gelanggang</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.gelanggang.create')
 @endsection

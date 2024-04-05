@@ -4,6 +4,10 @@
 
 @section('table-tanding', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data Tabel Tanding</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.tanding.create')
 @endsection

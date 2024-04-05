@@ -4,6 +4,10 @@
 
 @section('table-jadwal-tgr', 'active')
 
+@section('topLeft')
+    <h4>Kelola Data Jadwal TGR</h4>
+@endsection
+
 @section('formCreate')
     @include('admin.jadwal-tgr.create')
 @endsection
