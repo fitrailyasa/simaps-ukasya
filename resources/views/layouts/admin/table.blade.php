@@ -46,7 +46,31 @@
                 "lengthChange": true,
                 "autoWidth": false,
                 "paging": true,
-                // "buttons": ["excel", "pdf", "print"]
+                "buttons": [{
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn btn-dark mb-3',
+                        exportOptions: {
+                            columns: [':not(:last-child)']
+                        },
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn btn-dark mb-3',
+                        exportOptions: {
+                            columns: [':not(:last-child)']
+                        },
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Print',
+                        className: 'btn btn-dark mb-3',
+                        exportOptions: {
+                            columns: [':not(:last-child)']
+                        },
+                    }
+                ]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
