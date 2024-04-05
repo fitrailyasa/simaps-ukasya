@@ -6,7 +6,11 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            @if (auth()->user()->roles_id == 1)
                 <form method="POST" action="{{ route('admin.jadwal-tgr.store') }}" enctype="multipart/form-data">
+                @elseif (auth()->user()->roles_id == 2)
+                    <form method="POST" action="{{ route('op.jadwal-tgr.store') }}" enctype="multipart/form-data">
+            @endif
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFormLabel">Tambah Jadwal</h5>
