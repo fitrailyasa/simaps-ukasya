@@ -1,0 +1,12 @@
+.btn-biru {
+    background-color: #0053a6 !important;
+    color: #fff;
+}
+
+.btn-biru:hover {
+    background-color: #007bff !important;
+}
+
+.btn-biru:active {
+    background-color: #0053a6 !important;
+}

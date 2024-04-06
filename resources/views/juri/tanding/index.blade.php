@@ -118,8 +118,8 @@
             </div>
         </div>
     </div>
-    <div class="row m-3">
-        <div class="col d-flex justify-content-between">
+    <div class="row m-3 ">
+        <div class="col d-flex justify-content-between" style="margin-left: -8px">
             <div class="poin p-1 m-1" style="width: 50%">
                 <div class="poin p-1 m-1" style="width: 100%">
                     <button
