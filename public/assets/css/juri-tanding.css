@@ -4,6 +4,10 @@
     }
 }
 
+.btn-biru {
+    background-color: #0053a6 !important;
+}
+
 .babak-active {
     background-color: #f0d500 !important;
 }

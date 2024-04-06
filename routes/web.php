@@ -200,6 +200,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tanding', [DewanController::class, 'tanding'])->name('dewantanding');
+    Route::get('/tunggal', [DewanController::class, 'tunggal'])->name('dewantunggal');
+    Route::get('/ganda', [DewanController::class, 'ganda'])->name('dewanganda');
+    Route::get('/regu', [DewanController::class, 'regu'])->name('dewanregu');
 
   });
 

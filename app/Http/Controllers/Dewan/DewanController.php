@@ -11,4 +11,16 @@ class DewanController extends Controller
     {
         return view('dewan.tanding.index');
     }
+    public function tunggal()
+    {
+        return view('dewan.tunggal.index');
+    }
+    public function ganda()
+    {
+        return view('dewan.ganda.index');
+    }
+    public function regu()
+    {
+        return view('dewan.regu.index');
+    }
 }
