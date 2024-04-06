@@ -31,4 +31,20 @@ class KetuaPertandinganController extends Controller
         $nama ="SHEIK ALAUDIN";
         return view('client.penonton.ketua.tunggal.index',compact('match','arena','region','nama'));
     }
+    public function regu()
+    {
+        $match = "1";
+        $arena = "A";
+        $region = "Singapore";
+        $nama =["SHEIK ALAUDIN","SHEIK ALADIN"];
+        return view('client.penonton.ketua.regu.index',compact('match','arena','region','nama'));
+    }
+    public function ganda()
+    {
+        $match = "1";
+        $arena = "A";
+        $region = "Singapore";
+        $nama ="SHEIK ALAUDIN";
+        return view('client.penonton.ketua.ganda.index',compact('match','arena','region','nama'));
+    }
 }

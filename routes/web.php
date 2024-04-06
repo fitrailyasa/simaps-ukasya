@@ -34,6 +34,9 @@ Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
 Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');
 Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 'tanding'])->name('ketuatanding');
 Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
+Route::get('/ketuapertandingan/regu', [KetuaPertandinganController::class, 'regu'])->name('ketuaregu');
+Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketuaganda');
+
 
 Auth::routes();
 
