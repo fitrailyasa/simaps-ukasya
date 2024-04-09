@@ -115,9 +115,14 @@
                             <label class="form-label">Sudut Biru</label>
                             <select class="form-select @error('sudut_biru') is-invalid @enderror" name="sudut_biru"
                                 id="sudut_biru" required>
-                                <option selected disabled>Pilih Atlet</option>
+                                <option selected disabled data-golongan="" data-jenis-kelamin="" data-kategori="">
+                                    Pilih
+                                    Atlet</option>
                                 @foreach ($pengundiantgrs as $pengundiantgr)
-                                    <option value="{{ $pengundiantgr->no_undian }}">
+                                    <option value="{{ $pengundiantgr->no_undian }}"
+                                        data-golongan="{{ $pengundiantgr->TGR->golongan }}"
+                                        data-jenis-kelamin="{{ $pengundiantgr->TGR->jenis_kelamin }}"
+                                        data-kategori="{{ $pengundiantgr->TGR->kategori }}">
                                         {{ $pengundiantgr->TGR->nama ?? '-' }}
                                     </option>
                                 @endforeach
@@ -132,9 +137,14 @@
                             <label class="form-label">Sudut Merah</label>
                             <select class="form-select @error('sudut_merah') is-invalid @enderror" name="sudut_merah"
                                 id="sudut_merah" required>
-                                <option selected disabled>Pilih Atlet</option>
+                                <option selected disabled data-golongan="" data-jenis-kelamin="" data-kategori="">
+                                    Pilih
+                                    Atlet</option>
                                 @foreach ($pengundiantgrs as $pengundiantgr)
-                                    <option value="{{ $pengundiantgr->no_undian }}">
+                                    <option value="{{ $pengundiantgr->no_undian }}"
+                                        data-golongan="{{ $pengundiantgr->TGR->golongan }}"
+                                        data-jenis-kelamin="{{ $pengundiantgr->TGR->jenis_kelamin }}"
+                                        data-kategori="{{ $pengundiantgr->TGR->kategori }}">
                                         {{ $pengundiantgr->TGR->nama ?? '-' }}
                                     </option>
                                 @endforeach
@@ -178,3 +188,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Fungsi untuk mengatur opsi atlet berdasarkan filter
+    function filterAtlet() {
+        var golongan = document.getElementById('golongan').value;
+        var jenis_kelamin = document.getElementById('jenis_kelamin').value;
+        var kategori = document.getElementById('kategori').value;
+        var sudut_biru = document.getElementById('sudut_biru').value; // Atlet sudut biru yang dipilih
+        var atlet_options = document.querySelectorAll('#sudut_biru option, #sudut_merah option');
+
+        atlet_options.forEach(function(option) {
+            var atlet_golongan = option.getAttribute('data-golongan');
+            var atlet_jenis_kelamin = option.getAttribute('data-jenis-kelamin');
+            var atlet_kategori = option.getAttribute('data-kategori');
+            var atlet_sudut = option.value; // Sudut atlet (biru atau merah)
+
+            // Tampilkan atlet yang sesuai dengan filter dan bukan atlet yang dipilih pada sudut biru
+            if ((golongan === '' || golongan === atlet_golongan) &&
+                (jenis_kelamin === '' || jenis_kelamin === atlet_jenis_kelamin) &&
+                (kategori === '' || kategori === atlet_kategori) &&
+                (atlet_sudut !== sudut_biru)) { // Tambahkan kondisi untuk memeriksa sudut
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('golongan').addEventListener('change', filterAtlet);
+    document.getElementById('jenis_kelamin').addEventListener('change', filterAtlet);
+    document.getElementById('kategori').addEventListener('change', filterAtlet);
+    document.getElementById('sudut_biru').addEventListener('change', filterAtlet); // Tambahkan event listener
+
+    window.addEventListener('load', filterAtlet);
+</script>

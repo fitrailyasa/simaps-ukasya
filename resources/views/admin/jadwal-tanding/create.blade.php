@@ -99,25 +99,25 @@
                             <select name="kelas" id="kelas"
                                 class="form-select @error('kelas') is-invalid @enderror">
                                 <option value="">Pilih Kelas Tanding</option>
-                                <option value="A">Kelas A</option>
-                                <option value="B">Kelas B</option>
-                                <option value="C">Kelas C</option>
-                                <option value="D">Kelas D</option>
-                                <option value="E">Kelas E</option>
-                                <option value="F">Kelas F</option>
-                                <option value="G">Kelas G</option>
-                                <option value="H">Kelas H</option>
-                                <option value="I">Kelas I</option>
-                                <option value="J">Kelas J</option>
-                                <option value="K">Kelas K</option>
-                                <option value="L">Kelas L</option>
-                                <option value="M">Kelas M</option>
-                                <option value="N">Kelas N</option>
-                                <option value="O">Kelas O</option>
-                                <option value="P">Kelas P</option>
-                                <option value="Q">Kelas Q</option>
-                                <option value="R">Kelas R</option>
-                                <option value="S">Kelas S</option>
+                                <option value="Kelas A">Kelas A</option>
+                                <option value="Kelas B">Kelas B</option>
+                                <option value="Kelas C">Kelas C</option>
+                                <option value="Kelas D">Kelas D</option>
+                                <option value="Kelas E">Kelas E</option>
+                                <option value="Kelas F">Kelas F</option>
+                                <option value="Kelas G">Kelas G</option>
+                                <option value="Kelas H">Kelas H</option>
+                                <option value="Kelas I">Kelas I</option>
+                                <option value="Kelas J">Kelas J</option>
+                                <option value="Kelas K">Kelas K</option>
+                                <option value="Kelas L">Kelas L</option>
+                                <option value="Kelas M">Kelas M</option>
+                                <option value="Kelas N">Kelas N</option>
+                                <option value="Kelas O">Kelas O</option>
+                                <option value="Kelas P">Kelas P</option>
+                                <option value="Kelas Q">Kelas Q</option>
+                                <option value="Kelas R">Kelas R</option>
+                                <option value="Kelas S">Kelas S</option>
                                 <option value="Open 1">Open 1</option>
                                 <option value="Open 2">Open 2</option>
                             </select>
@@ -131,9 +131,13 @@
                             <label class="form-label">Sudut Biru</label>
                             <select class="form-select @error('sudut_biru') is-invalid @enderror" name="sudut_biru"
                                 id="sudut_biru" required>
-                                <option selected disabled>Pilih Atlet</option>
+                                <option selected disabled data-golongan="" data-jenis-kelamin="" data-kelas="">Pilih
+                                    Atlet</option>
                                 @foreach ($pengundiantandings as $pengundiantanding)
-                                    <option value="{{ $pengundiantanding->no_undian }}">
+                                    <option value="{{ $pengundiantanding->no_undian }}"
+                                        data-golongan="{{ $pengundiantanding->Tanding->golongan }}"
+                                        data-jenis-kelamin="{{ $pengundiantanding->Tanding->jenis_kelamin }}"
+                                        data-kelas="{{ $pengundiantanding->Tanding->kelas }}">
                                         {{ $pengundiantanding->Tanding->nama ?? '-' }}
                                     </option>
                                 @endforeach
@@ -148,9 +152,13 @@
                             <label class="form-label">Sudut Merah</label>
                             <select class="form-select @error('sudut_merah') is-invalid @enderror" name="sudut_merah"
                                 id="sudut_merah" required>
-                                <option selected disabled>Pilih Atlet</option>
+                                <option selected disabled data-golongan="" data-jenis-kelamin="" data-kelas="">Pilih
+                                    Atlet</option>
                                 @foreach ($pengundiantandings as $pengundiantanding)
-                                    <option value="{{ $pengundiantanding->no_undian }}">
+                                    <option value="{{ $pengundiantanding->no_undian }}"
+                                        data-golongan="{{ $pengundiantanding->Tanding->golongan }}"
+                                        data-jenis-kelamin="{{ $pengundiantanding->Tanding->jenis_kelamin }}"
+                                        data-kelas="{{ $pengundiantanding->Tanding->kelas }}">
                                         {{ $pengundiantanding->Tanding->nama ?? '-' }}
                                     </option>
                                 @endforeach
@@ -194,3 +202,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Fungsi untuk mengatur opsi atlet berdasarkan filter
+    function filterAtlet() {
+        var golongan = document.getElementById('golongan').value;
+        var jenis_kelamin = document.getElementById('jenis_kelamin').value;
+        var kelas = document.getElementById('kelas').value;
+        var sudut_biru = document.getElementById('sudut_biru').value; // Atlet sudut biru yang dipilih
+        var atlet_options = document.querySelectorAll('#sudut_biru option, #sudut_merah option');
+
+        atlet_options.forEach(function(option) {
+            var atlet_golongan = option.getAttribute('data-golongan');
+            var atlet_jenis_kelamin = option.getAttribute('data-jenis-kelamin');
+            var atlet_kelas = option.getAttribute('data-kelas');
+            var atlet_sudut = option.value; // Sudut atlet (biru atau merah)
+
+            // Tampilkan atlet yang sesuai dengan filter dan bukan atlet yang dipilih pada sudut biru
+            if ((golongan === '' || golongan === atlet_golongan) &&
+                (jenis_kelamin === '' || jenis_kelamin === atlet_jenis_kelamin) &&
+                (kelas === '' || kelas === atlet_kelas) &&
+                (atlet_sudut !== sudut_biru)) { // Tambahkan kondisi untuk memeriksa sudut
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('golongan').addEventListener('change', filterAtlet);
+    document.getElementById('jenis_kelamin').addEventListener('change', filterAtlet);
+    document.getElementById('kelas').addEventListener('change', filterAtlet);
+    document.getElementById('sudut_biru').addEventListener('change', filterAtlet); // Tambahkan event listener
+
+    window.addEventListener('load', filterAtlet);
+</script>

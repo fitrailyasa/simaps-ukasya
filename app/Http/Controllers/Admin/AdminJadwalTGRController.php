@@ -24,7 +24,6 @@ class AdminJadwalTGRController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
-            'kelompok' => 'required|max:255',
         ]);
 
         $file = $request->file('file');
@@ -45,7 +44,6 @@ class AdminJadwalTGRController extends Controller
             'partai' => 'required|max:255',
             'gelanggang' => 'required|max:255',
             'babak' => 'required|max:255',
-            'kelompok' => 'max:255',
             'sudut_biru' => 'required|max:255',
             'sudut_merah' => 'required|max:255',
             'next_sudut' => 'required|max:255',
@@ -68,7 +66,6 @@ class AdminJadwalTGRController extends Controller
             'partai' => 'required|max:255',
             'gelanggang' => 'required|max:255',
             'babak' => 'required|max:255',
-            'kelompok' => 'max:255',
             'sudut_biru' => 'required|max:255',
             'sudut_merah' => 'required|max:255',
             'next_sudut' => 'required|max:255',

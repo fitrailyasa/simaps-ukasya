@@ -53,7 +53,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="mb-2">
                             <label class="form-label">Babak</label>
                             <select class="form-select @error('babak') is-invalid @enderror" name="babak"
@@ -65,17 +65,6 @@
                                 <option value="Final">Final</option>
                             </select>
                             @error('babak')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-2">
-                            <label class="form-label">Kelompok</label>
-                            <input type="text" class="form-control @error('kelompok') is-invalid @enderror"
-                                placeholder="kelompok" name="kelompok" id="kelompok"
-                                value="{{ $jadwaltgr->kelompok }}" required>
-                            @error('kelompok')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

@@ -19,7 +19,6 @@ class JadwalTGRSeeder extends Seeder
                 'partai' => 1,
                 'gelanggang' => 1,
                 'babak' => 'Penyisihan',
-                'kelompok' => 'Tunggal Putra Remaja',
                 'sudut_biru' => 1,
                 'sudut_merah' => 2,
                 'next_sudut' => 1,

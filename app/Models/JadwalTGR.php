@@ -10,7 +10,7 @@ class JadwalTGR extends Model
     use HasFactory;
 
     protected $table = 'jadwal_tgr';
-    protected $fillable = ['partai', 'gelanggang', 'babak', 'kelompok', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang'];    
+    protected $fillable = ['partai', 'gelanggang', 'babak', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang'];    
 
     public function Gelanggang()    
     {
