@@ -32,11 +32,11 @@ Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
 
 //CMS KETUA PERTANDINGAN
 Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');
-Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 'tanding'])->name('ketuatanding');
-Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
-Route::get('/ketuapertandingan/regu', [KetuaPertandinganController::class, 'regu'])->name('ketuaregu');
-Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketuaganda');
-Route::get('/ketuapertandingan/solo', [KetuaPertandinganController::class, 'solo'])->name('ketuasolo');
+Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 'tanding'])->name('ketua.tanding');
+Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketua.tunggal');
+Route::get('/ketuapertandingan/regu', [KetuaPertandinganController::class, 'regu'])->name('ketua.regu');
+Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketua.ganda');
+Route::get('/ketuapertandingan/solo', [KetuaPertandinganController::class, 'solo'])->name('ketua.solo');
 
 
 Auth::routes();

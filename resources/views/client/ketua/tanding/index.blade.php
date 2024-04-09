@@ -1,15 +1,20 @@
 @extends('layouts.client.app')
 @section('style')
-    <link rel="stylesheet" href="{{url('assets/css/ketua-pertandingan-tanding.css')}}">
+    <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tanding.css') }}">
 @endsection
 @section('content')
-    @include('client.penonton.ketua.tanding.navbar',['jenis'=>"TANDING",'class'=>"CLASS E - FINAL",'match'=>$match,'arena'=>$arena])
+    @include('client.ketua.tanding.navbar', [
+        'jenis' => 'TANDING',
+        'class' => 'CLASS E - FINAL',
+        'match' => $match,
+        'arena' => $arena,
+    ])
     <div class="content p-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 40%">
                 <div class="biru-nama">
-                    <h5 class="ml-4 fw-bold">{{$biru_region}}</h5>
-                    <h4 class="fw-bold mt-4" style="color:#252c94">{{$biru_nama}}</h4>
+                    <h5 class="ml-4 fw-bold">{{ $biru_region }}</h5>
+                    <h4 class="fw-bold mt-4" style="color:#252c94">{{ $biru_nama }}</h4>
                 </div>
                 <div class="biru-score d-flex flex-column justify-content-center" style="height: 100%">
                     <h3 class="fw-bold" style="color:#252c94">0</h3>
@@ -23,8 +28,8 @@
                     <h3 class="fw-bold" style="color: #db3545 ">0</h3>
                 </div>
                 <div class="merah-nama text-end">
-                    <h5 class="mr-4 fw-bold" >{{$merah_region}}</h5>
-                    <h4 class="fw-bold mt-4" style="color: #db3545 ">{{$merah_nama}}</h4>
+                    <h5 class="mr-4 fw-bold">{{ $merah_region }}</h5>
+                    <h4 class="fw-bold mt-4" style="color: #db3545 ">{{ $merah_nama }}</h4>
                 </div>
             </div>
         </div>
@@ -48,11 +53,16 @@
                         </div>
                         <div class="detail-poin-body d-flex">
                             <div class="total-sementara" style="width: 10%">
-                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;"></div>
-                                <div class="total-sementara-jatuhan border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-binaan border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-teguran border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;">
+                                </div>
+                                <div class="total-sementara-jatuhan border border-dark" style="width: 100%; height: 12.5%;">
+                                </div>
+                                <div class="total-sementara-binaan border border-dark" style="width: 100%; height: 12.5%;">
+                                </div>
+                                <div class="total-sementara-teguran border border-dark" style="width: 100%; height: 12.5%;">
+                                </div>
+                                <div class="total-sementara-peringatan border border-dark"
+                                    style="width: 100%; height: 12.5%;"></div>
                             </div>
                             <div class="nilai" style="width: 50%">
                                 <div class="nilai-juri-1 border border-dark" style="width: 100%; height: 12.5%;"></div>
@@ -69,7 +79,7 @@
                                     <h4 class="fw-bold">Juri 1</h4>
                                 </div>
                                 <div class="juri-2 border border-dark text-center">
-                                    <h4 class="fw-bold">Juri 2</h4> 
+                                    <h4 class="fw-bold">Juri 2</h4>
                                 </div>
                                 <div class="juri-3 border border-dark text-center">
                                     <h4 class="fw-bold">Juri 3</h4>
@@ -116,7 +126,7 @@
                                     <h4 class="fw-bold">Juri 1</h4>
                                 </div>
                                 <div class="juri-2 border border-dark text-center">
-                                    <h4 class="fw-bold">Juri 2</h4> 
+                                    <h4 class="fw-bold">Juri 2</h4>
                                 </div>
                                 <div class="juri-3 border border-dark text-center">
                                     <h4 class="fw-bold">Juri 3</h4>
@@ -145,14 +155,20 @@
                                 <div class="nilai-jatuhan border border-dark" style="width: 100%; height: 12.5%;"></div>
                                 <div class="nilai-binaan border border-dark" style="width: 100%; height: 12.5%;"></div>
                                 <div class="nilai-teguran border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="nilai-peringatan border border-dark" style="width: 100%; height: 12.5%;"></div>
+                                <div class="nilai-peringatan border border-dark" style="width: 100%; height: 12.5%;">
+                                </div>
                             </div>
                             <div class="total-sementara" style="width: 10%">
-                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;"></div>
-                                <div class="total-sementara-jatuhan border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-binaan border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-teguran border border-dark" style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;">
+                                </div>
+                                <div class="total-sementara-jatuhan border border-dark"
+                                    style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-binaan border border-dark"
+                                    style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-teguran border border-dark"
+                                    style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-peringatan border border-dark"
+                                    style="width: 100%; height: 12.5%;"></div>
                             </div>
                         </div>
                     </div>
@@ -168,5 +184,5 @@
             </div>
         </div>
     </div>
-@include('client.penonton.ketua.tanding.modal',['pemenang'=>'merah'])
+    @include('client.ketua.tanding.modal', ['pemenang' => 'merah'])
 @endsection

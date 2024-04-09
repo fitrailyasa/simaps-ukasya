@@ -24,10 +24,13 @@
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <div class="d-flex justify-content-around align-items-center">
-                    <div class="h1 m-0"><b>SIMAPS</b></div>
+                    <div class="h3 m-0"><b>SIMAPS</b></div>
                     <a class="btn btn-primary" href="{{ route('penonton') }}"><i
                             class="fas fa-arrow-circle-right mr-1"></i>
                         Penonton</a>
+                    <a class="btn btn-primary" href="{{ route('ketuapertandingan') }}"><i
+                            class="fas fa-arrow-circle-right mr-1"></i>
+                        Ketua</a>
                 </div>
             </div>
             <div class="card-body">

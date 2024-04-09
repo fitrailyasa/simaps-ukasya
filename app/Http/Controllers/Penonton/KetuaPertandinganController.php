@@ -10,7 +10,7 @@ class KetuaPertandinganController extends Controller
 {
     public function index()
     {
-        return view('client.penonton.ketua.index');
+        return view('client.ketua.index');
     }
     public function tanding()
     {
@@ -20,7 +20,7 @@ class KetuaPertandinganController extends Controller
         $biru_nama ="SHEIK ALAUDIN";
         $merah_region = "Indonesia";
         $merah_nama = "BENNY G. SUMARSONO";
-        return view('client.penonton.ketua.tanding.index',compact('match','arena','biru_region','biru_nama','merah_region','merah_nama'));
+        return view('client.ketua.tanding.index',compact('match','arena','biru_region','biru_nama','merah_region','merah_nama'));
     }
 
     public function tunggal()
@@ -29,7 +29,7 @@ class KetuaPertandinganController extends Controller
         $arena = "A";
         $region = "Singapore";
         $nama ="SHEIK ALAUDIN";
-        return view('client.penonton.ketua.tunggal.index',compact('match','arena','region','nama'));
+        return view('client.ketua.tunggal.index',compact('match','arena','region','nama'));
     }
     public function regu()
     {
@@ -37,7 +37,7 @@ class KetuaPertandinganController extends Controller
         $arena = "A";
         $region = "Singapore";
         $nama =["SHEIK ALAUDIN","SHEIK ALADIN"];
-        return view('client.penonton.ketua.regu.index',compact('match','arena','region','nama'));
+        return view('client.ketua.regu.index',compact('match','arena','region','nama'));
     }
     public function ganda()
     {
@@ -45,7 +45,7 @@ class KetuaPertandinganController extends Controller
         $arena = "A";
         $region = "Singapore";
         $nama ="SHEIK ALAUDIN";
-        return view('client.penonton.ketua.ganda.index',compact('match','arena','region','nama'));
+        return view('client.ketua.ganda.index',compact('match','arena','region','nama'));
     }
     public function solo()
     {
@@ -53,6 +53,6 @@ class KetuaPertandinganController extends Controller
         $arena = "A";
         $region = "Singapore";
         $nama ="SHEIK ALAUDIN";
-        return view('client.penonton.ketua.solo.index',compact('match','arena','region','nama'));
+        return view('client.ketua.solo.index',compact('match','arena','region','nama'));
     }
 }
