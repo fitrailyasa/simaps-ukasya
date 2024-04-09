@@ -36,6 +36,7 @@ Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 't
 Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketuatunggal');
 Route::get('/ketuapertandingan/regu', [KetuaPertandinganController::class, 'regu'])->name('ketuaregu');
 Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketuaganda');
+Route::get('/ketuapertandingan/solo', [KetuaPertandinganController::class, 'solo'])->name('ketuasolo');
 
 
 Auth::routes();

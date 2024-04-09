@@ -47,4 +47,12 @@ class KetuaPertandinganController extends Controller
         $nama ="SHEIK ALAUDIN";
         return view('client.penonton.ketua.ganda.index',compact('match','arena','region','nama'));
     }
+    public function solo()
+    {
+        $match = "1";
+        $arena = "A";
+        $region = "Singapore";
+        $nama ="SHEIK ALAUDIN";
+        return view('client.penonton.ketua.solo.index',compact('match','arena','region','nama'));
+    }
 }
