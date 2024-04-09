@@ -23,4 +23,8 @@ class DewanController extends Controller
     {
         return view('dewan.regu.index');
     }
+    public function solo()
+    {
+        return view('dewan.regu.index');
+    }
 }

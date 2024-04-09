@@ -1,0 +1,112 @@
+body{
+    height: 100% !important;
+}
+
+@media only screen and (max-width: 1080px) {
+    h5{
+        font-size: 1rem !important;
+    }
+    h6{
+        font-size: 0.8rem;
+        margin-top: 20% !important;
+    
+    }
+    .score{
+        margin-top: 50% !important;
+    }
+    h4{
+        font-size: 0.6rem !important;
+    }
+    .btn{
+        font-size: 0.5rem !important;
+    }
+    .main-footer{
+        width: 77% !important;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    h5{
+        font-size: 0.5rem !important;
+    }
+    h6{
+        font-size: 0.35rem;
+        margin-top: 60% !important;
+    
+    }
+    .score{
+        margin-top: 100% !important;
+    }
+    h4{
+        font-size: 0.3rem !important;
+    }
+    .btn{
+        font-size: 0.25rem !important;
+        padding: .190rem .37rem;
+    }
+    .btn-row{
+        gap: 2px !important;
+    }
+
+    .aside{
+        width: 10% !important;
+    }
+    .main{
+        width: 90% !important;
+    }
+    .main-footer{
+        width: 73.5% !important;
+    }
+    .total-footer{
+        width: 20% !important;
+
+    }
+    .footer-content{
+        margin-bottom: -20% !important;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    h5{
+        font-size: 0.5rem !important;
+    }
+    h6{
+        font-size: 0.35rem;
+        margin-top: 60% !important;
+    
+    }
+    .score{
+        margin-top: 100% !important;
+    }
+    h4{
+        font-size: 0.3rem !important;
+    }
+    .btn{
+        font-size: 0.32rem !important;
+        padding: .10rem .15rem !important;
+    }
+    .btn-row{
+        gap: 1px !important;
+    }
+
+    .aside{
+        width: 10% !important;
+    }
+    .main{
+        width: 90% !important;
+    }
+    .row3{
+        height: 33% !important;
+    }
+    .footer-text{
+        margin-left: -15% !important;
+    }
+    .footer-content{
+        margin-bottom: -30% !important;
+    }
+}
+
+.bg-abu {
+    background-color: #ececec;
+    color: black;
+}

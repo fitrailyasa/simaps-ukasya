@@ -32,4 +32,9 @@ class JuriController extends Controller
         $user = Auth::user();
         return view('juri.ganda.index', compact('user'));
     }
+    public function solo()
+    {
+        $user = Auth::user();
+        return view('juri.solo.index', compact('user'));
+    }
 }

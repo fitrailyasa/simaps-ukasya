@@ -37,6 +37,12 @@ class GelanggangSeeder extends Seeder
                 'nama' => 'ARENA D',
                 'waktu' => 3,
                 'jenis' => 'Regu',
+            ],
+            [
+                'id' => 5,
+                'nama' => 'ARENA E',
+                'waktu' => 3,
+                'jenis' => 'Solo Kreatif',
             ]
         ];
         Gelanggang::query()->insert($Gelanggang);

@@ -199,21 +199,22 @@ Route::middleware(['auth'])->group(function () {
   Route::middleware([Dewan::class])->name('dewan.')->prefix('dewan')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/tanding', [DewanController::class, 'tanding'])->name('dewantanding');
-    Route::get('/tunggal', [DewanController::class, 'tunggal'])->name('dewantunggal');
-    Route::get('/ganda', [DewanController::class, 'ganda'])->name('dewanganda');
-    Route::get('/regu', [DewanController::class, 'regu'])->name('dewanregu');
-
+    Route::get('/tanding', [DewanController::class, 'tanding'])->name('tanding');
+    Route::get('/tunggal', [DewanController::class, 'tunggal'])->name('tunggal');
+    Route::get('/ganda', [DewanController::class, 'ganda'])->name('ganda');
+    Route::get('/regu', [DewanController::class, 'regu'])->name('regu');
+    Route::get('/solo', [DewanController::class, 'solo'])->name('solo');
   });
 
   // CMS Juri
   Route::middleware([Juri::class])->name('juri.')->prefix('juri')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/tanding', [JuriController::class, 'tanding'])->name('juritanding');
-    Route::get('/tunggal', [JuriController::class, 'tunggal'])->name('juritunggal');
-    Route::get('/regu', [JuriController::class, 'regu'])->name('juriregu');
-    Route::get('/ganda', [JuriController::class, 'ganda'])->name('juriganda');
+    Route::get('/tanding', [JuriController::class, 'tanding'])->name('tanding');
+    Route::get('/tunggal', [JuriController::class, 'tunggal'])->name('tunggal');
+    Route::get('/regu', [JuriController::class, 'regu'])->name('regu');
+    Route::get('/ganda', [JuriController::class, 'ganda'])->name('ganda');
+    Route::get('/solo', [JuriController::class, 'solo'])->name('solo');
   });
 
 });
