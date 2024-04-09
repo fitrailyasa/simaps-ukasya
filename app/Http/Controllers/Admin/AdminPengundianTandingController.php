@@ -45,7 +45,17 @@ class AdminPengundianTandingController extends Controller
 
     public function store(Request $request)
     {
-        $tandings = Tanding::all();        
+        $golongan = $request->golongan;
+        $jenis_kelamin = $request->jenis_kelamin;
+        $kelas = $request->kelas;
+
+        // Filter data atlet sesuai dengan golongan, jenis kelamin, dan kelas
+        $tandings = Tanding::where('golongan', $golongan)
+                            ->where('jenis_kelamin', $jenis_kelamin)
+                            ->where('kelas', $kelas)
+                            ->get();
+
+        // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();
         $totalPeserta = $tandings->count();        
 

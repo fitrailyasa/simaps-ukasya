@@ -45,7 +45,17 @@ class AdminPengundianTGRController extends Controller
 
     public function store(Request $request)
     {
-        $tgrs = TGR::all();        
+        $golongan = $request->golongan;
+        $jenis_kelamin = $request->jenis_kelamin;
+        $kategori = $request->kategori;
+
+        // Filter data atlet sesuai dengan golongan, jenis kelamin, dan kategori
+        $tgrs = TGR::where('golongan', $golongan)
+                            ->where('jenis_kelamin', $jenis_kelamin)
+                            ->where('kategori', $kategori)
+                            ->get();
+
+        // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTGR::pluck('atlet_id')->toArray();
         $totalPeserta = $tgrs->count();        
 

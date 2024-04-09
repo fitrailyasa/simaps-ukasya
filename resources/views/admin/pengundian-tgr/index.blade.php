@@ -25,13 +25,30 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+            $unique_combinations = []; // Array untuk melacak kombinasi unik
+            ?>
             @foreach ($pengundiantgrs as $pengundiantgr)
+                <?php
+                $combination = $pengundiantgr->TGR->golongan . '-' . $pengundiantgr->TGR->jenis_kelamin . '-' . $pengundiantgr->TGR->kategori; // Kombinasi golongan, jenis kelamin, dan kategori
+                if (!isset($unique_combinations[$combination])) {
+                    $unique_combinations[$combination] = 0; // Inisialisasi jumlah atlet untuk kombinasi unik
+                }
+                $unique_combinations[$combination]++; // Menambah jumlah atlet untuk kombinasi unik
+                ?>
+            @endforeach
+
+            <?php $row_number = 1; ?>
+            @foreach ($unique_combinations as $combination => $count)
+                <?php
+                [$golongan, $jenis_kelamin, $kategori] = explode('-', $combination); // Memecah kombinasi menjadi golongan, jenis kelamin, dan kategori
+                ?>
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengundiantgr->tgr->golongan ?? '-' }}</td>
-                    <td>{{ $pengundiantgr->tgr->kategori ?? '-' }}</td>
-                    <td>{{ $pengundiantgr->tgr->jenis_kelamin ?? '-' }}</td>
-                    <td>{{ $pengundiantgr->tgr->count() ?? '-' }} Atlet</td>
+                    <td>{{ $row_number }}</td>
+                    <td>{{ $golongan }}</td>
+                    <td>{{ $kategori }}</td>
+                    <td>{{ $jenis_kelamin }}</td>
+                    <td>{{ $count }} Atlet</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table') }}"><i
@@ -42,6 +59,7 @@
                         @endif
                     </td>
                 </tr>
+                <?php $row_number++; ?>
             @endforeach
         </tbody>
         <tfoot>
