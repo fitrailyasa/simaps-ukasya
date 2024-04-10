@@ -51,10 +51,10 @@
                     <td>{{ $count }} Atlet</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
-                            <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table') }}"><i
+                            <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table', $kelompok) }}"><i
                                     class="fas fa-eye"></i></a>
                         @elseif (auth()->user()->roles_id == 2)
-                            <a class="btn-sm btn-primary" href="{{ route('op.pengundian-tgr.table') }}"><i
+                            <a class="btn-sm btn-primary" href="{{ route('op.pengundian-tgr.table', $kelompok) }}"><i
                                     class="fas fa-eye"></i></a>
                         @endif
                     </td>

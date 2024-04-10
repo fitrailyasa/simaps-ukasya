@@ -16,11 +16,13 @@ class PengundianTGRSeeder extends Seeder
         $PengundianTGR = [
             [
                 'id' => 1,
+                'kelompok' => 1,
                 'no_undian' => 1,
                 'atlet_id' => 1
             ],
             [
                 'id' => 2,
+                'kelompok' => 1,
                 'no_undian' => 2,
                 'atlet_id' => 2
             ],

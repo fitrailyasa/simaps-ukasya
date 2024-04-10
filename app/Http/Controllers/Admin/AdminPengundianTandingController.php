@@ -13,15 +13,20 @@ class AdminPengundianTandingController extends Controller
 {
     public function index()
     {
+        $kelompok = PengundianTanding::max('kelompok') ?? 0;
         $tandings = Tanding::all();
         $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
-        return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings'));
+        return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings', 'kelompok'));
     }
     
-    public function table()
+    public function table(Request $request, $kelompok)
     {
         $tandings = Tanding::all();
-        $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
+        $pengundiantandings = PengundianTanding::with('tanding')
+            ->where('kelompok', $kelompok) // Filter by kelompok value
+            ->latest('id')
+            ->get();
+
         return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
     }
 
@@ -61,6 +66,10 @@ class AdminPengundianTandingController extends Controller
 
         $shuffledAtletIds = $tandings->pluck('id')->shuffle()->toArray();
 
+        $kelompok = PengundianTanding::max('kelompok') ?? 0; // Get the maximum kelompok value from the database
+
+        $kelompok++; // Increment kelompok for each new entry
+
         foreach ($shuffledAtletIds as $index => $atletId) {
             if (in_array($atletId, $existingAtletIds)) {
                 continue;
@@ -69,6 +78,7 @@ class AdminPengundianTandingController extends Controller
             $pengundiantanding = new PengundianTanding();
             $pengundiantanding->atlet_id = $atletId;
             $pengundiantanding->no_undian = $index + 1;
+            $pengundiantanding->kelompok = $kelompok; // Assign kelompok value
             $pengundiantanding->save();
 
             $existingAtletIds[] = $atletId;

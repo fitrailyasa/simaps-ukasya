@@ -13,15 +13,20 @@ class AdminPengundianTGRController extends Controller
 {
     public function index()
     {
+        $kelompok = PengundianTGR::max('kelompok') ?? 0;
         $tgrs = TGR::all();
         $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
-        return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs'));
+        return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs', 'kelompok'));
     }
     
-    public function table()
+    public function table(Request $request, $kelompok)
     {
         $tgrs = TGR::all();
-        $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
+        $pengundiantgrs = PengundianTGR::with('tgr')
+            ->where('kelompok', $kelompok) // Filter by kelompok value
+            ->latest('id')
+            ->get();
+
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
     }
 
@@ -61,6 +66,10 @@ class AdminPengundianTGRController extends Controller
 
         $shuffledAtletIds = $tgrs->pluck('id')->shuffle()->toArray();
 
+        $kelompok = PengundianTGR::max('kelompok') ?? 0; // Get the maximum kelompok value from the database
+
+        $kelompok++; // Increment kelompok for each new entry
+
         foreach ($shuffledAtletIds as $index => $atletId) {
             if (in_array($atletId, $existingAtletIds)) {
                 continue;
@@ -69,6 +78,7 @@ class AdminPengundianTGRController extends Controller
             $pengundiantgr = new PengundianTGR();
             $pengundiantgr->atlet_id = $atletId;
             $pengundiantgr->no_undian = $index + 1;
+            $pengundiantgr->kelompok = $kelompok; // Assign kelompok value
             $pengundiantgr->save();
 
             $existingAtletIds[] = $atletId;
