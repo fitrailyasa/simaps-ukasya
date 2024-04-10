@@ -35,25 +35,25 @@
                 <div class="form-group ml-2">
                     <select name="kelas" id="kelas" class="form-select @error('kelas') is-invalid @enderror">
                         <option value="">-- Pilih Kelas Tanding --</option>
-                        <option value="A">Kelas A</option>
-                        <option value="B">Kelas B</option>
-                        <option value="C">Kelas C</option>
-                        <option value="D">Kelas D</option>
-                        <option value="E">Kelas E</option>
-                        <option value="F">Kelas F</option>
-                        <option value="G">Kelas G</option>
-                        <option value="H">Kelas H</option>
-                        <option value="I">Kelas I</option>
-                        <option value="J">Kelas J</option>
-                        <option value="K">Kelas K</option>
-                        <option value="L">Kelas L</option>
-                        <option value="M">Kelas M</option>
-                        <option value="N">Kelas N</option>
-                        <option value="O">Kelas O</option>
-                        <option value="P">Kelas P</option>
-                        <option value="Q">Kelas Q</option>
-                        <option value="R">Kelas R</option>
-                        <option value="S">Kelas S</option>
+                        <option value="Kelas A">Kelas A</option>
+                        <option value="Kelas B">Kelas B</option>
+                        <option value="Kelas C">Kelas C</option>
+                        <option value="Kelas D">Kelas D</option>
+                        <option value="Kelas E">Kelas E</option>
+                        <option value="Kelas F">Kelas F</option>
+                        <option value="Kelas G">Kelas G</option>
+                        <option value="Kelas H">Kelas H</option>
+                        <option value="Kelas I">Kelas I</option>
+                        <option value="Kelas J">Kelas J</option>
+                        <option value="Kelas K">Kelas K</option>
+                        <option value="Kelas L">Kelas L</option>
+                        <option value="Kelas M">Kelas M</option>
+                        <option value="Kelas N">Kelas N</option>
+                        <option value="Kelas O">Kelas O</option>
+                        <option value="Kelas P">Kelas P</option>
+                        <option value="Kelas Q">Kelas Q</option>
+                        <option value="Kelas R">Kelas R</option>
+                        <option value="Kelas S">Kelas S</option>
                         <option value="Open 1">Open 1</option>
                         <option value="Open 2">Open 2</option>
                     </select>
@@ -73,126 +73,21 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/bagan/js/jquery.bracket-world.min.js') }}"></script>
     <script>
-        var minHeight = 0;
-        $(document).ready(function() {
-            setMainTitleHeight();
-
-            minHeight = $('#main-title-content').height();
-            $('#main-title-content').height(minHeight);
-
-            $(window).resize(function() {
-                setMainTitleHeight();
-            });
-
-            $('#bracket1').bracket();
-
-            //$('#bracket1').bracket({teams:4});
-
-            //$('#bracket1').bracket({teams:8, horizontal:0, scale:0.50, icons:false, bgcolor:'#ffffff', rectFill:'#000000'});
-
-            $('#bracket2').bracket({
-                teams: 11,
-                topOffset: 50,
-                scale: 0.45,
-                horizontal: 0,
-                height: '1000px',
-                icons: true,
-                teamNames: [{
-                        name: 'Illinois',
-                        seed: '6'
-                    },
+        $('#bracket2').bracket({
+            teams: {{ $pengundiantanding->count() }}, // Dynamically set the number of teams
+            topOffset: 50,
+            scale: 0.45,
+            horizontal: 0,
+            height: '1000px',
+            icons: true,
+            teamNames: [
+                @foreach ($pengundiantanding as $team)
                     {
-                        name: 'Iowa',
-                        seed: '11'
+                        name: '{{ $team->Tanding->nama }}',
+                        seed: '{{ $team->no_undian }}'
                     },
-                    {
-                        name: 'Indiana',
-                        seed: '5'
-                    },
-                    {
-                        name: 'Penn State',
-                        seed: '4'
-                    },
-                    {
-                        name: 'Michigan State',
-                        seed: '1'
-                    },
-                    {
-                        name: 'Michigan',
-                        seed: '10'
-                    },
-                    {
-                        name: 'Ohio State',
-                        seed: '7'
-                    },
-                    {
-                        name: 'Wisconsin',
-                        seed: '9'
-                    },
-                    {
-                        name: 'Minnesota',
-                        seed: '8'
-                    },
-                    {
-                        name: 'Northwestern',
-                        seed: '3'
-                    },
-                    {
-                        name: 'Purdue',
-                        seed: '2'
-                    }
-                ]
-            });
-
-            /*var theBracket = $('#bracket2').bracket({teams:6, height:'590px'});
-            theBracket.data("bracket").setVertical().zoomIn(0.6).setTeams(
-            [
-                {
-                    name:'Texas',
-                    seed:'5'
-                },
-                {
-                    name:'Kansas',
-                    seed:'4'
-                },
-                {
-                    name:'Kansas State',
-                    seed:'1'
-                },
-                {
-                    name:'Baylor',
-                    seed:'6'
-                },
-                {
-                    name:'Texas Tech',
-                    seed:'3'
-                },
-                {
-                    name:'TCU',
-                    seed:'2'
-                }
-            ]);*/
-
-            $('#bracket3, #bracket4').bracket({
-                teams: 8
-            });
-
-            /*$('#bracket1').bracket({teamNames:[{name:'Stanford',seed:'1'}, {name:'California',seed:'2'}]});
-            $('#bracket2').bracket({teams:64});*/
-
-            //$('#bracket1, #bracket2').bracket({teams:64}).each(function(){$(this).data("bracket").zoomIn()});
-
-            //$('#bracket1').bracket({teams:4, horizontal:0}).data("bracket").zoomIn(0.5, function(){$('#bracket2').bracket({horizontal:0, scale:0.5, teams:4}).data("bracket").setHorizontal(function(){alert('all done');});});
+                @endforeach
+            ]
         });
-
-        function setMainTitleHeight() {
-            var windowHeight = $(window).height();
-            if (windowHeight > minHeight) {
-                $('#main-title').height(windowHeight);
-                $('#main-title-content').css({
-                    'margin-top': (($('#main-title').height() - $('#main-title-content').height()) / 2) + 'px'
-                });
-            } else $('#main-title').height(minHeight);
-        }
     </script>
 @endsection
