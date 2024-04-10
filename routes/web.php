@@ -29,6 +29,9 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
 //CMS PENONTON
 Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
+Route::get('/tanding', [PenontonController::class, 'tanding'])->name('tanding');
+Route::get('/tgr', [PenontonController::class, 'tgr'])->name('tgr');
+
 
 //CMS KETUA PERTANDINGAN
 Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');

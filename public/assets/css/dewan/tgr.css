@@ -1,0 +1,21 @@
+.btn-biru {
+    background-color: #0053a6 !important;
+    color: #fff;
+}
+
+.btn-biru:hover {
+    background-color: #007bff !important;
+}
+
+.btn-biru:active {
+    background-color: #0053a6 !important;
+}
+
+@media only screen and (max-width: 1080px) {
+    .profile-picture {
+        width: 30% !important;
+    }
+    .text {
+        margin-top: -40% !important;
+    }
+}
