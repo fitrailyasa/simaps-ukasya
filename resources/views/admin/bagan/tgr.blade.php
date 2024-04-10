@@ -7,6 +7,13 @@
 @section('style')
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/bagan/css/jquery.bracket-world.css') }}" rel="stylesheet">
+    <style>
+        @media print {
+            .btn {
+                display: none;
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -44,7 +51,7 @@
             </div>
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <button type="submit" class="btn mx-1 btn-primary">Generate</button>
-                <button type="button" class="btn mx-1 btn-success">Print</button>
+                <button type="button" class="btn mx-1 btn-success" onclick="window.print();">Print</button>
             </div>
         </form>
         <div id="bracket2" class="bracket"></div>
