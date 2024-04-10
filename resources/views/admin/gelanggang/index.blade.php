@@ -28,7 +28,7 @@
                 <th>Nama</th>
                 <th>Waktu</th>
                 <th>Jenis</th>
-                <th>jumlah</th>
+                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -39,7 +39,7 @@
                     <td>{{ $gelanggang->nama }}</td>
                     <td>{{ $gelanggang->waktu }} menit</td>
                     <td>{{ $gelanggang->jenis }}</td>
-                    <td><a class="btn-sm btn-primary" href="#">0 jadwal</a>
+                    <td><a class="btn-sm btn-primary" href="#">{{ $gelanggang->JadwalTGR->count() + $gelanggang->JadwalTanding->count() }} jadwal</a>
                     </td>
                     <td class="manage-row">
                         @include('admin.gelanggang.edit')
@@ -54,7 +54,7 @@
                 <th>Nama</th>
                 <th>Waktu</th>
                 <th>Jenis</th>
-                <th>jumlah</th>
+                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
