@@ -58,6 +58,14 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password')
             ],
             [
+                'name' => 'Operator E',
+                'email' => 'operator5@simaps.com',
+                'roles_id' => 2,
+                'gelanggang' => 5,
+                'status' => 1,
+                'password' => Hash::make('password')
+            ],
+            [
                 'name' => 'Dewan A',
                 'email' => 'dewan1@simaps.com',
                 'roles_id' => 4,

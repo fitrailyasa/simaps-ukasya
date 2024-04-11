@@ -29,10 +29,10 @@
             @foreach ($users->where('email', '!=', 'super@admin.com') as $user)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->Gelanggang->nama }}</td>
-                    <td>{{ $user->roles->name }}</td>
+                    <td>{{ $user->name ?? '-' }}</td>
+                    <td>{{ $user->email ?? '-' }}</td>
+                    <td>{{ $user->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $user->roles->name ?? '-' }}</td>
                     <td>{{ $user->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                     <td class="manage-row">
                         <a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
