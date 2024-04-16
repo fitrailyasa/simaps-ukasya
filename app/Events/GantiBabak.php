@@ -26,8 +26,8 @@ class GantiBabak implements ShouldBroadcast
     public function __construct($jadwal_id)
     {
         $this->jadwal = JadwalTanding::where('id',$jadwal_id)->first();
-        $this->babak_merah = Babak::where('tanding',$this->jadwal->sudut_merah)->get();
-        $this->babak_biru = Babak::where('tanding',$this->jadwal->sudut_biru)->get();
+        $this->babak_merah = Babak::where('atlet',$this->jadwal->sudut_merah)->get();
+        $this->babak_biru = Babak::where('atlet',$this->jadwal->sudut_biru)->get();
 
         if($this->jadwal->babak_tanding!=3){
             $this->babak_merah[$this->jadwal->babak_tanding]->peringatan = $this->babak_merah[$this->jadwal->babak_tanding -1]->peringatan;

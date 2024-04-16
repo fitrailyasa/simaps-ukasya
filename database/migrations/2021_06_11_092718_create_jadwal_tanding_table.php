@@ -20,6 +20,7 @@ class CreateJadwalTandingTable extends Migration
             $table->string('babak');
             $table->string('kelas');
             $table->string('gelombang');
+            $table->string('tahap');
             $table->foreignId('sudut_biru');
             $table->foreignId('sudut_merah');
             $table->integer('next_sudut');
