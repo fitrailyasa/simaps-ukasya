@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Juri | @yield('title')</title>
+        @vite('resources/js/app.js')
 
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
         <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
@@ -208,6 +209,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
+        @livewireScripts
         <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>

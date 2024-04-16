@@ -24,11 +24,16 @@ use App\Http\Controllers\Penonton\KetuaPertandinganController;
 use App\Http\Controllers\Penonton\PenontonController;
 use App\Http\Controllers\Juri\JuriController;
 use App\Http\Controllers\Dewan\DewanController;
+use App\Livewire\DewanTanding;
+use App\Livewire\JuriTanding;
+use App\Livewire\PenontonTanding;
+
+
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
 //CMS PENONTON
-Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
+Route::get('/penonton', PenontonTanding::class)->name('penonton');
 Route::get('/tanding', [PenontonController::class, 'tanding'])->name('tanding');
 Route::get('/tgr', [PenontonController::class, 'tgr'])->name('tgr');
 
@@ -205,7 +210,7 @@ Route::middleware(['auth'])->group(function () {
   Route::middleware([Dewan::class])->name('dewan.')->prefix('dewan')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/tanding', [DewanController::class, 'tanding'])->name('tanding');
+    Route::get('/tanding', DewanTanding::class)->name('tanding');
     Route::get('/tunggal', [DewanController::class, 'tunggal'])->name('tunggal');
     Route::get('/ganda', [DewanController::class, 'ganda'])->name('ganda');
     Route::get('/regu', [DewanController::class, 'regu'])->name('regu');
@@ -216,7 +221,7 @@ Route::middleware(['auth'])->group(function () {
   Route::middleware([Juri::class])->name('juri.')->prefix('juri')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/tanding', [JuriController::class, 'tanding'])->name('tanding');
+    Route::get('/tanding', JuriTanding::class)->name('tanding');
     Route::get('/tunggal', [JuriController::class, 'tunggal'])->name('tunggal');
     Route::get('/regu', [JuriController::class, 'regu'])->name('regu');
     Route::get('/ganda', [JuriController::class, 'ganda'])->name('ganda');

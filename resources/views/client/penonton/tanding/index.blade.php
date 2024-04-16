@@ -1,10 +1,11 @@
 @extends('layouts.client.app')
 
+
+
+@section('content')
 @section('style')
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tanding.css')}}">
 @endsection
-
-@section('content')
 @include('client.penonton.tanding.navbar',['arena'=>$arena,'class'=>$class])
 @if ($tahap == 'persiapan')
     @include('client.penonton.tanding.persiapan',['pesilat'=>$pesilat,'partai'=>'100'])

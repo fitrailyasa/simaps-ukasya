@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="jatuhan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="jatuhan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
@@ -39,15 +39,6 @@
 @section('script')
 <script>
     let verif = 0
-    $('.btn-verif').on('click',()=>{
-        verif += 1;
-        if(verif == 1){
-            $('.modal-body').append(`<p>JURI 1 : {{$juri_1}}</p>
-        <p>JURI 2 : {{$juri_2}}</p>
-        <p>JURI 3 : {{$juri_3}}</p>
-        <p>Dibuat saat : {{date('Y-m-d H:i:s')}}</p>`)
-        }
-    })
     $('.btn-jatuhan-a').on('click',()=>{
         $('.jatuhan-1-a').append('3')
     })

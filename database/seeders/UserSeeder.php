@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Dewan A',
                 'email' => 'dewan1@simaps.com',
-                'roles_id' => 4,
+                'roles_id' => 3,
                 'gelanggang' => 1,
                 'status' => 1,
                 'password' => Hash::make('password')
@@ -76,7 +76,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Dewan B',
                 'email' => 'dewan2@simaps.com',
-                'roles_id' => 4,
+                'roles_id' => 3,
                 'gelanggang' => 2,
                 'status' => 1,
                 'password' => Hash::make('password')
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Dewan C',
                 'email' => 'dewan3@simaps.com',
-                'roles_id' => 4,
+                'roles_id' => 3,
                 'gelanggang' => 3,
                 'status' => 1,
                 'password' => Hash::make('password')
@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Dewan D',
                 'email' => 'dewan4@simaps.com',
-                'roles_id' => 4,
+                'roles_id' => 3,
                 'gelanggang' => 4,
                 'status' => 1,
                 'password' => Hash::make('password')
@@ -100,7 +100,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Dewan E',
                 'email' => 'dewan5@simaps.com',
-                'roles_id' => 4,
+                'roles_id' => 3,
                 'gelanggang' => 5,
                 'status' => 1,
                 'password' => Hash::make('password')

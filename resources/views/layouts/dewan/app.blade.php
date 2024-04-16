@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Dewan | @yield('title')</title>
+        @vite('resources/js/app.js')
 
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
         <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
@@ -168,7 +169,7 @@
             content="{{ asset('assets/favicon/mstile-310x150.png') }}"
         />
         <meta
-            name="msapplication-square310x310logo"
+            name="msap  plication-square310x310logo"
             content="{{ asset('assets/favicon/mstile-310x310.png') }}"
         />
     </head>
@@ -193,6 +194,8 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
+        @livewireScripts
+
         <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
