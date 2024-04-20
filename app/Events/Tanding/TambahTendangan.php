@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Tanding;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,8 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Tanding;
-use App\Models\Babak;
+
 
 
 class TambahTendangan implements ShouldBroadcast
@@ -20,13 +19,16 @@ class TambahTendangan implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $pesilat_id;
-    public $jumlah_tendangan;
+    public $sudut_id;
+    public $status;
+    public $eventSent;
 
-    public function __construct($id)
+
+    public function __construct($id,$eventSent,$status)
     {
-        $this->pesilat_id = $id;
-        $this->jumlah_tendangan = Tanding::where('id', $id)->increment('tendangan');
+        $this->sudut_id = $id;
+        $this->eventSent = $eventSent->event_sent;
+        $this->status = $status;
     }
 
     /**
@@ -42,4 +44,10 @@ class TambahTendangan implements ShouldBroadcast
     {
         return 'tambah-tendangan';
     }
+    
+    public function handleTimeout()
+{
+    // Cek apakah sudah lewat 3 detik sejak pembuatan objek
+
+}
 }

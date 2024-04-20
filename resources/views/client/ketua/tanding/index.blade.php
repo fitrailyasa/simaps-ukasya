@@ -104,9 +104,9 @@
                     </div>
                 </div>
             </div>
-            <div class="babak" style="width: 10%">
+            <div class="PenilaianTanding" style="width: 10%">
                 <div class="table-header border border-dark text-center">
-                    <h4 class="fw-bold pt-1">BABAK</h4>
+                    <h4 class="fw-bold pt-1">PenilaianTanding</h4>
                 </div>
                 <div class="table-body border border-dark" style="height: 89.1%">
                 </div>

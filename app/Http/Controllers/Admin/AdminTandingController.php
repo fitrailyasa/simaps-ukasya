@@ -55,7 +55,6 @@ class AdminTandingController extends Controller
             'kelas' => $request->kelas,
             'golongan' => $request->golongan,
         ]);
-
         if ($request->hasFile('img')) {
             $img = $request->file('img');
             $file_name = time() . '_' . $tanding->nama . '.' . $img->getClientOriginalExtension();

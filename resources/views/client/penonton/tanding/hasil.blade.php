@@ -3,8 +3,8 @@
         <div class="image d-flex justify-content-center" style="height: 20%;width: 100%" >
             <img src="{{url('/assets/img/ipsi.png')}}" alt="" style="height: 100%;width: 40%" >
         </div>
-        <h1 style="color: #0053a6">{{$pesilat[0]['nama']}}</h1>
-        <h1>{{$pesilat[0]['perguruan']}}</h1>
+        <h1 style="color: #0053a6">{{$sudut[0]['nama']}}</h1>
+        <h1>{{$sudut[0]['perguruan']}}</h1>
         <div class="score d-flex justify-content-center flex-column" style="height: 50%;width:100%;border: solid 3px #0053a6">
             <p class="text-hasil" style="font-size: 10rem;color: #0053a6">20</p>
         </div>
@@ -24,8 +24,8 @@
          <div class="image d-flex justify-content-center" style="height: 20%;width: 100%" >
             <img src="{{url('/assets/img/ipsi.png')}}" alt="" style="height: 100%;width: 40%;" >
         </div>
-        <h1 style="color: #db3545">{{$pesilat[1]['nama']}}</h1>
-        <h1>{{$pesilat[1]['perguruan']}}</h1>
+        <h1 style="color: #db3545">{{$sudut[1]['nama']}}</h1>
+        <h1>{{$sudut[1]['perguruan']}}</h1>
         <div class="score d-flex justify-content-center flex-column" style="height: 50%;width:100%;border: solid 3px #db3545">
             <p class="text-hasil" style="font-size: 10rem;color: #db3545">15</p>
         </div>

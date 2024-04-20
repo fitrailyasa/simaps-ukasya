@@ -8,7 +8,7 @@
 @endsection
 @include('client.penonton.tanding.navbar',['arena'=>$arena,'class'=>$class])
 @if ($tahap == 'persiapan')
-    @include('client.penonton.tanding.persiapan',['pesilat'=>$pesilat,'partai'=>'100'])
+    @include('client.penonton.tanding.persiapan',['pesilat'=>$sudut,'partai'=>'100'])
 @elseif($tahap == 'tanding')
     @include('client.penonton.tanding.tanding')  
 @elseif($tahap == 'hasil')

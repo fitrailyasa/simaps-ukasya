@@ -2,12 +2,12 @@
     <div class="dewan-tanding-body-header d-flex" style="width: 100%">
         <div class="kontingen-merah" style="width: 50%">
             <h4 class="fw-bold" style="color: #db3545">
-                {{$pesilat_merah->nama}}
+                {{$sudut_merah->nama}}
             </h4>
         </div>
         <div class="kontingen-biru text-end" style="width: 50%">
             <h4 class="fw-bold" style="color: #252c94">
-                {{$pesilat_biru->nama}}
+                {{$sudut_biru->nama}}
             </h4>
         </div>
     </div>
@@ -22,19 +22,19 @@
                         <div class="peringatan-babak-{{$i}} border border-dark text-end" style="min-height:42px;" >
                              @if (1 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[0]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[0]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[1]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[1]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[2]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[2]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -52,19 +52,19 @@
                         <div class="teguran-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
                             @if (1 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[0]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[0]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[1]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[1]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[2]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[2]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -82,19 +82,19 @@
                         <div class="binaan-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
                            @if (1 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[0]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[0]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[1]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[1]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[2]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[2]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -112,19 +112,19 @@
                         <div class="jatuhan-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
                            @if (1 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[0]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[0]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[1]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[1]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_merah[2]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_merah[2]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -162,19 +162,19 @@
                         <div class="jatuhan-babak-{{$i}} border border-dark" style="min-height:42px" >
                              @if (1 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[0]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[0]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[1]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[1]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[2]->jatuhan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[2]->jatuhan; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -192,19 +192,19 @@
                         <div class="binaan-babak-{{$i}} border border-dark" style="min-height:42px" >
                             @if (1 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[0]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[0]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[1]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[1]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[2]->binaan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[2]->binaan; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -222,19 +222,19 @@
                         <div class="teguran-babak-{{$i}} border border-dark" style="min-height:42px" >
                            @if (1 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[0]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[0]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[1]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[1]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[2]->teguran; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[2]->teguran; $j++)
                                     1
                                 @endfor
                              </h5>   
@@ -246,25 +246,25 @@
             <div class="peringatan" style="width: 23%">
                 <div class="peringatan-header border border-dark " style="background-color: #0053a6">
                     <h5 class="fw-bold p-1 text-white">Peringatan</h5>
-                </div>
+                </div> 
                 <div class="peringatan-content" style="height: 75%">
                     @for ($i = 1; $i <= 3; $i++)
                         <div class="peringatan-babak-{{$i}} border border-dark" style="min-height:42px" >
                              @if (1 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[0]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[0]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>
                              @elseif(2 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[1]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[1]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>  
                              @elseif(3 == $i)
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @for ($j = 0; $j < $babak_biru[2]->peringatan; $j++)
+                                @for ($j = 0; $j < $penilaian_tanding_biru[2]->peringatan; $j++)
                                     1
                                 @endfor
                              </h5>   

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
 use App\Models\PengundianTanding; 
+use App\Models\PenilaianTanding; 
+use App\Models\PukulanEventSent; 
+use App\Models\TendanganEventSent; 
 use App\Models\Gelanggang;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -49,8 +52,41 @@ class AdminJadwalTandingController extends Controller
             'next_sudut' => 'required|max:255',
             'next_partai' => 'required|max:255',
         ]);
+        $jadwal_tanding = JadwalTanding::create($request->all());
 
-        JadwalTanding::create($request->all());
+        for ($i=1; $i <=3 ; $i++) { 
+            PenilaianTanding::create([
+            'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_biru.$jadwal_tanding->id.$i,
+            'atlet'=>$request->sudut_biru,
+            'babak'=>$i,
+            'jadwal_tanding' => $jadwal_tanding->id
+        ]);
+        PenilaianTanding::create([
+            'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_merah.$jadwal_tanding->id.$i,
+            'atlet'=>$request->sudut_merah,
+            'babak'=>$i,
+            'jadwal_tanding' => $jadwal_tanding->id
+        ]);
+        }
+
+        TendanganEventSent::create([
+            'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_merah.$jadwal_tanding->id.$i,
+            'sudut'=>$request->sudut_merah,
+            'jadwal_tanding'=>$jadwal_tanding->id
+        ]);
+        TendanganEventSent::create([
+            'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_biru.$jadwal_tanding->id.$i,
+            'sudut'=>$request->sudut_biru,
+            'jadwal_tanding'=>$jadwal_tanding->id
+        ]);
+        PukulanEventSent::create([
+            'sudut'=>$request->sudut_merah,
+            'jadwal_tanding'=>$jadwal_tanding->id
+        ]);
+        PukulanEventSent::create([
+            'sudut'=>$request->sudut_biru,
+            'jadwal_tanding'=>$jadwal_tanding->id
+        ]);
 
         if(auth()->user()->roles_id == 1){
             return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');

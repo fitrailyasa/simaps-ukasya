@@ -14,6 +14,20 @@ window.Echo = new Echo({
 });
 
 window.Echo.channel("verifikasi").listen(".verifikasi-pelanggaran", (e) => {
+    $("#penaltyModal").modal("show");
+    if (e.verifikasi_pelanggaran.status == false) {
+        $("#pelanggaran").modal("hide");
+        $("#penaltyModal").modal("hide");
+    }
+    console.log(e);
+});
+
+window.Echo.channel("verifikasi").listen(".verifikasi-jatuhan", (e) => {
+    $("#verifyModal").modal("show");
+    if (e.verifikasi_jatuhan.status == false) {
+        $("#jatuhan").modal("hide");
+        $("#verifyModal").modal("hide");
+    }
     console.log(e);
 });
 
@@ -35,6 +49,7 @@ window.Echo.channel("poin").listen(".tambah-pukulan", (e) => {
 });
 
 window.Echo.channel("poin").listen(".tambah-tendangan", (e) => {
+    let tendangan = e.eventSent;
     console.log(e);
 });
 window.Echo.channel("poin").listen(".hapus", (e) => {

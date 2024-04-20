@@ -17,14 +17,14 @@ class PenontonController extends Controller
         $arena = "A";
         $tahap ='hasil';
         $class = 'A';
-        $pesilat = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
+        $sudut = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
         return view('client.penonton.tanding.index',compact('arena','tahap','class','pesilat'));
     }public function tgr()
     {
         $arena = "A";
         $tahap ='tampil';
         $class = 'A';
-        $pesilat = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
+        $sudut = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
         return view('client.penonton.tgr.index',compact('arena','tahap','class','pesilat'));
     }
 }

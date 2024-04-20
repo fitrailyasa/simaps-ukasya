@@ -1,6 +1,6 @@
 
 <!-- Modal Verivikasi Jatuhan-->
-<div class="modal fade" id="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div wire:ignore.self class="modal" id="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,16 +23,16 @@
         </div>
       </div>
       <div class="modal-body d-flex justify-content-around ">
-        <button type="button" class="btn btn-primary p-2" style="width: 40%">Blue Corner</button>
-        <button type="button" class="btn btn-danger p-2" style="width: 40%">Red Corner</button>
-        <button type="button" class="btn btn-warning p-2 text-white">Invalid</button>
+        <button wire:click='verifikasiJatuhanTrigger("biru")' type="button" class="btn btn-primary p-2" style="width: 40%">Blue Corner</button>
+        <button wire:click='verifikasiJatuhanTrigger("merah")' type="button" class="btn btn-danger p-2" style="width: 40%">Red Corner</button>
+        <button wire:click='verifikasiJatuhanTrigger("invalid")' type="button" class="btn btn-warning p-2 text-white">Invalid</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Modal Verivikasi Pelanggaran-->
-<div class="modal fade" id="penaltyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div wire:ignore.self  class="modal" id="penaltyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -55,9 +55,9 @@
         </div>
       </div>
       <div class="modal-body d-flex justify-content-around ">
-        <button type="button" class="btn btn-primary p-2" style="width: 40%">Blue Corner</button>
-        <button type="button" class="btn btn-danger p-2" style="width: 40%">Red Corner</button>
-        <button type="button" class="btn btn-warning p-2">Invalid</button>
+        <button wire:click='verifikasiPelanggaranTrigger("biru")' type="button" class="btn btn-primary p-2" style="width: 40%">Blue Corner</button>
+        <button wire:click='verifikasiPelanggaranTrigger("merah")' type="button" class="btn btn-danger p-2" style="width: 40%">Red Corner</button>
+        <button wire:click='verifikasiPelanggaranTrigger("invalid")' type="button" class="btn btn-warning p-2">Invalid</button>
       </div>
     </div>
   </div>

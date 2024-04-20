@@ -10,3 +10,10 @@
 .btn-biru:active {
     background-color: #0053a6 !important;
 }
+
+.active {
+    background-color: #ff8000;
+}
+.active-2 {
+    background-color: #f0d500;
+}

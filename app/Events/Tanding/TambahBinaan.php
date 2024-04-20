@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Tanding;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,24 +10,24 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Tanding;
-use App\Models\Babak;
+use App\Models\PenilaianTanding;
 
 
-class TambahTeguran implements ShouldBroadcast
+class TambahBinaan implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $pesilat_id;
-    public $jumlah_teguran;
+    public $sudut_id;
+    public $jumlah_binaan;
 
     public function __construct($id,$babak_tanding)
     {
         $this->pesilat_id = $id;
-        $this->jumlah_teguran = Babak::where('atlet',$id)->where('babak',$babak_tanding)->first();
-        $this->jumlah_teguran->increment('teguran');
+        $this->jumlah_binaan = PenilaianTanding::where('atlet',$id)->where('babak',$babak_tanding)->first();
+        $this->jumlah_binaan->increment('binaan');
     }
     public function broadcastOn(): Channel
     {
@@ -35,6 +35,6 @@ class TambahTeguran implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'tambah-teguran';
+        return 'tambah-binaan';
     }
 }

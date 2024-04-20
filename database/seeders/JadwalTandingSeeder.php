@@ -20,13 +20,10 @@ class JadwalTandingSeeder extends Seeder
                 'gelanggang' => 1,
                 'babak' => 'Penyisihan',
                 'kelas'=> 'A',
-                'gelombang' => 'A',
                 'sudut_biru' => 1,
                 'sudut_merah' => 2,
                 'next_sudut' => 1,
                 'next_partai' => 2,
-                'skor_biru' => 0,
-                'skor_merah' => 0,
                 'pemenang' => 2,
                 'tahap'=>'persiapan'
             ]

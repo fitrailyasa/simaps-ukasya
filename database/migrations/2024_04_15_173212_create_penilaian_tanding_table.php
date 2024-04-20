@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('penilaian_tanding', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->foreignId('atlet')->nullable();
-            $table->integer('babak');    
+            $table->foreignId('jadwal_tanding')->nullable();
+            $table->integer('babak')->default(1);    
             $table->integer('pukulan')->default(0);
             $table->integer('tendangan')->default(0);
             $table->integer('teguran')->default(0);

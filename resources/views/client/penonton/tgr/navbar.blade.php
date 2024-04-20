@@ -11,7 +11,7 @@
                     <h5 class="pt-2 fw-bold">PENCAK SILAT</h5>
                 </div>
                 <div class="nav-down mt-2">
-                    <h5 class="fw-bold">{{$jadwal->gelombang}} - {{$jadwal->partai}} {{$jadwal->babak}} TANDING - CLASS {{$jadwal->kelas}}</h5>
+                    <h5 class="fw-bold">{{$jadwal->gelombang}} - {{$jadwal->partai}} {{$jadwal->PenilaianTanding}} TANDING - CLASS {{$jadwal->kelas}}</h5>
                 </div>
               </a>
               <a class="navbar-brand" href="#">

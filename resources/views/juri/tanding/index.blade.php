@@ -46,7 +46,7 @@
                                 class="text-center mw-20"
                                 style="border: 2px solid #000; width:20%"
                             >
-                                Babak
+                                PenilaianTanding
                             </th>
                             <th
                                 scope="col"
@@ -68,7 +68,7 @@
                                 style="border: 2px solid #000"
                             ></td>
                             <td
-                                class="text-center babak-1 babak-active"
+                                class="text-center PenilaianTanding-1 PenilaianTanding-active"
                                 style="border: 2px solid #000; height: 60px"
                             >
                                 <img src={{url('/assets/svg/romawi-1.svg')}}
@@ -85,7 +85,7 @@
                                 style="border: 2px solid #000"
                             ></td>
                             <td
-                                class="text-center babak-2"
+                                class="text-center PenilaianTanding-2"
                                 style="border: 2px solid #000; height: 60px"
                             >
                                 <img src={{url('/assets/svg/romawi-2.svg')}}
@@ -102,7 +102,7 @@
                                 style="border: 2px solid #000"
                             ></td>
                             <td
-                                class="text-center babak-3"
+                                class="text-center PenilaianTanding-3"
                                 style="border: 2px solid #000; height: 60px"
                             >
                                 <img src={{url('/assets/svg/romawi-2.svg')}}
@@ -186,16 +186,16 @@
 @endsection
 @section('script')
 <script>
-    let babak = 1;
+    let PenilaianTanding = 1;
     let nilaiA = "";
     let nilaiB = "";
 
-    $(".ganti-babak").on("click", () => {
-        babak++;
+    $(".ganti-PenilaianTanding").on("click", () => {
+        PenilaianTanding++;
         nilaiA = "";
         nilaiB = "";
-        if (babak > 3) {
-            babak = 1;
+        if (PenilaianTanding > 3) {
+            PenilaianTanding = 1;
             $(`.tabel-1-1`).text("");
             $(`.tabel-2-1`).text("");
             $(`.tabel-3-1`).text("");
@@ -203,44 +203,44 @@
             $(`.tabel-2-2`).text("");
             $(`.tabel-3-2`).text("");
         }
-        $(".babak-active").removeClass("babak-active");
-        $(`.babak-${babak}`).addClass("babak-active");
+        $(".PenilaianTanding-active").removeClass("PenilaianTanding-active");
+        $(`.PenilaianTanding-${PenilaianTanding}`).addClass("PenilaianTanding-active");
     });
 
     //tambah poin pukulan a
     $(".tombol-pukulan-a").on("click", (e) => {
         nilaiA = "1" + nilaiA;
-        $(`.tabel-${babak}-1`).text(nilaiA);
+        $(`.tabel-${PenilaianTanding}-1`).text(nilaiA);
     });
     //tambah poin tendangan a
     $(".tombol-tendangan-a").on("click", (e) => {
         nilaiA = "2" + nilaiA;
-        $(`.tabel-${babak}-1`).text(nilaiA);
+        $(`.tabel-${PenilaianTanding}-1`).text(nilaiA);
     });
 
     //tambah poin pukulan b
     $(".tombol-pukulan-b").on("click", (e) => {
         nilaiB += "1";
-        $(`.tabel-${babak}-2`).text(nilaiB);
+        $(`.tabel-${PenilaianTanding}-2`).text(nilaiB);
     });
     //tambah poin tendangan b
     $(".tombol-tendangan-b").on("click", (e) => {
         if ((nilaiB.length + 1)%5 != 0){
             nilaiB += "2";
-            $(`.tabel-${babak}-2`).text(nilaiB);
+            $(`.tabel-${PenilaianTanding}-2`).text(nilaiB);
         }else{
             nilaiB += `2 \n`;
-            $(`.tabel-${babak}-2`).text(nilaiB);
+            $(`.tabel-${PenilaianTanding}-2`).text(nilaiB);
         } 
     });
 
     $(".tombol-hapus-a").on("click", (e) => {
         nilaiA = nilaiA.slice(1, nilaiA.length);
-        $(`.tabel-${babak}-1`).text(nilaiA);
+        $(`.tabel-${PenilaianTanding}-1`).text(nilaiA);
     });
     $(".tombol-hapus-b").on("click", (e) => {
         nilaiB = nilaiB.slice(0, -1);
-        $(`.tabel-${babak}-2`).text(nilaiB);
+        $(`.tabel-${PenilaianTanding}-2`).text(nilaiB);
     });
 
    setTimeout(()=>{

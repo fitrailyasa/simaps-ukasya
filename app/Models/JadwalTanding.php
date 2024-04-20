@@ -10,7 +10,7 @@ class JadwalTanding extends Model
     use HasFactory;
 
     protected $table = 'jadwal_tanding';
-    protected $fillable = ['partai', 'gelanggang', 'babak', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang','kelas','gelombang','babak_tanding','tahap'];    
+    protected $fillable = ['partai', 'gelanggang', 'babak', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang','kelas','babak_tanding','tahap'];    
 
     public function Gelanggang()
     {

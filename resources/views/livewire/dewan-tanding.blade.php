@@ -6,8 +6,8 @@
         Tanding  
     @endsection
     @include('dewan.tanding.header',['kelas_penyisihan'=>$jadwal->kelas,'gelombang'=>$jadwal->gelombang,'partai'=>$jadwal->babak])
-    @include('dewan.tanding.body',['pesilat_merah'=>$pesilat_merah,'pesilat_biru'=>$pesilat_biru])
-    @include('dewan.tanding.tombol',['pesilat_merah'=>$pesilat_merah,'pesilat_biru'=>$pesilat_biru])
+    @include('dewan.tanding.body',['sudut_merah'=>$sudut_merah,'sudut_biru'=>$sudut_biru])
+    @include('dewan.tanding.tombol',['sudut_merah'=>$sudut_merah,'sudut_biru'=>$sudut_biru])
 </div>
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Tanding;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Tanding;
+use App\Models\PenilaianTanding;
 
 class Hapus implements ShouldBroadcast
 {
@@ -18,12 +18,12 @@ class Hapus implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $tanding;
+    public $nilai;
 
-    public function __construct($id,$jenis)
+    public function __construct($id,$jenis,$babak)
     {
-        $this->tanding = Tanding::where('id', $id)->first();
-        $this->tanding->decrement($jenis);
+        $this->nilai = PenilaianTanding::where('atlet', $id)->where('babak',$babak)->first();
+        $this->nilai->decrement($jenis);
 
     }
 
