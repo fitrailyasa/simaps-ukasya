@@ -22,8 +22,8 @@ class CreateJadwalTGRTable extends Migration
             $table->foreignId('sudut_merah');
             $table->integer('next_sudut');
             $table->integer('next_partai');
-            $table->integer('skor_biru')->default(0);
-            $table->integer('skor_merah')->default(0);
+            $table->float('skor_biru');
+            $table->float('skor_merah');
             $table->foreignId('pemenang')->nullable();
             $table->timestamps();
         });

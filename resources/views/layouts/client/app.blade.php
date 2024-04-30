@@ -96,6 +96,7 @@
     @yield('content')
 
     {{-- @include('layouts.client.footer') --}}
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -143,6 +144,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"
     ></script>
+@livewireScripts
     @yield('script')
 </body>
 

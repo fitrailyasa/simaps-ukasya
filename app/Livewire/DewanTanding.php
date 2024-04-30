@@ -135,12 +135,6 @@ class DewanTanding extends Component
     
     public function render()
     {
-        return view('livewire.dewan-tanding',[
-        'jadwal'=> $this->jadwal,
-        'sudut_merah'=>$this->sudut_merah,
-        'sudut_biru'=>$this->sudut_biru,
-        'penilaian_tanding_biru'=>$this->penilaian_tanding_biru,
-        'penilaian_tanding_merah'=>$this->penilaian_tanding_merah
-        ])->extends('layouts.dewan.app')->section('content');
+        return view('livewire.dewan-tanding')->extends('layouts.dewan.app')->section('content');
     }
 }

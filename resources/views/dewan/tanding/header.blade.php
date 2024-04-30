@@ -1,7 +1,7 @@
 <div class="dewan-tanding-header d-flex pt-5" style="width: 100%">
     <div class="kontingen-merah d-flex flex-column justify-content-center" style="width: 30%">
         <h4 class="fw-bold">
-            Kontingen
+            {{$sudut_merah->kontingen}}
         </h4>
     </div>
     <div class="jenis text-center" style="width: 40%">
@@ -12,13 +12,13 @@
         </div>
         <div class="row-2">
             <h4 class="fw-bold">
-                PENYISIHAN - {{$kelas_penyisihan}} PRA REMAJA - GEL {{$gelombang}} <br/> Partai {{$partai}}
+                {{$jadwal->babak}} - {{$sudut_merah->golongan}} - GEL {{$jadwal->kelas}} <br/> Partai {{$jadwal->partai}}
             </h4>
         </div>
     </div>
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 30%">
         <h4 class="fw-bold">
-            Kontingen
+            {{$sudut_biru->kontingen}}
         </h4>
     </div>
 </div>

@@ -27,6 +27,16 @@ use App\Http\Controllers\Dewan\DewanController;
 use App\Livewire\DewanTanding;
 use App\Livewire\JuriTanding;
 use App\Livewire\PenontonTanding;
+use App\Livewire\KetuaTanding;
+use App\Livewire\DewanTunggal;
+use App\Livewire\JuriTunggal;
+use App\Livewire\PenontonTunggal;
+use App\Livewire\KetuaTunggal;
+use App\Livewire\DewanRegu;
+use App\Livewire\JuriRegu;
+use App\Livewire\PenontonRegu;
+use App\Livewire\KetuaRegu;
+
 
 
 
@@ -35,14 +45,15 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 //CMS PENONTON
 Route::get('/penonton', PenontonTanding::class)->name('penonton');
 Route::get('/tanding', [PenontonController::class, 'tanding'])->name('tanding');
-Route::get('/tgr', [PenontonController::class, 'tgr'])->name('tgr');
+Route::get('/tunggal', PenontonTunggal::class)->name('tunggal');
+Route::get('/regu', PenontonRegu::class)->name('regu');
 
 
 //CMS KETUA PERTANDINGAN
 Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');
-Route::get('/ketuapertandingan/tanding', [KetuaPertandinganController::class, 'tanding'])->name('ketua.tanding');
-Route::get('/ketuapertandingan/tunggal', [KetuaPertandinganController::class, 'tunggal'])->name('ketua.tunggal');
-Route::get('/ketuapertandingan/regu', [KetuaPertandinganController::class, 'regu'])->name('ketua.regu');
+Route::get('/ketuapertandingan/tanding', KetuaTanding::class)->name('ketua.tanding');
+Route::get('/ketuapertandingan/tunggal', KetuaTunggal::class)->name('ketua.tunggal');
+Route::get('/ketuapertandingan/regu', KetuaRegu::class)->name('ketua.regu');
 Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketua.ganda');
 Route::get('/ketuapertandingan/solo', [KetuaPertandinganController::class, 'solo'])->name('ketua.solo');
 
@@ -211,9 +222,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tanding', DewanTanding::class)->name('tanding');
-    Route::get('/tunggal', [DewanController::class, 'tunggal'])->name('tunggal');
+    Route::get('/tunggal', DewanTunggal::class)->name('tunggal');
     Route::get('/ganda', [DewanController::class, 'ganda'])->name('ganda');
-    Route::get('/regu', [DewanController::class, 'regu'])->name('regu');
+    Route::get('/regu', DewanRegu::class)->name('regu');
     Route::get('/solo', [DewanController::class, 'solo'])->name('solo');
   });
 
@@ -222,8 +233,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('beranda');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tanding', JuriTanding::class)->name('tanding');
-    Route::get('/tunggal', [JuriController::class, 'tunggal'])->name('tunggal');
-    Route::get('/regu', [JuriController::class, 'regu'])->name('regu');
+    Route::get('/tunggal', JuriTunggal::class)->name('tunggal');
+    Route::get('/regu', JuriRegu::class)->name('regu');
     Route::get('/ganda', [JuriController::class, 'ganda'])->name('ganda');
     Route::get('/solo', [JuriController::class, 'solo'])->name('solo');
   });

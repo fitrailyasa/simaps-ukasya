@@ -1,4 +1,4 @@
-<div class="tanding-container p-3 " style="height: 50vh;">
+<div class="tanding-container p-3 {{$mulai == true ? "mulai" : ""}}" style="height: 50vh;">
     <div class="tanding-header d-flex" style="height: 20%; width: 100%">
         <div class="sudut_merah d-flex" style="width: 40%">
             <div class="bendera" style="width: 30%;">
@@ -225,17 +225,44 @@
                     <h3>J2</h3>
                 </div>
                 <div class="j-3 border mt-1 {{$tendangan_biru >= 3 ? "active" : ""}}" style="width: 33.3%;height: 80%;">
-                    <h3>J3</h3>
+                    <h3>J3 </h3>
                 </div>
+                <button wire:click='tes'></button>
             </div>
         </div>
     </div>
 </div>
 
 @section('script')
-    {{-- <script>
-       setInterval(function () {
-        @this.call('decrementWaktu');
-    }, 10); // Panggil method setiap detik (1000 ms)
-    </script> --}}
+    <script>
+        let intervalRef; 
+        function observeChanges() {
+            // Buat instance dari MutationObserver
+            const observer = new MutationObserver(function(mutationsList, observer) {
+                // Iterasi melalui setiap mutasi
+                for(let mutation of mutationsList) {
+                    // Periksa apakah mutasi menambahkan kelas "timer" ke elemen
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class' && $(mutation.target).hasClass('mulai')) {
+                        // Lakukan sesuatu, misalnya menjalankan interval
+                        
+                        intervalRef = setInterval(function () {
+                            if (@this.get('waktu') <= 0){
+                                @this.call('resetWaktu');
+                                clearInterval(intervalRef);
+                                return;
+                            }
+                            @this.call('decrementWaktu');
+                        }, 10);
+                    }else{
+                        // clearInterval(intervalRef);
+                        return;
+                    }
+                }
+            });
+
+            // Mulai memantau perubahan pada elemen dengan kelas "tes"
+            observer.observe(document.body, { attributes: true, subtree: true });
+        }
+    </script>
 @endsection
+

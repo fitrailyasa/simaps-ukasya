@@ -11,7 +11,13 @@
                     <h5 class="pt-2 fw-bold">PENCAK SILAT</h5>
                 </div>
                 <div class="nav-down mt-2">
-                    <h5 class="fw-bold">{{$jenis}} - {{$class}} @ Arena {{$arena}} Match {{$match}}</h5>
+                    <h5 class="fw-bold">
+                      @if ($tampil == $sudut_biru->id)
+                        {{$sudut_biru->kategori}}-{{$sudut_biru->kategori}}
+                      @else
+                        {{$sudut_merah->kategori}}-{{$sudut_merah->kategori}}
+                      @endif
+                      @ {{$gelanggang->nama}} Match {{$jadwal->partai}}</h5>
                 </div>
               </a>
               <a class="navbar-brand" href="#">

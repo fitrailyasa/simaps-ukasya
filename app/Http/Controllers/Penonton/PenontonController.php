@@ -25,6 +25,6 @@ class PenontonController extends Controller
         $tahap ='tampil';
         $class = 'A';
         $sudut = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
-        return view('client.penonton.tgr.index',compact('arena','tahap','class','pesilat'));
+        return view('client.penonton.tgr.index',compact('arena','tahap','class','sudut'));
     }
 }

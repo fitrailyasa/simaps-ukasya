@@ -22,11 +22,14 @@ class TambahTendangan implements ShouldBroadcast
     public $sudut_id;
     public $status;
     public $eventSent;
+    public $juri_id;
 
 
-    public function __construct($id,$eventSent,$status)
+
+    public function __construct($id,$juri_id,$eventSent,$status)
     {
         $this->sudut_id = $id;
+        $this->juri_id = $juri_id;
         $this->eventSent = $eventSent->event_sent;
         $this->status = $status;
     }

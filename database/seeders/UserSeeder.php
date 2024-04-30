@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
                 'name' => 'Juri A',
                 'email' => 'juri1@simaps.com',
                 'roles_id' => 4,
-                'gelanggang' => 1,
+                'gelanggang' => 4,
                 'status' => 1,
                 'password' => Hash::make('password')
             ],
@@ -117,7 +117,7 @@ class UserSeeder extends Seeder
                 'name' => 'Juri B',
                 'email' => 'juri2@simaps.com',
                 'roles_id' => 4,
-                'gelanggang' => 1,
+                'gelanggang' => 4,
                 'status' => 1,
                 'password' => Hash::make('password')
             ],
@@ -133,7 +133,7 @@ class UserSeeder extends Seeder
                 'name' => 'Juri D',
                 'email' => 'juri4@simaps.com',
                 'roles_id' => 4,
-                'gelanggang' => 4,
+                'gelanggang' => 1,
                 'status' => 1,
                 'password' => Hash::make('password')
             ],
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
                 'name' => 'Juri E',
                 'email' => 'juri5@simaps.com',
                 'roles_id' => 4,
-                'gelanggang' => 5,
+                'gelanggang' => 2,
                 'status' => 1,
                 'password' => Hash::make('password')
             ],

@@ -55,7 +55,42 @@ window.Echo.channel("poin").listen(".tambah-tendangan", (e) => {
 window.Echo.channel("poin").listen(".hapus", (e) => {
     console.log(e);
 });
+window.Echo.channel("poin").listen(".poin-masuk-keluar", (e) => {});
+
+window.Echo.channel("poin").listen(".salah-gerakan-tunggal", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".tambah-skor-tunggal", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".penalty-tunggal", (e) => {
+    console.log(e);
+});
+window.Echo.channel("poin").listen(".hapus-penalty-tunggal", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".salah-gerakan-regu", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".tambah-skor-regu", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".penalty-regu", (e) => {
+    console.log(e);
+});
+window.Echo.channel("poin").listen(".hapus-penalty-regu", (e) => {
+    console.log(e);
+});
 
 window.Echo.channel("arena").listen(".ganti-babak", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("arena").listen(".mulai-pertandingan", (e) => {
     console.log(e);
 });

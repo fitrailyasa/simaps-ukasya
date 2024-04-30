@@ -147,7 +147,7 @@
                                 class="text-center babak-3 {{$jadwal->babak_tanding==3 ? "babak-active" : ""}}"
                                 style="border: 2px solid #000; height: 60px"
                             >
-                                <img src={{url('/assets/svg/romawi-2.svg')}}
+                                <img src={{url('/assets/svg/romawi-3.svg')}}
                                 alt="">
                             </td>
                             <td
@@ -156,7 +156,6 @@
                             >
                                 @if ($jadwal->babak_tanding==3)
                                 <h5 class="fw-bold p-1">
-                                    @dd(sizeof($babak_3_sudut_biru))
                                     @for ($i = 0; $i < sizeof($babak_3_sudut_biru); $i++)                                        
                                     {{$babak_3_sudut_biru[$i]}}
                                     @endfor

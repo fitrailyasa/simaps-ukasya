@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('jatuhan')->default(0);
             $table->integer('peringatan')->default(0);
             $table->integer('binaan')->default(0);
+            $table->json('skor')->nullable();
             $table->timestamps();
         });
     }

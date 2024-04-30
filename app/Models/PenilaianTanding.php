@@ -10,7 +10,7 @@ class PenilaianTanding extends Model
     use HasFactory;
 
     protected $table = 'penilaian_tanding';
-    protected $fillable = ['uuid','jadwal_tanding','babak','pukulan', 'tendangan', 'binaan','peringatan','teguran','jatuhan','atlet'];
+    protected $fillable = ['uuid','jadwal_tanding','babak','pukulan', 'tendangan', 'binaan','peringatan','teguran','jatuhan','atlet','skor'];
     
     public function Tanding()
     {

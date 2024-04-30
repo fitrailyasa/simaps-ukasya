@@ -21,6 +21,7 @@ class CreateTgrTable extends Migration
             $table->string('kontingen');    
             $table->string('kategori');
             $table->string('golongan');
+            $table->string('region');
             $table->timestamps();
         });
     }

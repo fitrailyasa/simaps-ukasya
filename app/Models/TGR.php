@@ -10,7 +10,7 @@ class TGR extends Model
     use HasFactory;
 
     protected $table = 'tgr';
-    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'kontingen', 'golongan', 'kategori'];
+    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'kontingen', 'golongan', 'kategori','region'];
 
     public function PengundianTGR()
     {
