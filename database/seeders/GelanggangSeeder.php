@@ -47,7 +47,7 @@ class GelanggangSeeder extends Seeder
                 'id' => 5,
                 'nama' => 'ARENA E',
                 'waktu' => 3,
-                'jenis' => 'Solo Kreatif',
+                'jenis' => 'Solo_Kreatif',
                 'jadwal_tanding'=> NULL,
             ]
         ];

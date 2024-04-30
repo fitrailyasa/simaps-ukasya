@@ -136,7 +136,7 @@ Tunggal
                     class="aside fw-bold text-center border border-dark"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">{{number_format(9.90 - $penilaian_regu->salah*0.01,2)}}</span>
+                    <span style="color: #0053a6">{{number_format(9.90 - $penilaian_tunggal->salah*0.01,2)}}</span>
                 </div>
             </div>
             <div class="range-score d-flex gap-1">
@@ -154,13 +154,13 @@ Tunggal
                         @for ($i = 1; $i <= 10; $i++)
                             @if ($i == 10)
                                 <button
-                                @if ($sudut_biru->id == $tampil)
+                                                                @if ($sudut_biru->id == $tampil)
                                     wire:click='tambahNilaiTrigger({{$sudut_biru->id}},{{$i}})'
                                 @else
                                     wire:click='tambahNilaiTrigger({{$sudut_merah->id}},{{$i}})'
                                 @endif
                                 class="p-1"
-                                style="background-color: #ececec"
+                                style="background-color: #ececec; width:5%"
                                 >
                                 0.10
                                 </button>
@@ -173,7 +173,7 @@ Tunggal
                                 @endif
                                 
                                 class="p-1"
-                                style="background-color: #ececec"
+                                style="background-color: #ececec;width:5%"
                                 >
                                 0.0{{$i}}
                                 </button>

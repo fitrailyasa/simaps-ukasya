@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PenaltyRegu extends Model
+class PenilaianGanda extends Model
 {
     use HasFactory;
-    protected $table = 'penalty_regu';
-    protected $fillable = ['uuid','jadwal_regu','sudut_merah','sudut_biru','dewan','toleransi_waktu','keluar_arena','menyentuh_lantai','pakaian','tidak_bergerak'];
+    protected $table = 'penilaian_ganda';
+    protected $fillable = ['uuid','jadwal_ganda','sudut_merah','sudut_biru','skor','attack_skor','firmness_skor','soulfulness_skor','juri'];
 
     public function TGR_1()
     {
@@ -21,10 +21,10 @@ class PenaltyRegu extends Model
     }
     public function JadwalTGR()
     {
-        return $this->belongsTo(JadwalTGR::class, 'jadwal_tunggal', 'id');
+        return $this->belongsTo(JadwalTGR::class, 'jadwal_ganda', 'id');
     }
-    public function Dewan()
+    public function Juri()
     {
-        return $this->belongsTo(User::class, 'dewan', 'id');
+        return $this->belongsTo(User::class, 'juri', 'id');
     }
 }

@@ -152,7 +152,7 @@ regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$i}})'
                                 class="p-1"
-                                style="background-color: #ececec"
+                                style="background-color: #ececec;width:5%"
                                 >
                                 0.10
                                 </button>
@@ -160,7 +160,7 @@ regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$i}})'
                                 class="p-1"
-                                style="background-color: #ececec"
+                                style="background-color: #ececec;width:5%"
                                 >
                                 0.0{{$i}}
                                 </button>

@@ -36,6 +36,14 @@ use App\Livewire\DewanRegu;
 use App\Livewire\JuriRegu;
 use App\Livewire\PenontonRegu;
 use App\Livewire\KetuaRegu;
+use App\Livewire\DewanGanda;
+use App\Livewire\JuriGanda;
+use App\Livewire\PenontonGanda;
+use App\Livewire\KetuaGanda;
+use App\Livewire\DewanSolo;
+use App\Livewire\JuriSolo;
+use App\Livewire\PenontonSolo;
+use App\Livewire\KetuaSolo;
 
 
 
@@ -47,6 +55,9 @@ Route::get('/penonton', PenontonTanding::class)->name('penonton');
 Route::get('/tanding', [PenontonController::class, 'tanding'])->name('tanding');
 Route::get('/tunggal', PenontonTunggal::class)->name('tunggal');
 Route::get('/regu', PenontonRegu::class)->name('regu');
+Route::get('/ganda', PenontonGanda::class)->name('ganda');
+Route::get('/solo', PenontonSolo::class)->name('solo');
+
 
 
 //CMS KETUA PERTANDINGAN
@@ -54,8 +65,8 @@ Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])-
 Route::get('/ketuapertandingan/tanding', KetuaTanding::class)->name('ketua.tanding');
 Route::get('/ketuapertandingan/tunggal', KetuaTunggal::class)->name('ketua.tunggal');
 Route::get('/ketuapertandingan/regu', KetuaRegu::class)->name('ketua.regu');
-Route::get('/ketuapertandingan/ganda', [KetuaPertandinganController::class, 'ganda'])->name('ketua.ganda');
-Route::get('/ketuapertandingan/solo', [KetuaPertandinganController::class, 'solo'])->name('ketua.solo');
+Route::get('/ketuapertandingan/ganda', KetuaGanda::class)->name('ketua.ganda');
+Route::get('/ketuapertandingan/solo', KetuaSolo::class)->name('ketua.solo');
 
 
 Auth::routes();
@@ -223,9 +234,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tanding', DewanTanding::class)->name('tanding');
     Route::get('/tunggal', DewanTunggal::class)->name('tunggal');
-    Route::get('/ganda', [DewanController::class, 'ganda'])->name('ganda');
+    Route::get('/ganda', DewanGanda::class)->name('ganda');
     Route::get('/regu', DewanRegu::class)->name('regu');
-    Route::get('/solo', [DewanController::class, 'solo'])->name('solo');
+    Route::get('/solo', DewanSolo::class)->name('solo');
   });
 
   // CMS Juri
@@ -235,8 +246,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tanding', JuriTanding::class)->name('tanding');
     Route::get('/tunggal', JuriTunggal::class)->name('tunggal');
     Route::get('/regu', JuriRegu::class)->name('regu');
-    Route::get('/ganda', [JuriController::class, 'ganda'])->name('ganda');
-    Route::get('/solo', [JuriController::class, 'solo'])->name('solo');
+    Route::get('/ganda', JuriGanda::class)->name('ganda');
+    Route::get('/solo', JuriSolo::class)->name('solo');
   });
 
 });

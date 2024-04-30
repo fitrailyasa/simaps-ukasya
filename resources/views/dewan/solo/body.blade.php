@@ -31,56 +31,56 @@
         <div class="score-body" style="height: 90%;">
             <div class="row-1 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("toleransi_waktu")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("toleransi_waktu")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->toleransi_waktu}}</h5>
                 </div>
             </div>
             <div class="row-2 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("keluar_arena")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("keluar_arena")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark  d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->keluar_arena}}</h5>
                 </div>
             </div>
             <div class="row-3 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("menyentuh_lantai")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("menyentuh_lantai")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->menyentuh_lantai}}</h5>
                 </div>
             </div>
             <div class="row-4 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("pakaian")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("pakaian")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->pakaian}}</h5>
                 </div>
             </div>
             <div class="row-5 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("tidak_bergerak")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("tidak_bergerak")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                  <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->tidak_bergerak}}</h5>
                 </div>
             </div>
             <div class="row-6 d-flex" style="height:16.67% ">
                 <div class="button d-flex justify-content-center gap-2 border border-dark" style="width: 80%">
-                    <button class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
-                    <button class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
+                    <button wire:click='hapusPenaltyTrigger("senjata_jatuh")' class="btn btn-biru mt-3" style="height: 60%"><h5 class="text-white">Hapus</h5></button>
+                    <button wire:click='penaltyTrigger("senjata_jatuh")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{$penalty_solo->senjata_jatuh}}</h5>
                 </div>
             </div>
         </div>

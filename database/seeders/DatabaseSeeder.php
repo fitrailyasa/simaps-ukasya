@@ -29,5 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PenaltyTunggalSeeder::class);
         $this->call(PenilaianReguSeeder::class);
         $this->call(PenaltyReguSeeder::class);
+        $this->call(PenilaianGandaSeeder::class);
+        $this->call(PenaltyGandaSeeder::class);
+        $this->call(PenilaianSoloSeeder::class);
+        $this->call(PenaltySoloSeeder::class);
     }
 }

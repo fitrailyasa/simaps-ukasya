@@ -9,51 +9,48 @@ use App\Models\Gelanggang;
 use App\Models\Tanding;
 use App\Models\JadwalTGR;
 use App\Models\TGR;
-use App\Events\Regu\TambahNilai;
-use App\Events\Regu\SalahGerakan;
-use App\Events\Regu\PenaltyDewan;
-use App\Events\Regu\HapusPenalty;
-use App\Models\PenaltyRegu;
+use App\Events\Ganda\TambahNilai;
+use App\Events\Ganda\SalahGerakan;
+use App\Events\Ganda\PenaltyDewan;
+use App\Events\Ganda\HapusPenalty;
+use App\Models\PenaltyGanda;
 
-class DewanRegu extends Component
+class DewanGanda extends Component
 {
     public $jadwal;
     public $sudut_merah;
     public $sudut_biru;
     public $gelanggang;
     public $waktu ;
-    public $tampil;
     public $mulai = false;
-    public $penalty_regu;
+    public $penalty_ganda;
 
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Regu')->first();
+        $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
         $this->waktu = $this->gelanggang->waktu * 60;
-        $this->tampil = $this->sudut_biru->id;
-        $this->penalty_regu = PenaltyRegu::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
-
+        $this->penalty_ganda = PenaltyGanda::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
     }
 
     public function penaltyTrigger($jenis_penalty){
         PenaltyDewan::dispatch($this->jadwal->id,$this->sudut_merah->id,$this->sudut_biru->id,Auth::user()->id,$jenis_penalty);
     }
     public function hapusPenaltyTrigger($jenis_penalty){
-        HapusPenalty::dispatch($this->jadwal->id,$this->sudut_merah->id,$this->sudut_biru->id,$this->tampil,Auth::user()->id,$jenis_penalty);
+        HapusPenalty::dispatch($this->jadwal->id,$this->sudut_merah->id,$this->sudut_biru->id,Auth::user()->id,$jenis_penalty);
     }
 
-    #[On('echo:poin,.penalty-regu')]
+    #[On('echo:poin,.penalty-ganda')]
     public function tambahNilaiHandler(){
     }
-    #[On('echo:poin,.hapus-penalty-regu')]
+    #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
     }
 
     public function render()
     {
         
-        return view('livewire.dewan-regu')->extends('layouts.dewan.app')->section('content');
+        return view('livewire.dewan-ganda')->extends('layouts.dewan.app')->section('content');
     }
 }

@@ -87,6 +87,28 @@ window.Echo.channel("poin").listen(".hapus-penalty-regu", (e) => {
     console.log(e);
 });
 
+window.Echo.channel("poin").listen(".tambah-skor-ganda", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".penalty-ganda", (e) => {
+    console.log(e);
+});
+window.Echo.channel("poin").listen(".hapus-penalty-ganda", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".tambah-skor-solo", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("poin").listen(".penalty-solo", (e) => {
+    console.log(e);
+});
+window.Echo.channel("poin").listen(".hapus-penalty-solo", (e) => {
+    console.log(e);
+});
+
 window.Echo.channel("arena").listen(".ganti-babak", (e) => {
     console.log(e);
 });

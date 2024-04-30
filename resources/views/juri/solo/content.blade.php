@@ -35,12 +35,16 @@
                 <div class=" p-2 d-flex flex-row gap-2 mt-1 btn-row" style="width:100% !important ;">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark att-btn-10"
+                            <button
+                                wire:click='tambahNilaiTrigger({{$i}},"attack_skor")'
+                                class="btn border bg-abu border-dark att-btn-10"
                                 style="font-size: 1.2rem; width:10%">
                                 0.10
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark att-btn-{{ $i }}"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i}},"attack_skor")'
+                                class="btn border bg-abu border-dark att-btn-{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.0{{ $i }}
                             </button>
@@ -50,12 +54,16 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark att-btn-20"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i+10}},"attack_skor")'
+                                class="btn border bg-abu border-dark att-btn-20"
                                 style="font-size: 1.2rem; width:10%">
                                 0.20
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark att-btn-1{{ $i }}"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i+10}},"attack_skor")' 
+                                class="btn border bg-abu border-dark att-btn-1{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.1{{ $i }}
                             </button>
@@ -65,12 +73,16 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark att-btn-30"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i+20}},"attack_skor")'
+                                class="btn border bg-abu border-dark att-btn-30"
                                 style="font-size: 1.2rem; width:10%">
                                 0.30
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark att-btn-2{{ $i }}"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i+20}},"attack_skor")'
+                                class="btn border bg-abu border-dark att-btn-2{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.2{{ $i }}
                             </button>
@@ -82,12 +94,14 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important;">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark firm-btn-10"
+                            <button  wire:click='tambahNilaiTrigger({{$i}},"firmness_skor")' class="btn border bg-abu border-dark firm-btn-10"
                                 style="font-size: 1.2rem; width:10%">
                                 0.10
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark firm-btn-{{ $i }}"
+                            <button 
+                                wire:click='tambahNilaiTrigger({{$i}},"firmness_skor")'
+                                class="btn border bg-abu border-dark firm-btn-{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.0{{ $i }}
                             </button>
@@ -97,12 +111,12 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark firm-btn-20"
+                            <button wire:click='tambahNilaiTrigger({{$i+10}},"firmness_skor")' class="btn border bg-abu border-dark firm-btn-20"
                                 style="font-size: 1.2rem; width:10%">
                                 0.20
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark firm-btn-1{{ $i }}"
+                            <button wire:click='tambahNilaiTrigger({{$i+10}},"firmness_skor")' class="btn border bg-abu border-dark firm-btn-1{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.1{{ $i }}
                             </button>
@@ -112,12 +126,12 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark firm-btn-30"
+                            <button wire:click='tambahNilaiTrigger({{$i+20}},"firmness_skor")' class="btn border bg-abu border-dark firm-btn-30"
                                 style="font-size: 1.2rem; width:10%">
                                 0.30
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark firm-btn-2{{ $i }}"
+                            <button wire:click='tambahNilaiTrigger({{$i+20}},"firmness_skor")' class="btn border bg-abu border-dark firm-btn-2{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.2{{ $i }}
                             </button>
@@ -129,12 +143,12 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark soul-btn-10"
+                            <button wire:click='tambahNilaiTrigger({{$i}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-10"
                                 style="font-size: 1.2rem; width:10%">
                                 0.10
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark soul-btn-{{ $i }}"
+                            <button wire:click='tambahNilaiTrigger({{$i}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.0{{ $i }}
                             </button>
@@ -144,12 +158,12 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark soul-btn-20"
+                            <button wire:click='tambahNilaiTrigger({{$i+10}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-20"
                                 style="font-size: 1.2rem; width:10%">
                                 0.20
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark soul-btn-1{{ $i }}"
+                            <button wire:click='tambahNilaiTrigger({{$i+10}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-1{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.1{{ $i }}
                             </button>
@@ -159,12 +173,12 @@
                 <div class=" p-2 d-flex flex-row gap-2 btn-row" style="width:100% !important">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($i == 10)
-                            <button class="btn border bg-abu border-dark soul-btn-30"
+                            <button wire:click='tambahNilaiTrigger({{$i+20}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-30"
                                 style="font-size: 1.2rem; width:10%">
                                 0.30
                             </button>
                         @else
-                            <button class="btn border bg-abu border-dark soul-btn-2{{ $i }}"
+                            <button wire:click='tambahNilaiTrigger({{$i+20}},"soulfulness_skor")' class="btn border bg-abu border-dark soul-btn-2{{ $i }}"
                                 style="font-size: 1.2rem; width:10%">
                                 0.2{{ $i }}
                             </button>
@@ -176,15 +190,21 @@
         <div class="score-sub-total text-center d-flex flex-column" style="width: 7%; gap:5px;">
             <div class="border border-secondary " style="height: 35.3% !important; padding-top: 50% ">
                 <h4 class="fw-bold score">SCORE</h4>
-                <h4 class="fw-bold" style="color: #0053a6 !important;">0</h4>
+                <h4 class="fw-bold" style="color: #0053a6 !important;">
+                    {{number_format($penilaian_solo->attack_skor,2)}}
+                </h4>
             </div>
             <div class="border border-secondary " style="height: 33.7%;padding-top: 50%">
                 <h4 class="fw-bold score">SCORE</h4>
-                <h4 class="fw-bold" style="color: #0053a6 !important;">0</h4>
+                <h4 class="fw-bold" style="color: #0053a6 !important;">
+                    {{number_format($penilaian_solo->firmness_skor,2)}}
+                </h4>
             </div>
             <div class="border border-secondary " style="height: 33.5%;padding-top: 50%">
                 <h4 class="fw-bold score">SCORE</h4>
-                <h4 class="fw-bold" style="color: #0053a6 !important;">0</h4>
+                <h4 class="fw-bold" style="color: #0053a6 !important;">
+                    {{number_format($penilaian_solo->soulfulness_skor,2)}}
+                </h4>
             </div>
         </div>
         <div class=" score-total d-flex flex-column justify-content-center text-center  border border-secondary"
@@ -193,7 +213,9 @@
             <span class="fw-bold">-Technique</span>
             <span class="fw-bold">-Firmness</span>
             <span class="fw-bold">-Soulfullness</span>
-            <h4 class="fw-bold" style="color: #0053a6 !important;">0</h4>
+            <h4 class="fw-bold" style="color: #0053a6 !important;">
+                {{number_format($penilaian_solo->skor,2)}}
+            </h4>
         </div>
     </div>
     <div class="footer d-flex gap-1 justify-content-start" style="width: 100%; height: 7vh !important;">
