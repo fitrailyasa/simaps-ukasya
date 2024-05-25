@@ -22,8 +22,6 @@ use App\Http\Controllers\Admin\AdminKontrolController;
 use App\Http\Controllers\Admin\AdminGelanggangController;  
 use App\Http\Controllers\Penonton\KetuaPertandinganController;
 use App\Http\Controllers\Penonton\PenontonController;
-use App\Http\Controllers\Juri\JuriController;
-use App\Http\Controllers\Dewan\DewanController;
 use App\Livewire\DewanTanding;
 use App\Livewire\JuriTanding;
 use App\Livewire\PenontonTanding;

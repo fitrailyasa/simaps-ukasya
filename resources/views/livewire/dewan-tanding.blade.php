@@ -5,9 +5,9 @@
     @section('title')
         Tanding  
     @endsection
-    @include('dewan.tanding.header',['kelas_penyisihan'=>$jadwal->kelas,'gelombang'=>$jadwal->gelombang,'partai'=>$jadwal->babak])
-    @include('dewan.tanding.body',['sudut_merah'=>$sudut_merah,'sudut_biru'=>$sudut_biru])
-    @include('dewan.tanding.tombol',['sudut_merah'=>$sudut_merah,'sudut_biru'=>$sudut_biru])
+    @include('dewan.tanding.header')
+    @include('dewan.tanding.body')
+    @include('dewan.tanding.tombol')
 </div>
 
 

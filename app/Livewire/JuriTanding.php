@@ -51,12 +51,12 @@ class JuriTanding extends Component
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
         $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
-        $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->whereIn($this->juri, [1, 2])->get();
-        $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->whereIn($this->juri, [1, 2])->get();
+        $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+        $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
     }
 
     public function hapusTrigger($id){
-        $penilaian = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis', ['pukulan', 'tendangan'])->where('sudut',$id)->where('aktif',true)->orderBy('id', 'desc')->first();
+        $penilaian = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis', ['pukulan', 'tendangan'])->where('sudut',$id)->where('aktif',true)->orderBy('id', 'desc')->first();
         if(!$penilaian){
             $this->error ='tidak bisa menghapus nilai yang sudah masuk';
             Hapus::dispatch($penilaian,$this->juri);
@@ -66,15 +66,15 @@ class JuriTanding extends Component
             $penilaian->save();
         };
         if($id == $this->jadwal->sudut_biru){
-            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->whereIn($this->juri, [1, 2])->get();
+            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
         }else{
-            $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->whereIn($this->juri, [1, 2])->get();
+            $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
         }
     }
 
     public function tambahPukulanTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
-            $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('sudut',$id)->where('aktif',true)->first();
+            $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('sudut',$id)->where('aktif',true)->first();
             if($penilaian_pukulan == null){
                 PenilaianTanding::create([
                 'jenis'=>'pukulan',
@@ -90,9 +90,9 @@ class JuriTanding extends Component
                 $penilaian_pukulan->save();
             };
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->whereIn($this->juri, [1, 2])->get();
+                $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }else{
-                $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->whereIn($this->juri, [1, 2])->get();
+                $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah->where('jadwal_tanding',$this->jadwal->id))->whereIn($this->juri, [1, 2])->get();
             }
             TambahPukulan::dispatch($id);
         }
@@ -101,7 +101,7 @@ class JuriTanding extends Component
 
     public function tambahTendanganTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
-            $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('sudut',$id)->where('aktif',true)->first();
+            $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('sudut',$id)->where('aktif',true)->first();
             if($penilaian_tendangan==null){
                 PenilaianTanding::create([
                 'jenis'=>'tendangan',
@@ -117,9 +117,9 @@ class JuriTanding extends Component
                 $penilaian_tendangan->save();
             };
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->whereIn($this->juri, [1, 2])->get();
+                $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }else{
-                $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->whereIn($this->juri, [1, 2])->get();
+                $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }
             TambahTendangan::dispatch($id);
         }
@@ -127,8 +127,8 @@ class JuriTanding extends Component
     }
 
     public function batasSkorMasukCek(){
-        $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('aktif',true)->get();
-        $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('aktif',true)->get();
+        $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('aktif',true)->get();
+        $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('aktif',true)->get();
 
         foreach ($penilaian_pukulan as $penilaian) {
             if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=3){

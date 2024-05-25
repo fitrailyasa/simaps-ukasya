@@ -1,9 +1,63 @@
-@php
-// Daftar warna yang mungkin untuk latar belakang
-$backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF33FF', '#33FF33', '#3333FF', '#FF3333'];
-@endphp
-
 <div>
+@php
+    $jatuhan_biru = 0;
+    $binaan_biru = 0;
+    $teguran_biru = 0;
+    $peringatan_biru = 0;
+    $pukulan_tendangan_biru = 0;
+    foreach ($penilaian_tanding_biru->where('status','sah') as $penilaian) {
+        switch ($penilaian->jenis) {
+            case 'jatuhan':
+                $jatuhan_biru += $penilaian->dewan;
+                break;
+            case 'binaan':
+                $binaan_biru += $penilaian->dewan;
+                break;
+            case 'teguran':
+                $teguran_biru += $penilaian->dewan;
+                break;
+            case 'peringatan':
+                $peringatan_biru += $penilaian->dewan;
+                break;
+            case 'pukulan':
+                $pukulan_tendangan_biru += 1;
+                break;
+            case 'tendangan':
+                $pukulan_tendangan_biru += 2;
+                break;
+        }
+    }
+    $total_poin_biru = $jatuhan_biru + $binaan_biru + $teguran_biru + $peringatan_biru + $pukulan_tendangan_biru ;
+
+    $jatuhan_merah = 0;
+    $binaan_merah = 0;
+    $teguran_merah = 0;
+    $peringatan_merah = 0;
+    $pukulan_tendangan_merah = 0;
+    foreach ($penilaian_tanding_merah->where('status','sah') as $penilaian) {
+        switch ($penilaian->jenis) {
+            case 'jatuhan':
+                $jatuhan_merah += $penilaian->dewan;
+                break;
+            case 'binaan':
+                $binaan_merah += $penilaian->dewan;
+                break;
+            case 'teguran':
+                $teguran_merah += $penilaian->dewan;
+                break;
+            case 'peringatan':
+                $peringatan_merah += $penilaian->dewan;
+                break;
+            case 'pukulan':
+                $pukulan_tendangan_merah += 1;
+                break;
+            case 'tendangan':
+                $pukulan_tendangan_merah += 2;
+                break;
+        }
+    }
+    $total_poin_merah = $jatuhan_merah + $binaan_merah + $teguran_merah + $peringatan_merah + $pukulan_tendangan_merah ;
+@endphp
 @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tanding.css') }}">
 @endsection
@@ -16,15 +70,15 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                     <h4 class="fw-bold mt-4" style="color:#252c94">{{ $sudut_biru->nama}}</h4>
                 </div>
                 <div class="biru-score d-flex flex-column justify-content-center" style="height: 100%">
-                    <h3 class="fw-bold" style="color:#252c94">0</h3>
+                    <h3 class="fw-bold" style="color:#252c94">{{$total_poin_biru}}</h3>
                 </div>
             </div>
             <div class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
-                <h2 class="">{{ sprintf("%02d:%02d:%02d", floor($waktu / 60), $waktu % 60, ($waktu - floor($waktu)) * 10) }}</h2>
+                <h2 class="">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</h2>
             </div>
             <div class="merah  d-flex justify-content-between p-2" style="width: 40%">
                 <div class="merah-score d-flex flex-column justify-content-center">
-                    <h3 class="fw-bold" style="color: #db3545 ">0</h3>
+                    <h3 class="fw-bold" style="color: #db3545 ">{{$total_poin_merah }}</h3>
                 </div>
                 <div class="merah-nama text-end">
                     <h5 class="mr-4 fw-bold">{{ $sudut_merah->negara }}</h5>
@@ -42,8 +96,12 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                         <div class="total-header border border-dark text-center" style="background-color: #375cbf">
                             <h4 class="text-white fw-bold">Total</h4>
                         </div>
-                        <div class="table-body border border-dark" style="height: 89.1%">
-                            <div class="total-akhir"></div>
+                        <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
+                            <div class="total-akhir d-flex justify-content-center">
+                                <h1 class="fw-bold">
+                                    {{$total_poin_biru}}
+                                </h1>
+                            </div>
                         </div>
                     </div>
                     <div class="detail-poin" style="width: 80%">
@@ -52,68 +110,123 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                         </div>
                         <div class="detail-poin-body d-flex">
                             <div class="total-sementara" style="width: 10%">
-                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;">
+                                <div class="total-sementara-juri border border-dark d-flex flex-column justify-content-center" style="width: 100%; height: 50%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$pukulan_tendangan_biru}}
+                                    </h5>
                                 </div>
                                 <div class="total-sementara-jatuhan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$jatuhan_biru}}
+                                    </h5>
                                 </div>
                                 <div class="total-sementara-binaan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$binaan_biru}}
+                                    </h5>
                                 </div>
                                 <div class="total-sementara-teguran border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$teguran_biru}}
+                                    </h5>
                                 </div>
-                                <div class="total-sementara-peringatan border border-dark"
-                                    style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$peringatan_biru}}
+                                    </h5>
+                                </div>
                             </div>
                             <div class="nilai" style="width: 50%">
                                 @foreach ($juris as $index => $juri)
                                     <div class="nilai-juri-{{$index}} border border-dark" style="width: 100%; height: 12.5%;">
-                                        @if (json_decode($penilaian_juri_biru[$index]->data) && $penilaian_juri_biru[$index]->sudut == $jadwal->sudut_biru && $juri->id == $penilaian_juri_biru[$index]->juri)
-                                            @foreach (json_decode($penilaian_juri_biru[$index]->data) as $nilai)
-                                                @if ($nilai == '1_in')
-                                                    <img src="{{url('assets/svg/1.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                                @elseif ($nilai == '2_in')
-                                                    <img src="{{url('assets/svg/2.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                                @elseif ($nilai == '1_out')
-                                                    <img src="{{url('assets/svg/1blocked.svg')}}" alt="" height="40" style=" ">
-                                                @elseif ($nilai == '2_out')
-                                                    <img src="{{url('assets/svg/2blocked.svg')}}" alt="" height="40" style=" ">
+                                        <h5 style="margin-left: 2px">
+                                            @foreach ($penilaian_tanding_biru as $penilaian)
+                                                @if ($index == 0)
+                                                    @if ($penilaian->juri_1 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_1 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_1 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style=" background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_1 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
+                                                @endif
+                                                @if ($index == 1)
+                                                    @if ($penilaian->juri_2 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_2 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_2 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style=" background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_2 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
+                                                @endif
+                                                @if ($index == 2)
+                                                    @if ($penilaian->juri_3 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_3 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_3 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style=" background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_3 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        </h5>
                                     </div>
                                 @endforeach
                                 <div class="nilai-skor border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                     @if (json_decode($penilaian_tanding_biru->skor) ?? null)
-                                        @foreach (json_decode($penilaian_tanding_biru->skor) as $item)
-                                            @if ($item == '1')
-                                                 <img src="{{url('assets/svg/1.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                            @elseif ($item == 2)
-                                                 <img src="{{url('assets/svg/2.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                            @endif
+                                    <h5 style="margin-left: 2px">
+                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                            @if ($penilaian->jenis == 'pukulan' && $penilaian->status == 'sah')
+                                                <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                            @elseif ($penilaian->jenis == 'tendangan' && $penilaian->status == 'sah')
+                                                <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style="background-color: #ff8000">
+                                            @endif        
                                         @endforeach
-                                    @endif
+                                    </h5>
                                 </div>
                                 <div class="nilai-jatuhan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_biru->jatuhan; $i++)
-                                        <h5 class="fw-bold m-2">3</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                            @if ($penilaian->jenis == 'jatuhan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-binaan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_biru->binaan; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*0}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                            @if ($penilaian->jenis == 'binaan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-teguran border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_biru->teguran; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*-1}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                            @if ($penilaian->jenis == 'teguran' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-peringatan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_biru->peringatan; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*-5}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                            @if ($penilaian->jenis == 'peringatan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                             </div>
-                            <div class="indikasi" style="width: 40%">
+                            <div class="indikasi" style="width: 40%;height: 120% !important">
                                 <div class="juri-1 border border-dark text-center">
                                     <h4 class="fw-bold">Juri 1</h4>
                                 </div>
@@ -147,10 +260,10 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                 <div class="table-header border border-dark text-center">
                     <h4 class="fw-bold pt-1">Babak</h4>
                 </div>
-                <div class="table-body border border-dark d-flex flex-column justify-content-center text-center" style="height: 89.1%">
+                <div class="table-body border border-dark d-flex flex-column justify-content-center text-center" style="height: 89.1%;background-color:#f0d500;">
                     @if ($jadwal->babak_tanding == 1)
                         <img src="{{url('/assets/svg/romawi-1.svg')}}" alt="">
-                    @elseif ($jadwal->babak_tanding == 3)
+                    @elseif ($jadwal->babak_tanding == 2)
                          <img src="{{url('/assets/svg/romawi-2.svg')}}" alt="">
                     @else
                          <img src="{{url('/assets/svg/romawi-3.svg')}}" alt="">
@@ -167,7 +280,7 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                             <h4 class="text-white fw-bold">Detail Poin</h4>
                         </div>
                         <div class="detail-poin-body d-flex">
-                            <div class="indikasi" style="width: 40%">
+                            <div class="indikasi" style="width: 40%;height: 120% !important">
                                 <div class="juri-1 border border-dark text-center">
                                     <h4 class="fw-bold">Juri 1</h4>
                                 </div>
@@ -196,64 +309,119 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                             <div class="nilai" style="width: 50%">
                                 @foreach ($juris as $index => $juri)
                                     <div class="nilai-juri-{{$index}} border border-dark" style="width: 100%; height: 12.5%;">
-                                        @if (json_decode($penilaian_juri_merah[$index]->data) && $penilaian_juri_merah[$index]->sudut == $jadwal->sudut_merah && $juri->id == $penilaian_juri_merah[$index]->juri)
-                                            @foreach (json_decode($penilaian_juri_merah[$index]->data) as $nilai)
-                                                @if ($nilai == '1_in')
-                                                    <img src="{{url('assets/svg/1.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                                @elseif ($nilai == '2_in')
-                                                    <img src="{{url('assets/svg/2.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                                @elseif ($nilai == '1_out')
-                                                    <img src="{{url('assets/svg/1blocked.svg')}}" alt="" height="40" style=" ">
-                                                @elseif ($nilai == '2_out')
-                                                    <img src="{{url('assets/svg/2blocked.svg')}}" alt="" height="40" style=" ">
+                                        <h5 style="margin-left: 2px">
+                                            @foreach ($penilaian_tanding_merah as $penilaian)
+                                                @if ($index == 0)
+                                                    @if ($penilaian->juri_1 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_1 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_1 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style="background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_1 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
+                                                @endif
+                                                @if ($index == 1)
+                                                    @if ($penilaian->juri_2 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_2 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_2 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style="background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_2 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
+                                                @endif
+                                                @if ($index == 2)
+                                                    @if ($penilaian->juri_3 == 1 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                                    @elseif ($penilaian->juri_3 == 1 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/1blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @elseif ($penilaian->juri_3 == 2 && $penilaian->status == 'sah')
+                                                        <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style="background-color: #ff8000">
+                                                    @elseif ($penilaian->juri_3 == 2 && $penilaian->status == 'tidak sah')
+                                                        <img src="{{url('assets/svg/2blocked.svg')}}" alt="1" width="15" height="30">
+                                                    @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        </h5>
                                     </div>
                                 @endforeach
-                                 <div class="nilai-skor border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @if (json_decode($penilaian_tanding_merah->skor) ?? null)
-                                        @foreach (json_decode($penilaian_tanding_merah->skor) as $item)
-                                            @if ($item == '1')
-                                                 <img src="{{url('assets/svg/1.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                            @elseif ($item == 2)
-                                                 <img src="{{url('assets/svg/2.svg')}}" alt="" height="40" style="background-color: {{ $backgroundColors[mt_rand(1, 100)%8]}} ">
-                                            @endif
+                                <div class="nilai-skor border border-dark d-flex" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 2px">
+                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                            @if ($penilaian->jenis == 'pukulan' && $penilaian->status == 'sah')
+                                                <img src="{{url('assets/svg/1.svg')}}" alt="1" width="15" height="30" style="background-color: #f0d500">
+                                            @elseif ($penilaian->jenis == 'tendangan' && $penilaian->status == 'sah')
+                                                <img src="{{url('assets/svg/2.svg')}}" alt="1" width="15" height="30" style="background-color: #ff8000">
+                                            @endif        
                                         @endforeach
-                                    @endif
+                                    </h5>
                                 </div>
                                 <div class="nilai-jatuhan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_merah->jatuhan; $i++)
-                                        <h5 class="fw-bold m-2">3</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                            @if ($penilaian->jenis == 'jatuhan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-binaan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_merah->binaan; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*0}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                            @if ($penilaian->jenis == 'binaan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-teguran border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_merah->teguran; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*-1}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                            @if ($penilaian->jenis == 'teguran' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                                 <div class="nilai-peringatan border border-dark d-flex" style="width: 100%; height: 12.5%;">
-                                    @for ($i = 1; $i <= $penilaian_tanding_merah->peringatan; $i++)
-                                        <h5 class="fw-bold m-2">{{$i*-5}}</h5>
-                                    @endfor
+                                    <h5 class="fw-bold ml-1">
+                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                            @if ($penilaian->jenis == 'peringatan' && $penilaian->status == 'sah')
+                                                {{$penilaian->dewan}}
+                                            @endif        
+                                        @endforeach
+                                    </h5>
                                 </div>
                             </div>
                             <div class="total-sementara" style="width: 10%">
-                                <div class="total-sementara-juri border border-dark" style="width: 100%; height: 50%;">
+                                <div class="total-sementara-juri border border-dark d-flex flex-column justify-content-center" style="width: 100%; height: 50%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$pukulan_tendangan_merah}}
+                                    </h5>
                                 </div>
-                                <div class="total-sementara-jatuhan border border-dark"
-                                    style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-binaan border border-dark"
-                                    style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-teguran border border-dark"
-                                    style="width: 100%; height: 12.5%;"></div>
-                                <div class="total-sementara-peringatan border border-dark"
-                                    style="width: 100%; height: 12.5%;"></div>
+                                <div class="total-sementara-jatuhan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$jatuhan_merah}}
+                                    </h5>
+                                </div>
+                                <div class="total-sementara-binaan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$binaan_merah}}
+                                    </h5>
+                                </div>
+                                <div class="total-sementara-teguran border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$teguran_merah}}
+                                    </h5>
+                                </div>
+                                <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;">
+                                    <h5 style="margin-left: 15px; font-weight: bold">
+                                        {{$peringatan_merah}}
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -261,8 +429,12 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
                         <div class="total-header border border-dark text-center" style="background-color: #db3545">
                             <h4 class="text-white fw-bold">Total</h4>
                         </div>
-                        <div class="table-body border border-dark" style="height: 89.1%">
-                            <div class="total-akhir"></div>
+                        <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
+                            <div class="total-akhir d-flex justify-content-center">
+                                <h1 class="fw-bold">
+                                    {{$total_poin_merah}}
+                                </h1>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -274,34 +446,8 @@ $backgroundColors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FFFF33', '#FF
 
 @section('script')
      <script>
-        let intervalRef; 
-        function observeChanges() {
-            // Buat instance dari MutationObserver
-            const observer = new MutationObserver(function(mutationsList, observer) {
-                // Iterasi melalui setiap mutasi
-                for(let mutation of mutationsList) {
-                    // Periksa apakah mutasi menambahkan kelas "timer" ke elemen
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class' && $(mutation.target).hasClass('mulai')) {
-                        // Lakukan sesuatu, misalnya menjalankan interval
-                        
-                        intervalRef = setInterval(function () {
-                            if (@this.get('waktu') <= 0){
-                                @this.call('resetWaktu');
-                                clearInterval(intervalRef);
-                                return;
-                            }
-                            @this.call('decrementWaktu');
-                        }, 10);
-                    }else{
-                        // clearInterval(intervalRef);
-                        return;
-                    }
-                }
-            });
-
-            // Mulai memantau perubahan pada elemen dengan kelas "tes"
-            observer.observe(document.body, { attributes: true, subtree: true });
-        }
-        observeChanges();
+        setInterval(() => {
+            @this.call('resetIndikator')
+        }, 1000);
     </script>
 @endsection

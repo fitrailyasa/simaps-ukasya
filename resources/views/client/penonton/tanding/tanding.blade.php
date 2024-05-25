@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="time text-center d-flex flex-column justify-content-center" style="width:20%">
-            <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($gelanggang->waktu), ($gelanggang->waktu*60)%60) }}</span></div>
+            <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
         </div>
         <div class="sudut-biru d-flex" style="width: 40%">
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">

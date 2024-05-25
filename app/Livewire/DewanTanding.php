@@ -42,8 +42,8 @@ class DewanTanding extends Component
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
         $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
-        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
-        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
     public function hapusTrigger($id){
         if($this->jadwal->sudut_biru == $id){
@@ -51,34 +51,44 @@ class DewanTanding extends Component
                 $this->error = "Tidak bisa menghapus nilai kosong";
             }else{
                 $this->penilaian_tanding_biru->where('sudut',$id)->last()->delete();
-                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             };
         }else{
             if(!$this->penilaian_tanding_merah->where('sudut',$id)->last()){
                 $this->error = "Tidak bisa menghapus nilai kosong";
             }else{
                 $this->penilaian_tanding_merah->where('sudut',$id)->last()->delete();
-                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             };
         }
     }
     public function tambahPeringatanTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
+            $nilai = -5;
+            if($id == $this->jadwal->sudut_biru){
+                if(count($this->penilaian_tanding_biru->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
+                $nilai = -10;
+                };
+            }else{
+                if(count($this->penilaian_tanding_merah->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
+                $nilai = -10;
+                }
+            }
             PenilaianTanding::create([
                 'jenis'=>'peringatan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
                 'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
-                'dewan' => -5,
+                'dewan' => $nilai,
                 'status'=> 'sah',
                 'aktif'=> false,
                 'babak'=>$this->jadwal->babak_tanding
             ]);
     
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }else{
-                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }
             
             TambahPeringatan::dispatch($id,$this->jadwal->babak_tanding);
@@ -110,9 +120,9 @@ class DewanTanding extends Component
             ]);
     
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }else{
-                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }
                    
             TambahTeguran::dispatch($id,$this->jadwal->babak_tanding);
@@ -134,9 +144,9 @@ class DewanTanding extends Component
             ]);
     
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }else{
-                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }
             
             TambahBinaan::dispatch($id,$this->jadwal->babak_tanding);
@@ -158,9 +168,9 @@ class DewanTanding extends Component
             ]);
 
             if($id == $this->jadwal->sudut_biru){
-                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }else{
-                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+                $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
             }
                     
             TambahJatuhan::dispatch($id,$this->jadwal->babak_tanding);
