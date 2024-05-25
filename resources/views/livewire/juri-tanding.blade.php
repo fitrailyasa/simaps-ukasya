@@ -8,7 +8,7 @@
 >
     <div class="row justify-content-md-center m-2">
         <div class="col-md-4 d-flex justify-content-center">
-            <h3 class="fw-bold">{{$juri->name}}</h3>
+            <h3 class="fw-bold">{{$user->name}}</h3>
         </div>
     </div>
     
@@ -24,7 +24,7 @@
             <h5 class="fw-bold p-3 rounded text-white kontingen" style="background-color: #0053a6; margin-right: 12px">{{$sudut_biru->kontingen}}</h5>
         </div>
     </div>
-    <div class="row m-3" style="margin-top: 0px !important">
+    <div class="row m-3" style="margin-top: 0px !important; width:100%">
         <div class="row mt-5">
             <div class="col">
                 <table
@@ -65,15 +65,14 @@
                             <td
                                 class="tabel-1-1 fw-bold fs-5 text-end"
                                 style="border: 2px solid #000"
-                            >
-                            @if ($jadwal->babak_tanding==1)
+                            > 
                              <h5 class="fw-bold p-1">
-                                @for ($i = 0; $i < sizeof($babak_1_sudut_merah); $i++)
-                                    
-                                {{$babak_1_sudut_merah[$i]}}
-                                @endfor
+                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                    @if ($penilaian->babak == 1)
+                                        {{$penilaian->$juri}}
+                                    @endif
+                                @endforeach
                              </h5>    
-                            @endif
                             </td>
                             <td
                                 class="text-center babak-1 {{$jadwal->babak_tanding==1 ? "babak-active" : ""}}"
@@ -86,14 +85,13 @@
                                 class="tabel-1-2 fw-bold fs-5 "
                                 style="border: 2px solid #000"
                             >
-                                @if ($jadwal->babak_tanding==1)
                                 <h5 class="fw-bold p-1">
-                                   
-                                    @for ($i = 0; $i < sizeof($babak_1_sudut_biru); $i++)    
-                                        {{$babak_1_sudut_biru[$i]}}
-                                    @endfor
-                                </h5>    
-                                @endif
+                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                    @if ($penilaian->babak == 1)
+                                        {{$penilaian->$juri}}
+                                    @endif
+                                @endforeach
+                             </h5>   
                             </td>
                         </tr>
                         <tr style="border: 2px solid #000">
@@ -101,13 +99,11 @@
                                 class="tabel-2-1 fw-bold fs-5 text-end"
                                 style="border: 2px solid #000"
                             >
-                                @if ($jadwal->babak_tanding==2)
-                                <h5 class="fw-bold p-1">
-                                    @for ($i = 0; $i < sizeof($babak_2_sudut_merah); $i++)      
-                                        {{$babak_2_sudut_merah[$i]}}
-                                    @endfor
-                                </h5>    
-                                @endif
+                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                    @if ($penilaian->babak == 2)
+                                        {{$penilaian->$juri}}
+                                    @endif
+                                @endforeach
                             </td>
                             <td
                                 class="text-center babak-2 {{$jadwal->babak_tanding==2 ? "babak-active" : ""}}"
@@ -120,13 +116,11 @@
                                 class="tabel-2-2 fw-bold fs-5"
                                 style="border: 2px solid #000"
                             >
-                            @if ($jadwal->babak_tanding==2)
-                                <h5 class="fw-bold p-1">
-                                    @for ($i = 0; $i < sizeof($babak_2_sudut_biru); $i++)                                
-                                        {{$babak_2_sudut_biru[$i]}}
-                                    @endfor
-                                </h5>    
+                           @foreach ($penilaian_tanding_biru as $penilaian)
+                                @if ($penilaian->babak == 2)
+                                    {{$penilaian->$juri}}
                                 @endif
+                            @endforeach
                             </td>
                         </tr>
                         <tr style="border: 2px solid #000">
@@ -134,14 +128,11 @@
                                 class="tabel-3-1 fw-bold fs-5 text-end"
                                 style="border: 2px solid #000"
                             >
-                            @if ($jadwal->babak_tanding==3)
-                                <h5 class="fw-bold p-1">
-                                    @for ($i = 0; $i < sizeof($babak_3_sudut_merah); $i++)
-                                        
-                                    {{$babak_3_sudut_merah[$i]}}
-                                    @endfor
-                                </h5>    
-                            @endif
+                            @foreach ($penilaian_tanding_merah as $penilaian)
+                                @if ($penilaian->babak == 3)
+                                    {{$penilaian->$juri}}
+                                @endif
+                            @endforeach
                             </td>
                             <td
                                 class="text-center babak-3 {{$jadwal->babak_tanding==3 ? "babak-active" : ""}}"
@@ -154,13 +145,11 @@
                                 class="tabel-3-2 fw-bold fs-5"
                                 style="border: 2px solid #000"
                             >
-                                @if ($jadwal->babak_tanding==3)
-                                <h5 class="fw-bold p-1">
-                                    @for ($i = 0; $i < sizeof($babak_3_sudut_biru); $i++)                                        
-                                    {{$babak_3_sudut_biru[$i]}}
-                                    @endfor
-                                </h5>    
-                                @endif
+                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                    @if ($penilaian->babak == 3)
+                                        {{$penilaian->$juri}}
+                                    @endif
+                                @endforeach
                             </td>
                         </tr>
                     </tbody>
@@ -239,4 +228,14 @@
     </div>
 </div>
 @include('juri.tanding.JuriVerivikasiModal')
+@include('juri.tanding.ErrorModal')
 </div>
+
+
+@section('script')
+<script>
+    setInterval(() => {
+        @this.call('batasSkorMasukCek')
+    }, 3000);
+</script>
+@endsection

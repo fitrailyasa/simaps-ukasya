@@ -54,6 +54,10 @@ window.Echo.channel("poin").listen(".tambah-tendangan", (e) => {
 });
 window.Echo.channel("poin").listen(".hapus", (e) => {
     console.log(e);
+    if (!e.penilaian) {
+        $(`#error-modal-${e.juri}`).modal("show");
+    }
+    console.log(e);
 });
 window.Echo.channel("poin").listen(".poin-masuk-keluar", (e) => {});
 

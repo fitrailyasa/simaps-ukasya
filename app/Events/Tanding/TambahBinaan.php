@@ -21,13 +21,12 @@ class TambahBinaan implements ShouldBroadcast
      * Create a new event instance.
      */
     public $sudut_id;
-    public $jumlah_binaan;
+    public $babak;
 
     public function __construct($id,$babak_tanding)
     {
-        $this->pesilat_id = $id;
-        $this->jumlah_binaan = PenilaianTanding::where('atlet',$id)->where('babak',$babak_tanding)->first();
-        $this->jumlah_binaan->increment('binaan');
+        $this->sudut_id = $id;
+        $this->babak = $babak_tanding;
     }
     public function broadcastOn(): Channel
     {

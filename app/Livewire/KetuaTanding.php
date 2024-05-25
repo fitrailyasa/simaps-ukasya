@@ -35,8 +35,8 @@ class KetuaTanding extends Component
             $this->waktu = $this->gelanggang->waktu * 60;
             $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
             $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
-            $this->penilaian_tanding_merah= PenilaianTanding::where('atlet',$this->sudut_merah->id)->where('babak',$this->jadwal->babak_tanding)->first();
-            $this->penilaian_tanding_biru= PenilaianTanding::where('atlet',$this->sudut_biru->id)->where('babak',$this->jadwal->babak_tanding)->first();  
+            $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('babak',$this->jadwal->babak_tanding)->first();
+            $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('babak',$this->jadwal->babak_tanding)->first();  
             $this->skor_merah = json_decode($this->penilaian_tanding_merah->skor);
             $this->skor_biru = json_decode($this->penilaian_tanding_biru->skor);
             $this->penilaian_juri_merah = PenilaianJuri::where('sudut',$this->jadwal->sudut_merah)->where('partai',$this->jadwal->partai)->get();
@@ -88,8 +88,8 @@ class KetuaTanding extends Component
     }
     #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler(){
-         $this->penilaian_tanding_merah= PenilaianTanding::where('atlet',$this->sudut_merah->id)->where('babak',$this->jadwal->babak_tanding)->first();
-            $this->penilaian_tanding_biru= PenilaianTanding::where('atlet',$this->sudut_biru->id)->where('babak',$this->jadwal->babak_tanding)->first();  
+         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('babak',$this->jadwal->babak_tanding)->first();
+            $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('babak',$this->jadwal->babak_tanding)->first();  
             $this->skor_merah = json_decode($this->penilaian_tanding_merah->skor);
             $this->skor_biru = json_decode($this->penilaian_tanding_biru->skor);
 

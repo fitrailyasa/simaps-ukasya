@@ -20,13 +20,12 @@ class TambahPeringatan implements ShouldBroadcast
      */
     
     public $sudut_id;
-    public $jumlah_peringatan;
+    public $babak;
 
     public function __construct($id,$babak_tanding)
     {
-        $this->pesilat_id = $id;
-        $this->jumlah_peringatan = PenilaianTanding::where('atlet',$id)->where('babak',$babak_tanding)->first();
-        $this->jumlah_peringatan->increment('peringatan');
+        $this->sudut_id = $id;
+        $this->babak = $babak_tanding;
     }
 
     public function broadcastOn(): Channel

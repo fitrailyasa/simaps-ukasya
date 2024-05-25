@@ -19,13 +19,12 @@ class TambahJatuhan implements ShouldBroadcast
      * Create a new event instance.
      */
     public $sudut_id;
-    public $jumlah_jatuhan;
+    public $babak;
 
     public function __construct($id,$babak_tanding)
     {
-        $this->pesilat_id = $id;
-        $this->jumlah_jatuhan = PenilaianTanding::where('atlet',$id)->where('babak',$babak_tanding)->first();
-        $this->jumlah_jatuhan->increment('jatuhan');
+        $this->sudut_id = $id;
+        $this->babak = $babak_tanding;
     }
 
     public function broadcastOn(): Channel

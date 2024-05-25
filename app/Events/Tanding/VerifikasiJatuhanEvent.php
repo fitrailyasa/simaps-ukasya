@@ -70,9 +70,9 @@ class VerifikasiJatuhanEvent implements ShouldBroadcast
                         }
                     }
                     if($biru > $merah && $biru > $invalid){
-                        PenilaianTanding::where('atlet',$this->jadwal_tanding->sudut_biru)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('jatuhan');       
+                        PenilaianTanding::where('sudut',$this->jadwal_tanding->sudut_biru)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('jatuhan');       
                     }elseif($merah > $biru && $merah > $invalid){
-                        PenilaianTanding::where('atlet',$this->jadwal_tanding->sudut_merah)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('jatuhan');
+                        PenilaianTanding::where('sudut',$this->jadwal_tanding->sudut_merah)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('jatuhan');
                     }
                     $this->verifikasi_jatuhan->status = false;
                     $this->verifikasi_jatuhan->save();

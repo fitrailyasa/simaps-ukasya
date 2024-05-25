@@ -10,11 +10,11 @@ class PenilaianTanding extends Model
     use HasFactory;
 
     protected $table = 'penilaian_tanding';
-    protected $fillable = ['uuid','jadwal_tanding','babak','pukulan', 'tendangan', 'binaan','peringatan','teguran','jatuhan','atlet','skor'];
+    protected $fillable = ['uuid','aktif','jenis','status','jadwal_tanding','sudut','juri_1','juri_2','juri_3','dewan','babak'];
     
     public function Tanding()
     {
-        return $this->belongsTo(Tanding::class, 'tanding','atlet', 'id');
+        return $this->belongsTo(Tanding::class, 'tanding','sudut', 'id');
     }
     public function JadwalTanding()
     {

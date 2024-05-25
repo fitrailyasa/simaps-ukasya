@@ -21,14 +21,10 @@ class MulaiPertandingan implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $gelanggang;
-    public $jadwal;
-    public $waktu;
-    public function __construct($jadwal_id)
+    public $event;
+    public function __construct($event)
     {
-        $this->jadwal = JadwalTanding::where('id',$jadwal_id)->first();
-        $this->jadwal->tahap = 'tanding';
-        $this->jadwal->save(); 
+        $this->event = $event;
     }
 
     /**

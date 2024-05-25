@@ -57,13 +57,13 @@ class AdminJadwalTandingController extends Controller
         for ($i=1; $i <=3 ; $i++) { 
             PenilaianTanding::create([
             'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_biru.$jadwal_tanding->id.$i,
-            'atlet'=>$request->sudut_biru,
+            'sudut'=>$request->sudut_biru,
             'babak'=>$i,
             'jadwal_tanding' => $jadwal_tanding->id
         ]);
         PenilaianTanding::create([
             'uuid'=>$jadwal_tanding->created_at->format('YmdHis').$request->sudut_merah.$jadwal_tanding->id.$i,
-            'atlet'=>$request->sudut_merah,
+            'sudut'=>$request->sudut_merah,
             'babak'=>$i,
             'jadwal_tanding' => $jadwal_tanding->id
         ]);

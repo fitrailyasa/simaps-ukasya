@@ -5,7 +5,7 @@
     @include('client.penonton.tanding.navbar')
     @if ($jadwal->tahap == 'persiapan')
         @include('client.penonton.tanding.persiapan')
-    @elseif($jadwal->tahap == 'tanding')
+    @elseif($jadwal->tahap == 'tanding' || $jadwal->tahap == 'pause')
         @include('client.penonton.tanding.tanding')  
     @elseif($jadwal->tahap == 'hasil')
         @include('client.penonton.tanding.hasil')

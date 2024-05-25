@@ -18,37 +18,37 @@ class PenilaianTandingSeeder extends Seeder
                 'uuid' => 'erer6',
                 'babak' => 1,
                 'jadwal_tanding'=>1,
-                'atlet'=>1
+                'sudut'=>1
             ],
             [
                 'uuid' => 'erer5',
                 'babak' => 2,
                 'jadwal_tanding'=>1,
-                'atlet'=>1
+                'sudut'=>1
             ],
             [
                 'uuid' => 'erer4',
                 'babak' => 3,
                 'jadwal_tanding'=>1,
-                'atlet'=>1
+                'sudut'=>1
             ],
             [
                 'uuid' => 'erer3',
                 'babak' => 1,
                 'jadwal_tanding'=>1,
-                'atlet'=>2
+                'sudut'=>2
             ],
             [
                 'uuid' => 'erer2',
                 'babak' => 2,
                 'jadwal_tanding'=>1,
-                'atlet'=>2
+                'sudut'=>2
             ],
             [
                 'uuid' => 'erer1',
                 'babak' => 3,
                 'jadwal_tanding'=>1,
-                'atlet'=>2
+                'sudut'=>2
             ]
         ];
         PenilaianTanding::query()->insert($PenilaianTanding);

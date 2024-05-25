@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('penilaian_tanding', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->foreignId('atlet')->nullable();
+            $table->foreignId('sudut')->nullable();
             $table->foreignId('jadwal_tanding')->nullable();
-            $table->integer('babak')->default(1);    
-            $table->integer('pukulan')->default(0);
-            $table->integer('tendangan')->default(0);
-            $table->integer('teguran')->default(0);
-            $table->integer('jatuhan')->default(0);
-            $table->integer('peringatan')->default(0);
-            $table->integer('binaan')->default(0);
-            $table->json('skor')->nullable();
+            $table->string('jenis');
+            $table->integer('juri_1')->default(0);
+            $table->integer('juri_2')->default(0);
+            $table->integer('juri_3')->default(0);
+            $table->integer('dewan')->default(0);
+            $table->string('status')->default('tidak sah');
+            $table->boolean('aktif')->default(true);
+            $table->integer('babak');    
             $table->timestamps();
         });
     }

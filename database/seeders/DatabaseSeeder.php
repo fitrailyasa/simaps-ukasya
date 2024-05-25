@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PengundianTGRSeeder::class);
         $this->call(JadwalTandingSeeder::class);
         $this->call(JadwalTGRSeeder::class);
-        $this->call(PenilaianTandingSeeder::class);
         $this->call(TendanganEventSentSeeder::class);
         $this->call(PukulanEventSentSeeder::class);
         $this->call(PenilaianJuriSeeder::class);

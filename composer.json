@@ -53,6 +53,12 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "start-all": [
+            "@php artisan serve",
+            "@php artisan reverb:start --host=127.0.0.1 --port=9000",
+            "@php artisan queue:listen",
+            "npm run dev"
         ]
     },
     "extra": {

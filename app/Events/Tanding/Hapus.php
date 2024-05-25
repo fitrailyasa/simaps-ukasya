@@ -18,13 +18,13 @@ class Hapus implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $nilai;
+    public $penilaian;
+    public $juri;
 
-    public function __construct($id,$jenis,$babak)
+    public function __construct($penilaian,$juri)
     {
-        $this->nilai = PenilaianTanding::where('atlet', $id)->where('babak',$babak)->first();
-        $this->nilai->decrement($jenis);
-
+        $this->penilaian = $penilaian;
+        $this->juri = $juri;
     }
 
     public function broadcastOn(): Channel

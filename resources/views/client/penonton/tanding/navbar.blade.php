@@ -6,14 +6,14 @@
             <a class="navbar-brand" href="#">
                 <img src="{{url('assets/img/ipsi.png')}}" alt="" width="50" height="50">
               </a>
-              <a class="navbar-brand text-center" href="#" style="color:#fff; width:60%;margin-top: -12px">
+              <div class="navbar-brand text-center" href="#" style="color:#fff; width:60%;margin-top: -12px">
                 <div class="nav-up" style="background-image:url('{{url('/assets/img/bg2.png')}}'); background-size: 100% 115%; background-repeat: no-repeat; background-position:top center;height:50px;">
                     <h5 class="pt-2 fw-bold">PENCAK SILAT</h5>
                 </div>
                 <div class="nav-down mt-2">
-                    <h5 class="fw-bold">{{$jadwal->gelombang}} - {{$jadwal->partai}} {{$jadwal->PenilaianTanding}} TANDING - CLASS {{$jadwal->kelas}}</h5>
+                    <h5 class="fw-bold">{{$jadwal->babak}} - {{$jadwal->partai}} {{$jadwal->PenilaianTanding}} TANDING - CLASS {{$jadwal->kelas}}</h5>
                 </div>
-              </a>
+              </div>
               <a class="navbar-brand" href="#">
                 <img src="{{url('assets/img/ipsi.png')}}" alt="" width="50" height="50">
               </a>

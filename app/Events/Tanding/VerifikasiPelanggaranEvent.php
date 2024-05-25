@@ -72,9 +72,9 @@ class VerifikasiPelanggaranEvent implements ShouldBroadcast
                         }
                     }
                     if($biru > $merah && $biru > $invalid){
-                        PenilaianTanding::where('atlet',$this->jadwal_tanding->sudut_biru)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('peringatan');       
+                        PenilaianTanding::where('sudut',$this->jadwal_tanding->sudut_biru)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('peringatan');       
                     }elseif($merah > $biru && $merah > $invalid){
-                        PenilaianTanding::where('atlet',$this->jadwal_tanding->sudut_merah)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('peringatan');
+                        PenilaianTanding::where('sudut',$this->jadwal_tanding->sudut_merah)->where('babak',$this->jadwal_tanding->babak_tanding)->increment('peringatan');
                     }
                     $this->verifikasi_pelanggaran->status = false;
                     $this->verifikasi_pelanggaran->save();
