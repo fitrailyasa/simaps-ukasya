@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -22,6 +23,7 @@ class JuriTanding extends Component
 {
     public $jadwal;
     public $juri;
+    public $juris;
     public $sudut_merah;
     public $sudut_biru;
     public $gelanggang;
@@ -33,21 +35,13 @@ class JuriTanding extends Component
 
     public function mount()
     {
-        switch (Auth::user()->name) {
-            case 'Juri A':
-                $juri = 'juri_1';
-                $this->juri = 'juri_1';
-                break;
-            case 'Juri B':
-                $juri = 'juri_2';
-                $this->juri = 'juri_2';
-                break;
-            case 'Juri C':
-                $juri = 'juri_3';
-                $this->juri = 'juri_3';
-                break;
-        }
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        $this->juris= User::where('gelanggang',$this->gelanggang->id)->where('roles_id',4)->where('status',true)->get();
+        foreach ($this->juris as $index => $juri) {
+            if($juri->name == Auth::user()->name){
+                $this->juri = 'juri_'.$index + 1;
+            };
+        }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
         $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
