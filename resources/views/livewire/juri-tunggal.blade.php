@@ -1,8 +1,8 @@
-<div>
+<div class="pt-4">
 @section('title')
 Tunggal 
 @endsection 
-<div class="container-fluid pb-4" style="width: 100%; border: solid 2px black;">
+<div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;">
     <div
         class="header d-flex justify-content-between p-1 m-1"
         style="color: black"

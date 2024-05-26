@@ -30,8 +30,16 @@ class DewanGanda extends Component
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
-        $this->waktu = $this->gelanggang->waktu * 60;
         $this->penalty_ganda = PenaltyGanda::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+        if(!$this->penalty_ganda){
+            $this->penalty_ganda = PenaltyGanda::create([
+                'dewan'=>Auth::user()->id,
+                'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
+                'sudut_merah'=>$this->sudut_merah->id,
+                'sudut_biru'=>$this->sudut_biru->id,
+                'jadwal_ganda'=>$this->jadwal->id
+            ]);
+        }
     }
 
     public function penaltyTrigger($jenis_penalty){

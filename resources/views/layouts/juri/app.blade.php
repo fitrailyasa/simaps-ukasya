@@ -181,25 +181,9 @@
                 class="content-wrapper"
                 style="margin: 0; right:0 background-color: #ffffff;"
             >
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="ml-2">
-                                    @yield('backlink')
-                                </h1>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
-
                 <!-- Main content -->
                 <section class="content" style="position: relative">
-                    <div class="container-fluid mb-5">@yield('content')</div>
+                    <div class="container-fluid">@yield('content')</div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->

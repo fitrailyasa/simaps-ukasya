@@ -6,11 +6,8 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use App\Models\Gelanggang;
-use App\Models\Tanding;
 use App\Models\JadwalTGR;
 use App\Models\TGR;
-use App\Events\Tunggal\TambahNilai;
-use App\Events\Tunggal\SalahGerakan;
 use App\Events\Tunggal\PenaltyDewan;
 use App\Events\Tunggal\HapusPenalty;
 use App\Models\PenaltyTunggal;
@@ -31,12 +28,27 @@ class DewanTunggal extends Component
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
-        $this->waktu = $this->gelanggang->waktu * 60;
         $this->tampil = $this->sudut_biru->id;
         if($this->tampil == $this->sudut_biru->id){
             $this->penalty_tunggal = PenaltyTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_tunggal){
+                $this->penalty_tunggal = PenaltyTunggal::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->tampil,
+                    'jadwal_tunggal'=>$this->jadwal->id
+                ]);
+            }
         }else{
             $this->penalty_tunggal = PenaltyTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_tunggal){
+                $this->penalty_tunggal = PenaltyTunggal::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->tampil,
+                    'jadwal_tunggal'=>$this->jadwal->id
+                ]);
+            }
         }
     }
 

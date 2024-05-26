@@ -1,8 +1,8 @@
 <div class="header d-flex justify-content-between p-3" style="width: 100%">
     <div class="left" style="width: 50%">
-        <span class="ml-5 fw-bold">{{ $sudut->region }}</span>
+        <span class="ml-5 fw-bold">{{ $tampil == $jadwal->sudut_merah ? $sudut_merah->region : $sudut_niru->region }}</span>
         <h5 class="fw-bold" style="color:#252c94">
-            {{ $sudut->nama }}
+            {{ $tampil == $jadwal->sudut_merah ? $sudut_merah->nama : $sudut_niru->nama }}
         </h5>
     </div>
     <div class="right  text-end mt-3" style="width: 50%">

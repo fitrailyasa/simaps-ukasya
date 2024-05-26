@@ -1,4 +1,4 @@
-<div>
+<div class="pt-4">
 @section('title')
 regu 
 @endsection 

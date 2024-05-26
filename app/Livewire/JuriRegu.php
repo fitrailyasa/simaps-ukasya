@@ -30,6 +30,15 @@ class JuriRegu extends Component
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->penilaian_regu = PenilaianRegu::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if(!$this->penilaian_regu){
+                $this->penilaian_regu = PenilaianRegu::create([
+                    'jadwal_regu'=>$this->jadwal->id,
+                    'sudut_biru' => $this->sudut_biru->id,
+                    'sudut_merah' => $this->sudut_merah->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
+                    'juri' => Auth::user()->id
+                ]);
+            }
     }
 
     public function tambahNilaiTrigger($value){

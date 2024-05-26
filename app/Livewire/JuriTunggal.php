@@ -34,8 +34,24 @@ class JuriTunggal extends Component
         $this->tampil = $this->sudut_biru->id;
         if($this->tampil == $this->sudut_biru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            if(!$this->penilaian_tunggal){
+                $this->penilaian_tunggal = PenilaianTunggal::create([
+                    'jadwal_tunggal'=>$this->jadwal->id,
+                    'sudut' => $this->sudut_biru->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
+                    'juri' => Auth::user()->id
+                ]);
+            }
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            if(!$this->penilaian_tunggal){
+                $this->penilaian_tunggal = PenilaianTunggal::create([
+                    'jadwal_tunggal'=>$this->jadwal->id,
+                    'sudut' => $this->sudut_merah->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->sudut_merah->id.Auth::user()->id.'-'.$this->jadwal->id,
+                    'juri' => Auth::user()->id
+                ]);
+            }
         }
     }
 

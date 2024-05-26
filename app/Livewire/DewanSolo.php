@@ -28,8 +28,16 @@ class DewanSolo extends Component
         $this->gelanggang = Gelanggang::where('jenis','Solo_kreatif')->first();
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut = TGR::find($this->jadwal->sudut_merah);
-        $this->waktu = $this->gelanggang->waktu * 60;
+        $this->tampil = $this->jadwal->sudut_merah;
         $this->penalty_solo = PenaltySolo::where('sudut',$this->sudut->id)->where('jadwal_solo',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+        if(!$this->penalty_solo){
+            $this->penalty_solo = PenaltySolo::create([
+                'dewan'=>Auth::user()->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                'sudut'=>$this->tampil,
+                'jadwal_solo'=>$this->jadwal->id
+            ]);
+        }
     }
 
     public function penaltyTrigger($jenis_penalty){

@@ -31,6 +31,15 @@ class JuriGanda extends Component
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->penilaian_ganda = PenilaianGanda::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if(!$this->penilaian_ganda){
+                $this->penilaian_ganda = PenilaianGanda::create([
+                    'jadwal_ganda'=>$this->jadwal->id,
+                    'sudut_biru' => $this->sudut_biru->id,
+                    'sudut_merah' => $this->sudut_merah->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
+                    'juri' => Auth::user()->id
+                ]);
+            }
     }
 
     public function tambahNilaiTrigger($value,$jenis_skor){
