@@ -272,38 +272,9 @@
 
 @section('script')
     <script>
-        let intervalRef; 
-        function observeChanges() {
-            // Buat instance dari MutationObserver
-            const observer = new MutationObserver(function(mutationsList, observer) {
-                // Iterasi melalui setiap mutasi
-                for(let mutation of mutationsList) {
-                    // Periksa apakah mutasi menambahkan kelas "timer" ke elemen
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class' && $(mutation.target).hasClass('mulai')) {
-                        // Lakukan sesuatu, misalnya menjalankan interval
-                        
-                        intervalRef = setInterval(function () {
-                            if (@this.get('waktu') <= 0){
-                                @this.call('resetWaktu');
-                                clearInterval(intervalRef);
-                                return;
-                            }
-                            @this.call('decrementWaktu');
-                        }, 10);
-                    }else{
-                        // clearInterval(intervalRef);
-                        return;
-                    }
-                }
-            });
-
-            // Mulai memantau perubahan pada elemen dengan kelas "tes"
-            observer.observe(document.body, { attributes: true, subtree: true });
-        }
-
         setInterval(() => {
             @this.call('resetIndikator')
-        }, 1000);
+        }, 100);
     </script>
 @endsection
 

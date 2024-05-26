@@ -27,7 +27,7 @@
                 break;
         }
     }
-    $total_poin_biru = $jatuhan_biru + $binaan_biru + $teguran_biru + $peringatan_biru + $pukulan_tendangan_biru ;
+    $total_poin_sementara_biru = $jatuhan_biru + $binaan_biru + $teguran_biru + $peringatan_biru + $pukulan_tendangan_biru ;
 
     $jatuhan_merah = 0;
     $binaan_merah = 0;
@@ -56,7 +56,55 @@
                 break;
         }
     }
-    $total_poin_merah = $jatuhan_merah + $binaan_merah + $teguran_merah + $peringatan_merah + $pukulan_tendangan_merah ;
+    $total_poin_sementara_merah = $jatuhan_merah + $binaan_merah + $teguran_merah + $peringatan_merah + $pukulan_tendangan_merah ;
+
+    $total_poin_merah = 0;
+    foreach ($poin_merah->where('status','sah') as $index => $poin) {
+        switch ($poin->jenis) {
+            case 'jatuhan':
+                $total_poin_merah += $poin->dewan;
+                break;
+            case 'binaan':
+                $total_poin_merah += $poin->dewan;
+                break;
+            case 'teguran':
+                $total_poin_merah += $poin->dewan;
+                break;
+            case 'peringatan':
+                $total_poin_merah += $poin->dewan;
+                break;
+            case 'pukulan':
+                $total_poin_merah += 1;
+                break;
+            case 'tendangan':
+                $total_poin_merah += 2;
+                break;
+        }
+    }
+    $total_poin_biru = 0;
+    foreach ($poin_biru->where('status','sah') as $index => $poin) {
+        switch ($poin->jenis) {
+            case 'jatuhan':
+                $total_poin_biru += $poin->dewan;
+                break;
+            case 'binaan':
+                $total_poin_biru += $poin->dewan;
+                break;
+            case 'teguran':
+                $total_poin_biru += $poin->dewan;
+                break;
+            case 'peringatan':
+                $total_poin_biru += $poin->dewan;
+                break;
+            case 'pukulan':
+                $total_poin_biru += 1;
+                break;
+            case 'tendangan':
+                $total_poin_biru += 2;
+                break;
+        }
+    }
+    
 @endphp
 @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tanding.css') }}">
@@ -99,7 +147,7 @@
                         <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
                             <div class="total-akhir d-flex justify-content-center">
                                 <h1 class="fw-bold">
-                                    {{$total_poin_biru}}
+                                    {{$total_poin_sementara_biru}}
                                 </h1>
                             </div>
                         </div>
@@ -432,7 +480,7 @@
                         <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
                             <div class="total-akhir d-flex justify-content-center">
                                 <h1 class="fw-bold">
-                                    {{$total_poin_merah}}
+                                    {{$total_poin_sementara_merah}}
                                 </h1>
                             </div>
                         </div>
@@ -441,13 +489,16 @@
             </div>
         </div>
     </div>
-    @include('client.ketua.tanding.modal', ['pemenang' => 'merah'])
+    @include('client.ketua.tanding.modal')
 </div>
 
 @section('script')
      <script>
         setInterval(() => {
             @this.call('resetIndikator')
+            if(@this.get('tahap') == 'hasil'){
+                $('#keputusan-ketua').modal('show')
+            }
         }, 1000);
     </script>
 @endsection

@@ -235,6 +235,12 @@
 @section('script')
 <script>
     setInterval(() => {
+        if(@this.get('error').length > 0){
+                $(`#error-modal-${@this.get('juri')}`).modal("show");
+                $('#close').on('click', () => {
+                    @this.set('error', "")
+                })
+            }
         @this.call('batasSkorMasukCek')
     }, 3000);
 </script>
