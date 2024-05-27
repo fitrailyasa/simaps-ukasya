@@ -36,6 +36,9 @@ class JuriTanding extends Component
     public function mount()
     {
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+            return redirect('dashboard');
+        }
         $this->juris= User::where('gelanggang',$this->gelanggang->id)->where('roles_id',4)->where('status',true)->get();
         foreach ($this->juris as $index => $juri) {
             if($juri->name == Auth::user()->name){

@@ -654,7 +654,7 @@
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
-        
+                    
                     // Cari objek juri yang memiliki id yang sesuai dalam array $juri
                     $juri_name = '';
                     foreach ($juris as $j) {

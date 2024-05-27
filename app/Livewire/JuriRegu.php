@@ -25,6 +25,9 @@ class JuriRegu extends Component
     
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Regu')->first();
+        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+            return redirect('dashboard');
+        }
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
@@ -42,12 +45,18 @@ class JuriRegu extends Component
     }
 
     public function tambahNilaiTrigger($value){
-        $this->flow_score = $value/100;
-        TambahNilai::dispatch($this->jadwal->id,$this->sudut_biru->id,$this->sudut_merah->id,$this->flow_score,Auth::user()->id);
+        $value/=100;
+        $this->penilaian_regu->skor += $value;
+        $this->penilaian_regu->flow_skor += $value;
+        $this->penilaian_regu->save();
+        TambahNilai::dispatch($this->jadwal,[$this->sudut_biru , $this->sudut_merah],$this->penilaian_regu,Auth::user());
     }
 
     public function salahGerakanTrigger(){
-        SalahGerakan::dispatch($this->jadwal->id,$this->sudut_biru->id,$this->sudut_merah->id,Auth::user()->id);
+        $this->penilaian_regu->increment('salah');
+        $this->penilaian_regu->skor -= 0.01;
+        $this->penilaian_regu->save();
+        SalahGerakan::dispatch($this->jadwal,[$this->sudut_biru , $this->sudut_merah],$this->penilaian_regu,Auth::user());
     }
 
     #[On('echo:poin,.tambah-skor-regu')]

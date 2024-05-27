@@ -8,9 +8,9 @@ regu
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
-            <span class="fw-bold" style="font-size: 1.3rem">{{$sudut_biru->region}}</span>
+            <span class="fw-bold" style="font-size: 1.3rem">{{$sudut_biru->region}}, {{$sudut_merah->region}}</span>
             <h3 class="fw-bold" style="color: #0053a6 !important">
-                {{$sudut_biru->nama}}
+                {{$sudut_biru->nama}}, {{$sudut_merah->nama}}
             </h3>
         </div>
         <div class="jenis-lomba text-end" style="width: 40%">

@@ -4,7 +4,6 @@ namespace App\Livewire;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
-use App\Models\Tanding;
 use App\Models\JadwalTGR;
 use App\Models\TGR;
 use App\Models\PenilaianSolo;
@@ -29,7 +28,7 @@ class PenontonSolo extends Component
         $this->gelanggang = Gelanggang::where('jenis','Solo_Kreatif')->first();
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut= TGR::find($this->jadwal->sudut_merah);
-        $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
+        $this->juris = User::where('roles_id',4)->where('status',1)->where('gelanggang',$this->gelanggang->id)->get();
         $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->get();
         $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;

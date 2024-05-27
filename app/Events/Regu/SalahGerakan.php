@@ -21,16 +21,17 @@ class SalahGerakan implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $sudut;
     public $jadwal_regu;
     public $penilaian_regu;
-    public function __construct($jadwal_id,$sudut_biru_id,$sudut_merah_id,$juri_id)
+    public $sudut;
+    public $juri;
+
+    public function __construct($jadwal,$sudut,$penilaian,$juri)
     {
-        $this->jadwal_regu = JadwalTGR::where('id',$jadwal_id)->first();
-        $this->penilaian_regu = PenilaianRegu::where('sudut_biru',$sudut_biru_id)->where('sudut_merah',$sudut_merah_id)->where('jadwal_regu',$jadwal_id)->where('juri',$juri_id)->first();
-        $this->penilaian_regu->increment('salah');
-        $this->penilaian_regu->skor -= 0.01;
-        $this->penilaian_regu->save();
+        $this->juri = $juri;
+        $this->sudut = $sudut;
+        $this->penilaian_regu = $penilaian;
+        $this->jadwal_regu = $jadwal;
     }
 
     /**

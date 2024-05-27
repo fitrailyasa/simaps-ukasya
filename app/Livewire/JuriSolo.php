@@ -26,6 +26,9 @@ class JuriSolo extends Component
     
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Solo_kreatif')->first();
+        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+            return redirect('dashboard');
+        }
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->tampil = $this->jadwal->sudut_merah;
@@ -43,11 +46,24 @@ class JuriSolo extends Component
     }
 
     public function tambahNilaiTrigger($value,$jenis_skor){
-        TambahNilai::dispatch($this->jadwal->id,$this->sudut->id,$value/100,Auth::user()->id,$jenis_skor);
-    }
-
-    public function salahGerakanTrigger(){
-        SalahGerakan::dispatch($this->jadwal->id,$this->sudut->id,Auth::user()->id);
+        $value/=100;
+        switch ($jenis_skor) {
+            case 'attack_skor':
+                $this->penilaian_solo->attack_skor += $value;
+                $this->penilaian_solo->save();
+                break;
+            case 'firmness_skor':
+                $this->penilaian_solo->firmness_skor +=  $value;
+                $this->penilaian_solo->save();
+                break;
+            case 'soulfulness_skor':
+                $this->penilaian_solo->soulfulness_skor += $value;
+                $this->penilaian_solo->save();
+                break;
+        }
+        $this->penilaian_solo->skor += $value;
+        $this->penilaian_solo->save();
+        TambahNilai::dispatch($this->jadwal,$this->tampil == $this->jadwal->sudut_biru ? $this->sudut_biru : $this->sudut_merah,$this->penilaian_solo,Auth::user());
     }
 
     #[On('echo:poin,.tambah-skor-solo')]

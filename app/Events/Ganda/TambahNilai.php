@@ -21,29 +21,17 @@ class TambahNilai implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $jadwal_ganda;
-    public $penilaian_ganda;
+    public $jadwal_solo;
+    public $penilaian_solo;
+    public $sudut;
+    public $juri;
 
-    public function __construct($jadwal_id,$sudut_biru_id,$sudut_merah_id,$value,$juri_id,$jenis_skor)
+    public function __construct($jadwal,$sudut,$penilaian,$juri)
     {
-        $this->jadwal_ganda = JadwalTGR::where('id',$jadwal_id)->first();
-        $this->penilaian_ganda = PenilaianGanda::where('sudut_biru',$sudut_biru_id)->where('sudut_merah',$sudut_merah_id)->where('jadwal_ganda',$jadwal_id)->where('juri',$juri_id)->first();
-        switch ($jenis_skor) {
-            case 'attack_skor':
-                $this->penilaian_ganda->attack_skor+=$value;
-                $this->penilaian_ganda->save();
-                break;
-            case 'firmness_skor':
-                $this->penilaian_ganda->firmness_skor+=$value;
-                $this->penilaian_ganda->save();
-                break;
-            case 'soulfulness_skor':
-                $this->penilaian_ganda->soulfulness_skor+=$value;
-                $this->penilaian_ganda->save();
-                break;
-        }
-        $this->penilaian_ganda->skor+=$value;
-        $this->penilaian_ganda->save();
+        $this->juri = $juri;
+        $this->sudut = $sudut;
+        $this->penilaian_solo = $penilaian;
+        $this->jadwal_solo = $jadwal;
     }
 
     /**
