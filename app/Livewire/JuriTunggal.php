@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
-use App\Models\Tanding;
 use App\Models\JadwalTGR;
 use App\Models\TGR;
 use App\Events\Tunggal\TambahNilai;

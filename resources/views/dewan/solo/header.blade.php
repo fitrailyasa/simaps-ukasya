@@ -3,7 +3,7 @@
         <h5 class="fw-bold ml-3" style="margin-bottom: -4px">
             Pelatnas
         </h5>
-        <h4 class="fw-bold" style="color: #db3545">{{$sudut->nama}}</h4>
+        <h4 class="fw-bold" style="color: #db3545">{{$tampil->nama}}</h4>
     </div>
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">

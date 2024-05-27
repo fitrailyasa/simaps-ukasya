@@ -8,7 +8,7 @@
     </div>
     <div class="total-value border border-dark d-flex flex-column justify-content-center" style="width: 10%">
         <h5 class="fw-bold">
-            {{$total}}
+            {{$total == 0 ? "0" : $total * -0.5}}
         </h5>
     </div>
 </div>

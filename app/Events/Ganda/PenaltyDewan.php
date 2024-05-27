@@ -23,31 +23,15 @@ class PenaltyDewan implements ShouldBroadcast
      */
     public $jadwal_ganda;
     public $penalty_ganda;
+    public $sudut;
+    public $juri;
 
-    public function __construct($jadwal_id,$sudut_merah_id,$sudut_biru_id,$dewan_id,$jenis_penalty)
-    {;
-        $this->jadwal_ganda = JadwalTGR::where('id',$jadwal_id)->first();
-        $this->penalty_ganda = PenaltyGanda::where('sudut_biru',$sudut_biru_id)->where('sudut_merah',$sudut_merah_id)->where('jadwal_ganda',$jadwal_id)->where('dewan',$dewan_id)->first();
-        switch ($jenis_penalty) {
-            case 'toleransi_waktu':
-                $this->penalty_ganda->increment('toleransi_waktu');
-                break;
-            case 'keluar_arena':
-                $this->penalty_ganda->increment('keluar_arena');
-                break;
-            case 'menyentuh_lantai':
-                $this->penalty_ganda->increment('menyentuh_lantai');
-                break;
-            case 'pakaian':
-                $this->penalty_ganda->increment('pakaian');
-                break;
-            case 'tidak_bergerak':
-                $this->penalty_ganda->increment('tidak_bergerak');
-                break;
-            case 'senjata_jatuh':
-                $this->penalty_ganda->increment('senjata_jatuh');
-                break;
-        }
+    public function __construct($jadwal,$sudut,$penalty,$juri)
+    {
+        $this->juri = $juri;
+        $this->sudut = $sudut;
+        $this->penalty_ganda = $penalty;
+        $this->jadwal_ganda = $jadwal;
     }
     /**
      * Get the channels the event should broadcast on.

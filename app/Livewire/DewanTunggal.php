@@ -25,6 +25,9 @@ class DewanTunggal extends Component
 
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Tunggal')->first();
+        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+            return redirect('dashboard');
+        }
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
@@ -53,10 +56,69 @@ class DewanTunggal extends Component
     }
 
     public function penaltyTrigger($jenis_penalty){
-        PenaltyDewan::dispatch($this->jadwal->id,$this->tampil,Auth::user()->id,$jenis_penalty);
+        switch ($jenis_penalty) {
+            case 'toleransi_waktu':
+                $this->penalty_tunggal->increment('toleransi_waktu');
+                break;
+            case 'keluar_arena':
+                $this->penalty_tunggal->increment('keluar_arena');
+                break;
+            case 'menyentuh_lantai':
+                $this->penalty_tunggal->increment('menyentuh_lantai');
+                break;
+            case 'pakaian':
+                $this->penalty_tunggal->increment('pakaian');
+                break;
+            case 'tidak_bergerak':
+                $this->penalty_tunggal->increment('tidak_bergerak');
+                break;
+        }
+        PenaltyDewan::dispatch($this->jadwal,$this->tampil == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_tunggal,Auth::user());
     }
     public function hapusPenaltyTrigger($jenis_penalty){
-        HapusPenalty::dispatch($this->jadwal->id,$this->tampil,Auth::user()->id,$jenis_penalty);
+        switch ($jenis_penalty) {
+            case 'toleransi_waktu':
+                $this->penalty_tunggal->decrement('toleransi_waktu');
+                if($this->penalty_tunggal->toleransi_waktu < 0){
+                    $this->penalty_tunggal->toleransi_waktu = 0;
+                    $this->penalty_tunggal->save();
+                    return;
+                }
+                break;
+            case 'keluar_arena':
+                $this->penalty_tunggal->decrement('keluar_arena');
+                if($this->penalty_tunggal->keluar_arena < 0){
+                    $this->penalty_tunggal->keluar_arena = 0;
+                    $this->penalty_tunggal->save();
+                    return;
+                }
+                break;
+            case 'menyentuh_lantai':
+                $this->penalty_tunggal->decrement('menyentuh_lantai');
+                if($this->penalty_tunggal->menyentuh_lantai < 0){
+                    $this->penalty_tunggal->menyentuh_lantai = 0;
+                    $this->penalty_tunggal->save();
+                    return;
+                }
+                break;
+            case 'pakaian':
+                $this->penalty_tunggal->decrement('pakaian');
+                if($this->penalty_tunggal->pakaian < 0){
+                    $this->penalty_tunggal->pakaian = 0;
+                    $this->penalty_tunggal->save();
+                    return;
+                }
+                break;
+            case 'tidak_bergerak':
+                $this->penalty_tunggal->decrement('tidak_bergerak');
+                if($this->penalty_tunggal->tidak_bergerak < 0){
+                    $this->penalty_tunggal->tidak_bergerak = 0;
+                    $this->penalty_tunggal->save();
+                    return;
+                }
+                break;
+        }
+        HapusPenalty::dispatch($this->jadwal,$this->tampil == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_tunggal,Auth::user());
     }
 
     #[On('echo:poin,.penalty-tunggal')]

@@ -39,6 +39,9 @@ class DewanTanding extends Component
     public function mount()
     {
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+            return redirect('dashboard');
+        }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
         $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);

@@ -32,7 +32,7 @@
                     <button wire:click='penaltyTrigger("toleransi_waktu")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">{{$penalty_tunggal->toleransi_waktu}}</h5>
+                    <h5 class="fw-bold">{{$penalty_tunggal->toleransi_waktu == 0 ? "0" : $penalty_tunggal->toleransi_waktu * -0.5}}</h5>
                 </div>
             </div>
             <div class="row-2 d-flex" style="height:20% ">
@@ -41,7 +41,7 @@
                     <button wire:click='penaltyTrigger("keluar_arena")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark  d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">{{$penalty_tunggal->keluar_arena}}</h5>
+                    <h5 class="fw-bold">{{$penalty_tunggal->keluar_arena == 0 ? "0" : $penalty_tunggal->keluar_arena * -0.5}}</h5>
                 </div>
             </div>
             <div class="row-3 d-flex" style="height:20% ">
@@ -50,7 +50,7 @@
                     <button wire:click='penaltyTrigger("menyentuh_lantai")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">{{$penalty_tunggal->menyentuh_lantai}}</h5>
+                    <h5 class="fw-bold">{{$penalty_tunggal->menyentuh_lantai == 0 ? "0" : $penalty_tunggal->menyentuh_lantai * -0.5}}</h5>
                 </div>
             </div>
             <div class="row-4 d-flex" style="height:20% ">
@@ -59,7 +59,7 @@
                     <button wire:click='penaltyTrigger("pakaian")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                 <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">{{$penalty_tunggal->pakaian}}</h5>
+                    <h5 class="fw-bold">{{$penalty_tunggal->pakaian == 0 ? "0" : $penalty_tunggal->pakaian * -0.5}}</h5>
                 </div>
             </div>
             <div class="row-5 d-flex" style="height:20% ">
@@ -68,7 +68,7 @@
                     <button wire:click='penaltyTrigger("tidak_bergerak")' class="btn btn-danger mt-3" style="height: 60%"><h5 class="text-white">-0.50</h5></button>
                 </div>
                  <div class="score-value border border-dark d-flex justify-content-center flex-column" style="width: 20%">
-                    <h5 class="fw-bold">{{$penalty_tunggal->tidak_bergerak}}</h5>
+                    <h5 class="fw-bold">{{$penalty_tunggal->tidak_bergerak == 0 ? "0" : $penalty_tunggal->tidak_bergerak * -0.5}}</h5>
                 </div>
             </div>
         </div>

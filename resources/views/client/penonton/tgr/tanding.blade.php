@@ -85,7 +85,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty}}
+                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -262,7 +262,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty}}
+                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -439,7 +439,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty}}
+                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -614,7 +614,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty}}
+                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">

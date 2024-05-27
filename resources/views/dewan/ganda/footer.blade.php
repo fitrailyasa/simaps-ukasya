@@ -6,6 +6,6 @@
         <h5 class="fw-bold">Total</h5>
     </div>
     <div class="total-value border-dark border d-flex flex-column justify-content-center" style="width: 10%">
-        <h5 class="fw-bold">{{$total}}</h5>
+        <h5 class="fw-bold">{{$total == 0 ? "0" : $total * -0.5}}</h5>
     </div>
 </div>

@@ -21,32 +21,17 @@ class PenaltyDewan implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $sudut;
     public $jadwal_tunggal;
     public $penalty_tunggal;
+    public $sudut;
+    public $juri;
 
-    public function __construct($jadwal_id,$sudut_id,$dewan_id,$jenis_penalty)
+    public function __construct($jadwal,$sudut,$penalty,$juri)
     {
-        $this->sudut = TGR::where('id',$sudut_id)->where('kategori','Tunggal')->first();
-        $this->jadwal_tunggal = JadwalTGR::where('id',$jadwal_id)->first();
-        $this->penalty_tunggal = PenaltyTunggal::where('sudut',$sudut_id)->where('jadwal_tunggal',$jadwal_id)->where('dewan',$dewan_id)->first();
-        switch ($jenis_penalty) {
-            case 'toleransi_waktu':
-                $this->penalty_tunggal->increment('toleransi_waktu');
-                break;
-            case 'keluar_arena':
-                $this->penalty_tunggal->increment('keluar_arena');
-                break;
-            case 'menyentuh_lantai':
-                $this->penalty_tunggal->increment('menyentuh_lantai');
-                break;
-            case 'pakaian':
-                $this->penalty_tunggal->increment('pakaian');
-                break;
-            case 'tidak_bergerak':
-                $this->penalty_tunggal->increment('tidak_bergerak');
-                break;
-        }
+        $this->juri = $juri;
+        $this->sudut = $sudut;
+        $this->penalty_tunggal = $penalty;
+        $this->jadwal_tunggal = $jadwal;
     }
     /**
      * Get the channels the event should broadcast on.
