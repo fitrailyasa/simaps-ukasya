@@ -1,24 +1,19 @@
 <!-- Tombol untuk membuka modal -->
-<a role="button" class="btn-sm btn-warning mr-2" data-bs-toggle="modal"
-    data-bs-target=".bd-example-modal-sm{{ $timbangulang->id }}">
+<a role="button" class="btn-sm btn-primary mr-2" data-bs-toggle="modal" data-bs-target=".create{{ $jadwaltanding->id }}">
     <i class="fa fa-edit"></i>
 </a>
 <!-- Modal -->
-<div class="modal fade bd-example-modal-sm{{ $timbangulang->id }}" tabindex="-1" role="dialog" aria-hidden="">
+<div class="modal fade create{{ $jadwaltanding->id }}" tabindex="-1" role="dialog" aria-hidden="">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             @if (auth()->user()->roles_id == 1)
-                <form method="POST" action="{{ route('admin.timbang-ulang.update', $timbangulang->id) }}"
-                    enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.timbang-ulang.store') }}" enctype="multipart/form-data">
                 @elseif (auth()->user()->roles_id == 2)
-                    <form method="POST" action="{{ route('op.timbang-ulang.update', $timbangulang->id) }}"
-                        enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('op.timbang-ulang.store') }}" enctype="multipart/form-data">
             @endif
             @csrf
-            @method('PUT')
             <div class="modal-header">
-                <h5 class="modal-title" id="modalFormLabel">Edit Timbang Ulang Partai
-                    Ke-{{ $timbangulang->partai ?? '-' }}
+                <h5 class="modal-title" id="modalFormLabel">Timbang Ulang Partai Ke-{{ $jadwaltanding->partai ?? '-' }}
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -27,18 +22,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5">
-                        <input type="hidden" name="partai" value="{{ $timbangulang->partai }}">
-                        <input type="hidden" name="gelanggang" value="{{ $timbangulang->Gelanggang->id }}">
-                        <input type="hidden" name="babak" value="{{ $timbangulang->babak }}">
-                        <input type="hidden" name="kelas" value="{{ $timbangulang->kelas }}">
+                        <input type="hidden" name="partai" value="{{ $jadwaltanding->partai }}">
+                        <input type="hidden" name="gelanggang" value="{{ $jadwaltanding->Gelanggang->id }}">
+                        <input type="hidden" name="babak" value="{{ $jadwaltanding->babak }}">
+                        <input type="hidden" name="kelas" value="{{ $jadwaltanding->kelas }}">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
                             <input type="hidden" name="sudut_biru"
-                                value="{{ $timbangulang->PengundianTandingBiru->Tanding->id ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->id ?? '-' }}">
                             <input type="text" class="form-control bg-primary" readonly
-                                value="{{ $timbangulang->PengundianTandingBiru->Tanding->kontingen ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }}">
                             <input type="text" class="form-control bg-primary" readonly
-                                value="{{ $timbangulang->PengundianTandingBiru->Tanding->nama ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}">
                         </div>
                     </div>
                     <div class="col-md-2 text-center align-self-center fw-bold">VS</div>
@@ -46,11 +41,11 @@
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
                             <input type="hidden" name="sudut_merah"
-                                value="{{ $timbangulang->PengundianTandingMerah->Tanding->id ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->id ?? '-' }}">
                             <input type="text" class="form-control bg-danger" readonly
-                                value="{{ $timbangulang->PengundianTandingMerah->Tanding->kontingen ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}">
                             <input type="text" class="form-control bg-danger" readonly
-                                value="{{ $timbangulang->PengundianTandingMerah->Tanding->nama ?? '-' }}">
+                                value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}">
                         </div>
                     </div>
                     <hr>
@@ -58,7 +53,7 @@
                         <div class="mb-2">
                             <label class="form-label">Hasil Timbang</label>
                             <input type="number" class="form-control" placeholder="60" name="berat_biru" required
-                                value="{{ $timbangulang->berat_biru }}">
+                                value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->berat_badan ?? '-' }}">
                         </div>
                     </div>
                     <div class="col-md-2 text-center align-self-center fw-bold">VS</div>
@@ -66,7 +61,7 @@
                         <div class="mb-2">
                             <label class="form-label">Hasil Timbang</label>
                             <input type="number" class="form-control" placeholder="60" name="berat_merah" required
-                                value="{{ $timbangulang->berat_merah }}">
+                                value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->berat_badan ?? '-' }}">
                         </div>
                     </div>
                     <hr>
@@ -74,15 +69,10 @@
                         <div class="mb-2">
                             <label class="form-label">Keputusan</label>
                             <select name="status_biru" id="status_biru" class="form-select" required>
-                                <option value="">-- Pilih Keputusan --</option>
-                                <option value="SAH" {{ $timbangulang->status_biru == 'SAH' ? 'selected' : '' }}>SAH
-                                </option>
-                                <option value="TIDAK SAH"
-                                    {{ $timbangulang->status_biru == 'TIDAK SAH' ? 'selected' : '' }}>TIDAK SAH
-                                </option>
-                                <option value="UNDUR DIRI"
-                                    {{ $timbangulang->status_biru == 'UNDUR DIRI' ? 'selected' : '' }}>UNDUR DIRI
-                                </option>
+                                <option selected readonly>-- Pilih Keputusan --</option>
+                                <option value="SAH">SAH</option>
+                                <option value="TIDAK SAH">TIDAK SAH</option>
+                                <option value="UNDUR DIRI">UNDUR DIRI</option>
                             </select>
                         </div>
                     </div>
@@ -91,15 +81,10 @@
                         <div class="mb-2">
                             <label class="form-label">Keputusan</label>
                             <select name="status_merah" id="status_merah" class="form-select" required>
-                                <option value="">-- Pilih Keputusan --</option>
-                                <option value="SAH" {{ $timbangulang->status_merah == 'SAH' ? 'selected' : '' }}>
-                                    SAH</option>
-                                <option value="TIDAK SAH"
-                                    {{ $timbangulang->status_merah == 'TIDAK SAH' ? 'selected' : '' }}>TIDAK SAH
-                                </option>
-                                <option value="UNDUR DIRI"
-                                    {{ $timbangulang->status_merah == 'UNDUR DIRI' ? 'selected' : '' }}>UNDUR DIRI
-                                </option>
+                                <option selected readonly>-- Pilih Keputusan --</option>
+                                <option value="SAH">SAH</option>
+                                <option value="TIDAK SAH">TIDAK SAH</option>
+                                <option value="UNDUR DIRI">UNDUR DIRI</option>
                             </select>
                         </div>
                     </div>
