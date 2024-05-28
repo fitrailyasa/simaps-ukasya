@@ -12,3 +12,18 @@
         </h5>
     </div>
 </div>
+<div class="row">OPERATOR KONTROL</div>
+<div class="row">
+    <div class="col-md-4">
+        <button wire:click='gantiTahap("persiapan",null)'>persiapan</button>
+    </div>
+    <div class="col-md-4">
+        <button wire:click='gantiTahap("tampil","biru")'>penampilan biru</button>
+        <button wire:click='gantiTahap("tampil","merah")'>penampilan merah</button>
+    </div>
+    <div class="col-md-4">
+        <button wire:click='gantiTahap("keputusan","merah")'>merah</button>
+        <button wire:click='gantiTahap("keputusan","biru")'>biru</button>
+        <button>keputusan</button>
+    </div>
+</div>

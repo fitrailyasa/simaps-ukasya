@@ -4,7 +4,7 @@
         @include('client.penonton.tgr.persiapan')
     @elseif($tahap == 'tampil')
         @include('client.penonton.tgr.tanding')  
-    @elseif($tahap == 'hasil')
+    @elseif($tahap == 'keputusan')
         @include('client.penonton.tgr.hasil')
     @endif
 </div>

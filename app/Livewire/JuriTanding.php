@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\PengundianTanding;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -35,7 +36,7 @@ class JuriTanding extends Component
 
     public function mount()
     {
-        $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
@@ -46,8 +47,10 @@ class JuriTanding extends Component
             };
         }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
-        $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
+        $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
+        $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
+        $this->sudut_merah = Tanding::find($this->pengundian_biru->atlet_id);
+        $this->sudut_biru = Tanding::find($this->pengundian_merah->atlet_id);
         $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
     }

@@ -75,6 +75,12 @@ window.Echo.channel("poin").listen(".penalty-tunggal", (e) => {
 window.Echo.channel("poin").listen(".hapus-penalty-tunggal", (e) => {
     console.log(e);
 });
+window.Echo.channel("arena").listen(".ganti-tahap-tunggal", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tampil-tunggal", (e) => {
+    console.log(e);
+});
 
 window.Echo.channel("poin").listen(".salah-gerakan-regu", (e) => {
     console.log(e);
@@ -99,6 +105,13 @@ window.Echo.channel("poin").listen(".penalty-ganda", (e) => {
     console.log(e);
 });
 window.Echo.channel("poin").listen(".hapus-penalty-ganda", (e) => {
+    console.log(e);
+});
+
+window.Echo.channel("arena").listen(".ganti-tahap-ganda", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tampil-ganda", (e) => {
     console.log(e);
 });
 

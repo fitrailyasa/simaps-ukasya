@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('penalty_ganda', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->foreignId('sudut_merah');
-            $table->foreignId('sudut_biru');
+            $table->foreignId('sudut');
             $table->foreignId('jadwal_ganda');
             $table->foreignId('dewan');
             $table->integer('toleransi_waktu')->default(0);

@@ -10,7 +10,7 @@ class JadwalTGR extends Model
     use HasFactory;
 
     protected $table = 'jadwal_tgr';
-    protected $fillable = ['partai', 'gelanggang', 'babak', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang'];    
+    protected $fillable = ['partai','tampil','tahap' ,'gelanggang', 'babak', 'sudut_biru', 'sudut_merah', 'next_sudut', 'next_partai', 'skor_biru', 'skor_merah', 'pemenang'];    
 
     public function Gelanggang()    
     {
@@ -25,6 +25,11 @@ class JadwalTGR extends Model
     public function PengundianTGRMerah()
     {
         return $this->belongsTo(PengundianTGR::class, 'sudut_merah', 'id');
+    }
+
+    public function TampilTGR()
+    {
+        return $this->belongsTo(PengundianTGR::class, 'tampil', 'id');
     }
 
     public function PemenangTGR()

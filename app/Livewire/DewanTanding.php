@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Events\Tanding\MulaiPertandingan;
+use App\Models\PengundianTanding;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -25,6 +26,8 @@ class DewanTanding extends Component
     public $jadwal;
     public $sudut_merah;
     public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
     public $penilaian_tanding_merah;
     public $penilaian_tanding_biru;
@@ -43,8 +46,10 @@ class DewanTanding extends Component
             return redirect('dashboard');
         }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
-        $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
+        $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
+        $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
+        $this->sudut_merah = Tanding::find($this->pengundian_biru->atlet_id);
+        $this->sudut_biru = Tanding::find($this->pengundian_merah->atlet_id);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }

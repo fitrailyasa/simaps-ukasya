@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Ganda;
+namespace App\Events\Tunggal;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,31 +9,22 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\JadwalTGR;
-use App\Models\TGR;
-use App\Models\Gelanggang;
-use App\Models\PenilaianGanda;
 
-class TambahNilai implements ShouldBroadcast
+class GantiTampil implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $jadwal_ganda;
-    public $penilaian_ganda;
-    public $sudut;
-    public $juri;
-
-    public function __construct($jadwal,$sudut,$penilaian,$juri)
+    public $tampil;
+    public $jadwal;
+    public function __construct($tampil,$jadwal)
     {
-        $this->juri = $juri;
-        $this->sudut = $sudut;
-        $this->penilaian_ganda = $penilaian;
-        $this->jadwal_ganda = $jadwal;
-    }
+        $this->tampil = $tampil;
+        $this->jadwal = $jadwal;
 
+    }
     /**
      * Get the channels the event should broadcast on.
      *
@@ -41,10 +32,10 @@ class TambahNilai implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('poin');
+        return new Channel('arena');
     }
     public function broadcastAs()
     {
-        return 'tambah-skor-ganda';
+        return 'ganti-tampil-tunggal';
     }
 }

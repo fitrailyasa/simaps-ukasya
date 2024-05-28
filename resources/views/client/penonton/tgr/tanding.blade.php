@@ -1,30 +1,54 @@
-@if ($penalty_tunggal??null)
+@if ($jenis == "tunggal")
     @php
-    if(count($penilaian_tunggal_juri)%2==0){
-        $length = count($penilaian_tunggal_juri)/2;
-    }else{
+    if(count($penilaian_tunggal_juri) % 2 == 0){
+        $length = count($penilaian_tunggal_juri) / 2;
+    } else if(count($penilaian_tunggal_juri)%2==1){
         $length = (count($penilaian_tunggal_juri)+1)/2;
+    }else{
+        $length = 1;
     }
-    $penalty = $penalty_tunggal->toleransi_waktu+$penalty_tunggal->keluar_arena+$penalty_tunggal->menyentuh_lantai+$penalty_tunggal->pakaian+$penalty_tunggal->tidak_bergerak;
+    
+    if($penalty_tunggal){
+        $penalty = $penalty_tunggal->toleransi_waktu + $penalty_tunggal->keluar_arena + $penalty_tunggal->menyentuh_lantai + $penalty_tunggal->pakaian + $penalty_tunggal->tidak_bergerak;
+    } else {
+        $penalty = 0;
+    }
+
     $total = 0;
     foreach ($penilaian_tunggal_juri as $penilaian_juri) {
         $total += $penilaian_juri->skor;
     }
-    $mean = $total / count($penilaian_tunggal_juri);
-    
-    // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
-    $total_diff_squared = 0;
-    foreach ($penilaian_tunggal_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
-    }
 
-    // Menghitung standar deviasi
-    $standard_deviation = sqrt($total_diff_squared / count($penilaian_tunggal_juri));
-    
-    $sorted_nilai =  json_decode($penilaian_tunggal_juri);
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai = json_decode($penilaian_tunggal_juri);
     usort($sorted_nilai, function($a, $b) {
         return $a->skor <=> $b->skor;
     });
+
+    // Menghitung median
+    $count = count($sorted_nilai);
+    if ($count % 2 == 0 && $count !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median = ($sorted_nilai[$count / 2 - 1]->skor + $sorted_nilai[$count / 2]->skor) / 2;
+    } else if($count % 2 == 1 && $count !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median = $sorted_nilai[floor($count / 2)]->skor;
+    }else{
+        $median = 0;
+    }
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    $total_diff_squared = 0;
+    foreach ($penilaian_tunggal_juri as $penilaian_juri) {
+        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+    }
+
+    // Menghitung standar deviasi
+    if (count($penilaian_tunggal_juri) !== 0) {
+        $standard_deviation = sqrt($total_diff_squared / $count);
+    } else {
+        $standard_deviation = 0;
+    }
 @endphp
 
 @section('style')
@@ -42,23 +66,15 @@
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">
-                    @if ($tampil == $sudut_biru->id)
-                        {{$sudut_biru->nama}}
-                    @else
-                        {{$sudut_merah->nama}}
-                    @endif
+                    {{$tampil['nama']}}
                 </p>
-                <p class="fw-bold" style="font-size: 2rem;{{$tampil == $sudut_biru->id?"color: #0053a6" : "color: #db3545"}}">
-                    @if ($tampil == $sudut_biru->id)
-                        {{$sudut_biru->region}}
-                    @else
-                        {{$sudut_merah->region}}
-                    @endif    
+                <p class="fw-bold" style="font-size: 2rem;{{$jadwal->tampil == $sudut_biru->id?"color: #0053a6" : "color: #db3545"}}">
+                    {{$tampil['region']}}    
                 </p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($nilai_masuk == false)
+            @if ($mulai == true)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
@@ -73,11 +89,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                @if (count($penilaian_tunggal_juri) % 2 == 0 )
-                                    {{($penilaian_tunggal_juri[$length-1]->skor + $penilaian_tunggal_juri[$length]->skor)/2}}
-                                @else
-                                    {{$penilaian_tunggal_juri[$length-1]->skor}}
-                                @endif
+                                {{$median}}
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -101,7 +113,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$mean - $penalty *  0.5}}
+                                {{$median - $penalty *  0.5}}
                             </div>
                         </div>
                         
@@ -121,7 +133,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if ($length*2 %2 == 0)
+        @if (count($penilaian_tunggal_juri) == $length*2)
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
@@ -184,9 +196,9 @@
         // }
     </script>
 @endsection
-@elseif($penalty_regu??null)
+@elseif($jenis == "regu")
     @php
-    if(count($penilaian_regu_juri)%2==0){
+    if(count($penilaian_regu_juri) %2 == 0){
         $length = count($penilaian_regu_juri)/2;
     }else{
         $length = (count($penilaian_regu_juri)+1)/2;
@@ -250,11 +262,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                @if (count($penilaian_regu_juri) % 2 == 0 )
-                                    {{($penilaian_regu_juri[$length-1]->skor + $penilaian_regu_juri[$length]->skor)/2}}
-                                @else
-                                    {{$penilaian_regu_juri[$length-1]->skor}}
-                                @endif
+                                {{$median}}
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -278,7 +286,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$mean - $penalty *  0.5}}
+                                {{$median - $penalty *  0.5}}
                             </div>
                         </div>
                         
@@ -298,7 +306,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if ($length*2 %2 == 0)
+        @if (($length *2 -1) %2 !== 0)
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
@@ -343,10 +351,6 @@
             </div>
             @endforeach
         @endif
-        
-        @for ($i = 1; $i <= 10; $i++)
-        
-        @endfor
     </div>
 </div>
 
@@ -361,33 +365,57 @@
         // }
     </script>
 @endsection
-@elseif($penalty_ganda??null)
+@elseif($jenis == "ganda")
 @php
-    if(count($penilaian_ganda_juri)%2==0){
-        $length = count($penilaian_ganda_juri)/2;
-    }else{
+    if(count($penilaian_ganda_juri) % 2 == 0){
+        $length = count($penilaian_ganda_juri) / 2;
+    } else if(count($penilaian_ganda_juri)%2==1){
         $length = (count($penilaian_ganda_juri)+1)/2;
+    }else{
+        $length = 1;
     }
-    $penalty = $penalty_ganda->toleransi_waktu+$penalty_ganda->keluar_arena+$penalty_ganda->menyentuh_lantai+$penalty_ganda->pakaian+$penalty_ganda->tidak_bergerak;
+    
+    if($penalty_ganda){
+        $penalty = $penalty_ganda->toleransi_waktu + $penalty_ganda->keluar_arena + $penalty_ganda->menyentuh_lantai + $penalty_ganda->pakaian + $penalty_ganda->tidak_bergerak;
+    } else {
+        $penalty = 0;
+    }
+
     $total = 0;
     foreach ($penilaian_ganda_juri as $penilaian_juri) {
         $total += $penilaian_juri->skor;
     }
-    $mean = $total / count($penilaian_ganda_juri);
-    
-    // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
-    $total_diff_squared = 0;
-    foreach ($penilaian_ganda_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
-    }
 
-    // Menghitung standar deviasi
-    $standard_deviation = sqrt($total_diff_squared / count($penilaian_ganda_juri));
-    
-    $sorted_nilai =  json_decode($penilaian_ganda_juri);
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai = json_decode($penilaian_ganda_juri);
     usort($sorted_nilai, function($a, $b) {
         return $a->skor <=> $b->skor;
     });
+
+    // Menghitung median
+    $count = count($sorted_nilai);
+    if ($count % 2 == 0 && $count !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median = ($sorted_nilai[$count / 2 - 1]->skor + $sorted_nilai[$count / 2]->skor) / 2;
+    } else if($count % 2 == 1 && $count !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median = $sorted_nilai[floor($count / 2)]->skor;
+    }else{
+        $median = 0;
+    }
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    $total_diff_squared = 0;
+    foreach ($penilaian_ganda_juri as $penilaian_juri) {
+        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+    }
+
+    // Menghitung standar deviasi
+    if (count($penilaian_ganda_juri) !== 0) {
+        $standard_deviation = sqrt($total_diff_squared / $count);
+    } else {
+        $standard_deviation = 0;
+    }
 @endphp
 
 @section('style')
@@ -407,12 +435,12 @@
                 <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}, {{$sudut_merah->nama}}</p>
-                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->region}}</p>
+                <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
+                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['region']}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($nilai_masuk == false)
+            @if ($mulai == true)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
@@ -427,11 +455,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                @if (count($penilaian_ganda_juri) % 2 == 0 )
-                                    {{($penilaian_ganda_juri[$length-1]->skor + $penilaian_ganda_juri[$length]->skor)/2}}
-                                @else
-                                    {{$penilaian_ganda_juri[$length-1]->skor}}
-                                @endif
+                                {{$median}}
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -455,7 +479,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$mean - $penalty *  0.5}}
+                                {{$median - $penalty *  0.5}}
                             </div>
                         </div>
                         
@@ -475,7 +499,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if ($length*2 %2 == 0)
+        @if (count($penilaian_ganda_juri) == $length*2)
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
@@ -488,14 +512,14 @@
                         }
                     }
                 @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
             @endforeach
         @else
             @foreach ($sorted_nilai as $i => $nilai)
@@ -510,20 +534,16 @@
                         }
                     }
                 @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
             @endforeach
         @endif
-        
-        @for ($i = 1; $i <= 10; $i++)
-        
-        @endfor
     </div>
 </div>
 
@@ -539,7 +559,7 @@
     </script>
 @endsection
 
-@elseif($penalty_solo??null)
+@elseif($jenis == "solo")
 @php
     if(count($penilaian_solo_juri)%2==0){
         $length = count($penilaian_solo_juri)/2;

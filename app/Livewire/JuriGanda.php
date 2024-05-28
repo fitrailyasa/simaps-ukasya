@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\PengundianTGR;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,10 +20,13 @@ class JuriGanda extends Component
     public $jadwal;
     public $sudut_merah;
     public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
     public $waktu ;
     public $mulai = false;
     public $penilaian_ganda;
+    public $tampil;
     
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
@@ -30,19 +34,22 @@ class JuriGanda extends Component
             return redirect('dashboard');
         }
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
-        $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
+        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
+        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
+        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
+        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
+        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
         $this->waktu = $this->gelanggang->waktu * 60;
-        $this->penilaian_ganda = PenilaianGanda::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->tampil->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         if(!$this->penilaian_ganda){
-                $this->penilaian_ganda = PenilaianGanda::create([
-                    'jadwal_ganda'=>$this->jadwal->id,
-                    'sudut_biru' => $this->sudut_biru->id,
-                    'sudut_merah' => $this->sudut_merah->id,
-                    'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
-                    'juri' => Auth::user()->id
-                ]);
-            }
+            $this->penilaian_ganda = PenilaianGanda::create([
+                'jadwal_ganda'=>$this->jadwal->id,
+                'sudut' => $this->tampil->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                'juri' => Auth::user()->id
+            ]);
+            TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user());
+        }
     }
 
     public function tambahNilaiTrigger($value,$jenis_skor){
@@ -63,7 +70,7 @@ class JuriGanda extends Component
         }
         $this->penilaian_ganda->skor += $value;
         $this->penilaian_ganda->save();
-        TambahNilai::dispatch($this->jadwal,[$this->sudut_biru , $this->sudut_merah],$this->penilaian_ganda,Auth::user());
+        TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user());
     }
 
     #[On('echo:poin,.tambah-skor-ganda')]

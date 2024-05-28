@@ -8,9 +8,9 @@ Tunggal
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
-            <span class="fw-bold" style="font-size: 1.3rem">{{$sudut_biru->region}}</span>
-            <h3 class="fw-bold" style="{{$sudut_biru->id == $tampil ? "color: #0053a6 !important" : "color:  red!important"}}">
-                {{$sudut_biru->nama}}
+            <span class="fw-bold" style="font-size: 1.3rem">{{$tampil->region}}</span>
+            <h3 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
+                {{$tampil->nama}}
             </h3>
         </div>
         <div class="jenis-lomba text-end" style="width: 40%">
@@ -65,11 +65,7 @@ Tunggal
                     "
                 >
                     <button
-                        @if ($sudut_biru->id == $tampil)
-                            wire:click='salahGerakanTrigger({{$sudut_biru->id}})'
-                        @else
-                            wire:click='salahGerakanTrigger({{$sudut_merah->id}})'
-                        @endif
+                        wire:click='salahGerakanTrigger({{$tampil->id}})'
                         class="btn tombol-tunggal"
                         style="
                             width: 100%;
@@ -154,11 +150,7 @@ Tunggal
                         @for ($i = 1; $i <= 10; $i++)
                             @if ($i == 10)
                                 <button
-                                                                @if ($sudut_biru->id == $tampil)
-                                    wire:click='tambahNilaiTrigger({{$sudut_biru->id}},{{$i}})'
-                                @else
-                                    wire:click='tambahNilaiTrigger({{$sudut_merah->id}},{{$i}})'
-                                @endif
+                                wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1"
                                 style="background-color: #ececec; width:5%"
                                 >
@@ -166,12 +158,7 @@ Tunggal
                                 </button>
                             @else
                                 <button
-                                @if ($sudut_biru->id == $tampil)
-                                    wire:click='tambahNilaiTrigger({{$sudut_biru->id}},{{$i}})'
-                                @else
-                                    wire:click='tambahNilaiTrigger({{$sudut_merah->id}},{{$i}})'
-                                @endif
-                                
+                                wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1"
                                 style="background-color: #ececec;width:5%"
                                 >

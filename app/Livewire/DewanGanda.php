@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Events\Ganda\GantiTahap;
+use App\Events\Ganda\GantiTampil;
+use App\Models\PengundianTGR;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
@@ -20,10 +23,13 @@ class DewanGanda extends Component
     public $jadwal;
     public $sudut_merah;
     public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
     public $waktu ;
     public $mulai = false;
     public $penalty_ganda;
+    public $tampil;
 
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
@@ -31,15 +37,17 @@ class DewanGanda extends Component
             return redirect('dashboard');
         }
         $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
-        $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
-        $this->penalty_ganda = PenaltyGanda::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
+        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
+        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
+        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
+        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->penalty_ganda = PenaltyGanda::where('sudut',$this->tampil->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
         if(!$this->penalty_ganda){
             $this->penalty_ganda = PenaltyGanda::create([
                 'dewan'=>Auth::user()->id,
-                'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
-                'sudut_merah'=>$this->sudut_merah->id,
-                'sudut_biru'=>$this->sudut_biru->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                'sudut'=>$this->tampil->id,
                 'jadwal_ganda'=>$this->jadwal->id
             ]);
         }
@@ -121,6 +129,60 @@ class DewanGanda extends Component
         }
         HapusPenalty::dispatch($this->jadwal, [$this->sudut_biru , $this->sudut_merah],$this->penalty_ganda,Auth::user());
     }
+
+    //operator start
+    public function gantiTampil($sudut){
+        if($sudut == "merah"){
+            $this->tampil = $this->sudut_merah;
+            $this->jadwal->tampil = $this->pengundian_merah->id;
+            $this->jadwal->save();
+        }else if($sudut == "biru"){
+            $this->tampil = $this->sudut_biru;
+            $this->jadwal->tampil = $this->pengundian_biru->id;
+            $this->jadwal->save();
+        }
+        GantiTampil::dispatch($this->tampil,$this->jadwal);
+    }
+    public function gantiTahap($tahap,$tampil){
+        if($tahap == "keputusan"){
+            if($tampil == "merah"){
+                $this->jadwal->pemenang = $this->sudut_merah->id;
+            }else if($tampil == "biru"){
+                $this->jadwal->pemenang = $this->sudut_biru->id;
+            }
+        }else if ($tahap == "tampil"){
+            if($tampil == "merah"){
+                $this->jadwal->tampil = $this->sudut_merah->id;
+                $this->penalty_ganda = PenaltyGanda::where('sudut',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+                if(!$this->penalty_ganda){
+                    $this->penalty_ganda = PenaltyGanda::create([
+                        'dewan'=>Auth::user()->id,
+                        'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                        'sudut'=>$this->jadwal->tampil,
+                        'jadwal_ganda'=>$this->jadwal->id
+                    ]);
+                }
+                $this->gantiTampil("merah");
+            }else if($tampil == "biru"){
+                $this->jadwal->tampil = $this->sudut_biru->id;
+                $this->penalty_ganda = PenaltyGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+                if(!$this->penalty_ganda){
+                    $this->penalty_ganda = PenaltyGanda::create([
+                        'dewan'=>Auth::user()->id,
+                        'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                        'sudut'=>$this->jadwal->tampil,
+                        'jadwal_ganda'=>$this->jadwal->id
+                    ]);
+                }
+                $this->gantiTampil("biru");
+            }
+        }
+        $this->jadwal->tahap = $tahap;
+        $this->jadwal->save();
+        $this->tampil = TGR::find($this->jadwal->tampil);
+        GantiTahap::dispatch($tahap,$tampil,$this->tampil);
+    }
+    //operator end
 
     #[On('echo:poin,.penalty-ganda')]
     public function tambahNilaiHandler(){

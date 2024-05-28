@@ -9,15 +9,11 @@ class PenilaianGanda extends Model
 {
     use HasFactory;
     protected $table = 'penilaian_ganda';
-    protected $fillable = ['uuid','jadwal_ganda','sudut_merah','sudut_biru','skor','attack_skor','firmness_skor','soulfulness_skor','juri'];
+    protected $fillable = ['uuid','jadwal_ganda','sudut','skor','attack_skor','firmness_skor','soulfulness_skor','juri'];
 
-    public function TGR_1()
+    public function TGR()
     {
-        return $this->belongsTo(TGR::class, 'sudut_merah', 'id');
-    }
-    public function TGR_2()
-    {
-        return $this->belongsTo(TGR::class, 'sudut_biru', 'id');
+        return $this->belongsTo(TGR::class, 'sudut', 'id');
     }
     public function JadwalTGR()
     {
