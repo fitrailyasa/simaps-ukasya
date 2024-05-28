@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::get('/auth', [AuthController::class, 'checkUser'])->name('checkuser');
 
   // CMS ADMIN
   Route::middleware([Admin::class])->name('admin.')->prefix('admin')->group(function () {

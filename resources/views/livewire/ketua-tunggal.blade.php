@@ -1,27 +1,55 @@
 
 <div>
     @php
-    $length = count($penilaian_tunggal_juri)/2;
-    $penalty = $penalty_tunggal->toleransi_waktu+$penalty_tunggal->keluar_arena+$penalty_tunggal->menyentuh_lantai+$penalty_tunggal->pakaian+$penalty_tunggal->tidak_bergerak;
+    if(count($penilaian_tunggal_juri) % 2 == 0){
+        $length = count($penilaian_tunggal_juri) / 2;
+    } else if(count($penilaian_tunggal_juri)%2==1){
+        $length = (count($penilaian_tunggal_juri)+1)/2;
+    }else{
+        $length = 1;
+    }
+    
+    if($penalty_tunggal){
+        $penalty = $penalty_tunggal->toleransi_waktu + $penalty_tunggal->keluar_arena + $penalty_tunggal->menyentuh_lantai + $penalty_tunggal->pakaian + $penalty_tunggal->tidak_bergerak;
+    } else {
+        $penalty = 0;
+    }
+
     $total = 0;
     foreach ($penilaian_tunggal_juri as $penilaian_juri) {
         $total += $penilaian_juri->skor;
     }
-    $mean = $total / count($penilaian_tunggal_juri);
-    $total = $mean - $penalty * 0.5;
-    // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
-    $total_diff_squared = 0;
-    foreach ($penilaian_tunggal_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
-    }
 
-    // Menghitung standar deviasi
-    $standard_deviation = sqrt($total_diff_squared / count($penilaian_tunggal_juri));
-    // Menyortir array penilaian_tunggal_juri berdasarkan skor dari terkecil ke terbesar
-    $sorted_nilai =  json_decode($penilaian_tunggal_juri);
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai = json_decode($penilaian_tunggal_juri);
     usort($sorted_nilai, function($a, $b) {
         return $a->skor <=> $b->skor;
     });
+
+    // Menghitung median
+    $count = count($sorted_nilai);
+    if ($count % 2 == 0 && $count !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median = ($sorted_nilai[$count / 2 - 1]->skor + $sorted_nilai[$count / 2]->skor) / 2;
+    } else if($count % 2 == 1 && $count !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median = $sorted_nilai[floor($count / 2)]->skor;
+    }else{
+        $median = 0;
+    }
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    $total_diff_squared = 0;
+    foreach ($penilaian_tunggal_juri as $penilaian_juri) {
+        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+    }
+
+    // Menghitung standar deviasi
+    if (count($penilaian_tunggal_juri) !== 0) {
+        $standard_deviation = sqrt($total_diff_squared / $count);
+    } else {
+        $standard_deviation = 0;
+    }
 @endphp
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">
@@ -32,10 +60,10 @@
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
                 <div class="biru-nama">
                     <h5 class="ml-4 fw-bold">
-                        {{$sudut_biru->region}}, {{$sudut_merah->region}}
+                        {{$tampil['kontingen']}}
                     </h5>
-                    <h4 class="fw-bold mt-4" style="color:#252c94">
-                        {{$sudut_biru->nama}}, {{$sudut_merah->nama}}
+                    <h4 class="fw-bold mt-4" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
+                        {{$tampil['nama']}}
                     </h4>
                 </div>
             </div>
@@ -67,6 +95,47 @@
                 </div>
             </div>
             <div class="nilai d-flex gap-1" style="width: 80%; height: 100% !important">
+                @if (!$penilaian_tunggal_juri || count($penilaian_tunggal_juri) == 0)
+                    <div class="nilai-1" style="width: {{100}}%; height: 100%">
+                    <div class="nilai-1-header border border-dark text-center pt-2" style="background-color: #ececec">
+                        <h6 class="fw-bold">
+                            -
+                        </h6>
+                    </div>
+                    <div class="nilai-1-body mt-1">
+                        <div class="nilai-1-movement d-flex justify-content-between " style="gap: 4px !important">
+                            <div class="merah text-center border border-dark pt-2" style="width: 50%">
+                                <h6 class="fw-bold" style="color:#db3545">-</h6>
+                            </div>
+                            <div class="biru text-center border border-dark pt-2" style="width: 50%">
+                                <h6 class="fw-bold" style="color: #252c94">-</h6>
+                            </div>
+                        </div>
+                        <div class="nilai-1-correctness mt-1">
+                            <div class="biru text-center border border-dark pt-2" style="width: 100%">
+                                <h6 class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}"">
+                                    -
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="nilai-1-flow mt-1 " style="height: 100% ;">
+                            <div class="biru text-center border border-dark pt-2 d-flex flex-column justify-content-center"
+                                style="width: 100%; height: 76px;">
+                                <h6 class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}"">
+                                    -
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="nilai-1-total mt-1">
+                            <div class="biru text-center border border-dark pt-2" style="width: 100%">
+                                <h6 class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}"">
+                                    -
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 @foreach ($penilaian_tunggal_juri as $i => $penilaian_juri)
                     <div class="nilai-1" style="width: {{100/$length}}%; height: 100%">
                     <div class="nilai-1-header border border-dark text-center pt-2" style="background-color: #ececec">
@@ -77,7 +146,7 @@
                     <div class="nilai-1-body mt-1">
                         <div class="nilai-1-movement d-flex justify-content-between " style="gap: 4px !important">
                             <div class="merah text-center border border-dark pt-2" style="width: 50%">
-                                <h6 class="fw-bold" style="color:#db3545">0</h6>
+                                <h6 class="fw-bold" style="color:#db3545">{{number_format($penilaian_juri->salah*0.01,2)}}</h6>
                             </div>
                             <div class="biru text-center border border-dark pt-2" style="width: 50%">
                                 <h6 class="fw-bold" style="color: #252c94">0</h6>
@@ -145,6 +214,21 @@
                     </div>
                 </div>
                 <div class="sorted-judge d-flex" style="margin-top: -9px;margin-bottom: -24px !important">
+                    @if (!$sorted_nilai)
+                        <div class="juri-1 text-center" style="width: {{100}}%">
+                            <div class="juri-1-header border border-dark"
+                                style="width: 100%; background-color: #ececec; height: 40%;">
+                                <h6 class="fw-bold">
+                                    -
+                                </h6>
+                            </div>
+                            <div class="juri-1-value border border-dark" style="width: 100%; height: 32%;">
+                                <h6 class="fw-bold">
+                                    -
+                                </h6>
+                            </div>
+                        </div>
+                    @endif
                     @foreach ($sorted_nilai as $i => $nilai)
                         @php
                             $juri_id = $nilai->juri;
@@ -157,7 +241,7 @@
                                 }
                             }
                         @endphp
-                        <div class="juri-1 text-center" style="width: {{100/$length}}%">
+                    <div class="juri-1 text-center" style="width: {{100/$length}}%">
                         <div class="juri-1-header border border-dark"
                             style="width: 100%; background-color: #ececec; height: 40%;">
                             <h6 class="fw-bold">
@@ -174,12 +258,8 @@
                 </div>
                 <div class="median-value text-center">
                     <div class="border border-dark mt-2">
-                        <h6 class="fw-bold pt-2" style="color: #252c94">
-                            @if (count($penilaian_tunggal_juri) % 2 == 0 )
-                                {{($penilaian_tunggal_juri[$length/2]->skor + $penilaian_tunggal_juri[$length/2+1]->skor)/2}}
-                            @else
-                                {{$penilaian_tunggal_juri[$length/2]->skor}}
-                            @endif
+                        <h6 class="fw-bold pt-2" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
+                            {{$median}}
                         </h6>
                     </div>
                 </div>
@@ -192,7 +272,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->toleransi_waktu}}
+                        {{$penalty_tunggal->toleransi_waktu == 0 ? "0" : $penalty_tunggal->toleransi_waktu  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -202,7 +282,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->keluar_arena}}
+                        {{$penalty_tunggal->keluar_arena == 0 ? "0" : $penalty_tunggal->keluar_arena  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -212,7 +292,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->menyentuh_lantai}}
+                        {{$penalty_tunggal->menyentuh_lantai == 0 ? "0" : $penalty_tunggal->menyentuh_lantai  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -222,7 +302,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->pakaian}}
+                        {{$penalty_tunggal->pakaian == 0 ? "0" : $penalty_tunggal->pakaian  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -232,7 +312,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->tidak_bergerak}}
+                        {{$penalty_tunggal->tidak_bergerak == 0 ? "0" : $penalty_tunggal->tidak_bergerak  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -249,7 +329,7 @@
         </div>
         <div class="content-left text-center" style="width:50%;">
             <div class="final-score border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$total}}</h6>
+                <h6 class="fw-bold mt-1">{{$median}}</h6>
             </div>
             <div class="standart-dev border border-dark" style="width:100%;">
                 <h6 class="fw-bold mt-1">{{$standard_deviation}}</h6>

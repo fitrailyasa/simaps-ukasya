@@ -12,11 +12,7 @@
                 </div>
                 <div class="nav-down mt-2">
                     <h5 class="fw-bold">
-                      @if ($tampil == $sudut_biru->id)
-                        {{$sudut_biru->kategori}}-{{$sudut_biru->kategori}}
-                      @else
-                        {{$sudut_merah->kategori}}-{{$sudut_merah->kategori}}
-                      @endif
+                      {{$tampil['kategori']}}
                       @ {{$gelanggang->nama}} Match {{$jadwal->partai}}</h5>
                 </div>
               </a>

@@ -3,7 +3,7 @@
         <h5 class="fw-bold ml-3" style="margin-bottom: -4px">
             {{$tampil->kontingen}}
         </h5>
-        <h4 class="fw-bold" style="color: #db3545">
+        <h4 class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
             {{$tampil->nama}}    
         </h4>
     </div>
