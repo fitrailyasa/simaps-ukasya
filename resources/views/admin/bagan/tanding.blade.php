@@ -19,7 +19,8 @@
 
 @section('content')
     <div class="card p-3">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.generate.tanding') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="d-flex justify-content-center align-items-center">
                 <div class="form-group ml-0">
                     <select name="golongan" id="golongan" class="form-select @error('golongan') is-invalid @enderror">
@@ -43,25 +44,9 @@
                 <div class="form-group ml-2">
                     <select name="kelas" id="kelas" class="form-select @error('kelas') is-invalid @enderror">
                         <option value="">-- Pilih Kelas Tanding --</option>
-                        <option value="Kelas A">Kelas A</option>
-                        <option value="Kelas B">Kelas B</option>
-                        <option value="Kelas C">Kelas C</option>
-                        <option value="Kelas D">Kelas D</option>
-                        <option value="Kelas E">Kelas E</option>
-                        <option value="Kelas F">Kelas F</option>
-                        <option value="Kelas G">Kelas G</option>
-                        <option value="Kelas H">Kelas H</option>
-                        <option value="Kelas I">Kelas I</option>
-                        <option value="Kelas J">Kelas J</option>
-                        <option value="Kelas K">Kelas K</option>
-                        <option value="Kelas L">Kelas L</option>
-                        <option value="Kelas M">Kelas M</option>
-                        <option value="Kelas N">Kelas N</option>
-                        <option value="Kelas O">Kelas O</option>
-                        <option value="Kelas P">Kelas P</option>
-                        <option value="Kelas Q">Kelas Q</option>
-                        <option value="Kelas R">Kelas R</option>
-                        <option value="Kelas S">Kelas S</option>
+                        @foreach (['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'] as $kelas)
+                            <option value="Kelas {{ $kelas }}">Kelas {{ $kelas }}</option>
+                        @endforeach
                         <option value="Open 1">Open 1</option>
                         <option value="Open 2">Open 2</option>
                     </select>
@@ -80,22 +65,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/bagan/js/jquery.bracket-world.min.js') }}"></script>
-    <script>
-        $('#bracket2').bracket({
-            teams: {{ $pengundiantanding->count() }}, // Dynamically set the number of teams
-            topOffset: 50,
-            scale: 0.45,
-            horizontal: 0,
-            height: '1000px',
-            icons: true,
-            teamNames: [
-                @foreach ($pengundiantanding as $team)
-                    {
-                        name: '{{ $team->Tanding->nama }}',
-                        seed: '{{ $team->no_undian }}'
-                    },
-                @endforeach
-            ]
-        });
-    </script>
+    @if(isset($script))
+    {!! $script !!}
+    @endif
 @endsection

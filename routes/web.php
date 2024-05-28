@@ -125,7 +125,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Bagan
     Route::get('/bagan-tanding', [AdminBaganController::class, 'tanding'])->name('bagan.tanding');
+    Route::post('/bagan-tanding', [AdminBaganController::class, 'generateTanding'])->name('generate.tanding');
     Route::get('/bagan-tgr', [AdminBaganController::class, 'tgr'])->name('bagan.tgr');
+    Route::post('/bagan-tgr', [AdminBaganController::class, 'generateTGR'])->name('generate.tgr');
 
     // Jadwal Tanding
     Route::get('/jadwal-tanding', [AdminJadwalTandingController::class, 'index'])->name('jadwal-tanding.index');

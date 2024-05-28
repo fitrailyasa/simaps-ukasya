@@ -19,7 +19,8 @@
 
 @section('content')
     <div class="card p-3">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.generate.tgr') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="d-flex justify-content-center align-items-center">
                 <div class="form-group ml-0">
                     <select name="golongan" id="golongan" class="form-select @error('golongan') is-invalid @enderror">
@@ -55,7 +56,11 @@
                 <button type="button" class="btn mx-1 btn-success" onclick="window.print();">Print</button>
             </div>
         </form>
-        <div id="bracket2" class="bracket"></div>
+        <div id="bracket2" class="bracket">
+            @if (isset($template))
+                {!! $template !!}
+            @endif
+        </div>
     </div>
 @endsection
 
@@ -63,22 +68,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/bagan/js/jquery.bracket-world.min.js') }}"></script>
-    <script>
-        $('#bracket2').bracket({
-            teams: {{ $pengundiantgr->count() }}, // Dynamically set the number of teams
-            topOffset: 50,
-            scale: 0.45,
-            horizontal: 0,
-            height: '1000px',
-            icons: true,
-            teamNames: [
-                @foreach ($pengundiantgr as $team)
-                    {
-                        name: '{{ $team->TGR->nama }}',
-                        seed: '{{ $team->no_undian }}'
-                    },
-                @endforeach
-            ]
-        });
-    </script>
+    @if (isset($script))
+        {!! $script !!}
+    @endif
 @endsection
