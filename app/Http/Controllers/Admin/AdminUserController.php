@@ -28,7 +28,8 @@ class AdminUserController extends Controller
                 'gelanggang' => 'required',
                 'password' => 'required',
                 'roles_id' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'permissions' => 'required',
             ],
             [
                 'name.required' => 'name harus diisi!',
@@ -39,20 +40,23 @@ class AdminUserController extends Controller
                 'gelanggang.required' => 'No HP harus diisi!',
                 'password.required' => 'Password harus diisi!',
                 'roles_id.required' => 'Roles harus diisi!',
-                'status.required' => 'Status harus diisi!'
+                'status.required' => 'Status harus diisi!',
+                'permissions.required' => 'Permissions harus diisi!',
             ]
         );
-        
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'gelanggang' => $request->gelanggang,
             'password' => Hash::make($request->password),
-            'roles_id' => $request->roles_id
+            'roles_id' => $request->roles_id,
+            'status' => $request->status,
+            'permissions' => $request->permissions,
         ]);
 
         if (auth()->user()->roles_id == 1) {
-            return redirect('admin/user')->with('sukses', 'Berhasil Tambah User!');
+            back()->with('sukses', 'Berhasil Tambah User!');
         }
     }
 
@@ -64,32 +68,40 @@ class AdminUserController extends Controller
                 'email' => 'required|max:255',
                 'gelanggang' => 'required',
                 'roles_id' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'permissions' => 'required',
             ],
             [
-                'name.required' => 'name harus diisi!',
-                'name.max' => 'name maksimal 255 karakter!',
+                'name.required' => 'Name harus diisi!',
+                'name.max' => 'Name maksimal 255 karakter!',
                 'email.required' => 'Email harus diisi!',
                 'email.max' => 'Email maksimal 255 karakter!',
-                'gelanggang.required' => 'No HP harus diisi!',
+                'gelanggang.required' => 'Gelanggang harus diisi!',
                 'roles_id.required' => 'Roles harus diisi!',
-                'status.required' => 'Status harus diisi!'
+                'status.required' => 'Status harus diisi!',
+                'permissions.required' => 'Permissions harus diisi!',
             ]
         );
 
         $user = User::where('id', $id)->first();
-        $user->update(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'gelanggang' => $request->gelanggang,
-                'password' => Hash::make($request->password),
-                'roles_id' => $request->roles_id,
-                'status' => $request->status
-            ]
-        );
+
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'gelanggang' => $request->gelanggang,
+            'roles_id' => $request->roles_id,
+            'status' => $request->status,
+            'permissions' => $request->permissions,
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+
         if (auth()->user()->roles_id == 1) {
-            return redirect('admin/user')->with('sukses', 'Berhasil Edit User!');
+            return back()->with('sukses', 'Berhasil Edit User!');
         }
     }
 

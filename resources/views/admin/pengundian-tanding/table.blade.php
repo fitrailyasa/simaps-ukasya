@@ -3,6 +3,7 @@
 @section('title', 'Peserta Tanding')
 
 @section('table-pengundian-tanding', 'active')
+@section('tanding', 'menu-open')
 
 @section('table')
     <table id="example1" class="table table-bordered table-striped">

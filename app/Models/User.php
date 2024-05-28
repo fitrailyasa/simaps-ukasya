@@ -27,7 +27,8 @@ class User extends Authenticatable
         'gelanggang',
         'password',
         'roles_id',
-        'status'
+        'status',
+        'permissions',
     ];
 
     /**

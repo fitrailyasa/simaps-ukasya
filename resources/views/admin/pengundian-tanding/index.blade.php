@@ -3,6 +3,7 @@
 @section('title', 'Pengundian Tanding')
 
 @section('table-pengundian-tanding', 'active')
+@section('tanding', 'menu-open')
 
 @section('topLeft')
     @include('admin.pengundian-tanding.create')

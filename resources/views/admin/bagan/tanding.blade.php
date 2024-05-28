@@ -3,6 +3,7 @@
 @section('title', 'Bagan Tanding')
 
 @section('table-bagan-tanding', 'active')
+@section('tanding', 'menu-open')
 
 @section('style')
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">

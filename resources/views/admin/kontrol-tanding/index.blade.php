@@ -1,24 +1,12 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Jadwal Tanding')
+@section('title', 'Kontrol Tanding')
 
-@section('table-jadwal-tanding', 'active')
+@section('table-kontrol-tanding', 'active')
 @section('tanding', 'menu-open')
 
 @section('topLeft')
-    <h4>Kelola Data Jadwal Tanding</h4>
-@endsection
-
-@section('formCreate')
-    @include('admin.jadwal-tanding.create')
-@endsection
-
-@section('formUpload')
-    @include('admin.jadwal-tanding.upload')
-@endsection
-
-@section('formDeleteAll')
-    @include('admin.jadwal-tanding.deleteAll')
+    <h4>Kelola Data Kontrol Tanding</h4>
 @endsection
 
 @section('table')
@@ -57,8 +45,7 @@
                     </td>
                     <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
-                        @include('admin.jadwal-tanding.edit')
-                        @include('admin.jadwal-tanding.delete')
+                        @include('admin.kontrol-tanding.edit')
                     </td>
                 </tr>
             @endforeach

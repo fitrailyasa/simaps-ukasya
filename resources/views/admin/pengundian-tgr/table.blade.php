@@ -3,6 +3,7 @@
 @section('title', 'Peserta TGR')
 
 @section('table-pengundian-tgr', 'active')
+@section('tgr', 'menu-open')
 
 @section('table')
     <table id="example1" class="table table-bordered table-striped">

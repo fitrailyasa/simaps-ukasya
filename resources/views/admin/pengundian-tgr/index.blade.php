@@ -3,6 +3,7 @@
 @section('title', 'Pengundian TGR')
 
 @section('table-pengundian-tgr', 'active')
+@section('tgr', 'menu-open')
 
 @section('topLeft')
     @include('admin.pengundian-tgr.create')

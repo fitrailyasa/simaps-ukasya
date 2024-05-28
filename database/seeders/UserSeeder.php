@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 1,
                 'gelanggang' => null,
                 'status' => 1,
+                'permissions' => 'Admin',
                 'password' => Hash::make('password')
             ],
             [
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 2,
                 'gelanggang' => 1,
                 'status' => 1,
+                'permissions' => 'Operator',
                 'password' => Hash::make('password')
             ],
             [
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 2,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Operator',
                 'password' => Hash::make('password')
             ],
             [
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 2,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Operator',
                 'password' => Hash::make('password')
             ],
             [
@@ -55,6 +59,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 2,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Operator',
                 'password' => Hash::make('password')
             ],
             [
@@ -63,6 +68,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 2,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Operator',
                 'password' => Hash::make('password')
             ],
             [
@@ -71,6 +77,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 3,
                 'gelanggang' => 1,
                 'status' => 1,
+                'permissions' => 'Dewan',
                 'password' => Hash::make('password')
             ],
             [
@@ -79,6 +86,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 3,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Dewan',
                 'password' => Hash::make('password')
             ],
             [
@@ -87,6 +95,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 3,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Dewan',
                 'password' => Hash::make('password')
             ],
             [
@@ -95,6 +104,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 3,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Dewan',
                 'password' => Hash::make('password')
             ],
             [
@@ -103,6 +113,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 3,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Dewan',
                 'password' => Hash::make('password')
             ],
             [
@@ -111,6 +122,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 1,
+                'permissions' => 'Juri 1',
                 'password' => Hash::make('password')
             ],
             [
@@ -119,6 +131,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 1,
+                'permissions' => 'Juri 2',
                 'password' => Hash::make('password')
             ],
             [
@@ -127,6 +140,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 1,
+                'permissions' => 'Juri 3',
                 'password' => Hash::make('password')
             ],
             [
@@ -135,6 +149,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 4',
                 'password' => Hash::make('password')
             ],
             [
@@ -143,6 +158,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 5',
                 'password' => Hash::make('password')
             ],
             [
@@ -151,6 +167,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 6',
                 'password' => Hash::make('password')
             ],
             [
@@ -159,6 +176,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 7',
                 'password' => Hash::make('password')
             ],
             [
@@ -167,6 +185,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 8',
                 'password' => Hash::make('password')
             ],
             [
@@ -175,6 +194,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 9',
                 'password' => Hash::make('password')
             ],
             [
@@ -183,6 +203,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 1,
                 'status' => 0,
+                'permissions' => 'Juri 10',
                 'password' => Hash::make('password')
             ],
             [
@@ -191,6 +212,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Juri 1',
                 'password' => Hash::make('password')
             ],
             [
@@ -199,6 +221,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Juri 2',
                 'password' => Hash::make('password')
             ],
             [
@@ -207,6 +230,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Juri 3',
                 'password' => Hash::make('password')
             ],
             [
@@ -215,6 +239,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 1,
+                'permissions' => 'Juri 4',
                 'password' => Hash::make('password')
             ],
             [
@@ -223,6 +248,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 5',
                 'password' => Hash::make('password')
             ],
             [
@@ -231,6 +257,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 6',
                 'password' => Hash::make('password')
             ],
             [
@@ -239,6 +266,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 7',
                 'password' => Hash::make('password')
             ],
             [
@@ -247,6 +275,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 8',
                 'password' => Hash::make('password')
             ],
             [
@@ -255,6 +284,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 9',
                 'password' => Hash::make('password')
             ],
             [
@@ -263,6 +293,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 2,
                 'status' => 0,
+                'permissions' => 'Juri 10',
                 'password' => Hash::make('password')
             ],
             [
@@ -271,6 +302,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Juri 1',
                 'password' => Hash::make('password')
             ],
             [
@@ -279,6 +311,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Juri 2',
                 'password' => Hash::make('password')
             ],
             [
@@ -287,6 +320,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Juri 3',
                 'password' => Hash::make('password')
             ],
             [
@@ -295,6 +329,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 1,
+                'permissions' => 'Juri 4',
                 'password' => Hash::make('password')
             ],
             [
@@ -303,6 +338,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 5',
                 'password' => Hash::make('password')
             ],
             [
@@ -311,6 +347,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 6',
                 'password' => Hash::make('password')
             ],
             [
@@ -319,6 +356,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 7',
                 'password' => Hash::make('password')
             ],
             [
@@ -327,6 +365,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 8',
                 'password' => Hash::make('password')
             ],
             [
@@ -335,6 +374,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 9',
                 'password' => Hash::make('password')
             ],
             [
@@ -343,6 +383,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 3,
                 'status' => 0,
+                'permissions' => 'Juri 10',
                 'password' => Hash::make('password')
             ],
             [
@@ -351,6 +392,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Juri 1',
                 'password' => Hash::make('password')
             ],
             [
@@ -359,6 +401,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Juri 2',
                 'password' => Hash::make('password')
             ],
             [
@@ -367,6 +410,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Juri 3',
                 'password' => Hash::make('password')
             ],
             [
@@ -375,6 +419,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 1,
+                'permissions' => 'Juri 4',
                 'password' => Hash::make('password')
             ],
             [
@@ -383,6 +428,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 5',
                 'password' => Hash::make('password')
             ],
             [
@@ -391,6 +437,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 6',
                 'password' => Hash::make('password')
             ],
             [
@@ -399,6 +446,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 7',
                 'password' => Hash::make('password')
             ],
             [
@@ -407,6 +455,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 8',
                 'password' => Hash::make('password')
             ],
             [
@@ -415,6 +464,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 9',
                 'password' => Hash::make('password')
             ],
             [
@@ -423,6 +473,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 4,
                 'status' => 0,
+                'permissions' => 'Juri 10',
                 'password' => Hash::make('password')
             ],
             [
@@ -431,6 +482,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Juri 1',
                 'password' => Hash::make('password')
             ],
             [
@@ -439,6 +491,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Juri 2',
                 'password' => Hash::make('password')
             ],
             [
@@ -447,6 +500,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Juri 3',
                 'password' => Hash::make('password')
             ],
             [
@@ -455,6 +509,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 1,
+                'permissions' => 'Juri 4',
                 'password' => Hash::make('password')
             ],
             [
@@ -463,6 +518,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 5',
                 'password' => Hash::make('password')
             ],
             [
@@ -471,6 +527,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 6',
                 'password' => Hash::make('password')
             ],
             [
@@ -479,6 +536,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 7',
                 'password' => Hash::make('password')
             ],
             [
@@ -487,6 +545,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 8',
                 'password' => Hash::make('password')
             ],
             [
@@ -495,6 +554,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 9',
                 'password' => Hash::make('password')
             ],
             [
@@ -503,6 +563,7 @@ class UserSeeder extends Seeder
                 'roles_id' => 4,
                 'gelanggang' => 5,
                 'status' => 0,
+                'permissions' => 'Juri 10',
                 'password' => Hash::make('password')
             ],
         ];

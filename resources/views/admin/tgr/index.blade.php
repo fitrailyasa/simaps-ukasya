@@ -3,6 +3,7 @@
 @section('title', 'TGR')
 
 @section('table-tgr', 'active')
+@section('tgr', 'menu-open')
 
 @section('topLeft')
     <h4>Kelola Data Tabel TGR</h4>

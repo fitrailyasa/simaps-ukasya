@@ -80,17 +80,29 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Roles</label>
-                                <select class="form-select @error('roles_id') is-invalid @enderror" name="roles_id"
-                                    id="roles_id" required>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                    @endforeach
+                                <select class="form-select @error('permissions') is-invalid @enderror"
+                                    name="permissions" id="permissions" required>
+                                    <option selected disabled>Pilih Roles</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Operator">Operator</option>
+                                    <option value="Dewan">Dewan</option>
+                                    <option value="Juri 1">Juri 1</option>
+                                    <option value="Juri 2">Juri 2</option>
+                                    <option value="Juri 3">Juri 3</option>
+                                    <option value="Juri 4">Juri 4</option>
+                                    <option value="Juri 5">Juri 5</option>
+                                    <option value="Juri 6">Juri 6</option>
+                                    <option value="Juri 7">Juri 7</option>
+                                    <option value="Juri 8">Juri 8</option>
+                                    <option value="Juri 9">Juri 9</option>
+                                    <option value="Juri 10">Juri 10</option>
                                 </select>
-                                @error('roles_id')
+                                @error('permissions')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        <input type="hidden" name="roles_id" id="roles_id">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -101,3 +113,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('permissions').addEventListener('change', function() {
+        var roles_id = document.getElementById('roles_id');
+        var selectedRole = this.value;
+
+        switch (selectedRole) {
+            case 'Admin':
+                roles_id.value = 1;
+                break;
+            case 'Operator':
+                roles_id.value = 2;
+                break;
+            case 'Dewan':
+                roles_id.value = 3;
+                break;
+            default:
+                if (selectedRole.startsWith('Juri')) {
+                    roles_id.value = 4;
+                } else {
+                    roles_id.value = '';
+                }
+                break;
+        }
+    });
+</script>

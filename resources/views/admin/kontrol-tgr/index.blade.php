@@ -2,23 +2,11 @@
 
 @section('title', 'Jadwal TGR')
 
-@section('table-jadwal-tgr', 'active')
+@section('table-kontrol-tgr', 'active')
 @section('tgr', 'menu-open')
 
 @section('topLeft')
     <h4>Kelola Data Jadwal TGR</h4>
-@endsection
-
-@section('formCreate')
-    @include('admin.jadwal-tgr.create')
-@endsection
-
-@section('formUpload')
-    @include('admin.jadwal-tgr.upload')
-@endsection
-
-@section('formDeleteAll')
-    @include('admin.jadwal-tgr.deleteAll')
 @endsection
 
 @section('table')
@@ -57,8 +45,7 @@
                     </td>
                     <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
-                        @include('admin.jadwal-tgr.edit')
-                        @include('admin.jadwal-tgr.delete')
+                        @include('admin.kontrol-tgr.edit')
                     </td>
                 </tr>
             @endforeach

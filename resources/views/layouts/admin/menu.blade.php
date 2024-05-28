@@ -10,69 +10,121 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.tanding.index') }}" class="nav-link text-white @yield('table-tanding')">
-                    <i class="nav-icon fas fa-tv"></i>
+            <li class="nav-item @yield('tanding')">
+                <a href="#" class="nav-link text-white">
+                    <i class="nav-icon fas fa-list"></i>
                     <p>
-                        Atlet Tanding
+                        Kelola Tanding
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tanding.index') }}" class="nav-link text-white @yield('table-tanding')">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Atlet Tanding
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pengundian-tanding.index') }}"
+                            class="nav-link text-white @yield('table-pengundian-tanding')">
+                            <i class="nav-icon fas fa-random"></i>
+                            <p>
+                                Pengundian Tanding
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.bagan.tanding') }}" class="nav-link text-white @yield('table-bagan-tanding')">
+                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <p>
+                                Bagan Tanding
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.jadwal-tanding.index') }}"
+                            class="nav-link text-white @yield('table-jadwal-tanding')">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>
+                                Jadwal Tanding
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.timbang-ulang.index') }}"
+                            class="nav-link text-white @yield('table-timbang-ulang')">
+                            <i class="nav-icon fas fa-child"></i>
+                            <p>
+                                Timbang Ulang
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.kontrol-tanding.index') }}"
+                            class="nav-link text-white @yield('table-kontrol-tanding')">
+                            <i class="nav-icon fas fa-tv"></i>
+                            <p>
+                                Kontrol Tanding
+                            </p>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.pengundian-tanding.index') }}" class="nav-link text-white @yield('table-pengundian-tanding')">
-                    <i class="nav-icon fas fa-random"></i>
+            <li class="nav-item @yield('tgr')">
+                <a href="#" class="nav-link text-white">
+                    <i class="nav-icon fas fa-list"></i>
                     <p>
-                        Pengundian Tanding
+                        Kelola TGR
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.bagan.tanding') }}" class="nav-link text-white @yield('table-bagan-tanding')">
-                    <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>
-                        Bagan Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.jadwal-tanding.index') }}" class="nav-link text-white @yield('table-jadwal-tanding')">
-                    <i class="nav-icon fas fa-calendar"></i>
-                    <p>
-                        Jadwal Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.tgr.index') }}" class="nav-link text-white @yield('table-tgr')">
-                    <i class="nav-icon fas fa-flag"></i>
-                    <p>
-                        Atlet TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.pengundian-tgr.index') }}" class="nav-link text-white @yield('table-pengundian-tgr')">
-                    <i class="nav-icon fas fa-random"></i>
-                    <p>
-                        Pengundian TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.bagan.tgr') }}" class="nav-link text-white @yield('table-bagan-tgr')">
-                    <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>
-                        Bagan TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.jadwal-tgr.index') }}" class="nav-link text-white @yield('table-jadwal-tgr')">
-                    <i class="nav-icon fas fa-calendar"></i>
-                    <p>
-                        Jadwal TGR
-                    </p>
-                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tgr.index') }}" class="nav-link text-white @yield('table-tgr')">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Atlet TGR
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pengundian-tgr.index') }}"
+                            class="nav-link text-white @yield('table-pengundian-tgr')">
+                            <i class="nav-icon fas fa-random"></i>
+                            <p>
+                                Pengundian TGR
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.bagan.tgr') }}" class="nav-link text-white @yield('table-bagan-tgr')">
+                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <p>
+                                Bagan TGR
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.jadwal-tgr.index') }}" class="nav-link text-white @yield('table-jadwal-tgr')">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>
+                                Jadwal TGR
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.kontrol-tgr.index') }}"
+                            class="nav-link text-white @yield('table-kontrol-tgr')">
+                            <i class="nav-icon fas fa-tv"></i>
+                            <p>
+                                Kontrol TGR
+                            </p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.gelanggang.index') }}" class="nav-link text-white @yield('table-gelanggang')">
@@ -111,71 +163,7 @@
                 <a href="{{ route('op.dashboard') }}" class="nav-link text-white @yield('activeDashboard')">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                        Dashboard
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.tanding.index') }}" class="nav-link text-white @yield('table-tanding')">
-                    <i class="nav-icon fas fa-tv"></i>
-                    <p>
-                        Atlet Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.pengundian-tanding.index') }}" class="nav-link text-white @yield('table-pengundian-tanding')">
-                    <i class="nav-icon fas fa-random"></i>
-                    <p>
-                        Pengundian Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.bagan.tanding') }}" class="nav-link text-white @yield('table-bagan-tanding')">
-                    <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>
-                        Bagan Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.jadwal-tanding.index') }}" class="nav-link text-white @yield('table-jadwal-tanding')">
-                    <i class="nav-icon fas fa-calendar"></i>
-                    <p>
-                        Jadwal Tanding
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.tgr.index') }}" class="nav-link text-white @yield('table-tgr')">
-                    <i class="nav-icon fas fa-flag"></i>
-                    <p>
-                        Atlet TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.pengundian-tgr.index') }}" class="nav-link text-white @yield('table-pengundian-tgr')">
-                    <i class="nav-icon fas fa-random"></i>
-                    <p>
-                        Pengundian TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.bagan.tgr') }}" class="nav-link text-white @yield('table-bagan-tgr')">
-                    <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>
-                        Bagan TGR
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('op.jadwal-tgr.index') }}" class="nav-link text-white @yield('table-jadwal-tgr')">
-                    <i class="nav-icon fas fa-calendar"></i>
-                    <p>
-                        Jadwal TGR
+                        Kontrol
                     </p>
                 </a>
             </li>

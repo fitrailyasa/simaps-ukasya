@@ -3,6 +3,7 @@
 @section('title', 'Bagan TGR')
 
 @section('table-bagan-tgr', 'active')
+@section('tgr', 'menu-open')
 
 @section('style')
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">

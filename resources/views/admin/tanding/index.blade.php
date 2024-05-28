@@ -3,6 +3,7 @@
 @section('title', 'Tanding')
 
 @section('table-tanding', 'active')
+@section('tanding', 'menu-open')
 
 @section('topLeft')
     <h4>Kelola Data Tabel Tanding</h4>

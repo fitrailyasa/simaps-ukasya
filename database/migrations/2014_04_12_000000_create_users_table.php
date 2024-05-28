@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up():void
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->foreignId('gelanggang')->nullable();
             $table->integer('status')->nullable()->default(0);
+            $table->string('permissions')->nullable()->default(0);
             $table->string('password');
             $table->unsignedBigInteger('roles_id')->nullable()->default(99);
             $table->foreign('roles_id')->references('id')->on('roles')
-            ->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+                ->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -38,9 +39,9 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down():void
+    public function down(): void
     {
-        Schema::dropIfExists('users');   
-        Schema::dropIfExists('sessions');   
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('sessions');
     }
 };
