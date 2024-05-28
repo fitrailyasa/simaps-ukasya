@@ -18,7 +18,7 @@ class AdminPengundianTGRController extends Controller
         $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
         return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs', 'kelompok'));
     }
-    
+
     public function table(Request $request, $kelompok)
     {
         $tgrs = TGR::all();
@@ -40,12 +40,7 @@ class AdminPengundianTGRController extends Controller
 
         Excel::import(new PengundianTGRImport, $file);
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Import Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Import Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Import Data Undian!');
     }
 
     public function store(Request $request)
@@ -56,13 +51,13 @@ class AdminPengundianTGRController extends Controller
 
         // Filter data atlet sesuai dengan golongan, jenis kelamin, dan kategori
         $tgrs = TGR::where('golongan', $golongan)
-                            ->where('jenis_kelamin', $jenis_kelamin)
-                            ->where('kategori', $kategori)
-                            ->get();
+            ->where('jenis_kelamin', $jenis_kelamin)
+            ->where('kategori', $kategori)
+            ->get();
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTGR::pluck('atlet_id')->toArray();
-        $totalPeserta = $tgrs->count();        
+        $totalPeserta = $tgrs->count();
 
         $shuffledAtletIds = $tgrs->pluck('id')->shuffle()->toArray();
 
@@ -84,12 +79,7 @@ class AdminPengundianTGRController extends Controller
             $existingAtletIds[] = $atletId;
         }
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Tambah Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Tambah Data Undian!');
     }
 
     public function update(Request $request, $id)
@@ -102,12 +92,7 @@ class AdminPengundianTGRController extends Controller
         $pengundiantgr = PengundianTGR::findOrFail($id);
         $pengundiantgr->update($request->all());
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Edit Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Edit Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Edit Data Undian!');
     }
 
     public function destroy($id)
@@ -115,23 +100,13 @@ class AdminPengundianTGRController extends Controller
         $pengundiantgr = PengundianTGR::findOrFail($id);
         $pengundiantgr->delete();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Data Undian!');
     }
 
     public function destroyAll()
     {
         PengundianTGR::truncate();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tgr.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Semua Data Undian!');
     }
 }

@@ -28,7 +28,7 @@ class AdminGelanggangController extends Controller
 
         Excel::import(new GelanggangImport, $file);
 
-        return redirect()->route('admin.gelanggang.index')->with('sukses', 'Berhasil Import Data Undian!');
+        return back()->with('sukses', 'Berhasil Import Data Undian!');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class AdminGelanggangController extends Controller
 
         Gelanggang::create($request->all());
 
-        return redirect()->route('admin.gelanggang.index')->with('sukses', 'Berhasil Tambah Undian!');
+        return back()->with('sukses', 'Berhasil Tambah Undian!');
     }
 
     public function update(Request $request, $id)
@@ -55,7 +55,7 @@ class AdminGelanggangController extends Controller
         $gelanggang = Gelanggang::findOrFail($id);
         $gelanggang->update($request->all());
 
-        return redirect()->route('admin.gelanggang.index')->with('sukses', 'Berhasil Edit Undian!');
+        return back()->with('sukses', 'Berhasil Edit Undian!');
     }
 
     public function destroy($id)
@@ -63,13 +63,13 @@ class AdminGelanggangController extends Controller
         $gelanggang = Gelanggang::findOrFail($id);
         $gelanggang->delete();
 
-        return redirect()->route('admin.gelanggang.index')->with('sukses', 'Berhasil Hapus Undian!');
+        return back()->with('sukses', 'Berhasil Hapus Undian!');
     }
 
     public function destroyAll()
     {
         Gelanggang::truncate();
 
-        return redirect()->route('admin.gelanggang.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
+        return back()->with('sukses', 'Berhasil Hapus Semua Data Undian!');
     }
 }

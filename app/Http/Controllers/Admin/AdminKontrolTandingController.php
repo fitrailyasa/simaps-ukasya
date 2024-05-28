@@ -33,10 +33,6 @@ class AdminKontrolTandingController extends Controller
         $jadwaltanding = JadwalTanding::findOrFail($id);
         $jadwaltanding->update($request->all());
 
-        if (auth()->user()->roles_id == 1) {
-            return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
-        } else if (auth()->user()->roles_id == 2) {
-            return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
-        }
+        return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
     }
 }

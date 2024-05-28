@@ -26,12 +26,7 @@ class AdminTandingController extends Controller
 
         Excel::import(new TandingImport, $file);
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Import Data Atlet!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.tanding.index')->with('sukses', 'Berhasil Import Data Atlet!');
-        }
+        return back()->with('sukses', 'Berhasil Import Data Atlet!');
     }
 
     public function store(Request $request)
@@ -42,7 +37,7 @@ class AdminTandingController extends Controller
             'tinggi_badan' => 'required|max:255',
             'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kelas' => 'required|max:255', 
+            'kelas' => 'required|max:255',
             'golongan' => 'required|max:255'
         ]);
 
@@ -63,12 +58,7 @@ class AdminTandingController extends Controller
             $img->move('../public/assets/img/', $file_name);
         }
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Tambah Data Atlet!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.tanding.index')->with('sukses', 'Berhasil Tambah Data Atlet!');
-        }
+        return back()->with('sukses', 'Berhasil Tambah Data Atlet!');
     }
 
     public function update(Request $request, $id)
@@ -79,7 +69,7 @@ class AdminTandingController extends Controller
             'tinggi_badan' => 'required|max:255',
             'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kelas' => 'required|max:255', 
+            'kelas' => 'required|max:255',
             'golongan' => 'required|max:255'
         ]);
 
@@ -102,12 +92,7 @@ class AdminTandingController extends Controller
             $img->move('../public/assets/img/', $file_name);
         }
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Edit Data Atlet!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.tanding.index')->with('sukses', 'Berhasil Edit Data Atlet!');
-        }
+        return back()->with('sukses', 'Berhasil Edit Data Atlet!');
     }
 
     public function destroy($id)
@@ -115,23 +100,13 @@ class AdminTandingController extends Controller
         $tanding = Tanding::findOrFail($id);
         $tanding->delete();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Data Atlet!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.tanding.index')->with('sukses', 'Berhasil Hapus Data Atlet!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Data Atlet!');
     }
 
     public function destroyAll()
     {
         Tanding::truncate();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Semua Data Atlet!');
     }
 }

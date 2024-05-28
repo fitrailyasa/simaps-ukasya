@@ -18,7 +18,7 @@ class AdminPengundianTandingController extends Controller
         $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
         return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings', 'kelompok'));
     }
-    
+
     public function table(Request $request, $kelompok)
     {
         $tandings = Tanding::all();
@@ -40,12 +40,7 @@ class AdminPengundianTandingController extends Controller
 
         Excel::import(new PengundianTandingImport, $file);
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Import Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Import Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Import Data Undian!');
     }
 
     public function store(Request $request)
@@ -56,13 +51,13 @@ class AdminPengundianTandingController extends Controller
 
         // Filter data atlet sesuai dengan golongan, jenis kelamin, dan kelas
         $tandings = Tanding::where('golongan', $golongan)
-                            ->where('jenis_kelamin', $jenis_kelamin)
-                            ->where('kelas', $kelas)
-                            ->get();
+            ->where('jenis_kelamin', $jenis_kelamin)
+            ->where('kelas', $kelas)
+            ->get();
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();
-        $totalPeserta = $tandings->count();        
+        $totalPeserta = $tandings->count();
 
         $shuffledAtletIds = $tandings->pluck('id')->shuffle()->toArray();
 
@@ -84,12 +79,7 @@ class AdminPengundianTandingController extends Controller
             $existingAtletIds[] = $atletId;
         }
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Tambah Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Tambah Data Undian!');
     }
 
     public function update(Request $request, $id)
@@ -102,12 +92,7 @@ class AdminPengundianTandingController extends Controller
         $pengundiantanding = PengundianTanding::findOrFail($id);
         $pengundiantanding->update($request->all());
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Edit Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Edit Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Edit Data Undian!');
     }
 
     public function destroy($id)
@@ -115,23 +100,13 @@ class AdminPengundianTandingController extends Controller
         $pengundiantanding = PengundianTanding::findOrFail($id);
         $pengundiantanding->delete();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Data Undian!');
     }
 
     public function destroyAll()
     {
         PengundianTanding::truncate();
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.pengundian-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Undian!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus Semua Data Undian!');
     }
 }

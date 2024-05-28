@@ -33,12 +33,7 @@ class AdminJadwalTandingController extends Controller
 
         Excel::import(new JadwalTandingImport($request->kelompok), $file);
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Jadwal!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Import Data Jadwal!');
-        }
+        return back()->with('sukses', 'Berhasil Import Data Jadwal!');
     }
 
     public function store(Request $request)
@@ -88,12 +83,7 @@ class AdminJadwalTandingController extends Controller
             'jadwal_tanding'=>$jadwal_tanding->id
         ]);
 
-        if(auth()->user()->roles_id == 1){
-            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
-        }
-        else if(auth()->user()->roles_id == 2){
-            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Tambah Data Jadwal!');
-        }
+        return back()->with('sukses', 'Berhasil Tambah Data Jadwal!');
     }
 
     public function update(Request $request, $id)

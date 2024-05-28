@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
-use App\Models\PengundianTanding;
 use App\Models\Gelanggang;
 use Illuminate\Http\Request;
 
@@ -13,9 +12,8 @@ class AdminTimbangUlangController extends Controller
     public function index()
     {
         $gelanggangs = Gelanggang::all();
-        $pengundiantandings = PengundianTanding::latest('id')->get();
         $jadwaltandings = JadwalTanding::latest('id')->get();
-        return view('admin.timbang-ulang.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings'));
+        return view('admin.timbang-ulang.index', compact('jadwaltandings', 'gelanggangs'));
     }
 
     public function update(Request $request, $id)
@@ -33,10 +31,6 @@ class AdminTimbangUlangController extends Controller
         $jadwaltanding = JadwalTanding::findOrFail($id);
         $jadwaltanding->update($request->all());
 
-        if (auth()->user()->roles_id == 1) {
-            return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
-        } else if (auth()->user()->roles_id == 2) {
-            return redirect()->route('op.jadwal-tanding.index')->with('sukses', 'Berhasil Edit Data Jadwal!');
-        }
+        return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
     }
 }

@@ -54,10 +54,7 @@ class AdminUserController extends Controller
             'status' => $request->status,
             'permissions' => $request->permissions,
         ]);
-
-        if (auth()->user()->roles_id == 1) {
-            back()->with('sukses', 'Berhasil Tambah User!');
-        }
+        return back()->with('sukses', 'Berhasil Tambah User!');
     }
 
     public function update(Request $request, string $id)
@@ -99,19 +96,13 @@ class AdminUserController extends Controller
         }
 
         $user->update($updateData);
-
-        if (auth()->user()->roles_id == 1) {
-            return back()->with('sukses', 'Berhasil Edit User!');
-        }
+        return back()->with('sukses', 'Berhasil Edit User!');
     }
 
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        User::findOrFail($id)->delete();
 
-        if (auth()->user()->roles_id == 1) {
-            return redirect('admin/user')->with('sukses', 'Berhasil Hapus User!');
-        }
+        return back()->with('sukses', 'Berhasil Hapus User!');
     }
 }
