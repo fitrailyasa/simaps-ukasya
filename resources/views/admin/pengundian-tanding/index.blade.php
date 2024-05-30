@@ -50,11 +50,11 @@
                 [$golongan, $jenis_kelamin, $kelas] = explode('-', $combination); // Memecah kombinasi menjadi golongan, jenis kelamin, dan kelas
                 ?>
                 <tr>
-                    <td>{{ $row_number }}</td>
-                    <td>{{ $golongan }}</td>
-                    <td>{{ $kelas }}</td>
-                    <td>{{ $jenis_kelamin }}</td>
-                    <td>{{ $count }} Atlet</td>
+                    <td>{{ $row_number ?? '-' }}</td>
+                    <td>{{ $golongan ?? '-' }}</td>
+                    <td>{{ $kelas ?? '-' }}</td>
+                    <td>{{ $jenis_kelamin ?? '-' }}</td>
+                    <td>{{ $count ?? '0' }} Atlet</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tanding.table', $kelompok) }}"><i

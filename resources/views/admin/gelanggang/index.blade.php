@@ -36,10 +36,12 @@
             @foreach ($gelanggangs as $gelanggang)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $gelanggang->nama }}</td>
-                    <td>{{ $gelanggang->waktu }} menit</td>
-                    <td>{{ $gelanggang->jenis }}</td>
-                    <td><a class="btn-sm btn-primary" href="#">{{ $gelanggang->JadwalTGR->count() + $gelanggang->JadwalTanding->count() }} jadwal</a>
+                    <td>{{ $gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $gelanggang->waktu ?? '-' }} menit</td>
+                    <td>{{ $gelanggang->jenis ?? '-' }}</td>
+                    <td><a class="btn-sm btn-primary"
+                            href="#">{{ $gelanggang->JadwalTGR->count() + $gelanggang->JadwalTanding->count() ?? '0' }}
+                            jadwal</a>
                     </td>
                     <td class="manage-row">
                         @include('admin.gelanggang.edit')

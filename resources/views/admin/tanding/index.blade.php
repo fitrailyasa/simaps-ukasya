@@ -70,13 +70,13 @@
                             </div>
                         @endif
                     </td>
-                    <td>{{ $tanding->nama }}</td>
+                    <td>{{ $tanding->nama ?? '-' }}</td>
                     <td>{{ $tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</td>
-                    <td>{{ $tanding->tinggi_badan }} cm</td>
-                    <td>{{ $tanding->berat_badan }} kg</td>
-                    <td>{{ $tanding->kontingen }}</td>
-                    <td>{{ $tanding->kelas }}</td>
-                    <td>{{ $tanding->golongan }}</td>
+                    <td>{{ $tanding->tinggi_badan ?? '-' }} cm</td>
+                    <td>{{ $tanding->berat_badan ?? '-' }} kg</td>
+                    <td>{{ $tanding->kontingen ?? '-' }}</td>
+                    <td>{{ $tanding->kelas ?? '-' }}</td>
+                    <td>{{ $tanding->golongan ?? '-' }}</td>
                     <td class="manage-row">
                         @include('admin.tanding.edit')
                         @include('admin.tanding.delete')

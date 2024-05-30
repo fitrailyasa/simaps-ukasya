@@ -50,11 +50,11 @@
                 [$golongan, $jenis_kelamin, $kategori] = explode('-', $combination); // Memecah kombinasi menjadi golongan, jenis kelamin, dan kategori
                 ?>
                 <tr>
-                    <td>{{ $row_number }}</td>
-                    <td>{{ $golongan }}</td>
-                    <td>{{ $kategori }}</td>
-                    <td>{{ $jenis_kelamin }}</td>
-                    <td>{{ $count }} Atlet</td>
+                    <td>{{ $row_number ?? '-' }}</td>
+                    <td>{{ $golongan ?? '-' }}</td>
+                    <td>{{ $kategori ?? '-' }}</td>
+                    <td>{{ $jenis_kelamin ?? '-' }}</td>
+                    <td>{{ $count ?? '0' }} Atlet</td>
                     <td class="manage-row">
                         @if (auth()->user()->roles_id == 1)
                             <a class="btn-sm btn-primary" href="{{ route('admin.pengundian-tgr.table', $kelompok) }}"><i

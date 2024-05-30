@@ -68,11 +68,11 @@
                             </div>
                         @endif
                     </td>
-                    <td>{{ $tgr->nama }}</td>
+                    <td>{{ $tgr->nama ?? '-' }}</td>
                     <td>{{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</td>
-                    <td>{{ $tgr->kontingen }}</td>
-                    <td>{{ $tgr->kategori }}</td>
-                    <td>{{ $tgr->golongan }}</td>
+                    <td>{{ $tgr->kontingen ?? '-' }}</td>
+                    <td>{{ $tgr->kategori ?? '-' }}</td>
+                    <td>{{ $tgr->golongan ?? '-' }}</td>
                     <td class="manage-row">
                         @include('admin.tgr.edit')
                         @include('admin.tgr.delete')
