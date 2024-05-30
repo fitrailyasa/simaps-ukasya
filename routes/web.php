@@ -111,7 +111,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pengundian-tanding/table/{kelompok}', [AdminPengundianTandingController::class, 'table'])->name('pengundian-tanding.table');
     Route::put('/pengundian-tanding/{id}/update', [AdminPengundianTandingController::class, 'update'])->name('pengundian-tanding.update');
     Route::delete('/pengundian-tanding/{id}/destroy', [AdminPengundianTandingController::class, 'destroy'])->name('pengundian-tanding.destroy');
-    Route::post('/pengundian-tanding/upload', [AdminPengundianTandingController::class, 'import'])->name('pengundian-tanding.import');
     Route::delete('/pengundian-tanding/destroy-all', [AdminPengundianTandingController::class, 'destroyAll'])->name('pengundian-tanding.destroy-all');
 
     // Pengundian TGR
@@ -120,7 +119,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pengundian-tgr/table/{kelompok}', [AdminPengundianTGRController::class, 'table'])->name('pengundian-tgr.table');
     Route::put('/pengundian-tgr/{id}/update', [AdminPengundianTGRController::class, 'update'])->name('pengundian-tgr.update');
     Route::delete('/pengundian-tgr/{id}/destroy', [AdminPengundianTGRController::class, 'destroy'])->name('pengundian-tgr.destroy');
-    Route::post('/pengundian-tgr/upload', [AdminPengundianTGRController::class, 'import'])->name('pengundian-tgr.import');
     Route::delete('/pengundian-tgr/destroy-all', [AdminPengundianTGRController::class, 'destroyAll'])->name('pengundian-tgr.destroy-all');
 
     // Bagan

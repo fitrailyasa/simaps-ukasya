@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\PengundianTGR;
 use App\Models\TGR;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\PengundianTGRImport;
 
 class AdminPengundianTGRController extends Controller
 {
@@ -30,19 +28,6 @@ class AdminPengundianTGRController extends Controller
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
     }
 
-    public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls',
-        ]);
-
-        $file = $request->file('file');
-
-        Excel::import(new PengundianTGRImport, $file);
-
-        return back()->with('sukses', 'Berhasil Import Data Undian!');
-    }
-
     public function store(Request $request)
     {
         $golongan = $request->golongan;
@@ -54,6 +39,10 @@ class AdminPengundianTGRController extends Controller
             ->where('jenis_kelamin', $jenis_kelamin)
             ->where('kategori', $kategori)
             ->get();
+
+        if ($tgrs->isEmpty()) {
+            return redirect()->back()->with('alert', 'Data Kosong!');
+        }
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTGR::pluck('atlet_id')->toArray();

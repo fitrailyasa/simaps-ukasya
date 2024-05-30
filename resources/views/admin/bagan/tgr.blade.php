@@ -18,6 +18,11 @@
 @endsection
 
 @section('content')
+    @if (session('alert'))
+        <script>
+            alert("{{ session('alert') }}");
+        </script>
+    @endif
     <div class="card p-3">
         <form action="{{ route('admin.generate.tgr') }}" method="POST" enctype="multipart/form-data">
             @csrf

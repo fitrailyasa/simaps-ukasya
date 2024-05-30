@@ -14,6 +14,11 @@
 @endsection
 
 @section('table')
+    @if (session('alert'))
+        <script>
+            alert("{{ session('alert') }}");
+        </script>
+    @endif
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>

@@ -38,10 +38,6 @@
                     </td>
                     <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
                         ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
-                    <td>{{ $jadwaltanding->PemenangTanding->Tanding->nama ?? '' }}
-                        ({{ $jadwaltanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }})
-                    </td>
-                    <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @include('admin.timbang-ulang.create')
                     </td>

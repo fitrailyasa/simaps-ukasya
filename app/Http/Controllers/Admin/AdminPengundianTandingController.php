@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\PengundianTanding;
 use App\Models\Tanding;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\PengundianTandingImport;
 
 class AdminPengundianTandingController extends Controller
 {
@@ -30,19 +28,6 @@ class AdminPengundianTandingController extends Controller
         return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
     }
 
-    public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls',
-        ]);
-
-        $file = $request->file('file');
-
-        Excel::import(new PengundianTandingImport, $file);
-
-        return back()->with('sukses', 'Berhasil Import Data Undian!');
-    }
-
     public function store(Request $request)
     {
         $golongan = $request->golongan;
@@ -54,6 +39,10 @@ class AdminPengundianTandingController extends Controller
             ->where('jenis_kelamin', $jenis_kelamin)
             ->where('kelas', $kelas)
             ->get();
+
+        if ($tandings->isEmpty()) {
+            return redirect()->back()->with('alert', 'Data Kosong!');
+        }
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();

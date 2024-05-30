@@ -25,7 +25,7 @@ class JadwalTGRSeeder extends Seeder
                 'next_partai' => 2,
                 'skor_biru' => 0,
                 'skor_merah' => 0,
-                'tampil'=>2,
+                'tampil' => 2,
                 'pemenang' => 1
             ],
             [
@@ -39,7 +39,7 @@ class JadwalTGRSeeder extends Seeder
                 'next_partai' => 3,
                 'skor_biru' => 0,
                 'skor_merah' => 0,
-                'tampil'=>2,
+                'tampil' => 2,
                 'pemenang' => 1
             ],
             [
@@ -53,7 +53,7 @@ class JadwalTGRSeeder extends Seeder
                 'next_partai' => 4,
                 'skor_biru' => 0,
                 'skor_merah' => 0,
-                'tampil'=>2,
+                'tampil' => 2,
                 'pemenang' => 1
             ],
             [
@@ -67,7 +67,7 @@ class JadwalTGRSeeder extends Seeder
                 'next_partai' => 5,
                 'skor_biru' => 0,
                 'skor_merah' => 0,
-                'tampil'=>1,
+                'tampil' => 1,
                 'pemenang' => 1
             ]
         ];

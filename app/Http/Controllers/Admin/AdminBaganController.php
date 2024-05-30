@@ -36,6 +36,10 @@ class AdminBaganController extends Controller
             ->where('kelas', $request->kelas)
             ->get();
 
+        if ($teams->isEmpty()) {
+            return redirect()->back()->with('alert', 'Data Kosong!');
+        }
+
         $teamNames = [];
         $seed = 1;
         foreach ($teams as $team) {
@@ -77,6 +81,10 @@ class AdminBaganController extends Controller
             ->where('jenis_kelamin', $request->jenis_kelamin)
             ->where('kategori', $request->kategori)
             ->get();
+
+        if ($teams->isEmpty()) {
+            return redirect()->back()->with('alert', 'Data Kosong!');
+        }
 
         $teamNames = [];
         $seed = 1;
