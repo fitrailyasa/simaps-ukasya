@@ -78,8 +78,7 @@
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
-                <div class="timer-clock">
-                    <p class="text-hasil" style="font-size: 3rem;">00:00</p>
+                <div class="timer-clock">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                 </div>
             @else
                 <div class="box-nilai"  style="height: 100%">
@@ -105,7 +104,10 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($waktu / 60), $waktu % 60) }}
+                                @php
+                                    $performance_time = 3-$waktu;
+                                @endphp
+                                {{ sprintf("%02d:%02d", floor($performance_time), ($performance_time*60)%60) }}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -133,67 +135,61 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if (count($penilaian_tunggal_juri) == $length*2)
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+        @if ($mulai == false) 
+            @if (count($penilaian_tunggal_juri) == $length*2)
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
-        @else
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+                @endforeach
+            @else
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
+                @endforeach
+            @endif
         @endif
-        
-        @for ($i = 1; $i <= 10; $i++)
-        
-        @endfor
     </div>
 </div>
 
 @section('script')
     <script>
-        // let rand = Math.floor(Math.random() * 10) + 1;
-        // if($(`.box-nilai`)){
-        //     $(`.down-${rand}`).removeClass('bg-primary')
-        //     $(`.up-${rand}`).removeClass('bg-primary')
-        //     $(`.down-${rand}`).addClass('bg-success')
-        //     $(`.up-${rand}`).addClass('bg-success')
-        // }
+        setInterval(() => {
+            @this.call('kurangiWaktu')
+        }, 100);
     </script>
 @endsection
 @elseif($jenis == "regu")
@@ -356,13 +352,7 @@
 
 @section('script')
     <script>
-        // let rand = Math.floor(Math.random() * 10) + 1;
-        // if($(`.box-nilai`)){
-        //     $(`.down-${rand}`).removeClass('bg-primary')
-        //     $(`.up-${rand}`).removeClass('bg-primary')
-        //     $(`.down-${rand}`).addClass('bg-success')
-        //     $(`.up-${rand}`).addClass('bg-success')
-        // }
+        
     </script>
 @endsection
 @elseif($jenis == "ganda")

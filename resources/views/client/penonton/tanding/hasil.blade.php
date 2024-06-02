@@ -38,8 +38,8 @@
         <p class="text-hasil fw-bold" style="font-size: 3rem;">PEMENANG</p>
         <div class="score d-flex justify-content-center" style="height: 20%;width:100%;">
             <div class="button"  style="height: 90%;width:60%">
-                <div class="" style="height: 100%;width:100%;{{$pemenang == "merah" ? "border: solid 3px #db3545;background-color: #db3545;" : "border: solid 3px #0053a6;background-color: #0053a6;"}} border-radius: 20px">
-                    <p class="text-hasil" style="font-size: 4rem;color: #fff">{{$pemenang == "merah" ? "MERAH" : "BIRU"}}</p>
+                <div class="" style="height: 100%;width:100%;{{$jadwal->pemenang == $sudut_merah->id ? "border: solid 3px #db3545;background-color: #db3545;" : "border: solid 3px #0053a6;background-color: #0053a6;"}} border-radius: 20px">
+                    <p class="text-hasil" style="font-size: 4rem;color: #fff">{{$jadwal->pemenang == $sudut_merah->id ? "MERAH" : "BIRU"}}</p>
                 </div>
             </div>
         </div>

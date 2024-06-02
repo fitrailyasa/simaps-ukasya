@@ -147,7 +147,7 @@
                         <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
                             <div class="total-akhir d-flex justify-content-center">
                                 <h1 class="fw-bold">
-                                    {{$total_poin_sementara_biru}}
+                                    {{$total_poin_biru}}
                                 </h1>
                             </div>
                         </div>
@@ -480,7 +480,7 @@
                         <div class="table-body border border-dark d-flex flex-column justify-content-center" style="height: 89.1%">
                             <div class="total-akhir d-flex justify-content-center">
                                 <h1 class="fw-bold">
-                                    {{$total_poin_sementara_merah}}
+                                    {{$total_poin_merah}}
                                 </h1>
                             </div>
                         </div>

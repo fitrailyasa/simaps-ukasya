@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Juri;
 
 use App\Models\PengundianTGR;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +32,7 @@ class JuriTunggal extends Component
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
@@ -86,7 +86,12 @@ class JuriTunggal extends Component
     }
     #[On('echo:arena,.ganti-tahap-tunggal')]
     public function gantiTahapHandler($data){
-        if($this->jadwal->tanding == $this->sudut_biru->id){
+        
+    }
+
+    #[On('echo:arena,.ganti-tampil-tunggal')]
+    public function gantiTampilHandler($data){
+        if($this->jadwal->tampil == $this->pengundian_biru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
             if(!$this->penilaian_tunggal){
                 $this->penilaian_tunggal = PenilaianTunggal::create([

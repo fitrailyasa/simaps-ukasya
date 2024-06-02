@@ -22,8 +22,7 @@ class TandingSeeder extends Seeder
                 'berat_badan' => 70,
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
-                'kelas' => 'Kelas A',
-                'negara'=>'INDONESIA'   
+                'kelas' => 'Kelas A',   
             ],
             [
                 'id' => 2,
@@ -33,8 +32,7 @@ class TandingSeeder extends Seeder
                 'berat_badan' => 70,
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
-                'kelas' => 'Kelas A', 
-                'negara'=>'INDONESIA'  
+                'kelas' => 'Kelas A',   
             ],
             [
                 'id' => 3,
@@ -44,8 +42,7 @@ class TandingSeeder extends Seeder
                 'berat_badan' => 76,
                 'kontingen' => 'ASAD',
                 'golongan' => 'Dewasa',
-                'kelas' => 'Kelas B',
-                'negara'=>'INDONESIA'   
+                'kelas' => 'Kelas B',   
             ],
         ];
         Tanding::query()->insert($Tanding);

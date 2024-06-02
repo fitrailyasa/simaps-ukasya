@@ -10,7 +10,11 @@
     }else{
         $length = (count($penilaian_tunggal_juri_merah)+1)/2;
     }
-    $penalty = $penalty_tunggal_merah->toleransi_waktu+$penalty_tunggal->keluar_arena+$penalty_tunggal->menyentuh_lantai+$penalty_tunggal->pakaian+$penalty_tunggal->tidak_bergerak;
+    if($penalty_tunggal_merah){
+        $penalty_merah = $penalty_tunggal_merah->toleransi_waktu+$penalty_tunggal_merah->keluar_arena+$penalty_tunggal_merah->menyentuh_lantai+$penalty_tunggal_merah->pakaian+$penalty_tunggal_merah->tidak_bergerak;
+    }else{
+        $penalty_merah = 0;
+    }
     $total_merah = 0;
     foreach ($penilaian_tunggal_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
@@ -39,7 +43,11 @@
     }else{
         $length = (count($penilaian_tunggal_juri_biru)+1)/2;
     }
-    $penalty = $penalty_tunggal_biru->toleransi_waktu+$penalty_tunggal->keluar_arena+$penalty_tunggal->menyentuh_lantai+$penalty_tunggal->pakaian+$penalty_tunggal->tidak_bergerak;
+    if($penalty_tunggal_biru){
+        $penalty_biru = $penalty_tunggal_biru->toleransi_waktu+$penalty_tunggal_biru->keluar_arena+$penalty_tunggal_biru->menyentuh_lantai+$penalty_tunggal_biru->pakaian+$penalty_tunggal_biru->tidak_bergerak;
+    }else{
+        $penalty_biru = 0;
+    }
     $total_biru = 0;
     foreach ($penilaian_tunggal_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
@@ -91,7 +99,7 @@
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
         <p class="text-hasil fw-bold" style="font-size: 1.5rem;">Winner</p>
-        @if ($jadwal->pemenang == $sudut_biru->id)
+        @if ($jadwal->pemenang == $pengundian_biru->id)
             <p class="fw-bold" style="font-size: 1.2rem; color: #0053a6; margin-top: -24px;">Biru</p>
         @else
             <p class="fw-bold" style="font-size: 1.2rem; color: #db3545;">Merah</p>
@@ -183,7 +191,11 @@
     }else{
         $length = (count($penilaian_ganda_juri_merah)+1)/2;
     }
-    $penalty = $penalty_ganda_merah->toleransi_waktu+$penalty_ganda->keluar_arena+$penalty_ganda->menyentuh_lantai+$penalty_ganda->pakaian+$penalty_ganda->tidak_bergerak;
+    if($penalty_tunggal_merah){
+        $penalty_merah = $penalty_tunggal_merah->toleransi_waktu+$penalty_tunggal_merah->keluar_arena+$penalty_tunggal_merah->menyentuh_lantai+$penalty_tunggal_merah->pakaian+$penalty_tunggal_merah->tidak_bergerak;
+    }else{
+        $penalty_merah = 0;
+    }
     $total_merah = 0;
     foreach ($penilaian_ganda_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
@@ -212,7 +224,7 @@
     }else{
         $length = (count($penilaian_ganda_juri_biru)+1)/2;
     }
-    $penalty = $penalty_ganda_biru->toleransi_waktu+$penalty_ganda->keluar_arena+$penalty_ganda->menyentuh_lantai+$penalty_ganda->pakaian+$penalty_ganda->tidak_bergerak;
+    $penalty_biru = $penalty_ganda_biru->toleransi_waktu+$penalty_ganda->keluar_arena+$penalty_ganda->menyentuh_lantai+$penalty_ganda->pakaian+$penalty_ganda->tidak_bergerak;
     $total_biru = 0;
     foreach ($penilaian_ganda_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;

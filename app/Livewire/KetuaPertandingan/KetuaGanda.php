@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\KetuaPertandingan;
+
 use App\Models\PengundianTGR;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -36,7 +37,7 @@ class KetuaGanda extends Component
 
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);

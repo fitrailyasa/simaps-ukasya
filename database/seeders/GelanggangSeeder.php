@@ -19,14 +19,14 @@ class GelanggangSeeder extends Seeder
                 'nama' => 'ARENA A',
                 'waktu' => 3,
                 'jenis' => 'Tanding',
-                'jadwal_tanding'=> 1,
+                'jadwal'=>1
             ],
             [
                 'id' => 2,
                 'nama' => 'ARENA B',
                 'waktu' => 3,
                 'jenis' => 'Tunggal',
-                'jadwal_tanding'=> NULL,
+                'jadwal'=>1
 
             ],
             [
@@ -34,21 +34,21 @@ class GelanggangSeeder extends Seeder
                 'nama' => 'ARENA C',
                 'waktu' => 3,
                 'jenis' => 'Ganda',
-                'jadwal_tanding'=> NULL,
+                'jadwal'=>1
             ],
             [
                 'id' => 4,
                 'nama' => 'ARENA D',
                 'waktu' => 3,
                 'jenis' => 'Regu',
-                'jadwal_tanding'=> NULL,
+                'jadwal'=>1
             ],
             [
                 'id' => 5,
                 'nama' => 'ARENA E',
                 'waktu' => 3,
                 'jenis' => 'Solo_Kreatif',
-                'jadwal_tanding'=> NULL,
+                'jadwal'=>1
             ]
         ];
         Gelanggang::query()->insert($Gelanggang);

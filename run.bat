@@ -2,10 +2,10 @@
 echo Menjalankan semua perintah...
 
 :: Menjalankan PHP artisan serve
-start "PHP Server" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan serve --host=127.0.0.1"
+start "PHP Server" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan serve --host=192.168.0.100"
 
 :: Menjalankan PHP artisan reverb:start dengan host dan port tertentu
-start "Reverb" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan reverb:start --host=127.0.0.1 --port=9000"
+start "Reverb" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan reverb:start --host=192.168.0.100 --port=9000"
 
 :: Menjalankan PHP artisan queue:listen
 start "Queue Listener" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan queue:listen"

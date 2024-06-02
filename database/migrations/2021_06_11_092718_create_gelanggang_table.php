@@ -18,7 +18,7 @@ class CreateGelanggangTable extends Migration
             $table->string('nama');
             $table->string('waktu');
             $table->string('jenis'); 
-            $table->foreignId('jadwal_tanding')->nullable();
+            $table->foreignId('jadwal')->nullable();
             $table->timestamps();
         });
     }

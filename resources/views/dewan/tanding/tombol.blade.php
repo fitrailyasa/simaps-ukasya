@@ -44,20 +44,3 @@
     
         @include('dewan.tanding.modal',['juri_1'=>'setuju','juri_2'=>'setuju','juri_3'=>'setuju','PenilaianTanding'=>'1'])
 </div>
-<div class="row">
-        <div class="col-md-2">
-            <button wire:click='GantiBabakTrigger({{1}})'>1</button>
-            <button wire:click='GantiBabakTrigger({{2}})'>2</button>
-            <button wire:click='GantiBabakTrigger({{3}})'>3</button>
-        </div>
-        <div class="col-md-2">
-            <button wire:click='mulaiPertandingan()'>mulai</button>
-            <button wire:click='pausePertandingan()'>pause</button>
-            <button wire:click='GantiBabakTrigger({{1}})'>keputusan</button>
-            <button wire:click='keputusanMenang({{$jadwal->sudut_biru}})'>biru</button>
-            <button wire:click='keputusanMenang({{$jadwal->sudut_merah}})'>merah</button>
-        </div>
-        <div class="col-md-2">
-            {{ sprintf("%02d:%02d", floor($gelanggang->waktu), ($gelanggang->waktu*60)%60) }}
-        </div>
-</div>

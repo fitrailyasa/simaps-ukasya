@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Dewan;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +31,7 @@ class DewanRegu extends Component
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
         $this->tampil = $this->sudut_biru->id;

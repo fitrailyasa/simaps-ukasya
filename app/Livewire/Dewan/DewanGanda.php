@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Dewan;
 
 use App\Events\Ganda\GantiTahap;
 use App\Events\Ganda\GantiTampil;
@@ -36,7 +36,7 @@ class DewanGanda extends Component
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);

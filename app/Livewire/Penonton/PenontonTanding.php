@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Penonton;
 use App\Models\JadwalTanding;
 use App\Models\Gelanggang;
 use App\Models\Tanding;
@@ -27,13 +27,15 @@ class PenontonTanding extends Component
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
         $this->waktu = $this->gelanggang->waktu;
-        $this->jadwal = JadwalTanding::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
         $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
     public function resetIndikator(){
+        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->pukulan_merah = $this->penilaian_tanding_merah->where('jenis','pukulan')->where('aktif',true)->last();
@@ -47,7 +49,8 @@ class PenontonTanding extends Component
 
      #[On('echo:arena,.ganti-babak')]
     public function GantiBabakHandler($data){
-        
+        $this->waktu = $this->gelanggang->waktu;
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
     }
 
      #[On('echo:poin,.tambah-peringatan')]
@@ -113,6 +116,10 @@ class PenontonTanding extends Component
         }else{
             $this->mulai = false;
         }
+        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
+        $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
     }
 
     public function render()

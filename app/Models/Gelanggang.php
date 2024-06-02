@@ -10,7 +10,7 @@ class Gelanggang extends Model
     use HasFactory;
 
     protected $table = 'gelanggang';
-    protected $fillable = ['nama', 'waktu', 'jenis','jadwal_tanding'];      
+    protected $fillable = ['nama', 'waktu', 'jenis','jadwal'];      
 
     public function JadwalTGR()
     {

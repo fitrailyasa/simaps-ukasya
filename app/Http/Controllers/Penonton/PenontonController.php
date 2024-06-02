@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Penonton;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gelanggang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,19 +13,25 @@ class PenontonController extends Controller
     {
         return view('client.penonton.index');
     }
-    public function tanding()
-    {
-        $arena = "A";
-        $tahap ='hasil';
-        $class = 'A';
-        $sudut = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
-        return view('client.penonton.tanding.index',compact('arena','tahap','class','pesilat'));
-    }public function tgr()
-    {
-        $arena = "A";
-        $tahap ='tampil';
-        $class = 'A';
-        $sudut = [['nama'=>'Seikh Alauin','perguruan'=>'Tapak Suci'],['nama'=>'Mustavid','perguruan'=>'PSHT']];
-        return view('client.penonton.tgr.index',compact('arena','tahap','class','sudut'));
+
+    public function auth($gelanggang_id){
+        $gelanggang = Gelanggang::find($gelanggang_id);
+        switch ($gelanggang->jenis) {
+            case 'Tanding':
+                return redirect('/tanding');
+                break;
+            case 'Tunggal':
+                return redirect('/tunggal');
+                break;
+            case 'Regu':
+                return redirect('/regu');
+                break;
+            case 'Ganda':
+                return redirect('/ganda');
+                break;
+            case 'Solo_Kreatif':
+                return redirect('/solo');
+                break;
+        }
     }
 }

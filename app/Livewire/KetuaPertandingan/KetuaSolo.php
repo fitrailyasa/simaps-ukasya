@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\KetuaPertandingan;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
+use App\Models\Tanding;
 use App\Models\JadwalTGR;
 use App\Models\TGR;
 use App\Models\PenilaianSolo;
 use App\Models\PenaltySolo;
 use App\Models\User;
 
-class PenontonSolo extends Component
+class KetuaSolo extends Component
 {
     public $jadwal;
     public $sudut;
@@ -26,9 +27,9 @@ class PenontonSolo extends Component
 
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Solo_Kreatif')->first();
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
-        $this->sudut= TGR::find($this->jadwal->sudut_merah);
-        $this->juris = User::where('roles_id',4)->where('status',1)->where('gelanggang',$this->gelanggang->id)->get();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        $this->sudut = TGR::find($this->jadwal->sudut_merah);
+        $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->get();
         $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
@@ -49,6 +50,6 @@ class PenontonSolo extends Component
 
     public function render()
     {
-        return view('livewire.penonton-solo')->extends('layouts.client.app')->section('content');
+        return view('livewire.ketua-solo')->extends('layouts.client.app')->section('content');
     }
 }

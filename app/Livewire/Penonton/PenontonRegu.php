@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Penonton;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
@@ -28,7 +28,7 @@ class PenontonRegu extends Component
 
     public function mount(){
         $this->gelanggang = Gelanggang::where('jenis','Regu')->first();
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();

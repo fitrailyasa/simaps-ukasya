@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Livewire\Operator\OperatorGandaKontrol;
+use App\Livewire\Operator\OperatorReguKontrol;
+use App\Livewire\Operator\OperatorSoloKontrol;
+use App\Livewire\Operator\OperatorTandingKontrol;
+use App\Livewire\Operator\OperatorTunggalKontrol;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -24,26 +29,26 @@ use App\Http\Controllers\Admin\AdminKontrolTGRController;
 use App\Http\Controllers\Admin\AdminGelanggangController;
 use App\Http\Controllers\Penonton\KetuaPertandinganController;
 use App\Http\Controllers\Penonton\PenontonController;
-use App\Livewire\DewanTanding;
-use App\Livewire\JuriTanding;
-use App\Livewire\PenontonTanding;
-use App\Livewire\KetuaTanding;
-use App\Livewire\DewanTunggal;
-use App\Livewire\JuriTunggal;
-use App\Livewire\PenontonTunggal;
-use App\Livewire\KetuaTunggal;
-use App\Livewire\DewanRegu;
-use App\Livewire\JuriRegu;
-use App\Livewire\PenontonRegu;
-use App\Livewire\KetuaRegu;
-use App\Livewire\DewanGanda;
-use App\Livewire\JuriGanda;
-use App\Livewire\PenontonGanda;
-use App\Livewire\KetuaGanda;
-use App\Livewire\DewanSolo;
-use App\Livewire\JuriSolo;
-use App\Livewire\PenontonSolo;
-use App\Livewire\KetuaSolo;
+use App\Livewire\Dewan\DewanTanding;
+use App\Livewire\Juri\JuriTanding;
+use App\Livewire\Penonton\PenontonTanding;
+use App\Livewire\KetuaPertandingan\KetuaTanding;
+use App\Livewire\Dewan\DewanTunggal;
+use App\Livewire\Juri\JuriTunggal;
+use App\Livewire\Penonton\PenontonTunggal;
+use App\Livewire\KetuaPertandingan\KetuaTunggal;
+use App\Livewire\Dewan\DewanRegu;
+use App\Livewire\Juri\JuriRegu;
+use App\Livewire\Penonton\PenontonRegu;
+use App\Livewire\KetuaPertandingan\KetuaRegu;
+use App\Livewire\Dewan\DewanGanda;
+use App\Livewire\Juri\JuriGanda;
+use App\Livewire\Penonton\PenontonGanda;
+use App\Livewire\KetuaPertandingan\KetuaGanda;
+use App\Livewire\Dewan\DewanSolo;
+use App\Livewire\Juri\JuriSolo;
+use App\Livewire\Penonton\PenontonSolo;
+use App\Livewire\KetuaPertandingan\KetuaSolo;
 
 
 
@@ -51,8 +56,9 @@ use App\Livewire\KetuaSolo;
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
 //CMS PENONTON
-Route::get('/penonton', PenontonTanding::class)->name('penonton');
-Route::get('/tanding', [PenontonController::class, 'tanding'])->name('tanding');
+Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
+Route::get('/penonton/{gelanggang_id}', [PenontonController::class, 'auth']);
+Route::get('/tanding', PenontonTanding::class)->name('tanding');
 Route::get('/tunggal', PenontonTunggal::class)->name('tunggal');
 Route::get('/regu', PenontonRegu::class)->name('regu');
 Route::get('/ganda', PenontonGanda::class)->name('ganda');
@@ -177,9 +183,23 @@ Route::middleware(['auth'])->group(function () {
 
     // Kontrol Tanding
     Route::get('/kontrol-tanding', [AdminKontrolTandingController::class, 'index'])->name('kontrol-tanding.index');
+    Route::post('/ubah/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'ubahtahap']);
+    Route::post('/stop/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'stop_pertandingan']);
+    Route::get('/kontrol-tanding/{jadwal_tanding_id}', OperatorTandingKontrol::class);
+
 
     // Kontrol Tgr
     Route::get('/kontrol-tgr', [AdminKontrolTGRController::class, 'index'])->name('kontrol-tgr.index');
+    //tunggal
+    Route::post('/ubahtunggal/{jadwal_tunggal_id}', [AdminKontrolTGRController::class, 'ubahtahap']);
+    Route::post('/stoptunggal/{jadwal_tunggal_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
+    Route::get('/kontrol-tgr/tunggal/{jadwal_tunggal_id}', OperatorTunggalKontrol::class);
+    //ganda
+    Route::get('/kontrol-tgr/ganda/{jadwal_tgr_id}', OperatorGandaKontrol::class);
+    //regu
+    Route::get('/kontrol-tgr/regu/{jadwal_tgr_id}', OperatorReguKontrol::class);
+    //solo
+    Route::get('/kontrol-tgr/solo/{jadwal_tgr_id}', OperatorSoloKontrol::class);
   });
 
   // CMS Dewan

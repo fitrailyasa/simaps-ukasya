@@ -26,6 +26,7 @@
             </tr>
         </thead>
         <tbody>
+            @if (auth()->user()->id == 1)
             @foreach ($jadwaltandings as $jadwaltanding)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -49,6 +50,50 @@
                     </td>
                 </tr>
             @endforeach
+            @elseif (auth()->user()->id == 2)
+            @foreach ($jadwaltandings as $jadwaltanding)
+                @if (auth()->user()->Gelanggang->jenis == $jadwaltanding->Gelanggang->jenis)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $jadwaltanding->partai ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->babak ?? '-' }}</td>
+                    <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
+                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
+                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
+                        ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
+                    </td>
+                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
+                    <td>{{ $jadwaltanding->PemenangTanding->Tanding->nama ?? '' }}
+                        ({{ $jadwaltanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }})
+                    </td>
+                    <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
+                    <td class="manage-row justify-content-center d-flex flex-row">
+                        @if ($jadwaltanding->id == $gelanggang_operator->jadwal && $jadwaltanding->tahap !== "hasil")
+                            <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tanding/{{$jadwaltanding->id}}">
+                                <i class="fa fa-tv"></i>
+                            </a>
+                            <form method="POST" action="stop/{{$jadwaltanding->id}}" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn-sm btn-danger">
+                                    <i class=" fa fa-stop"></i>
+                                </button>
+                            </form>
+                        @else
+                            <form method="POST" action="ubah/{{$jadwaltanding->id}}" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn-sm btn-primary mr-2">
+                                    <i class=" fa fa-play"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </td>
+                </tr>
+                @endif
+            @endforeach
+            @endif
         </tbody>
         <tfoot>
             <tr>

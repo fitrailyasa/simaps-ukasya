@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Juri;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
@@ -29,7 +29,7 @@ class JuriSolo extends Component
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
-        $this->jadwal = JadwalTGR::where('gelanggang',$this->gelanggang->id)->first();
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->tampil = $this->jadwal->sudut_merah;
         $this->penilaian_solo = PenilaianSolo::where('sudut',$this->tampil)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

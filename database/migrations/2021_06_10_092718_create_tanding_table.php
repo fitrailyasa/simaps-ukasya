@@ -18,7 +18,6 @@ class CreateTandingTable extends Migration
             $table->string('nama');
             $table->string('img')->nullable();
             $table->string('jenis_kelamin');
-            $table->string('negara');
             $table->string('tinggi_badan');
             $table->string('berat_badan');
             $table->string('kontingen');    

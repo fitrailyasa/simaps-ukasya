@@ -15,11 +15,11 @@
             <h1 class="">Halaman Penonton</h1>
             <p>Selamat Datang di Aplikasi SIMAPS</p>
             <a href="#" class="btn btn-primary">Beranda</a>
-            <a href="{{ route('penonton') }}" class="btn btn-primary">Arena A</a>
-            <a href="{{ route('penonton') }}" class="btn btn-primary">Arena B</a>
-            <a href="{{ route('penonton') }}" class="btn btn-primary">Arena C</a>
-            <a href="{{ route('penonton') }}" class="btn btn-primary">Arena D</a>
-            <a href="{{ route('penonton') }}" class="btn btn-primary">Arena E</a>
+            <a href="/penonton/1" class="btn btn-primary">Arena A</a>
+            <a href="/penonton/2" class="btn btn-primary">Arena B</a>
+            <a href="/penonton/3" class="btn btn-primary">Arena C</a>
+            <a href="/penonton/4" class="btn btn-primary">Arena D</a>
+            <a href="/penonton/5" class="btn btn-primary">Arena E</a>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Dewan;
 
 use App\Events\Tanding\MulaiPertandingan;
 use App\Models\PengundianTanding;
@@ -45,11 +45,11 @@ class DewanTanding extends Component
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }
-        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
-        $this->sudut_merah = Tanding::find($this->pengundian_biru->atlet_id);
-        $this->sudut_biru = Tanding::find($this->pengundian_merah->atlet_id);
+        $this->sudut_merah = Tanding::find($this->pengundian_merah->atlet_id);
+        $this->sudut_biru = Tanding::find($this->pengundian_biru->atlet_id);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
@@ -186,44 +186,7 @@ class DewanTanding extends Component
             $this->error = "pertandingan belum dimulai atau sedang di pause";
         }  
     }
-//operator start
-    public function kurangiWaktu(){
-        $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
-        $this->gelanggang->save();
-    } 
-    public function keputusanMenang($sudut){
-        $this->jadwal->tahap = 'hasil';
-        $this->jadwal->pemenang = $sudut;
-        $this->jadwal->save();
-        MulaiPertandingan::dispatch('keputusan pemenang');
-    }
-    public function mulaiPertandingan(){
-        //ganti dari persiapan ke mulai pertandingan
-        $this->jadwal->tahap = 'tanding';
-        $this->mulai = true;
-        $this->jadwal->save();
-        MulaiPertandingan::dispatch('mulai pertandingan');
-    }
 
-    public function pausePertandingan(){
-        //ganti dari persiapan ke mulai pertandingan
-        $this->jadwal->tahap = 'pause';
-        $this->mulai = false;
-        $this->jadwal->save();
-        MulaiPertandingan::dispatch('pause pertandingan');
-    }
-    public function GantiBabakTrigger($babak){
-        //ganti babak 
-        if($this->jadwal->babak_tanding != $babak){
-            $this->mulai = false;
-            $this->gelanggang->waktu = 3;
-            $this->gelanggang->save();
-        }
-        $this->jadwal->babak_tanding = $babak;
-        $this->jadwal->save();   
-        GantiBabak::dispatch($babak);
-    }
-//operator end
     public function VerifikasiJatuhanTrigger(){
         VerifikasiJatuhanEvent::dispatch($this->gelanggang->id,$this->jadwal->id,Auth::user()->id,null);
     }
@@ -254,7 +217,7 @@ class DewanTanding extends Component
     #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler(){
         $this->recent = [[],[]];
-        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
     }
     #[On('echo:verifikasi,.verifikasi-jatuhan')]
     public function verifikasiJatuhanHandler($data){

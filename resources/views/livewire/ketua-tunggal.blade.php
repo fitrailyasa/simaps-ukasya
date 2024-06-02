@@ -26,6 +26,7 @@
         return $a->skor <=> $b->skor;
     });
 
+
     // Menghitung median
     $count = count($sorted_nilai);
     if ($count % 2 == 0 && $count !==0) {
@@ -272,7 +273,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->toleransi_waktu == 0 ? "0" : $penalty_tunggal->toleransi_waktu  * -0.5}}
+                        {{!$penalty_tunggal ||$penalty_tunggal->toleransi_waktu == 0 ? "0" : $penalty_tunggal->toleransi_waktu  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -282,7 +283,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->keluar_arena == 0 ? "0" : $penalty_tunggal->keluar_arena  * -0.5}}
+                        {{!$penalty_tunggal || $penalty_tunggal->keluar_arena == 0 ? "0" : $penalty_tunggal->keluar_arena  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -292,7 +293,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->menyentuh_lantai == 0 ? "0" : $penalty_tunggal->menyentuh_lantai  * -0.5}}
+                        {{!$penalty_tunggal ||$penalty_tunggal->menyentuh_lantai == 0 ? "0" : $penalty_tunggal->menyentuh_lantai  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -302,7 +303,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->pakaian == 0 ? "0" : $penalty_tunggal->pakaian  * -0.5}}
+                        {{!$penalty_tunggal ||$penalty_tunggal->pakaian == 0 ? "0" : $penalty_tunggal->pakaian  * -0.5}}
                     </h6>
                 </div>
             </div>
@@ -312,7 +313,7 @@
                 </div>
                 <div class="nilai border border-dark text-center" style="width: 8%">
                     <h6 class="fw-bold mt-1" style="color: #db3545">
-                        {{$penalty_tunggal->tidak_bergerak == 0 ? "0" : $penalty_tunggal->tidak_bergerak  * -0.5}}
+                        {{!$penalty_tunggal ||!$penalty_tunggal ||$penalty_tunggal->tidak_bergerak == 0 ? "0" : $penalty_tunggal->tidak_bergerak  * -0.5}}
                     </h6>
                 </div>
             </div>

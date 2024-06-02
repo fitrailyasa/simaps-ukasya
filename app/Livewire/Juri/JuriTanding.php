@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Juri;
 
 use App\Models\PengundianTanding;
 use App\Models\User;
@@ -42,15 +42,15 @@ class JuriTanding extends Component
         }
         $this->juris= User::where('gelanggang',$this->gelanggang->id)->where('roles_id',4)->where('status',true)->get();
         foreach ($this->juris as $index => $juri) {
-            if($juri->name == Auth::user()->name){
+            if($juri->permissions == Auth::user()->permissions){
                 $this->juri = 'juri_'.$index + 1;
             };
         }
-        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal_tanding);
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
-        $this->sudut_merah = Tanding::find($this->pengundian_biru->atlet_id);
-        $this->sudut_biru = Tanding::find($this->pengundian_merah->atlet_id);
+        $this->sudut_merah = Tanding::find($this->pengundian_merah->atlet_id);
+        $this->sudut_biru = Tanding::find($this->pengundian_biru->atlet_id);
         $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->jadwal->sudut_biru)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
     }
@@ -85,7 +85,7 @@ class JuriTanding extends Component
                 'babak'=>$this->jadwal->babak_tanding
             ]);
             }else{
-                $juri =$this->juri;
+                $juri = $this->juri;
                 $penilaian_pukulan->$juri = 1;
                 $penilaian_pukulan->save();
             };

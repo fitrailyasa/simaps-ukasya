@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\KetuaPertandingan;
 use App\Models\User;
 use App\Models\JadwalTanding;
 use App\Models\Gelanggang;
@@ -13,32 +13,32 @@ use Livewire\Component;
 
 class KetuaTanding extends Component
 {
-        public $jadwal;
-        public $sudut_merah;
-        public $sudut_biru;
-        public $juris;
-        public $gelanggang;
-        public $penilaian_tanding_merah;
-        public $penilaian_tanding_biru;
-        public $waktu;
-        public $tahap = "";
-        public $mulai = false;
-        public $poin_merah;
-        public $poin_biru;
+    public $jadwal;
+    public $sudut_merah;
+    public $sudut_biru;
+    public $juris;
+    public $gelanggang;
+    public $penilaian_tanding_merah;
+    public $penilaian_tanding_biru;
+    public $waktu;
+    public $tahap = "";
+    public $mulai = false;
+    public $poin_merah;
+    public $poin_biru;
 
         
-        public function mount(){
-            $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
-            $this->juris = User::where('gelanggang', $this->gelanggang->id)->where('roles_id',4)->where('status',true)->get();
-            $this->jadwal = JadwalTanding::where('gelanggang',$this->gelanggang->id)->first();
-            $this->tahap = $this->jadwal->tahap;
-            $this->waktu = $this->gelanggang->waktu;
-            $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
-            $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
-            $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
-            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
-            $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
-            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
+    public function mount(){
+        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
+        $this->juris = User::where('gelanggang', $this->gelanggang->id)->where('roles_id',4)->where('status',true)->get();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        $this->tahap = $this->jadwal->tahap;
+        $this->waktu = $this->gelanggang->waktu;
+        $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
+        $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
+        $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
+        $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
+        $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
+        $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
 
     }
 
@@ -94,6 +94,7 @@ class KetuaTanding extends Component
     
    #[On('echo:arena,.mulai-pertandingan')]
     public function mulaiPertandinganHandler($data){
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         if($data['event'] == 'mulai pertandingan'){
             $this->mulai = true;
         }else if($data['event'] == 'pause pertandingan'){
