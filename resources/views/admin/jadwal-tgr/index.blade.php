@@ -32,8 +32,6 @@
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Pemenang</th>
-                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -52,10 +50,6 @@
                     </td>
                     <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
                         ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})</td>
-                    <td>{{ $jadwaltgr->PemenangTGR->TGR->nama ?? '' }}
-                        ({{ $jadwaltgr->PemenangTGR->TGR->kontingen ?? 'Belum Bertanding' }})
-                    </td>
-                    <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
                         @include('admin.jadwal-tgr.edit')
                         @include('admin.jadwal-tgr.delete')
@@ -72,8 +66,6 @@
                 <th>Kelompok</th>
                 <th>Sudut Biru</th>
                 <th>Sudut Merah</th>
-                <th>Pemenang</th>
-                <th>Skor</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>

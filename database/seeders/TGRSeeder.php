@@ -20,8 +20,7 @@ class TGRSeeder extends Seeder
                 'jenis_kelamin' => 'L',
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
-                'kategori' => 'Tunggal',   
-                'region' => 'Indonesia'
+                'kategori' => 'Tunggal',
             ],
             [
                 'id' => 2,
@@ -30,7 +29,6 @@ class TGRSeeder extends Seeder
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
                 'kategori' => 'Tunggal',
-                'region' => 'Indonesia'
             ],
             [
                 'id' => 3,
@@ -39,7 +37,6 @@ class TGRSeeder extends Seeder
                 'kontingen' => 'ASAD',
                 'golongan' => 'Dewasa',
                 'kategori' => 'Ganda',
-                'region' => 'Indonesia'
             ],
         ];
         TGR::query()->insert($TGR);

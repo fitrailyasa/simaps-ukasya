@@ -77,18 +77,20 @@
             @foreach ($timbangulangs as $timbangulang)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $timbangulang->partai ?? '-' }}</td>
-                    <td>{{ $timbangulang->Gelanggang->nama ?? '-' }}</td>
-                    <td>{{ $timbangulang->babak ?? '-' }}</td>
-                    <td>{{ $timbangulang->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $timbangulang->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
-                        {{ $timbangulang->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
-                    <td class="bg-primary">{{ $timbangulang->PengundianTandingBiru->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
-                        - {{ $timbangulang->berat_biru ?? '-' }} Kg ({{ $timbangulang->status_biru ?? '-' }})</td>
-                    <td class="bg-danger">{{ $timbangulang->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->PengundianTandingMerah->Tanding->kontingen ?? '-' }}) -
-                        {{ $timbangulang->berat_merah ?? '-' }} Kg ({{ $timbangulang->status_merah ?? '-' }})</td>
+                    <td>{{ $timbangulang->JadwalTanding->partai ?? '-' }}</td>
+                    <td>{{ $timbangulang->JadwalTanding->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $timbangulang->JadwalTanding->babak ?? '-' }}</td>
+                    <td>{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
+                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
+                    <td class="bg-primary">{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
+                        ({{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
+                        - {{ $timbangulang->berat_biru ?? '-' }} Kg
+                        ({{ $timbangulang->status_biru ?? '-' }})</td>
+                    <td class="bg-danger">{{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                        ({{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}) -
+                        {{ $timbangulang->berat_merah ?? '-' }} Kg
+                        ({{ $timbangulang->status_merah ?? '-' }})</td>
                     <td class="manage-row">
                         @include('admin.timbang-ulang.edit')
                         @include('admin.timbang-ulang.delete')

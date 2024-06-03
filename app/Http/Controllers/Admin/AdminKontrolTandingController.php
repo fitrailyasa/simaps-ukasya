@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\Tanding\MulaiPertandingan;
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
+use App\Models\TimbangUlang;
 use App\Models\PengundianTanding;
 use App\Models\Gelanggang;
 use Illuminate\Http\Request;
@@ -16,8 +17,8 @@ class AdminKontrolTandingController extends Controller
         $gelanggangs = Gelanggang::all();
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantandings = PengundianTanding::latest('id')->get();
-        $jadwaltandings = JadwalTanding::latest('id')->get();
-        return view('admin.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
+        $timbangulangs = TimbangUlang::latest('id')->get();
+        return view('admin.kontrol-tanding.index', compact('timbangulangs', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
     }
 
     public function ubahtahap(Request $request, $jadwal_tanding_id)
