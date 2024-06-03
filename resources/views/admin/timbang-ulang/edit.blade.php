@@ -27,10 +27,6 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5">
-                        <input type="hidden" name="partai" value="{{ $timbangulang->partai }}">
-                        <input type="hidden" name="gelanggang" value="{{ $timbangulang->Gelanggang->id }}">
-                        <input type="hidden" name="babak" value="{{ $timbangulang->babak }}">
-                        <input type="hidden" name="kelas" value="{{ $timbangulang->kelas }}">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
                             <input type="hidden" name="sudut_biru"

@@ -31,6 +31,7 @@ class AdminTimbangUlangController extends Controller
             'sudut_merah' => 'required|max:255',
             'berat_merah' => 'required|max:255',
             'status_merah' => 'required|max:255',
+            'pemenang' => 'required|max:255',
         ]);
 
         $TimbangUlang = TimbangUlang::create([
@@ -44,6 +45,7 @@ class AdminTimbangUlangController extends Controller
             'sudut_merah' => $request->sudut_merah,
             'berat_merah' => $request->berat_merah,
             'status_merah' => $request->status_merah,
+            'pemenang' => $request->pemenang,
         ]);
 
         return back()->with('sukses', 'Berhasil Tambah Data!');
@@ -52,10 +54,6 @@ class AdminTimbangUlangController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'partai' => 'required|max:255',
-            'gelanggang' => 'required|max:255',
-            'babak' => 'required|max:255',
-            'kelas' => 'required|max:255',
             'sudut_biru' => 'required|max:255',
             'berat_biru' => 'required|max:255',
             'status_biru' => 'required|max:255',

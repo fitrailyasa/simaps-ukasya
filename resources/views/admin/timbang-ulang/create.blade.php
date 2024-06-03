@@ -25,7 +25,10 @@
                         <input type="hidden" name="partai" value="{{ $jadwaltanding->partai }}">
                         <input type="hidden" name="gelanggang" value="{{ $jadwaltanding->Gelanggang->id }}">
                         <input type="hidden" name="babak" value="{{ $jadwaltanding->babak }}">
-                        <input type="hidden" name="kelas" value="{{ $jadwaltanding->kelas }}">
+                        <input type="hidden" name="pemenang"
+                            value="{{ $jadwaltanding->PemenangTanding->Tanding->id }}">
+                        <input type="hidden" name="kelas"
+                            value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas }}">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
                             <input type="hidden" name="sudut_biru"

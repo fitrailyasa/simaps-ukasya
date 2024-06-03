@@ -46,7 +46,6 @@
                     </td>
                     <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
-                        @include('admin.kontrol-tanding.edit')
                     </td>
                 </tr>
             @endforeach

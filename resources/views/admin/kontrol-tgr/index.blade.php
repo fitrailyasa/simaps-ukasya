@@ -46,7 +46,6 @@
                         </td>
                         <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                         <td class="manage-row">
-                            @include('admin.kontrol-tgr.edit')
                         </td>
                     </tr>
             @endforeach

@@ -25,6 +25,7 @@ class CreateTimbangUlangTable extends Migration
             $table->foreignId('sudut_merah');
             $table->integer('berat_merah')->nullable()->default(0);
             $table->string('status_merah')->nullable();
+            $table->string('pemenang')->nullable();
             $table->timestamps();
         });
     }
