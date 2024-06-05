@@ -32,7 +32,7 @@ class JadwalTandingImport implements ToModel, WithHeadingRow
             'partai' => $row['partai'],
             'gelanggang' => $gelanggang->id,
             'babak' => $row['babak'],
-            'kelas' => $this->kelompok,
+            // 'kelas' => $this->kelompok,
             'sudut_biru' => $row['sudut_biru'],
             'sudut_merah' => $row['sudut_merah'],
             'next_sudut' => $row['next_sudut'],

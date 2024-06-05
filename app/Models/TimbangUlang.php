@@ -10,20 +10,10 @@ class TimbangUlang extends Model
     use HasFactory;
 
     protected $table = 'timbang_ulang';
-    protected $fillable = ['partai', 'gelanggang', 'babak', 'sudut_biru', 'berat_biru', 'status_biru', 'sudut_merah', 'berat_merah', 'status_merah', 'kelas'];
+    protected $fillable = ['partai', 'berat_biru', 'status_biru', 'berat_merah', 'status_merah'];
 
-    public function Gelanggang()
+    public function JadwalTanding()
     {
-        return $this->belongsTo(Gelanggang::class, 'gelanggang');
-    }
-
-    public function PengundianTandingBiru()
-    {
-        return $this->belongsTo(PengundianTanding::class, 'sudut_biru', 'id');
-    }
-
-    public function PengundianTandingMerah()
-    {
-        return $this->belongsTo(PengundianTanding::class, 'sudut_merah', 'id');
+        return $this->belongsTo(JadwalTanding::class, 'partai', 'id');
     }
 }

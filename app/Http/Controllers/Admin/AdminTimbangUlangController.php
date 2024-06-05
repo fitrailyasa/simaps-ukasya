@@ -22,22 +22,14 @@ class AdminTimbangUlangController extends Controller
     {
         $request->validate([
             'partai' => 'required|max:255',
-            'gelanggang' => 'required|max:255',
-            'babak' => 'required|max:255',
-            'kelas' => 'required|max:255',
-            'sudut_biru' => 'required|max:255',
             'berat_biru' => 'required|max:255',
             'status_biru' => 'required|max:255',
-            'sudut_merah' => 'required|max:255',
             'berat_merah' => 'required|max:255',
             'status_merah' => 'required|max:255',
         ]);
 
         $TimbangUlang = TimbangUlang::create([
             'partai' => $request->partai,
-            'gelanggang' => $request->gelanggang,
-            'babak' => $request->babak,
-            'kelas' => $request->kelas,
             'sudut_biru' => $request->sudut_biru,
             'berat_biru' => $request->berat_biru,
             'status_biru' => $request->status_biru,
@@ -52,14 +44,8 @@ class AdminTimbangUlangController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'partai' => 'required|max:255',
-            'gelanggang' => 'required|max:255',
-            'babak' => 'required|max:255',
-            'kelas' => 'required|max:255',
-            'sudut_biru' => 'required|max:255',
             'berat_biru' => 'required|max:255',
             'status_biru' => 'required|max:255',
-            'sudut_merah' => 'required|max:255',
             'berat_merah' => 'required|max:255',
             'status_merah' => 'required|max:255',
         ]);

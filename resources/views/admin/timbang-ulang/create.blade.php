@@ -23,9 +23,6 @@
                 <div class="row">
                     <div class="col-md-5">
                         <input type="hidden" name="partai" value="{{ $jadwaltanding->partai }}">
-                        <input type="hidden" name="gelanggang" value="{{ $jadwaltanding->Gelanggang->id }}">
-                        <input type="hidden" name="babak" value="{{ $jadwaltanding->babak }}">
-                        <input type="hidden" name="kelas" value="{{ $jadwaltanding->kelas }}">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
                             <input type="hidden" name="sudut_biru"

@@ -16,13 +16,8 @@ class CreateTimbangUlangTable extends Migration
         Schema::create('timbang_ulang', function (Blueprint $table) {
             $table->id();
             $table->integer('partai');
-            $table->foreignId('gelanggang');
-            $table->string('babak');
-            $table->string('kelas');
-            $table->foreignId('sudut_biru');
             $table->integer('berat_biru')->nullable()->default(0);
             $table->string('status_biru')->nullable();
-            $table->foreignId('sudut_merah');
             $table->integer('berat_merah')->nullable()->default(0);
             $table->string('status_merah')->nullable();
             $table->timestamps();

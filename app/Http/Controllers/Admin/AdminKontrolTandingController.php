@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\Tanding\MulaiPertandingan;
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
+use App\Models\TimbangUlang;
 use App\Models\PengundianTanding;
 use App\Models\Gelanggang;
 use Illuminate\Http\Request;
@@ -16,11 +17,11 @@ class AdminKontrolTandingController extends Controller
         $gelanggangs = Gelanggang::all();
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantandings = PengundianTanding::latest('id')->get();
-        $jadwaltandings = JadwalTanding::latest('id')->get();
-        return view('admin.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings','gelanggang_operator'));
+        $timbangulangs = TimbangUlang::latest('id')->get();
+        return view('admin.kontrol-tanding.index', compact('timbangulangs', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
     }
 
-    public function ubahtahap(Request $request,$jadwal_tanding_id)
+    public function ubahtahap(Request $request, $jadwal_tanding_id)
     {
         $jadwaltanding = JadwalTanding::find($jadwal_tanding_id);
         $gelanggang = $jadwaltanding->Gelanggang;
@@ -37,7 +38,7 @@ class AdminKontrolTandingController extends Controller
         }
     }
 
-    public function stop_pertandingan(Request $request,$jadwal_tanding_id)
+    public function stop_pertandingan(Request $request, $jadwal_tanding_id)
     {
         $jadwaltanding = JadwalTanding::find($jadwal_tanding_id);
         if ($jadwaltanding) {
@@ -47,24 +48,5 @@ class AdminKontrolTandingController extends Controller
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
         }
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'partai' => 'required|max:255',
-            'gelanggang' => 'required|max:255',
-            'babak' => 'required|max:255',
-            'sudut_biru' => 'required|max:255',
-            'sudut_merah' => 'required|max:255',
-            'next_sudut' => 'required|max:255',
-            'next_partai' => 'required|max:255',
-        ]);
-
-        $jadwaltanding = JadwalTanding::findOrFail($id);
-        $jadwaltanding->update($request->all());
-
-        return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
     }
 }

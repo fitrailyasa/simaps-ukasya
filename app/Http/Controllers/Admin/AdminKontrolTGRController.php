@@ -49,21 +49,4 @@ class AdminKontrolTGRController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'partai' => 'required|max:255',
-            'gelanggang' => 'required|max:255',
-            'babak' => 'required|max:255',
-            'sudut_biru' => 'required|max:255',
-            'sudut_merah' => 'required|max:255',
-            'next_sudut' => 'required|max:255',
-            'next_partai' => 'required|max:255',
-        ]);
-
-        $jadwaltgr = JadwalTGR::findOrFail($id);
-        $jadwaltgr->update($request->all());
-
-        return back()->with('sukses', 'Berhasil Edit Data Jadwal!');
-    }
 }
