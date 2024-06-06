@@ -22,7 +22,7 @@ class AdminPengundianTGRController extends Controller
         $tgrs = TGR::all();
         $pengundiantgrs = PengundianTGR::with('tgr')
             ->where('kelompok', $kelompok) // Filter by kelompok value
-            ->latest('id')
+            ->first('partai')
             ->get();
 
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
