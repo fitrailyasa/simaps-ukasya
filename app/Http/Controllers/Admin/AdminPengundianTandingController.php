@@ -22,7 +22,7 @@ class AdminPengundianTandingController extends Controller
         $tandings = Tanding::all();
         $pengundiantandings = PengundianTanding::with('tanding')
             ->where('kelompok', $kelompok) // Filter by kelompok value
-            ->first('partai')
+            ->orderBy('partai')
             ->get();
 
         return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
