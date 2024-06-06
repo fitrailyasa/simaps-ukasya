@@ -3,19 +3,13 @@
 namespace App\Imports;
 
 use App\Models\JadwalTGR;
+use App\Models\PengundianTGR;
 use App\Models\Gelanggang;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class JadwalTGRImport implements ToModel, WithHeadingRow
 {
-    public $teams;
-
-    public function __construct($teams)
-    {
-        $this->teams = $teams;
-    }
-
     public function model(array $row)
     {
         $gelanggang = Gelanggang::where('nama', $row['gelanggang'])->first();
@@ -26,12 +20,6 @@ class JadwalTGRImport implements ToModel, WithHeadingRow
                 'waktu' => 3,
                 'jenis' => 'Tunggal',
             ]);
-        }
-
-        $team = $this->teams->where('nomor_undian', $row['nomor_undian'])->first();
-
-        if (!$team) {
-            return null;
         }
 
         return new JadwalTGR([

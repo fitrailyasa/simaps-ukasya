@@ -22,6 +22,11 @@
 @endsection
 
 @section('table')
+    @if (session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>

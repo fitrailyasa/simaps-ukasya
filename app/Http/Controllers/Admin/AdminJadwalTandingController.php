@@ -24,7 +24,16 @@ class AdminJadwalTandingController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
+            'golongan' => 'required|max:255',
+            'jenis_kelamin' => 'required|max:255',
+            'kelas' => 'required|max:255',
         ]);
+
+        $golongan = $request->golongan;
+        $jenis_kelamin = $request->jenis_kelamin;
+        $kelas = $request->kelas;
+
+        $file = $request->file('file');
 
         $teams = PengundianTanding::with('Tanding')
             ->whereHas('Tanding', function ($query) use ($request) {
@@ -34,11 +43,12 @@ class AdminJadwalTandingController extends Controller
             })
             ->get();
 
-        $file = $request->file('file');
-
-        Excel::import(new JadwalTandingImport($teams), $file);
-
-        return back()->with('sukses', 'Berhasil Import Data Jadwal!');
+        if ($teams->isEmpty()) {
+            return back()->with('warning', 'Data tim kosong!');
+        } else {
+            Excel::import(new JadwalTandingImport, $file);
+            return back()->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
     }
 
     public function store(Request $request)
