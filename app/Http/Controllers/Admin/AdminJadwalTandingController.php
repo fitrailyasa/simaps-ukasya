@@ -16,7 +16,7 @@ class AdminJadwalTandingController extends Controller
     {
         $gelanggangs = Gelanggang::all();
         $pengundiantandings = PengundianTanding::latest('id')->get();
-        $jadwaltandings = JadwalTanding::latest('id')->get();
+        $jadwaltandings = JadwalTanding::first('partai')->get();
         return view('admin.jadwal-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings'));
     }
 

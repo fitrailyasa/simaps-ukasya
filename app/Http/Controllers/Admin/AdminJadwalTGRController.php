@@ -16,7 +16,7 @@ class AdminJadwalTGRController extends Controller
     {
         $gelanggangs = Gelanggang::all();
         $pengundiantgrs = PengundianTGR::latest('id')->get();
-        $jadwaltgrs = JadwalTGR::latest('id')->get();
+        $jadwaltgrs = JadwalTGR::first('partai')->get();
         return view('admin.jadwal-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs'));
     }
 
