@@ -9,11 +9,11 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class JadwalTandingImport implements ToModel, WithHeadingRow
 {
-    public $kelompok;
+    public $teams;
 
-    public function __construct($kelompok)
+    public function __construct($teams)
     {
-        $this->kelompok = $kelompok;
+        $this->teams = $teams;
     }
 
     public function model(array $row)
@@ -28,11 +28,16 @@ class JadwalTandingImport implements ToModel, WithHeadingRow
             ]);
         }
 
+        $team = $this->teams->where('nomor_undian', $row['nomor_undian'])->first();
+
+        if (!$team) {
+            return null;
+        }
+
         return new JadwalTanding([
             'partai' => $row['partai'],
             'gelanggang' => $gelanggang->id,
             'babak' => $row['babak'],
-            // 'kelas' => $this->kelompok,
             'sudut_biru' => $row['sudut_biru'],
             'sudut_merah' => $row['sudut_merah'],
             'next_sudut' => $row['next_sudut'],

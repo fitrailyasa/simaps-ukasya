@@ -71,7 +71,7 @@
                         @endif
                     </td>
                     <td>{{ $tanding->nama ?? '-' }}</td>
-                    <td>{{ $tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</td>
+                    <td>{{ $tanding->jenis_kelamin ?? '-' }}</td>
                     <td>{{ $tanding->tinggi_badan ?? '-' }} cm</td>
                     <td>{{ $tanding->berat_badan ?? '-' }} kg</td>
                     <td>{{ $tanding->kontingen ?? '-' }}</td>

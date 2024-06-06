@@ -31,9 +31,12 @@ class AdminBaganController extends Controller
             'kelas' => 'required',
         ]);
 
-        $teams = Tanding::where('golongan', $request->golongan)
-            ->where('jenis_kelamin', $request->jenis_kelamin)
-            ->where('kelas', $request->kelas)
+        $teams = PengundianTanding::with('Tanding')
+            ->whereHas('Tanding', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kelas', $request->kelas);
+            })
             ->get();
 
         if ($teams->isEmpty()) {
@@ -41,13 +44,11 @@ class AdminBaganController extends Controller
         }
 
         $teamNames = [];
-        $seed = 1;
         foreach ($teams as $team) {
             $teamNames[] = [
-                'name' => $team->nama,
-                'seed' => $seed,
+                'name' => $team->Tanding->nama,
+                'seed' => $team->no_undian,
             ];
-            $seed++;
         }
 
         $teamNamesJson = json_encode($teamNames);
@@ -77,9 +78,12 @@ class AdminBaganController extends Controller
             'kategori' => 'required',
         ]);
 
-        $teams = TGR::where('golongan', $request->golongan)
-            ->where('jenis_kelamin', $request->jenis_kelamin)
-            ->where('kategori', $request->kategori)
+        $teams = PengundianTGR::with('TGR')
+            ->whereHas('TGR', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kategori', $request->kategori);
+            })
             ->get();
 
         if ($teams->isEmpty()) {
@@ -87,13 +91,11 @@ class AdminBaganController extends Controller
         }
 
         $teamNames = [];
-        $seed = 1;
         foreach ($teams as $team) {
             $teamNames[] = [
-                'name' => $team->nama,
-                'seed' => $seed,
+                'name' => $team->TGR->nama,
+                'seed' => $team->no_undian,
             ];
-            $seed++;
         }
 
         $teamNamesJson = json_encode($teamNames);

@@ -31,7 +31,7 @@
                     <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltanding->babak ?? '-' }}</td>
                     <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
                         {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
                     <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
                         ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
@@ -81,7 +81,7 @@
                     <td>{{ $timbangulang->JadwalTanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $timbangulang->JadwalTanding->babak ?? '-' }}</td>
                     <td>{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
                         {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
                     <td class="bg-primary">{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
                         ({{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})

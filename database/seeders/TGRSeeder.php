@@ -17,15 +17,15 @@ class TGRSeeder extends Seeder
             [
                 'id' => 1,
                 'nama' => 'Ukasya',
-                'jenis_kelamin' => 'L',
+                'jenis_kelamin' => 'Putra',
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
-                'kategori' => 'Tunggal',   
+                'kategori' => 'Tunggal',
             ],
             [
                 'id' => 2,
                 'nama' => 'Mustavid',
-                'jenis_kelamin' => 'L',
+                'jenis_kelamin' => 'Putra',
                 'kontingen' => 'ASAD',
                 'golongan' => 'Remaja',
                 'kategori' => 'Tunggal',
@@ -33,7 +33,7 @@ class TGRSeeder extends Seeder
             [
                 'id' => 3,
                 'nama' => 'Mustavid 2',
-                'jenis_kelamin' => 'L',
+                'jenis_kelamin' => 'Putra',
                 'kontingen' => 'ASAD',
                 'golongan' => 'Dewasa',
                 'kategori' => 'Ganda',

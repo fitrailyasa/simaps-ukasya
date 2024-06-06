@@ -26,9 +26,17 @@ class AdminJadwalTGRController extends Controller
             'file' => 'required|mimes:xlsx,xls',
         ]);
 
+        $teams = PengundianTGR::with('TGR')
+            ->whereHas('TGR', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kategori', $request->kategori);
+            })
+            ->get();
+
         $file = $request->file('file');
 
-        Excel::import(new JadwalTGRImport($request->kelompok), $file);
+        Excel::import(new JadwalTGRImport($teams), $file);
 
         return back()->with('sukses', 'Berhasil Import Data Jadwal!');
     }

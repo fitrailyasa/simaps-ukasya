@@ -33,20 +33,23 @@
                     <td>{{ $timbangulang->JadwalTanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $timbangulang->JadwalTanding->babak ?? '-' }}</td>
                     <td>{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
                         {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
                     <td class="bg-primary"><b>{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})</b>
+                            ({{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
+                        </b>
                         <br>({{ $timbangulang->status_biru ?? 'Belum Ditimbang Ulang' }})
                     </td>
-                    <td class="bg-danger"><b>{{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</b>
+                    <td class="bg-danger">
+                        <b>{{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                            ({{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</b>
                         <br>({{ $timbangulang->status_merah ?? 'Belum Ditimbang Ulang' }})
                     </td>
                     <td>{{ $timbangulang->JadwalTanding->PemenangTanding->Tanding->nama ?? '' }}
                         ({{ $timbangulang->JadwalTanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }})
                     </td>
-                    <td>{{ $timbangulang->JadwalTanding->skor_biru ?? '0' }} - {{ $timbangulang->JadwalTanding->skor_merah ?? '0' }}</td>
+                    <td>{{ $timbangulang->JadwalTanding->skor_biru ?? '0' }} -
+                        {{ $timbangulang->JadwalTanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
 
                     </td>

@@ -43,7 +43,7 @@
                     <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltgr->babak ?? '-' }}</td>
                     <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? '-' }}
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? '-' }}
                         {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '-' }}</td>
                     <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
                         ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }})
