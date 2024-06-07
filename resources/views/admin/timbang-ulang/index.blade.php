@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             @foreach ($jadwaltandings as $jadwaltanding)
-                @if ($jadwaltanding->berat_merah == null || $jadwaltanding->berat_biru == null)
+                @if ($jadwaltanding->berat_merah == null && $jadwaltanding->berat_biru == null)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $jadwaltanding->partai ?? '-' }}</td>
@@ -77,7 +77,7 @@
         </thead>
         <tbody>
             @foreach ($timbangulangs as $timbangulang)
-                @if ($jadwaltanding->berat_merah != null || $jadwaltanding->berat_biru != null)
+                @if ($jadwaltanding->berat_merah != null && $jadwaltanding->berat_biru != null)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $timbangulang->partai ?? '-' }}</td>

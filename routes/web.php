@@ -153,7 +153,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/timbang-ulang', [AdminTimbangUlangController::class, 'index'])->name('timbang-ulang.index');
     Route::post('/timbang-ulang', [AdminTimbangUlangController::class, 'store'])->name('timbang-ulang.store');
     Route::put('/timbang-ulang/{id}/update', [AdminTimbangUlangController::class, 'update'])->name('timbang-ulang.update');
-    Route::delete('/timbang-ulang/{id}/destroy', [AdminTimbangUlangController::class, 'destroy'])->name('timbang-ulang.destroy');
+    Route::put('/timbang-ulang/{id}/destroy', [AdminTimbangUlangController::class, 'destroy'])->name('timbang-ulang.destroy');
 
     // gelanggang
     Route::get('/gelanggang', [AdminGelanggangController::class, 'index'])->name('gelanggang.index');

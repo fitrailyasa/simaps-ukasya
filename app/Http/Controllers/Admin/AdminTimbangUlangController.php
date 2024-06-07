@@ -42,7 +42,13 @@ class AdminTimbangUlangController extends Controller
     public function destroy($id)
     {
         $TimbangUlang = JadwalTanding::findOrFail($id);
-        $TimbangUlang->delete();
+
+        $TimbangUlang->update([
+            'berat_biru' => null,
+            'status_biru' => null,
+            'berat_merah' => null,
+            'status_merah' => null,
+        ]);
 
         return back()->with('sukses', 'Berhasil Hapus Data!');
     }
