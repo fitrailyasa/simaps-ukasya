@@ -12,7 +12,7 @@ class AdminTandingController extends Controller
 {
     public function index()
     {
-        $tandings = Tanding::latest('id')->get();
+        $tandings = Tanding::all();
         return view('admin.tanding.index', compact('tandings'));
     }
 

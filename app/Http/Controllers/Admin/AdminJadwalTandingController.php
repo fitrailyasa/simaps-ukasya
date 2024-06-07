@@ -46,7 +46,7 @@ class AdminJadwalTandingController extends Controller
         if ($teams->isEmpty()) {
             return back()->with('warning', 'Data tim kosong!');
         } else {
-            Excel::import(new JadwalTandingImport, $file);
+            Excel::import(new JadwalTandingImport($teams), $file);
             return back()->with('sukses', 'Berhasil Import Data Jadwal!');
         }
     }

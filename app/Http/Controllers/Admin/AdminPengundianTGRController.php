@@ -21,9 +21,7 @@ class AdminPengundianTGRController extends Controller
     {
         $tgrs = TGR::all();
         $pengundiantgrs = PengundianTGR::with('tgr')
-            ->where('kelompok', $kelompok) // Filter by kelompok value
-            ->orderBy('partai')
-            ->get();
+            ->where('kelompok', $kelompok)->get();
 
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
     }
@@ -74,7 +72,6 @@ class AdminPengundianTGRController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'atlet_id' => 'required|max:255',
             'no_undian' => 'required|max:255',
         ]);
 

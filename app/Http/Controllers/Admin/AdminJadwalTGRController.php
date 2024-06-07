@@ -46,7 +46,7 @@ class AdminJadwalTGRController extends Controller
         if ($teams->isEmpty()) {
             return back()->with('warning', 'Data tim kosong!');
         } else {
-            Excel::import(new JadwalTGRImport, $file);
+            Excel::import(new JadwalTGRImport($teams), $file);
             return back()->with('sukses', 'Berhasil Import Data Jadwal!');
         }
     }

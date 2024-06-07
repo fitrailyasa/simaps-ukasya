@@ -20,10 +20,8 @@ class AdminPengundianTandingController extends Controller
     public function table(Request $request, $kelompok)
     {
         $tandings = Tanding::all();
-        $pengundiantandings = PengundianTanding::with('tanding')
-            ->where('kelompok', $kelompok) // Filter by kelompok value
-            ->orderBy('partai')
-            ->get();
+        $pengundiantandings = PengundianTanding::with('Tanding')
+            ->where('kelompok', $kelompok)->get();
 
         return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
     }
@@ -74,7 +72,6 @@ class AdminPengundianTandingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'atlet_id' => 'required|max:255',
             'no_undian' => 'required|max:255',
         ]);
 

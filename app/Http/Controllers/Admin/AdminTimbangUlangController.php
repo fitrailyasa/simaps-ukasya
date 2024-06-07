@@ -13,8 +13,8 @@ class AdminTimbangUlangController extends Controller
     public function index()
     {
         $gelanggangs = Gelanggang::all();
-        $jadwaltandings = JadwalTanding::latest('id')->get();
-        $timbangulangs = TimbangUlang::latest('id')->get();
+        $jadwaltandings = JadwalTanding::orderBy('partai')->get();
+        $timbangulangs = TimbangUlang::orderBy('partai')->get();
         return view('admin.timbang-ulang.index', compact('jadwaltandings', 'gelanggangs', 'timbangulangs'));
     }
 
