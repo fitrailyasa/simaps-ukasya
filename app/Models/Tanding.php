@@ -10,7 +10,7 @@ class Tanding extends Model
     use HasFactory;
 
     protected $table = 'tanding';
-    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'tinggi_badan', 'berat_badan', 'kontingen', 'golongan', 'kelas', 'skor', 'berat_biru', 'status_biru', 'berat_merah', 'status_merah'];
+    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'tinggi_badan', 'berat_badan', 'kontingen', 'golongan', 'kelas', 'skor'];
 
     public function PengundianTanding()
     {
