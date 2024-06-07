@@ -10,7 +10,7 @@ class Tanding extends Model
     use HasFactory;
 
     protected $table = 'tanding';
-    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'tinggi_badan', 'berat_badan', 'kontingen', 'golongan', 'kelas','skor'];
+    protected $fillable = ['nama', 'img', 'jenis_kelamin', 'tinggi_badan', 'berat_badan', 'kontingen', 'golongan', 'kelas', 'skor', 'berat_biru', 'status_biru', 'berat_merah', 'status_merah'];
 
     public function PengundianTanding()
     {
@@ -21,6 +21,4 @@ class Tanding extends Model
     {
         return $this->hasMany(PenilaianTanding::class);
     }
-
 }
-

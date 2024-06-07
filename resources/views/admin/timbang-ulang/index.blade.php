@@ -25,23 +25,25 @@
         </thead>
         <tbody>
             @foreach ($jadwaltandings as $jadwaltanding)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwaltanding->partai ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->babak ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
-                        ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
-                    </td>
-                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
-                    <td class="manage-row">
-                        @include('admin.timbang-ulang.create')
-                    </td>
-                </tr>
+                @if ($jadwaltanding->berat_merah == null || $jadwaltanding->berat_biru == null)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $jadwaltanding->partai ?? '-' }}</td>
+                        <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
+                        <td>{{ $jadwaltanding->babak ?? '-' }}</td>
+                        <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
+                            {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
+                            {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
+                        <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
+                            ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
+                        </td>
+                        <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                            ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
+                        <td class="manage-row">
+                            @include('admin.timbang-ulang.create')
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
         <tfoot>
@@ -75,27 +77,29 @@
         </thead>
         <tbody>
             @foreach ($timbangulangs as $timbangulang)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $timbangulang->JadwalTanding->partai ?? '-' }}</td>
-                    <td>{{ $timbangulang->JadwalTanding->Gelanggang->nama ?? '-' }}</td>
-                    <td>{{ $timbangulang->JadwalTanding->babak ?? '-' }}</td>
-                    <td>{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
-                        {{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
-                    <td class="bg-primary">{{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->JadwalTanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
-                        - {{ $timbangulang->berat_biru ?? '-' }} Kg
-                        ({{ $timbangulang->status_biru ?? '-' }})</td>
-                    <td class="bg-danger">{{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $timbangulang->JadwalTanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}) -
-                        {{ $timbangulang->berat_merah ?? '-' }} Kg
-                        ({{ $timbangulang->status_merah ?? '-' }})</td>
-                    <td class="manage-row">
-                        @include('admin.timbang-ulang.edit')
-                        @include('admin.timbang-ulang.delete')
-                    </td>
-                </tr>
+                @if ($jadwaltanding->berat_merah != null || $jadwaltanding->berat_biru != null)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $timbangulang->partai ?? '-' }}</td>
+                        <td>{{ $timbangulang->Gelanggang->nama ?? '-' }}</td>
+                        <td>{{ $timbangulang->babak ?? '-' }}</td>
+                        <td>{{ $timbangulang->PengundianTandingBiru->Tanding->kelas ?? '-' }}
+                            {{ $timbangulang->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
+                            {{ $timbangulang->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
+                        <td class="bg-primary">{{ $timbangulang->PengundianTandingBiru->Tanding->nama ?? '-' }}
+                            ({{ $timbangulang->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
+                            - {{ $timbangulang->berat_biru ?? '-' }} Kg
+                            ({{ $timbangulang->status_biru ?? '-' }})</td>
+                        <td class="bg-danger">{{ $timbangulang->PengundianTandingMerah->Tanding->nama ?? '-' }}
+                            ({{ $timbangulang->PengundianTandingMerah->Tanding->kontingen ?? '-' }}) -
+                            {{ $timbangulang->berat_merah ?? '-' }} Kg
+                            ({{ $timbangulang->status_merah ?? '-' }})</td>
+                        <td class="manage-row">
+                            @include('admin.timbang-ulang.edit')
+                            @include('admin.timbang-ulang.delete')
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
         <tfoot>

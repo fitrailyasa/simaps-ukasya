@@ -28,6 +28,10 @@ class CreateJadwalTandingTable extends Migration
             $table->integer('next_partai');
             $table->integer('babak_tanding')->default(1);
             $table->foreignId('pemenang')->nullable();
+            $table->integer('berat_biru')->nullable();
+            $table->string('status_biru')->nullable();
+            $table->integer('berat_merah')->nullable();
+            $table->string('status_merah')->nullable();
             $table->timestamps();
         });
     }

@@ -1,12 +1,12 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Kontrol Tanding')
+@section('title', 'Kontrol Tgr')
 
-@section('table-kontrol-tanding', 'active')
-@section('tanding', 'menu-open')
+@section('table-kontrol-tgr', 'active')
+@section('tgr', 'menu-open')
 
 @section('topLeft')
-    <h4>Kelola Data Kontrol Tanding</h4>
+    <h4>Kelola Data Kontrol Tgr</h4>
 @endsection
 
 @section('table')
@@ -26,27 +26,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($jadwaltandings as $jadwaltanding)
+            @foreach ($jadwaltgrs as $jadwaltgr)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $jadwaltanding->partai ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->babak ?? '-' }}</td>
-                    <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
-                        ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
-                        <br>({{ $jadwaltanding->status_biru ?? 'Belum Ditimbang Ulang' }})
+                    <td>{{ $jadwaltgr->partai ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->babak ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kelas ?? '-' }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? '-' }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '-' }}</td>
+                    <td class="bg-primary"><b>{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
+                            ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }})
+                        </b>
+                        <br>({{ $jadwaltgr->status_biru ?? 'Belum Ditimbang Ulang' }})
                     </td>
-                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})
-                        <br>({{ $jadwaltanding->status_merah ?? 'Belum Ditimbang Ulang' }})
+                    <td class="bg-danger"><b>{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
+                            ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})</b>
+                        <br>({{ $jadwaltgr->status_merah ?? 'Belum Ditimbang Ulang' }})
                     </td>
-                    <td>{{ $jadwaltanding->PemenangTanding->Tanding->nama ?? '' }}
-                        ({{ $jadwaltanding->PemenangTanding->Tanding->kontingen ?? 'Belum Bertanding' }})
+                    <td>{{ $jadwaltgr->PemenangTGR->TGR->nama ?? '' }}
+                        ({{ $jadwaltgr->PemenangTGR->TGR->kontingen ?? 'Belum Bertanding' }})
                     </td>
-                    <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
+                    <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
 
                     </td>
