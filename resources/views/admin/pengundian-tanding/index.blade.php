@@ -35,13 +35,15 @@
             $unique_combinations = []; // Array untuk melacak kombinasi unik
             ?>
             @foreach ($pengundiantandings as $pengundiantanding)
-                <?php
-                $combination = $pengundiantanding->Tanding->golongan . '-' . $pengundiantanding->Tanding->jenis_kelamin . '-' . $pengundiantanding->Tanding->kelas; // Kombinasi golongan, jenis kelamin, dan kelas
-                if (!isset($unique_combinations[$combination])) {
-                    $unique_combinations[$combination] = 0; // Inisialisasi jumlah atlet untuk kombinasi unik
-                }
-                $unique_combinations[$combination]++; // Menambah jumlah atlet untuk kombinasi unik
-                ?>
+                @if ($pengundiantanding->Tanding)
+                    <?php
+                    $combination = $pengundiantanding->Tanding->golongan . '-' . $pengundiantanding->Tanding->jenis_kelamin . '-' . $pengundiantanding->Tanding->kelas; // Kombinasi golongan, jenis kelamin, dan kelas
+                    if (!isset($unique_combinations[$combination])) {
+                        $unique_combinations[$combination] = 0; // Inisialisasi jumlah atlet untuk kombinasi unik
+                    }
+                    $unique_combinations[$combination]++; // Menambah jumlah atlet untuk kombinasi unik
+                    ?>
+                @endif
             @endforeach
 
             <?php $row_number = 1; ?>

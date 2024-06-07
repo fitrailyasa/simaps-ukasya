@@ -20,7 +20,7 @@ class AdminPengundianTGRController extends Controller
     public function table(Request $request, $kelompok)
     {
         $tgrs = TGR::all();
-        $pengundiantgrs = PengundianTGR::with('tgr')
+        $pengundiantgrs = PengundianTGR::with('TGR')
             ->where('kelompok', $kelompok)->get();
 
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
