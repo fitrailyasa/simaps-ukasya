@@ -1,6 +1,6 @@
 @extends('layouts.admin.table')
 
-@section('title', 'Tanding')
+@section('title', 'Atlet Tanding')
 
 @section('table-tanding', 'active')
 @section('tanding', 'menu-open')

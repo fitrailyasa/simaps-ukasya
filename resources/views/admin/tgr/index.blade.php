@@ -1,6 +1,6 @@
 @extends('layouts.admin.table')
 
-@section('title', 'TGR')
+@section('title', 'Atlet TGR')
 
 @section('table-tgr', 'active')
 @section('tgr', 'menu-open')
