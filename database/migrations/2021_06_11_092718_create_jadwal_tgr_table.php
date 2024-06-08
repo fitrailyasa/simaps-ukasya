@@ -15,12 +15,12 @@ class CreateJadwalTGRTable extends Migration
     {
         Schema::create('jadwal_tgr', function (Blueprint $table) {
             $table->id();
-            $table->integer('partai');
-            $table->foreignId('gelanggang');
-            $table->string('babak');
+            $table->integer('partai')->nullable();
+            $table->foreignId('gelanggang')->nullable();
+            $table->string('babak')->nullable();
             $table->string('tahap')->default('persiapan');
-            $table->foreignId('sudut_biru');
-            $table->foreignId('sudut_merah');
+            $table->foreignId('sudut_biru')->nullable();
+            $table->foreignId('sudut_merah')->nullable();
             $table->integer('next_sudut')->nullable();
             $table->integer('next_partai')->nullable();
             $table->float('skor_biru')->default(0);

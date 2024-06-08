@@ -15,17 +15,17 @@ class CreateJadwalTandingTable extends Migration
     {
         Schema::create('jadwal_tanding', function (Blueprint $table) {
             $table->id();
-            $table->integer('partai');
-            $table->foreignId('gelanggang');
-            $table->string('babak');
+            $table->integer('partai')->nullable();
+            $table->foreignId('gelanggang')->nullable();
+            $table->string('babak')->nullable();
             $table->string('jenis_kemenangan')->default('angka');
             $table->string('tahap')->default('persiapan');
-            $table->foreignId('sudut_biru');
-            $table->foreignId('sudut_merah');
+            $table->foreignId('sudut_biru')->nullable();
+            $table->foreignId('sudut_merah')->nullable();
             $table->integer('skor_merah')->default(0);
             $table->integer('skor_biru')->default(0);
-            $table->integer('next_sudut');
-            $table->integer('next_partai');
+            $table->integer('next_sudut')->nullable();
+            $table->integer('next_partai')->nullable();
             $table->integer('babak_tanding')->default(1);
             $table->foreignId('pemenang')->nullable();
             $table->integer('berat_biru')->nullable();

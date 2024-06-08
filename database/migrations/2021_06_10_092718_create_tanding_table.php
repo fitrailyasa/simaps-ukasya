@@ -15,15 +15,15 @@ class CreateTandingTable extends Migration
     {
         Schema::create('tanding', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->string('img')->nullable();
-            $table->string('jenis_kelamin');
-            $table->string('tinggi_badan');
-            $table->string('berat_badan');
-            $table->string('kontingen');    
-            $table->string('kelas');
-            $table->string('golongan');  
-            $table->integer('skor')->nullable();  
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('tinggi_badan')->nullable();
+            $table->string('berat_badan')->nullable();
+            $table->string('kontingen')->nullable();
+            $table->string('kelas')->nullable();
+            $table->string('golongan')->nullable();
+            $table->integer('skor')->nullable();
             $table->timestamps();
         });
     }

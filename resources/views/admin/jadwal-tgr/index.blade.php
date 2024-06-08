@@ -47,14 +47,14 @@
                     <td>{{ $jadwaltgr->partai ?? '-' }}</td>
                     <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltgr->babak ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? '-' }}
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? '-' }}
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '-' }}</td>
-                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
-                        ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }})
+                    <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? 'Menunggu Pertandingan' }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? '' }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '' }}</td>
+                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '' }}
+                        ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? 'Menunggu Pemenang' }})
                     </td>
-                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
-                        ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})</td>
+                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '' }}
+                        ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? 'Menunggu Pemenang' }})</td>
                     <td class="manage-row">
                         @include('admin.jadwal-tgr.edit')
                         @include('admin.jadwal-tgr.delete')

@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(GelanggangSeeder::class);
         $this->call(TandingSeeder::class);
         $this->call(TGRSeeder::class);
-        $this->call(PengundianTandingSeeder::class);
-        $this->call(PengundianTGRSeeder::class);
-        $this->call(JadwalTandingSeeder::class);
-        $this->call(JadwalTGRSeeder::class);
+        // $this->call(PengundianTandingSeeder::class);
+        // $this->call(PengundianTGRSeeder::class);
+        // $this->call(JadwalTandingSeeder::class);
+        // $this->call(JadwalTGRSeeder::class);
     }
 }

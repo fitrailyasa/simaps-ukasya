@@ -15,12 +15,12 @@ class CreateTgrTable extends Migration
     {
         Schema::create('tgr', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->string('img')->nullable();
-            $table->string('jenis_kelamin');
-            $table->string('kontingen');    
-            $table->string('kategori');
-            $table->string('golongan');
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('kontingen')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('golongan')->nullable();
             $table->timestamps();
         });
     }
