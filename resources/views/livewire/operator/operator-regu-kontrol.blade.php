@@ -126,12 +126,12 @@
     </div>
     <div class="tombol" style="width: 50%">
         <div class="row-1 d-flex flex-row justify-content-between">
-            <button wire:click='gantiTahap("tampil",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }})' class="mulai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Mulai</button>
-            <button wire:click='gantiTahap("tampil nilai" ,{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }})' class="nilai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Tampil Nilai</button>
-            <button wire:click='gantiTahap("pause",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }})' class="stop" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Stop</button>
+            <button wire:click='gantiTahap("tampil",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="mulai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Mulai</button>
+            <button wire:click='gantiTahap("tampil nilai" ,{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="nilai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Tampil Nilai</button>
+            <button wire:click='gantiTahap("pause",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="stop" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Stop</button>
         </div>
         <div class="row-2 d-flex flex-row justify-content-center mt-3">
-            <button wire:click='gantiTahap("persiapan",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }})' class="mulai" style="border:#9BB8CD ;{{$active == "persiapan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
+            <button wire:click='gantiTahap("persiapan",{{$jadwal_regu->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="mulai" style="border:#9BB8CD ;{{$active == "persiapan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
         </div>
         <div class="row-3 d-flex flex-row justify-content-center  mt-3">
             <button wire:click='gantiTampil("biru")' class="mulai" style="border:#9BB8CD ;{{$active == "sudutbiru" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Penampilan Sudut Biru</button>
@@ -144,8 +144,8 @@
         </div>
         <div class="row-6 d-flex flex-row justify-content-between gap-2 mt-3">
             <button class="btn" wire:click='hapusNilai()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
-            <button class="btn" wire:click='gantiTahap("keputusan","biru")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
-            <button class="btn" wire:click='gantiTahap("keputusan","merah")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
+            <button {{$total_merah == $total_biru ? "disabled" : ""}} class="btn" wire:click='gantiTahap("keputusan","biru","Menang Angka")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
+            <button {{$total_merah == $total_biru ? "disabled" : ""}} class="btn" wire:click='gantiTahap("keputusan","merah","Menang Angka")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <a href="/op/kontrol-tanding" class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</a>
         </div>
     </div>

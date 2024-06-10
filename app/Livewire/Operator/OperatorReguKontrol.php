@@ -86,7 +86,7 @@ class OperatorReguKontrol extends Component
         }
         GantiTampil::dispatch($this->tampil,$this->jadwal_regu);
     }
-    public function gantiTahap($tahap,$tampil){
+    public function gantiTahap($tahap,$tampil,$keputusan_pemenang){
         if($tahap == "keputusan"){
             $this->active = "keputusan";
             $this->mulai = false;
@@ -95,10 +95,12 @@ class OperatorReguKontrol extends Component
             }else if($tampil == "biru"){
                 $this->jadwal_regu->pemenang = $this->pengundian_biru->id;
             }
+            $this->jadwal_regu->jenis_kemenangan = $keputusan_pemenang;
+            $this->jadwal_regu->save();
             $next_partai = JadwalTGR::find($this->jadwal_regu->next_partai);
-            if($this->jadwal_regu->next_sudut == 1){
+            if($next_partai && $this->jadwal_regu->next_sudut == 1){
                 $next_partai->sudut_biru = $this->jadwal_regu->pemenang;
-            }else{
+            }else if($next_partai && $this->jadwal_regu->next_sudut == 2){
                 $next_partai->sudut_merah = $this->jadwal_regu->pemenang;
             }
         }else if($tahap == "tampil"){

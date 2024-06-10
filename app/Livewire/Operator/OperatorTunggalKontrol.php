@@ -30,7 +30,6 @@ class OperatorTunggalKontrol extends Component
     public $waktu;
     public $pemenang;
     public $keputusan_pemenang;
-
     public $active;
     public $mulai = false;
 

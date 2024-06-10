@@ -86,7 +86,7 @@ class OperatorGandaKontrol extends Component
         }
         GantiTampil::dispatch($this->tampil,$this->jadwal_ganda);
     }
-    public function gantiTahap($tahap,$tampil){
+    public function gantiTahap($tahap,$tampil,$keputusan_pemenang){
         if($tahap == "keputusan"){
             $this->active = "keputusan";
             $this->mulai = false;
@@ -95,10 +95,12 @@ class OperatorGandaKontrol extends Component
             }else if($tampil == "biru"){
                 $this->jadwal_ganda->pemenang = $this->pengundian_biru->id;
             }
+            $this->jadwal_ganda->jenis_kemenangan = $keputusan_pemenang;
+            $this->jadwal_ganda->save();
             $next_partai = JadwalTGR::find($this->jadwal_ganda->next_partai);
-            if($this->jadwal_ganda->next_sudut == 1){
+            if($next_partai && $this->jadwal_ganda->next_sudut == 1){
                 $next_partai->sudut_biru = $this->jadwal_ganda->pemenang;
-            }else{
+            }else if($next_partai && $this->jadwal_ganda->next_sudut == 2){
                 $next_partai->sudut_merah = $this->jadwal_ganda->pemenang;
             }
         }else if($tahap == "tampil"){
