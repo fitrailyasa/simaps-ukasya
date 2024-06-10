@@ -18,10 +18,10 @@ class AdminKontrolTandingController extends Controller
         $gelanggangs = Gelanggang::all();
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantandings = PengundianTanding::latest('id')->get();
-        $jadwaltandings = JadwalTanding::latest('id')->get();
-        if(auth()->user()->roles_id == 1){
+        $jadwaltandings = JadwalTanding::orderBy('partai')->get();
+        if (auth()->user()->roles_id == 1) {
             return view('admin.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
-        }else if(auth()->user()->roles_id == 2){
+        } else if (auth()->user()->roles_id == 2) {
             return view('operator.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
         }
     }

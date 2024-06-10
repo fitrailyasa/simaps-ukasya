@@ -42,19 +42,41 @@
         </thead>
         <tbody>
             @foreach ($jadwaltgrs as $jadwaltgr)
+                @php
+                    $waitingPartaiMerah = $jadwaltgrs
+                        ->where('next_sudut', 1)
+                        ->where('next_partai', $jadwaltgr->partai)
+                        ->first();
+                    $waitingPartaiBiru = $jadwaltgrs
+                        ->where('next_sudut', 2)
+                        ->where('next_partai', $jadwaltgr->partai)
+                        ->first();
+                @endphp
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jadwaltgr->partai ?? '-' }}</td>
                     <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltgr->babak ?? '-' }}</td>
-                    <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? 'Menunggu Pertandingan' }}
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? '' }}
-                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '' }}</td>
-                    <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '' }}
-                        ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? 'Menunggu Pemenang' }})
+                    <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->kategori ?? '-') }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->jenis_kelamin ?? '-') }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->golongan ?? '-') }}
                     </td>
-                    <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '' }}
-                        ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? 'Menunggu Pemenang' }})</td>
+                    <td class="bg-primary">
+                        @if ($jadwaltgr->sudut_biru)
+                            {{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '' }}
+                            ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '' }})
+                        @else
+                            Pemenang Partai ke-{{ $waitingPartaiBiru ? $waitingPartaiBiru->partai : '1' }}
+                        @endif
+                    </td>
+                    <td class="bg-danger">
+                        @if ($jadwaltgr->sudut_merah)
+                            {{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '' }}
+                            ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '' }})
+                        @else
+                            Pemenang Partai ke-{{ $waitingPartaiMerah ? $waitingPartaiMerah->partai : '1' }}
+                        @endif
+                    </td>
                     <td class="manage-row">
                         @include('admin.jadwal-tgr.edit')
                         @include('admin.jadwal-tgr.delete')

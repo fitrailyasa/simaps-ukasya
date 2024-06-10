@@ -63,7 +63,37 @@ class AdminJadwalTandingController extends Controller
             'next_partai' => 'required|max:255',
         ]);
 
-        $jadwal_tanding = JadwalTanding::create($request->all());
+        $teams = PengundianTanding::with('Tanding')
+            ->whereHas('Tanding', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kelas', $request->kelas);
+            })
+            ->get();
+
+        // Lakukan pencarian sudut biru berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutBiru = $teams->first(function ($team) use ($request) {
+            return $team->no_undian == $request->sudut_biru;
+        });
+
+        // Lakukan pencarian sudut merah berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutMerah = $teams->first(function ($team) use ($request) {
+            return $team->no_undian == $request->sudut_merah;
+        });
+
+        // dd($sudutBiru, $sudutMerah);
+
+        $jadwal_tanding = JadwalTanding::create([
+            'partai' => $request->partai,
+            'gelanggang' => $request->gelanggang,
+            'babak' => $request->babak,
+            'sudut_biru' => $sudutBiru ? $sudutBiru->id : null,
+            'sudut_merah' => $sudutMerah ? $sudutMerah->id : null,
+            'next_sudut' => $request->next_sudut,
+            'next_partai' => $request->next_partai,
+        ]);
+
+        // dd($jadwal_tanding);
 
         return back()->with('sukses', 'Berhasil Tambah Data Jadwal!');
     }

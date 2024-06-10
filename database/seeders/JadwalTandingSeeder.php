@@ -40,14 +40,14 @@ class JadwalTandingSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'partai' => 2,
+                'partai' => 3,
                 'gelanggang' => 1,
                 'babak' => 'Semi Final',
-                'sudut_biru' => 3,
-                'sudut_merah' => 4,
+                'sudut_biru' => null,
+                'sudut_merah' => null,
                 'next_sudut' => 2,
-                'next_partai' => 3,
-                'pemenang' => 4,
+                'next_partai' => 4,
+                'pemenang' => null,
                 'tahap' => 'persiapan'
             ],
         ];

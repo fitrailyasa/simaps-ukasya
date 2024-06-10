@@ -11,17 +11,21 @@ class AdminPengundianTandingController extends Controller
 {
     public function index()
     {
-        $kelompok = PengundianTanding::max('kelompok') ?? 0;
         $tandings = Tanding::all();
         $pengundiantandings = PengundianTanding::with('tanding')->latest('id')->get();
-        return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings', 'kelompok'));
+        return view('admin.pengundian-tanding.index', compact('pengundiantandings', 'tandings'));
     }
 
-    public function table(Request $request, $kelompok)
+    public function table(Request $request, $golongan, $jenis_kelamin, $kelas)
     {
         $tandings = Tanding::all();
         $pengundiantandings = PengundianTanding::with('Tanding')
-            ->where('kelompok', $kelompok)->get();
+            ->whereHas('Tanding', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kelas', $request->kelas);
+            })
+            ->get();
 
         return view('admin.pengundian-tanding.table', compact('pengundiantandings', 'tandings'));
     }
@@ -44,13 +48,8 @@ class AdminPengundianTandingController extends Controller
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();
-        $totalPeserta = $tandings->count();
 
         $shuffledAtletIds = $tandings->pluck('id')->shuffle()->toArray();
-
-        $kelompok = PengundianTanding::max('kelompok') ?? 0; // Get the maximum kelompok value from the database
-
-        $kelompok++; // Increment kelompok for each new entry
 
         foreach ($shuffledAtletIds as $index => $atletId) {
             if (in_array($atletId, $existingAtletIds)) {
@@ -60,7 +59,6 @@ class AdminPengundianTandingController extends Controller
             $pengundiantanding = new PengundianTanding();
             $pengundiantanding->atlet_id = $atletId;
             $pengundiantanding->no_undian = $index + 1;
-            $pengundiantanding->kelompok = $kelompok; // Assign kelompok value
             $pengundiantanding->save();
 
             $existingAtletIds[] = $atletId;
