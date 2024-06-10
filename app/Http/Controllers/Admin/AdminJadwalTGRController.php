@@ -63,7 +63,37 @@ class AdminJadwalTGRController extends Controller
             'next_partai' => 'required|max:255',
         ]);
 
-        JadwalTGR::create($request->all());
+        $teams = PengundianTGR::with('TGR')
+            ->whereHas('TGR', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kategori', $request->kategori);
+            })
+            ->get();
+
+        // Lakukan pencarian sudut biru berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutBiru = $teams->first(function ($team) use ($request) {
+            return $team->no_undian == $request->sudut_biru;
+        });
+
+        // Lakukan pencarian sudut merah berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutMerah = $teams->first(function ($team) use ($request) {
+            return $team->no_undian == $request->sudut_merah;
+        });
+
+        // dd($sudutBiru, $sudutMerah);
+
+        $jadwal_tgr = JadwalTGR::create([
+            'partai' => $request->partai,
+            'gelanggang' => $request->gelanggang,
+            'babak' => $request->babak,
+            'sudut_biru' => $sudutBiru ? $sudutBiru->id : null,
+            'sudut_merah' => $sudutMerah ? $sudutMerah->id : null,
+            'next_sudut' => $request->next_sudut,
+            'next_partai' => $request->next_partai,
+        ]);
+
+        // dd($jadwal_tgr);
 
         return back()->with('sukses', 'Berhasil Tambah Data Jadwal!');
     }

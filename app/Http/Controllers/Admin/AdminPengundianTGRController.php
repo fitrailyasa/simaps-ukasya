@@ -11,17 +11,21 @@ class AdminPengundianTGRController extends Controller
 {
     public function index()
     {
-        $kelompok = PengundianTGR::max('kelompok') ?? 0;
         $tgrs = TGR::all();
         $pengundiantgrs = PengundianTGR::with('tgr')->latest('id')->get();
-        return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs', 'kelompok'));
+        return view('admin.pengundian-tgr.index', compact('pengundiantgrs', 'tgrs'));
     }
 
     public function table(Request $request, $kelompok)
     {
         $tgrs = TGR::all();
         $pengundiantgrs = PengundianTGR::with('TGR')
-            ->where('kelompok', $kelompok)->get();
+            ->whereHas('TGR', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kategori', $request->kategori);
+            })
+            ->get();
 
         return view('admin.pengundian-tgr.table', compact('pengundiantgrs', 'tgrs'));
     }
