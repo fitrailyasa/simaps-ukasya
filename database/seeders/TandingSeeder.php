@@ -16,7 +16,7 @@ class TandingSeeder extends Seeder
         $Tanding = [
             [
                 'id' => 1,
-                'nama' => 'Ukasya',
+                'nama' => 'User 1',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -26,7 +26,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'nama' => 'Mustavid',
+                'nama' => 'User 2',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -36,7 +36,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'nama' => 'Ukasya 2',
+                'nama' => 'User 3',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -46,7 +46,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'nama' => 'Mustavid 2',
+                'nama' => 'User 4',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -56,7 +56,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'nama' => 'Ukasya 3',
+                'nama' => 'User 5',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -66,7 +66,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'nama' => 'Mustavid 3',
+                'nama' => 'User 6',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -76,7 +76,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'nama' => 'Ukasya 4',
+                'nama' => 'User 7',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,
@@ -86,7 +86,7 @@ class TandingSeeder extends Seeder
             ],
             [
                 'id' => 8,
-                'nama' => 'Mustavid 4',
+                'nama' => 'User 8',
                 'jenis_kelamin' => 'Putra',
                 'tinggi_badan' => 180,
                 'berat_badan' => 70,

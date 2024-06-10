@@ -29,17 +29,13 @@ class AdminJadwalTGRController extends Controller
             'kategori' => 'required|max:255',
         ]);
 
-        $golongan = $request->golongan;
-        $jenis_kelamin = $request->jenis_kelamin;
-        $kategori = $request->kategori;
-
         $file = $request->file('file');
 
         $teams = PengundianTGR::with('TGR')
-            ->whereHas('TGR', function ($query) use ($golongan, $jenis_kelamin, $kategori) {
-                $query->where('golongan', $golongan)
-                    ->where('jenis_kelamin', $jenis_kelamin)
-                    ->where('kategori', $kategori);
+            ->whereHas('TGR', function ($query) use ($request) {
+                $query->where('golongan', $request->golongan)
+                    ->where('jenis_kelamin', $request->jenis_kelamin)
+                    ->where('kategori', $request->kategori);
             })
             ->get();
 
