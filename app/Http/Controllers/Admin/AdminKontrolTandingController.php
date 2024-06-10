@@ -19,7 +19,7 @@ class AdminKontrolTandingController extends Controller
         $pengundiantandings = PengundianTanding::latest('id')->get();
         $jadwaltandings = JadwalTanding::latest('id')->get();
         if(auth()->user()->roles_id == 1){
-            return view('admin.kontrol-tanding.index', compact('timbangulangs', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
+            return view('admin.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
         }else if(auth()->user()->roles_id == 2){
             return view('operator.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
         }
