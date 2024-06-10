@@ -44,11 +44,11 @@
             @foreach ($jadwaltgrs as $jadwaltgr)
                 @php
                     $waitingPartaiMerah = $jadwaltgrs
-                        ->where('next_sudut', 1)
+                        ->where('next_sudut', 2)
                         ->where('next_partai', $jadwaltgr->partai)
                         ->first();
                     $waitingPartaiBiru = $jadwaltgrs
-                        ->where('next_sudut', 2)
+                        ->where('next_sudut', 1)
                         ->where('next_partai', $jadwaltgr->partai)
                         ->first();
                 @endphp
