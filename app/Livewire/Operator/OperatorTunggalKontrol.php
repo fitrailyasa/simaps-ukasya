@@ -29,6 +29,8 @@ class OperatorTunggalKontrol extends Component
     public $penalty_tunggal_biru;
     public $waktu;
     public $pemenang;
+    public $keputusan_pemenang;
+
     public $active;
     public $mulai = false;
 
@@ -39,7 +41,10 @@ class OperatorTunggalKontrol extends Component
         $this->sudut_merah = TGR::where('id',$this->jadwal_tunggal->PengundianTGRMerah->atlet_id)->first();
         $this->pengundian_merah = PengundianTGR::find($this->jadwal_tunggal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal_tunggal->sudut_biru);
-        $this->tampil = TGR::find($this->jadwal_tunggal->TampilTGR->atlet_id);
+        if(!$this->jadwal_tunggal->tampil){
+            $this->jadwal_tunggal->tampil = $this->jadwal_tunggal->PengundianTGRBiru->id;
+        }
+        $this->tampil = $this->jadwal_tunggal->TampilTGR->TGR;
         $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->first();
         $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
@@ -81,27 +86,29 @@ class OperatorTunggalKontrol extends Component
         }
         GantiTampil::dispatch($this->tampil,$this->jadwal_tunggal);
     }
-    public function gantiTahap($tahap,$tampil){
+    public function gantiTahap($tahap,$tampil,$keputusan_pemenang){
         if($tahap == "keputusan"){
             $this->active = "keputusan";
             $this->mulai = false;
             if($tampil == "merah"){
-                $this->jadwal_tunggal->pemenang = $this->pengundian_merah->id;
+                $this->jadwal_regu->pemenang = $this->pengundian_merah->id;
             }else if($tampil == "biru"){
-                $this->jadwal_tunggal->pemenang = $this->pengundian_biru->id;
+                $this->jadwal_regu->pemenang = $this->pengundian_biru->id;
             }
-            $next_partai = JadwalTGR::find($this->jadwal_tunggal->next_partai);
-            if($this->jadwal_tunggal->next_sudut == 1){
-                $next_partai->sudut_biru = $this->jadwal_tunggal->pemenang;
-            }else{
-                $next_partai->sudut_merah = $this->jadwal_tunggal->pemenang;
+            $this->jadwal_regu->jenis_kemenangan = $keputusan_pemenang;
+            $this->jadwal_regu->save();
+            $next_partai = JadwalTGR::find($this->jadwal_regu->next_partai);
+            if($next_partai && $this->jadwal_regu->next_sudut == 1){
+                $next_partai->sudut_biru = $this->jadwal_regu->pemenang;
+            }else if($next_partai && $this->jadwal_regu->next_sudut == 2){
+                $next_partai->sudut_merah = $this->jadwal_regu->pemenang;
             }
         }else if($tahap == "tampil"){
             $this->waktu = $this->gelanggang->waktu;
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
-            $this->jadwal_tunggal->tahap = "tampil nilai";
-            $this->jadwal_tunggal->save();
+            $this->jadwal_regu->tahap = "tampil nilai";
+            $this->jadwal_regu->save();
         }else if($tahap == "pause"){
             $this->mulai = false;
         }else if($tahap == "persiapan"){
@@ -109,36 +116,48 @@ class OperatorTunggalKontrol extends Component
             $this->mulai = false;
             $this->gelanggang->waktu = 3;
             $this->waktu = $this->gelanggang->waktu;
-            $this->jadwal_tunggal->tahap = "persiapan";
+            $this->jadwal_regu->tahap = "persiapan";
             $this->gelanggang->save();
-            $this->jadwal_tunggal->save();
+            $this->jadwal_regu->save();
         }
-        $this->jadwal_tunggal->tahap = $tahap;
-        $this->jadwal_tunggal->save();
-        $this->tampil = $this->jadwal_tunggal->TampilTGR;
-        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR);
+        $this->jadwal_regu->tahap = $tahap;
+        $this->jadwal_regu->save();
+        $this->tampil = $this->jadwal_regu->TampilTGR;
+        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_regu);
     }
     //operator endpublic function render()
 
     #[On('echo:poin,.tambah-skor-tunggal')]
-    public function tambahNilaiHandler(){
-        $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->get();
-        $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
+    public function tambahNilaiHandler($data){
+        if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
+            
+            $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
+        }
     }
     #[On('echo:poin,.salah-gerakan-tunggal')]
-    public function salahGerakanHandler(){
-        $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->get();
-        $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
+    public function salahGerakanHandler($data){
+        if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
+            
+            $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
+        }
     }
     #[On('echo:poin,.penalty-tunggal')]
-    public function tambahPenaltyHandler(){
-        $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->first();
-        $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
+    public function tambahPenaltyHandler($data){
+        if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
+            
+            $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
+        }
     }
     #[On('echo:poin,.hapus-penalty-tunggal')]
-    public function hapusPenaltyHandler(){
-        $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->first();
-        $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
+    public function hapusPenaltyHandler($data){
+        if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
+
+            $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
+        }
     }
     public function render()
     {

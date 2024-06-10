@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\GantiGelanggang;
 use App\Events\Tunggal\GantiTahap;
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTGR;
@@ -17,7 +18,11 @@ class AdminKontrolTGRController extends Controller
         $gelanggangs = Gelanggang::all();
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantgrs = PengundianTGR::latest('id')->get();
-        $jadwaltgrs = JadwalTGR::latest('id')->get();
+        if(auth()->user()->roles_id == 1){
+            $jadwaltgrs = JadwalTGR::latest('id')->get();
+        }else if(auth()->user()->roles_id == 2){
+            $jadwaltgrs = JadwalTGR::latest('id')->where('jenis',$gelanggang_operator->jenis)->get();
+        }
         if(auth()->user()->roles_id == 1){
             return view('admin.kontrol-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs','gelanggang_operator'));
         }else if(auth()->user()->roles_id == 2){
@@ -32,10 +37,10 @@ class AdminKontrolTGRController extends Controller
         if ($jadwaltgr) {
             $gelanggang->jadwal = $jadwaltgr->id;
             $gelanggang->jenis = $jenis;
-            $jadwaltgr->tahap = 'menunggu';
+            $jadwaltgr->tahap = 'persiapan';
             $gelanggang->save();
             $jadwaltgr->save();
-            GantiTahap::dispatch('persiapan', $jadwaltgr->tampil, $jadwaltgr->TampilTGR);
+            GantiGelanggang::dispatch($jadwaltgr->Gelanggang);
             return back()->with('sukses', 'Berhasil Mengganti Jadwal!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
@@ -48,6 +53,7 @@ class AdminKontrolTGRController extends Controller
         if ($jadwaltgr) {
             $jadwaltgr->tahap = "keputusan";
             $jadwaltgr->save();
+            GantiGelanggang::dispatch($jadwaltgr->Gelanggang);
             return back()->with('sukses', 'Berhasil Menghentikan Pertandingan!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
@@ -57,8 +63,9 @@ class AdminKontrolTGRController extends Controller
     {
         $jadwaltgr = JadwalTGR::find($jadwal_tgr_id);
         if ($jadwaltgr) {
-            $jadwaltgr->tahap = "persiapan";
+            $jadwaltgr->tahap = "menunggu";
             $jadwaltgr->save();
+            GantiGelanggang::dispatch($jadwaltgr->Gelanggang);
             return back()->with('sukses', 'Berhasil Mengulang Pertandingan!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);

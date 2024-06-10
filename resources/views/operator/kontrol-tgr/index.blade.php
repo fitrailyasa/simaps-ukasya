@@ -46,7 +46,7 @@
                             </td>
                             <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                             <td class="manage-row">
-                                @if ($jadwaltgr->id == $gelanggang_operator->jadwal && $jadwaltgr->tahap == 'menunggu'  && $gelanggang_operator->jenis !== "Tanding")
+                                @if ($gelanggang_operator->Jadwal_TGR && $jadwaltgr->partai == $gelanggang_operator->Jadwal_TGR->partai  && $jadwaltgr->tahap == 'persiapan'  && $gelanggang_operator->jenis !== "Tanding")
                                     @switch($jadwaltgr->jenis)
                                         @case("Tunggal")
                                             <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/tunggal/{{$jadwaltgr->id}}">
@@ -63,7 +63,7 @@
                                                 <i class="fa fa-tv"></i>
                                             </a>
                                             @break
-                                        @case("Solo_Kreatif")
+                                        @case("Solo Kreatif")
                                             <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/solo/{{$jadwaltgr->id}}">
                                                 <i class="fa fa-tv"></i>
                                             </a>
@@ -77,7 +77,7 @@
                                             <i class=" fa fa-stop"></i>
                                         </button>
                                     </form>
-                                @elseif($jadwaltgr->gelanggang == $gelanggang_operator->id && $jadwaltgr->tahap == "persiapan")
+                                @elseif($jadwaltgr->tahap == "menunggu")
                                     <form method="POST" action="ubah-tgr/{{$jadwaltgr->id}}/{{$jadwaltgr->jenis}}" style="display:inline;">
                                         @csrf
                                         <button type="submit" class="btn-sm btn-primary mr-2">

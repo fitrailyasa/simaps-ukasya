@@ -7,11 +7,4 @@
     @elseif($tahap == 'keputusan')
         @include('client.penonton.tgr.hasil')
     @endif
-    @section('script')
-    <script>
-        setInterval(() => {
-            @this.call(`check_gelanggang`)
-        }, 1000);
-    </script>
-@endsection
 </div>

@@ -20,15 +20,15 @@ class TambahTendangan implements ShouldBroadcast
      * Create a new event instance.
      */
     public $sudut_id;
-    public $status;
-    public $eventSent;
-    public $juri_id;
+    public $jadwal;
+ 
 
 
 
-    public function __construct($id)
+    public function __construct($id,$jadwal)
     {
         $this->sudut_id = $id;
+        $this->jadwal = $jadwal;
     }
 
     /**

@@ -72,7 +72,7 @@ class JadwalTGRSeeder extends Seeder
                 'skor_merah' => 0,
                 'tampil' => 1,
                 'pemenang' => 1,
-                'jenis'=>'Solo_Kreatif'
+                'jenis'=>'Solo Kreatif'
             ]
         ];
         JadwalTGR::query()->insert($JadwalTGR);

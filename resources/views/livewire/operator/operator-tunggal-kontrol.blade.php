@@ -144,8 +144,8 @@
         </div>
         <div class="row-6 d-flex flex-row justify-content-between gap-2 mt-3">
             <button class="btn" wire:click='hapusNilai()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
-            <button class="btn" wire:click='gantiTahap("keputusan","merah")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <button class="btn" wire:click='gantiTahap("keputusan","biru")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
+            <button class="btn" wire:click='gantiTahap("keputusan","merah")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <a href="/op/kontrol-tanding" class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</a>
         </div>
     </div>
@@ -193,21 +193,21 @@
         </div>
         <div class="mb-3">
           <label for="keputusanPemenang" class="form-label">Keputusan Pemenang</label>
-          <select class="form-select" id="keputusanPemenang">
-            <option selected>Keputusan Pemenang</option>
-            <option>Menang Teknik</option>
-            <option>Menang Angka</option>
-            <option>Diskualifikasi</option>
-            <option>Undur Diri</option>
-            <option>Menang Mutlak</option>
-            <option>Wasit Telah Menghentikan Pertandingan</option>
+          <select class="form-select" id="keputusanPemenang" wire:model.change='keputusan_pemenang'>
+            <option value="" selected>Pilih Keputusan</option>
+            <option value="Menang Teknik">Menang Teknik</option>
+            <option value="Diskualifikasi">Diskualifikasi</option>
+            <option value="Undur Diri">Undur Diri</option>
+            <option value="Menang Mutlak">Menang Mutlak</option>
+            <option value="Wasit Telah Menghentikan Pertandingan">Wasit Telah Menghentikan Pertandingan</option>
           </select>
         </div>
         <div class="mb-3">
           <label for="pemenang" class="form-label">Pemenang</label>
-          <select class="form-select" id="pemenang" wire:model='pemenang'>
-            <option value="1">Sudut Merah</option>
-            <option value="2">Sudut Biru</option>
+          <select class="form-select" id="pemenang" wire:model.change='pemenang'>
+            <option value="" selected>Pilih Sudut</option>
+            <option value="merah">Sudut Merah</option>
+            <option value="biru">Sudut Biru</option>
           </select>
         </div>
         <div class="mb-3">
@@ -216,7 +216,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" wire:click='gantiTahap("gantiTahap",{{$pemenang == $pengundian_biru->id ? $jadwal_tunggal->PengundianTGRBiru->atlet_id : $jadwal_tunggal->PengundianTGRMerah->atlet_id }})' data-bs-dismiss="modal">Simpan</button>
+        <button type="button" class="btn btn-primary" wire:click='gantiTahap("keputusan", "{{$pemenang}}","{{$keputusan_pemenang}}")' data-bs-dismiss="modal">Simpan</button>
       </div>
     </div>
   </div>

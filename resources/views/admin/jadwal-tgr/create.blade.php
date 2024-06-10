@@ -97,7 +97,7 @@
                     <div class="col-md-6">
                         <div class="mb-2">
                             <label class="form-label">Kategori</label>
-                            <select name="kategori" id="kategori"
+                            <select name="jenis" id="kategori"
                                 class="form-select @error('kategori') is-invalid @enderror">
                                 <option value="">Pilih Kategori</option>
                                 <option value="Tunggal">Tunggal</option>

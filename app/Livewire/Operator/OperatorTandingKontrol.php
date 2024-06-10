@@ -9,6 +9,7 @@ use App\Models\PengundianTanding;
 use App\Models\PenilaianTanding;
 use App\Models\Tanding;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class OperatorTandingKontrol extends Component
@@ -23,6 +24,7 @@ class OperatorTandingKontrol extends Component
     public $waktu;
     public $mulai = false;
     public $pemenang;
+    public $keputusan_pemenang;
     public $error = "";
     public $active;
 
@@ -52,22 +54,33 @@ class OperatorTandingKontrol extends Component
     }
 
     //operator start
+
+    public function Hapus(){
+        $this->poin_merah->delete();
+    }
     public function kurangiWaktu(){
         $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
         $this->gelanggang->save();
     } 
-    public function keputusanMenang($sudut){
+    public function keputusanMenang($sudut,$keputusan){
         $this->jadwal_tanding->tahap = 'hasil';
         $this->active = "hasil";
-        $this->jadwal_tanding->pemenang = $sudut;
+        if($sudut == "Sudut Biru"){
+            $this->jadwal_tanding->pemenang = $this->jadwal_tanding->PengundianTandingBiru->id;
+            $this->jadwal_tanding->save();
+        }else if($sudut == "Sudut Merah"){
+            $this->jadwal_tanding->pemenang = $this->jadwal_tanding->PengundianTandingMerah->id;
+            $this->jadwal_tanding->save();
+        }
+        $this->jadwal_tanding->jenis_kemenangan = $keputusan;
         $this->jadwal_tanding->save();
-        $next_partai = JadwalTanding::find($this->jadwal_tanding->next_partai);
+        $next_partai = JadwalTanding::where("partai",$this->jadwal_tanding->next_partai);
         if($this->jadwal_tanding->next_sudut == 1){
             $next_partai->sudut_biru = $this->jadwal_tanding->pemenang;
         }else{
             $next_partai->sudut_merah = $this->jadwal_tanding->pemenang;
         }
-        MulaiPertandingan::dispatch('keputusan pemenang');
+        MulaiPertandingan::dispatch('keputusan pemenang',$this->jadwal_tanding);
     }
     public function mulaiPertandingan($state){
         if($state == "persiapan"){
@@ -75,7 +88,7 @@ class OperatorTandingKontrol extends Component
             $this->jadwal_tanding->tahap = "persiapan";
             $this->mulai = false;
             $this->jadwal_tanding->save();
-            MulaiPertandingan::dispatch($state);
+            MulaiPertandingan::dispatch($state,$this->jadwal_tanding);
         }else{
             //ganti dari persiapan ke mulai pertandingan
             if($this->jadwal_tanding->tahap == "persiapan"){
@@ -84,7 +97,7 @@ class OperatorTandingKontrol extends Component
             };
             $this->mulai = true;
             $this->jadwal_tanding->save();
-            MulaiPertandingan::dispatch($state);
+            MulaiPertandingan::dispatch($state,$this->jadwal_tanding);
         }
     }
 
@@ -102,7 +115,7 @@ class OperatorTandingKontrol extends Component
         $this->jadwal_tanding->tahap = 'pause';
         $this->mulai = false;
         $this->jadwal_tanding->save();
-        MulaiPertandingan::dispatch('pause pertandingan');
+        MulaiPertandingan::dispatch('pause pertandingan',$this->jadwal_tanding);
     }
     public function gantiBabak($babak){
         //ganti babak 
@@ -115,9 +128,52 @@ class OperatorTandingKontrol extends Component
         $this->active = "babak_".$babak;
         $this->jadwal_tanding->tahap = "tanding";
         $this->jadwal_tanding->save();   
-        GantiBabak::dispatch($babak);
+        GantiBabak::dispatch($babak,$this->jadwal_tanding);
     }
 //operator end
+
+    #[On('echo:poin,.tambah-peringatan')]
+    public function peringatanHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
+    #[On('echo:poin,.tambah-teguran')]
+    public function teguranHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
+    #[On('echo:poin,.tambah-binaan')]
+    public function binaanHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
+    #[On('echo:poin,.tambah-jatuhan')]
+    public function jatuhanHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
+    #[On('echo:poin,.tambah-pukulan')]
+    public function pukulanHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+            $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
+    #[On('echo:poin,.tambah-tendangan')]
+    public function tendanganHandler($data){
+        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
+             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+            $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+        }
+    }
     public function render()
     {
         return view('livewire.operator.operator-tanding-kontrol')->extends('layouts.operator.app');

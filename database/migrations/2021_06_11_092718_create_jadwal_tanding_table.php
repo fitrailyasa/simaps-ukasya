@@ -19,7 +19,7 @@ class CreateJadwalTandingTable extends Migration
             $table->foreignId('gelanggang')->nullable();
             $table->string('babak')->nullable();
             $table->string('jenis_kemenangan')->default('Angka');
-            $table->string('tahap')->default('persiapan');
+            $table->string('tahap')->default('menunggu');
             $table->foreignId('sudut_biru')->nullable();
             $table->foreignId('sudut_merah')->nullable();
             $table->integer('skor_merah')->default(0);

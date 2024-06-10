@@ -7,7 +7,7 @@
         @vite('resources/js/app.js')
 
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
-        <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}" />
+        <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
 
         <!-- Google Font: Source Sans Pro -->
         <link

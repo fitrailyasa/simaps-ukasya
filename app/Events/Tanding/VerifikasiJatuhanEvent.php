@@ -21,12 +21,13 @@ class VerifikasiJatuhanEvent implements ShouldBroadcast
     
  
     public $verifikasi_jatuhan;
-
+    public $jadwal;
     
-    public function __construct($verifikasi)
+    public function __construct($verifikasi,$jadwal)
     {  
 
         $this->verifikasi_jatuhan = $verifikasi;
+        $this->jadwal = $jadwal;
     }
 
     /**

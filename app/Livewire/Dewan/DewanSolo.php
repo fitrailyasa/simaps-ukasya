@@ -27,7 +27,7 @@ class DewanSolo extends Component
     public $penalty_solo;
 
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Solo_kreatif')->first();
+        $this->gelanggang = Gelanggang::where('jenis','Solo Kreatif')->first();
         if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
             return redirect('dashboard');
         }

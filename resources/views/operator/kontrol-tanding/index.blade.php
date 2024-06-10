@@ -34,7 +34,7 @@
                     <td>{{ $jadwaltanding->Gelanggang->nama ?? '-' }}</td>
                     <td>{{ $jadwaltanding->babak ?? '-' }}</td>
                     <td>{{ $jadwaltanding->PengundianTandingBiru->Tanding->kelas ?? '-' }}
-                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
+                        {{ $jadwaltanding->PengundianTandingBiru->Tanding->jenis_kelamin ?? '-' }}
                         {{ $jadwaltanding->PengundianTandingBiru->Tanding->golongan ?? '-' }}</td>
                     <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
                         ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
@@ -48,7 +48,7 @@
                     </td>
                     <td>{{ $jadwaltanding->skor_biru ?? '0' }} - {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row justify-content-center d-flex flex-row">
-                        @if ($jadwaltanding->id == $gelanggang_operator->jadwal && $jadwaltanding->tahap == "menunggu"  && $gelanggang_operator->jenis == "Tanding")
+                        @if ($gelanggang_operator->Jadwal_Tanding && $jadwaltanding->partai == $gelanggang_operator->Jadwal_Tanding->partai &&  $jadwaltanding->tahap == "persiapan"  && $gelanggang_operator->jenis == "Tanding")
                             <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tanding/{{$jadwaltanding->id}}">
                                 <i class="fa fa-tv"></i>
                             </a>
@@ -58,7 +58,7 @@
                                     <i class=" fa fa-stop"></i>
                                 </button>
                             </form>
-                        @elseif ($jadwaltanding->gelanggang == $gelanggang_operator->id && $jadwaltanding->tahap == "persiapan")
+                        @elseif ($jadwaltanding->tahap == "menunggu")
                             <form method="POST" action="ubah/{{$jadwaltanding->id}}" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn-sm btn-primary mr-2">

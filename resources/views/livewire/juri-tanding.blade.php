@@ -24,13 +24,13 @@
             <h5 class="fw-bold p-3 rounded text-white kontingen" style="background-color: #0053a6; margin-right: 12px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
         </div>
     </div>
+    <div class="row mt-3 d-flex flex-row justify-content-center">
+        <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
+            <i class="fa fa-expand"></i>
+        </button>
+    </div>
     <div class="row m-3" style="margin-top: 0px !important; width:100%">
-        <div class="row mt-3 d-flex flex-row justify-content-center">
-            <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
-                <i class="fa-solid fa-expand"></i>
-            </button>
-        </div>
-        <div class="row mt-1">
+        <div class="row mt-1" style=" width:100%">
             <div class="col">
                 <table
                     class="table table-bordered"

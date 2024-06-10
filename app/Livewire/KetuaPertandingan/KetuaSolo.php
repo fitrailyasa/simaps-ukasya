@@ -25,8 +25,8 @@ class KetuaSolo extends Component
     public $nilai_masuk = true;
     
 
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Solo_Kreatif')->first();
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->sudut = TGR::find($this->jadwal->sudut_merah);
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
@@ -48,6 +48,12 @@ class KetuaSolo extends Component
     public function hapusPenaltyHandler(){
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler($data){
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        }
+    }
     public function render()
     {
         return view('livewire.ketua-solo')->extends('layouts.client.app')->section('content');

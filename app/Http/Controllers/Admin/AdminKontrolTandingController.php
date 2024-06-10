@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\GantiGelanggang;
 use App\Events\Tanding\MulaiPertandingan;
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
@@ -32,10 +33,10 @@ class AdminKontrolTandingController extends Controller
         if ($jadwaltanding) {
             $gelanggang->jenis = "Tanding";
             $gelanggang->jadwal = $jadwaltanding->id;
-            $jadwaltanding->tahap = 'menunggu';
+            $jadwaltanding->tahap = 'persiapan';
             $gelanggang->save();
             $jadwaltanding->save();
-            MulaiPertandingan::dispatch('ganti jadwal gelanggang');
+            GantiGelanggang::dispatch($jadwaltanding->Gelanggang);
             return back()->with('sukses', 'Berhasil Mengganti Jadwal!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
@@ -57,7 +58,7 @@ class AdminKontrolTandingController extends Controller
     {
         $jadwaltanding = JadwalTanding::find($jadwal_tanding_id);
         if ($jadwaltanding) {
-            $jadwaltanding->tahap = "persiapan";
+            $jadwaltanding->tahap = "menunggu";
             $jadwaltanding->save();
             return back()->with('sukses', 'Berhasil Mengulang Pertandingan!');
         } else {

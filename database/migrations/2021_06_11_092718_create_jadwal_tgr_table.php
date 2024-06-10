@@ -18,7 +18,7 @@ class CreateJadwalTGRTable extends Migration
             $table->integer('partai')->nullable();
             $table->foreignId('gelanggang')->nullable();
             $table->string('babak')->nullable();
-            $table->string('tahap')->default('persiapan');
+            $table->string('tahap')->default('menunggu');
             $table->string('jenis_kemenangan')->default('Angka');
             $table->string('jenis')->nullable();
             $table->foreignId('sudut_biru');

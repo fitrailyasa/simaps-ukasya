@@ -29,7 +29,7 @@ class PenontonController extends Controller
             case 'Ganda':
                 return redirect('/ganda/'.$gelanggang_id);
                 break;
-            case 'Solo_Kreatif':
+            case 'Solo Kreatif':
                 return redirect('/solo/'.$gelanggang_id);
                 break;
         }

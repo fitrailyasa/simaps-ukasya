@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Tanding;
+namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,32 +9,30 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\PenilaianTanding;
 
-class TambahJatuhan implements ShouldBroadcast
+class GantiGelanggang implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $sudut_id;
-    public $babak;
-    public $jadwal;
-
-    public function __construct($id,$babak_tanding,$jadwal)
+    public $gelanggang;
+    public function __construct($gelanggang)
     {
-        $this->sudut_id = $id;
-        $this->babak = $babak_tanding;
-        $this->jadwal = $jadwal;
+        $this->gelanggang = $gelanggang;
     }
-
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array<int, \Illuminate\Broadcasting\Channel>
+     */
     public function broadcastOn(): Channel
     {
-        return new Channel('poin');
+        return new Channel('arena');
     }
     public function broadcastAs()
     {
-        return 'tambah-jatuhan';
+        return 'ganti-gelanggang';
     }
 }

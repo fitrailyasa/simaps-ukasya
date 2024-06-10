@@ -17,7 +17,6 @@ use App\Events\Tanding\TambahPukulan;
 use App\Events\Tanding\TambahTendangan;
 use App\Events\Tanding\VerifikasiJatuhanEvent;
 use App\Events\Tanding\VerifikasiPelanggaranEvent;
-use App\Events\Tanding\Hapus;
 
 
 
@@ -61,7 +60,6 @@ class JuriTanding extends Component
         $penilaian = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis', ['pukulan', 'tendangan'])->where('sudut',$id)->where('aktif',true)->orderBy('id', 'desc')->first();
         if(!$penilaian){
             $this->error ='tidak bisa menghapus nilai yang sudah masuk';
-            Hapus::dispatch($penilaian,$this->juri);
         }else{
             $juri = $this->juri;
             $penilaian->$juri = null;
@@ -96,7 +94,7 @@ class JuriTanding extends Component
             }else{
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }
-            TambahPukulan::dispatch($id);
+            TambahPukulan::dispatch($id,$this->jadwal);
         }else{
             $this->error = "pertandingan belum dimulai atau sedang pause";
         }
@@ -126,7 +124,7 @@ class JuriTanding extends Component
             }else{
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->jadwal->sudut_merah)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }
-            TambahTendangan::dispatch($id);
+            TambahTendangan::dispatch($id,$this->jadwal);
         }else{
             $this->error = "pertandingan belum dimulai atau sedang pause";
         }

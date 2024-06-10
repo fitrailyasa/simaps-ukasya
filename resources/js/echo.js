@@ -31,6 +31,10 @@ window.Echo.channel("verifikasi").listen(".verifikasi-jatuhan", (e) => {
     console.log(e);
 });
 
+window.Echo.channel("arena").listen(".ganti-gelanggang", (e) => {
+    console.log(e);
+});
+
 window.Echo.channel("poin").listen(".tambah-peringatan", (e) => {
     console.log(e);
 });
@@ -82,6 +86,19 @@ window.Echo.channel("arena").listen(".ganti-tampil-tunggal", (e) => {
     console.log(e);
 });
 
+window.Echo.channel("arena").listen(".ganti-tahap-ganda", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tampil-ganda", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tahap-solo", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tampil-solo", (e) => {
+    console.log(e);
+});
+
 window.Echo.channel("poin").listen(".salah-gerakan-regu", (e) => {
     console.log(e);
 });
@@ -105,13 +122,6 @@ window.Echo.channel("poin").listen(".penalty-ganda", (e) => {
     console.log(e);
 });
 window.Echo.channel("poin").listen(".hapus-penalty-ganda", (e) => {
-    console.log(e);
-});
-
-window.Echo.channel("arena").listen(".ganti-tahap-ganda", (e) => {
-    console.log(e);
-});
-window.Echo.channel("arena").listen(".ganti-tampil-ganda", (e) => {
     console.log(e);
 });
 

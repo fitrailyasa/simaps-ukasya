@@ -16,7 +16,7 @@
             </h4>
         </div>
     </div>
-    <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 30%">
+    <div class="kontingen-biru text-right d-flex flex-column justify-content-end" style="width: 30%">
         <h4 class="fw-bold">
             {{$sudut_biru->kontingen}}
         </h4>

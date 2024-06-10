@@ -22,11 +22,13 @@ class TambahBinaan implements ShouldBroadcast
      */
     public $sudut_id;
     public $babak;
+    public $jadwal;
 
-    public function __construct($id,$babak_tanding)
+    public function __construct($id,$babak_tanding,$jadwal)
     {
         $this->sudut_id = $id;
         $this->babak = $babak_tanding;
+        $this->jadwal = $jadwal;
     }
     public function broadcastOn(): Channel
     {

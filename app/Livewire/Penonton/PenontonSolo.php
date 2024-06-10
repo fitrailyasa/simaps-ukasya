@@ -54,7 +54,7 @@ class PenontonSolo extends Component
     }
 
     public function check_gelanggang()  {
-        if($this->gelanggang->jenis !== "Solo_Kreatif"){
+        if($this->gelanggang->jenis !== "Solo Kreatif"){
             return redirect('/penonton/'.$this->gelanggang->id);
         }
     }

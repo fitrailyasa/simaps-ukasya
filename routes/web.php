@@ -68,11 +68,12 @@ Route::get('/solo/{gelanggang_id}', PenontonSolo::class)->name('solo');
 
 //CMS KETUA PERTANDINGAN
 Route::get('/ketuapertandingan', [KetuaPertandinganController::class, 'index'])->name('ketuapertandingan');
-Route::get('/ketuapertandingan/tanding', KetuaTanding::class)->name('ketua.tanding');
-Route::get('/ketuapertandingan/tunggal', KetuaTunggal::class)->name('ketua.tunggal');
-Route::get('/ketuapertandingan/regu', KetuaRegu::class)->name('ketua.regu');
-Route::get('/ketuapertandingan/ganda', KetuaGanda::class)->name('ketua.ganda');
-Route::get('/ketuapertandingan/solo', KetuaSolo::class)->name('ketua.solo');
+Route::get('/ketuapertandingan/{gelanggang_id}', [KetuaPertandinganController::class, 'auth']);
+Route::get('/ketuapertandingan/tanding/{gelanggang_id}', KetuaTanding::class)->name('ketua.tanding');
+Route::get('/ketuapertandingan/tunggal/{gelanggang_id}', KetuaTunggal::class)->name('ketua.tunggal');
+Route::get('/ketuapertandingan/regu/{gelanggang_id}', KetuaRegu::class)->name('ketua.regu');
+Route::get('/ketuapertandingan/ganda/{gelanggang_id}', KetuaGanda::class)->name('ketua.ganda');
+Route::get('/ketuapertandingan/solo/{gelanggang_id}', KetuaSolo::class)->name('ketua.solo');
 
 
 Auth::routes();
@@ -197,11 +198,11 @@ Route::middleware(['auth'])->group(function () {
     //tunggal
     Route::get('/kontrol-tgr/tunggal/{jadwal_tunggal_id}', OperatorTunggalKontrol::class);
     //ganda
-    Route::get('/kontrol-tgr/ganda/{jadwal_tgr_id}', OperatorGandaKontrol::class);
+    Route::get('/kontrol-tgr/ganda/{jadwal_ganda_id}', OperatorGandaKontrol::class);
     //regu
-    Route::get('/kontrol-tgr/regu/{jadwal_tgr_id}', OperatorReguKontrol::class);
+    Route::get('/kontrol-tgr/regu/{jadwal_regu_id}', OperatorReguKontrol::class);
     //solo
-    Route::get('/kontrol-tgr/solo/{jadwal_tgr_id}', OperatorSoloKontrol::class);
+    Route::get('/kontrol-tgr/solo/{jadwal_solo_id}', OperatorSoloKontrol::class);
   });
 
   // CMS Dewan

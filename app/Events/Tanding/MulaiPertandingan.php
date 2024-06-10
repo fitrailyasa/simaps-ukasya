@@ -22,9 +22,11 @@ class MulaiPertandingan implements ShouldBroadcast
      * Create a new event instance.
      */
     public $event;
-    public function __construct($event)
+    public $jadwal;
+    public function __construct($event,$jadwal)
     {
         $this->event = $event;
+        $this->jadwal = $jadwal;
     }
 
     /**

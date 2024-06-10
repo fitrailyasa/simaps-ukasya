@@ -22,18 +22,28 @@ class KetuaRegu extends Component
     public $penalty_regu;
     public $juris;
     public $mulai = false;
-    public $tahap = 'tampil';
+    public $tahap;
+    public $tampil;
+    public $penilaian_ganda_juri_merah;
+    public $penalty_ganda_merah;
+    public $penilaian_ganda_juri_biru;
+    public $penalty_ganda_biru;
     public $nilai_masuk = true;
     
 
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Regu')->first();
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
-        $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->get();
-        $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->first();
+        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
     }
 
@@ -50,6 +60,12 @@ class KetuaRegu extends Component
     public function hapusPenaltyHandler(){
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler($data){
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        }
+    }
     public function render()
     {
         return view('livewire.ketua-regu')->extends('layouts.client.app')->section('content');

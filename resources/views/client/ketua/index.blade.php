@@ -9,11 +9,12 @@
             <h1 class="">Halaman Ketua Pertandingan</h1>
             <p>Selamat Datang di Aplikasi SIMAPS</p>
             <a href="#" class="btn btn-primary">Beranda</a>
-            <a href="{{ route('ketua.tanding') }}" class="btn btn-primary">Arena A</a>
-            <a href="{{ route('ketua.tunggal') }}" class="btn btn-primary">Arena B</a>
-            <a href="{{ route('ketua.ganda') }}" class="btn btn-primary">Arena C</a>
-            <a href="{{ route('ketua.regu') }}" class="btn btn-primary">Arena D</a>
-            <a href="{{ route('ketua.solo') }}" class="btn btn-primary">Arena E</a>
+
+            <a href="/ketuapertandingan/1" class="btn btn-primary">Arena A</a>
+            <a href="/ketuapertandingan/2" class="btn btn-primary">Arena B</a>
+            <a href="/ketuapertandingan/3" class="btn btn-primary">Arena C</a>
+            <a href="/ketuapertandingan/4" class="btn btn-primary">Arena D</a>
+            <a href="/ketuapertandingan/5" class="btn btn-primary">Arena E</a>
         </div>
     </div>
 @endsection

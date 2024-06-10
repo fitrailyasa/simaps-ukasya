@@ -61,9 +61,11 @@ class AdminJadwalTGRController extends Controller
             'sudut_merah' => 'required|max:255',
             'next_sudut' => 'required|max:255',
             'next_partai' => 'required|max:255',
+            'jenis' => 'required|max:255',
         ]);
 
-        JadwalTGR::create($request->all());
+        $jadwal_tgr = JadwalTGR::create($request->all());
+        $jadwal_tgr->tampil = $jadwal_tgr->PengundianTGRBiru->id;
 
         return back()->with('sukses', 'Berhasil Tambah Data Jadwal!');
     }

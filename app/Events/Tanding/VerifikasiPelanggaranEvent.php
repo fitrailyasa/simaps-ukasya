@@ -23,10 +23,12 @@ class VerifikasiPelanggaranEvent implements ShouldBroadcast
      */
  
     public $verifikasi_pelanggaran;
+    public $jadwal;
     
-    public function __construct($verifikasi)
+    public function __construct($verifikasi,$jadwal)
     {  
             $this->verifikasi_pelanggaran = $verifikasi;
+            $this->jadwal = $jadwal;
     }
 
     /**

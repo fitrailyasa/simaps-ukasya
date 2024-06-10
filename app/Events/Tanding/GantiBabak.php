@@ -22,10 +22,11 @@ class GantiBabak implements ShouldBroadcast
      * Create a new event instance.
      */
     public $babak;
-
-    public function __construct($babak)
+    public $jadwal;
+    public function __construct($babak,$jadwal)
     {
         $this->babak = $babak;   
+        $this->jadwal = $jadwal;   
     }
 
     /**

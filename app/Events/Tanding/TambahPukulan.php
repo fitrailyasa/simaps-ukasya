@@ -19,14 +19,13 @@ class TambahPukulan implements ShouldBroadcast
      * Create a new event instance.
      */
     public $sudut_id;
-    public $pukulan;
-    public $status;
-    public $eventSent;
+    public $jadwal;
 
 
-    public function __construct($id)
+    public function __construct($id,$jadwal)
     {
        $this->sudut_id = $id;
+       $this->jadwal = $jadwal;
     }
 
     /** 

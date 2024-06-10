@@ -20,10 +20,12 @@ class GantiTahap implements ShouldBroadcast
     public $tahap;
     public $tampil;
     public $sudut_tampil;
-    public function __construct($tahap,$tampil,$sudut_tampil)
+    public $gelanggang;
+    public function __construct($tahap,$tampil,$sudut_tampil,$gelanggang)
     {
         $this->tahap = $tahap;
         $this->sudut_tampil = $sudut_tampil;
+        $this->gelanggang = $gelanggang;
         if($tampil !== null){
             if($tahap == "tampil"){
                 $this->tampil = $tampil;

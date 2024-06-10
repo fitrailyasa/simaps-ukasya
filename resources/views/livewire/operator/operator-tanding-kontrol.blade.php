@@ -98,9 +98,9 @@
             <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#keputusan-modal" class="keputusan" style="border:#9BB8CD ;{{$active == "hasil" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Keputusan</button>
         </div>
         <div class="row-6 d-flex flex-row justify-content-between gap-2 mt-3">
-            <button class="btn" wire:click='hapusNilai()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
-            <button class="btn" wire:click='keputusanMenang({{$jadwal_tanding->PengundianTandingBiru->id}})' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
-            <button class="btn" wire:click='keputusanMenang({{$jadwal_tanding->PengundianTandingMerah->id}})' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
+            <button class="btn" wire:click='Hapus()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
+            <button {{$total_poin_merah == $total_poin_biru ? "disabled" : ""}} class="btn" wire:click='keputusanMenang("Sudut Biru","Menang Angka")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
+            <button {{$total_poin_merah == $total_poin_biru ? "disabled" : ""}} class="btn" wire:click='keputusanMenang("Sudut Merah","Menang Angka")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <a href="/op/kontrol-tanding" class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</a>
         </div>
     </div>
@@ -147,22 +147,22 @@
             <div class="p-2 bg-danger text-white" style="width: 40%">{{$sudut_merah->kontingen}}</div>
         </div>
         <div class="mb-3">
-          <label for="keputusanPemenang" class="form-label">Keputusan Pemenang</label>
-          <select class="form-select" id="keputusanPemenang">
-            <option selected>Keputusan Pemenang</option>
-            <option>Menang Teknik</option>
-            <option>Menang Angka</option>
-            <option>Diskualifikasi</option>
-            <option>Undur Diri</option>
-            <option>Menang Mutlak</option>
-            <option>Wasit Telah Menghentikan Pertandingan</option>
-          </select>
+          <label for="keputusan_pemenang" class="form-label">Keputusan Pemenang</label>
+          <select class="form-select" id="keputusan_pemenang" wire:model.change='keputusan_pemenang'>
+            <option value="" selected>Pilih Keputusan</option>
+            <option value="Menang Teknik">Menang Teknik</option>
+            <option value="Diskualifikasi">Diskualifikasi</option>
+            <option value="Undur Diri">Undur Diri</option>
+            <option value="Menang Mutlak">Menang Mutlak</option>
+            <option value="Wasit Telah Menghentikan Pertandingan">Wasit Telah Menghentikan Pertandingan</option>
+            </select>
         </div>
         <div class="mb-3">
-          <label for="pemenang" class="form-label">Pemenang</label>
-          <select class="form-select" id="pemenang" wire:model='pemenang'>
-            <option value="1">Sudut Merah</option>
-            <option value="2">Sudut Biru</option>
+          <label for="pemenang" class="form-label">{{$pemenang}}</label>
+          <select class="form-select" id="pemenang" wire:model.change='pemenang'>
+            <option value="" selected>Pilih Sudut</option>
+            <option value="Sudut Biru">Sudut Biru</option>
+            <option value="Sudut Merah">Sudut Merah</option>
           </select>
         </div>
         <div class="mb-3">
@@ -171,7 +171,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" wire:click="keputusanMenang({{ $pemenang == 2 ? $jadwal_tanding->PengundianTandingBiru->id: $jadwal_tanding->PengundianTandingMerah->id}})" data-bs-dismiss="modal">Simpan</button>
+        <button type="button" class="btn btn-primary" wire:click='keputusanMenang("{{$pemenang}}" , "{{$keputusan_pemenang}}")' data-bs-dismiss="modal">
+            Simpan
+        </button>
       </div>
     </div>
   </div>

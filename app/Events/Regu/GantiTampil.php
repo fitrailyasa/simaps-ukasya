@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Regu;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,16 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RegTambahNilai
+class GantiTampil implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $tampil;
+    public $jadwal;
+    public function __construct($tampil,$jadwal)
     {
-        //
+        $this->tampil = $tampil;
+        $this->jadwal = $jadwal;
+
     }
 
     /**
@@ -27,10 +31,12 @@ class RegTambahNilai
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        return new Channel('arena');
+    }
+    public function broadcastAs()
+    {
+        return 'ganti-tampil-ganda';
     }
 }

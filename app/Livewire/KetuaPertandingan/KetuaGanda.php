@@ -35,8 +35,8 @@ class KetuaGanda extends Component
     public $jenis = "ganda";
     
 
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
@@ -55,9 +55,11 @@ class KetuaGanda extends Component
     }
 
     #[On('echo:poin,.tambah-skor-ganda')]
-    public function tambahNilaiHandler(){
-        $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
-        $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+    public function tambahNilaiHandler($data){
+         if($this->gelanggang->id == $data["gelanggang"]["id"]){
+             $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+             $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+         }
     }
     #[On('echo:poin,.salah-gerakan-ganda')]
     public function salahGerakanHandler(){
@@ -70,18 +72,27 @@ class KetuaGanda extends Component
     }
     #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
-        $this->tahap = $this->jadwal->tahap;
-        $this->tampil = $data["sudut_tampil"];
-        if($data["tahap"] == "tampil"){
-            if($data["tampil"] == "merah"){
-                $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
-                $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
-            }else if($data["tampil"] == "biru"){
-                $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
-                $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
-            }
-        }else if($data["tahap"] == "keputusan"){
-            $this->tahap = $this->jadwal->tahap;
+         if($this->gelanggang->id == $data["gelanggang"]["id"]){
+             $this->tahap = $this->jadwal->tahap;
+             $this->tampil = $data["sudut_tampil"];
+             if($data["tahap"] == "tampil"){
+                 if($data["tampil"] == "merah"){
+                     $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                     $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+                 }else if($data["tampil"] == "biru"){
+                     $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                     $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+                 }
+             }else if($data["tahap"] == "keputusan"){
+                 $this->tahap = $this->jadwal->tahap;
+             }
+         }
+    }
+
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler($data){
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
         }
     }
 

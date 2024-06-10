@@ -56,11 +56,6 @@ class PenontonTunggal extends Component
             $this->tampil_nilai = true;
         }
     }
-    public function check_gelanggang()  {
-        if($this->gelanggang->jenis !== "Tunggal"){
-            return redirect('/penonton/'.$this->gelanggang->id);
-        }
-    }
 
     public function kurangiWaktu(){
         if($this->mulai == true){
@@ -118,6 +113,10 @@ class PenontonTunggal extends Component
             }
     }
     
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+    }
 
     public function render()
     {

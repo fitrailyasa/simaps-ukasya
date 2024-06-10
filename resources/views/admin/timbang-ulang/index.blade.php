@@ -77,7 +77,7 @@
         </thead>
         <tbody>
             @foreach ($timbangulangs as $timbangulang)
-                @if ($jadwaltanding->berat_merah != null && $jadwaltanding->berat_biru != null)
+                @if ($timbangulang->berat_merah != null && $timbangulang->berat_biru != null)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $timbangulang->partai ?? '-' }}</td>
