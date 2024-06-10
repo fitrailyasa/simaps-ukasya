@@ -48,13 +48,8 @@ class AdminPengundianTandingController extends Controller
 
         // Lakukan pengacakan dan penyimpanan
         $existingAtletIds = PengundianTanding::pluck('atlet_id')->toArray();
-        $totalPeserta = $tandings->count();
 
         $shuffledAtletIds = $tandings->pluck('id')->shuffle()->toArray();
-
-        $kelompok = PengundianTanding::max('kelompok') ?? 0; // Get the maximum kelompok value from the database
-
-        $kelompok++; // Increment kelompok for each new entry
 
         foreach ($shuffledAtletIds as $index => $atletId) {
             if (in_array($atletId, $existingAtletIds)) {
@@ -64,7 +59,6 @@ class AdminPengundianTandingController extends Controller
             $pengundiantanding = new PengundianTanding();
             $pengundiantanding->atlet_id = $atletId;
             $pengundiantanding->no_undian = $index + 1;
-            $pengundiantanding->kelompok = $kelompok; // Assign kelompok value
             $pengundiantanding->save();
 
             $existingAtletIds[] = $atletId;
