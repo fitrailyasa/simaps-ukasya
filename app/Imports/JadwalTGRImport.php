@@ -3,17 +3,18 @@
 namespace App\Imports;
 
 use App\Models\JadwalTGR;
+use App\Models\PengundianTGR;
 use App\Models\Gelanggang;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class JadwalTGRImport implements ToModel, WithHeadingRow
 {
-    public $kelompok;
+    public $teams;
 
-    public function __construct($kelompok)
+    public function __construct($teams)
     {
-        $this->kelompok = $kelompok;
+        $this->teams = $teams;
     }
 
     public function model(array $row)
@@ -28,13 +29,22 @@ class JadwalTGRImport implements ToModel, WithHeadingRow
             ]);
         }
 
+        // Lakukan pencarian sudut biru berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutBiru = $this->teams->first(function ($team) use ($row) {
+            return $team->no_undian == $row['sudut_biru'];
+        });
+
+        // Lakukan pencarian sudut merah berdasarkan filter yang diterapkan pada koleksi $teams
+        $sudutMerah = $this->teams->first(function ($team) use ($row) {
+            return $team->no_undian == $row['sudut_merah'];
+        });
+
         return new JadwalTGR([
             'partai' => $row['partai'],
             'gelanggang' => $gelanggang->id,
             'babak' => $row['babak'],
-            'kelompok' => $this->kelompok,
-            'sudut_biru' => $row['sudut_biru'], 
-            'sudut_merah' => $row['sudut_merah'],
+            'sudut_biru' => $sudutBiru ? $sudutBiru->id : null, // Gunakan id sudut biru jika ditemukan, jika tidak, gunakan null
+            'sudut_merah' => $sudutMerah ? $sudutMerah->id : null, // Gunakan id sudut merah jika ditemukan, jika tidak, gunakan null
             'next_sudut' => $row['next_sudut'],
             'next_partai' => $row['next_partai'],
         ]);

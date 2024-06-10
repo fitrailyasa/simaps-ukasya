@@ -23,7 +23,7 @@
                         <form method="POST" action="{{ route('op.timbang-ulang.destroy', $timbangulang->id) }}"
                             enctype="multipart/form-data">
                 @endif
-                @method('DELETE')
+                @method('PUT')
                 @csrf
                 <input type="submit" class="btn btn-danger light" name="" id="" value="Hapus">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tidak</button>

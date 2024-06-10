@@ -22,6 +22,11 @@
 @endsection
 
 @section('table')
+    @if (session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -48,8 +53,8 @@
                     <td class="bg-primary">{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}
                         ({{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }})
                     </td>
-                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}
-                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }})</td>
+                    <td class="bg-danger">{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '' }}
+                        ({{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? 'Menunggu Pemenang' }})</td>
                     <td class="manage-row">
                         @include('admin.jadwal-tanding.edit')
                         @include('admin.jadwal-tanding.delete')

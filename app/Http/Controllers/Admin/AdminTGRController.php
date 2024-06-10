@@ -12,7 +12,7 @@ class AdminTGRController extends Controller
 {
     public function index()
     {
-        $tgrs = TGR::latest('id')->get();
+        $tgrs = TGR::all();
         return view('admin.tgr.index', compact('tgrs'));
     }
 
@@ -34,20 +34,16 @@ class AdminTGRController extends Controller
         $request->validate([
             'nama' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
-            'tinggi_badan' => 'required|max:255',
-            'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kelas' => 'required|max:255',
+            'kategori' => 'required|max:255',
             'golongan' => 'required|max:255'
         ]);
 
         $tgr = TGR::create([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
             'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
+            'kategori' => $request->kategori,
             'golongan' => $request->golongan,
         ]);
 
@@ -67,10 +63,8 @@ class AdminTGRController extends Controller
         $request->validate([
             'nama' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
-            'tinggi_badan' => 'required|max:255',
-            'berat_badan' => 'required|max:255',
             'kontingen' => 'required|max:255',
-            'kelas' => 'required|max:255',
+            'kategori' => 'required|max:255',
             'golongan' => 'required|max:255'
         ]);
 
@@ -78,10 +72,8 @@ class AdminTGRController extends Controller
         $tgr->update([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
             'kontingen' => $request->kontingen,
-            'kelas' => $request->kelas,
+            'kategori' => $request->kategori,
             'golongan' => $request->golongan,
         ]);
 

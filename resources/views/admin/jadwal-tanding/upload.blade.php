@@ -22,10 +22,65 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-1">
-                            <label class="form-label">Kelompok</label>
-                            <input type="text" class="form-control @error('kelompok') is-invalid @enderror"
-                                placeholder="kelompok" name="kelompok" id="kelompok" required>
-                            @error('kelompok')
+                            <label class="form-label">Golongan</label>
+                            <select name="golongan" id="golongan"
+                                class="form-select @error('golongan') is-invalid @enderror" required>
+                                <option value="">-- Pilih Golongan --</option>
+                                <option value="Usia Dini 1">Usia Dini 1</option>
+                                <option value="Usia Dini 2">Usia Dini 2</option>
+                                <option value="Pra Remaja">Pra Remaja</option>
+                                <option value="Remaja">Remaja</option>
+                                <option value="Dewasa">Dewasa</option>
+                                <option value="Master">Master</option>
+                            </select>
+                            @error('golongan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-1">
+                            <label class="form-label">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin"
+                                class="form-select @error('jenis_kelamin') is-invalid @enderror" required>
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Putra">Putra</option>
+                                <option value="Putri">Putri</option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-1">
+                            <label class="form-label">Kelas</label>
+                            <select name="kelas" id="kelas"
+                                class="form-select @error('kelas') is-invalid @enderror" required>
+                                <option value="">-- Pilih Kelas Tanding --</option>
+                                <option value="Kelas A">Kelas A</option>
+                                <option value="Kelas B">Kelas B</option>
+                                <option value="Kelas C">Kelas C</option>
+                                <option value="Kelas D">Kelas D</option>
+                                <option value="Kelas E">Kelas E</option>
+                                <option value="Kelas F">Kelas F</option>
+                                <option value="Kelas G">Kelas G</option>
+                                <option value="Kelas H">Kelas H</option>
+                                <option value="Kelas I">Kelas I</option>
+                                <option value="Kelas J">Kelas J</option>
+                                <option value="Kelas K">Kelas K</option>
+                                <option value="Kelas L">Kelas L</option>
+                                <option value="Kelas M">Kelas M</option>
+                                <option value="Kelas N">Kelas N</option>
+                                <option value="Kelas O">Kelas O</option>
+                                <option value="Kelas P">Kelas P</option>
+                                <option value="Kelas Q">Kelas Q</option>
+                                <option value="Kelas R">Kelas R</option>
+                                <option value="Kelas S">Kelas S</option>
+                                <option value="Open 1">Open 1</option>
+                                <option value="Open 2">Open 2</option>
+                            </select>
+                            @error('kelas')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

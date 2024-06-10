@@ -22,10 +22,48 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-1">
-                            <label class="form-label">Kelompok</label>
-                            <input type="text" class="form-control @error('kelompok') is-invalid @enderror"
-                                placeholder="kelompok" name="kelompok" id="kelompok" required>
-                            @error('kelompok')
+                            <label class="form-label">Golongan</label>
+                            <select name="golongan" id="golongan"
+                                class="form-select @error('golongan') is-invalid @enderror" required>
+                                <option value="">-- Pilih Golongan --</option>
+                                <option value="Usia Dini 1">Usia Dini 1</option>
+                                <option value="Usia Dini 2">Usia Dini 2</option>
+                                <option value="Pra Remaja">Pra Remaja</option>
+                                <option value="Remaja">Remaja</option>
+                                <option value="Dewasa">Dewasa</option>
+                                <option value="Master">Master</option>
+                            </select>
+                            @error('golongan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-1">
+                            <label class="form-label">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin"
+                                class="form-select @error('jenis_kelamin') is-invalid @enderror" required>
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Putra">Putra</option>
+                                <option value="Putri">Putri</option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-1">
+                            <label class="form-label">Kategori</label>
+                            <select name="kategori" id="kategori"
+                                class="form-select @error('kategori') is-invalid @enderror" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="Tunggal">Tunggal</option>
+                                <option value="Ganda">Ganda</option>
+                                <option value="Regu">Regu</option>
+                                <option value="Solo Kreatif">Solo Kreatif</option>
+                            </select>
+                            @error('kategori')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

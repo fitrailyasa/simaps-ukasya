@@ -1,6 +1,6 @@
 @extends('layouts.admin.table')
 
-@section('title', 'TGR')
+@section('title', 'Atlet TGR')
 
 @section('table-tgr', 'active')
 @section('tgr', 'menu-open')
@@ -69,7 +69,7 @@
                         @endif
                     </td>
                     <td>{{ $tgr->nama ?? '-' }}</td>
-                    <td>{{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</td>
+                    <td>{{ $tgr->jenis_kelamin ?? '-' }}</td>
                     <td>{{ $tgr->kontingen ?? '-' }}</td>
                     <td>{{ $tgr->kategori ?? '-' }}</td>
                     <td>{{ $tgr->golongan ?? '-' }}</td>

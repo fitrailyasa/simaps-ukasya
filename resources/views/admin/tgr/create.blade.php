@@ -49,8 +49,8 @@
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-select @error('jenis_kelamin') is-invalid @enderror">
                                 <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="L">Putra</option>
-                                <option value="P">Putri</option>
+                                <option value="Putra">Putra</option>
+                                <option value="Putri">Putri</option>
                             </select>
                             @error('jenis_kelamin')
                                 <div class="invalid-feedback">{{ $message }}</div>

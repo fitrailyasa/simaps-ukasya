@@ -35,7 +35,7 @@ class AdminKontrolTGRController extends Controller
             $jadwaltgr->tahap = 'menunggu';
             $gelanggang->save();
             $jadwaltgr->save();
-            GantiTahap::dispatch('persiapan',$jadwaltgr->tampil,$jadwaltgr->TampilTGR);
+            GantiTahap::dispatch('persiapan', $jadwaltgr->tampil, $jadwaltgr->TampilTGR);
             return back()->with('sukses', 'Berhasil Mengganti Jadwal!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);

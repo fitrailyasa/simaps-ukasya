@@ -51,10 +51,9 @@
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                                <option selected>
-                                    {{ $tgr->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</option>
-                                <option value="L">Putra</option>
-                                <option value="P">Putri</option>
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Putra" @if ($tgr->jenis_kelamin == 'Putra') selected @endif>Putra</option>
+                                <option value="Putri" @if ($tgr->jenis_kelamin == 'Putri') selected @endif>Putri</option>
                             </select>
                             @error('jenis_kelamin')
                                 <div class="invalid-feedback">{{ $message }}</div>

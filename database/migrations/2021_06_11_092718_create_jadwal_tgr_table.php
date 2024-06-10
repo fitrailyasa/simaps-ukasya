@@ -15,9 +15,9 @@ class CreateJadwalTGRTable extends Migration
     {
         Schema::create('jadwal_tgr', function (Blueprint $table) {
             $table->id();
-            $table->integer('partai');
-            $table->foreignId('gelanggang');
-            $table->string('babak');
+            $table->integer('partai')->nullable();
+            $table->foreignId('gelanggang')->nullable();
+            $table->string('babak')->nullable();
             $table->string('tahap')->default('persiapan');
             $table->string('jenis')->nullable();
             $table->foreignId('sudut_biru');

@@ -53,11 +53,9 @@
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                                <option selected>
-                                    {{ $tanding->jenis_kelamin == 'L' ? 'Putra' : 'Putri' }}</option>
-                                </option>
-                                <option value="L">Putra</option>
-                                <option value="P">Putri</option>
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Putra" @if ($tanding->jenis_kelamin == 'Putra') selected @endif>Putra</option>
+                                <option value="Putri" @if ($tanding->jenis_kelamin == 'Putri') selected @endif>Putri</option>
                             </select>
                             @error('jenis_kelamin')
                                 <div class="invalid-feedback">{{ $message }}</div>

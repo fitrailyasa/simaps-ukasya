@@ -7,11 +7,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             @if (auth()->user()->roles_id == 1)
-                <form method="POST" action="{{ route('admin.timbang-ulang.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.timbang-ulang.update', $jadwaltanding->id) }}"
+                    enctype="multipart/form-data">
                 @elseif (auth()->user()->roles_id == 2)
-                    <form method="POST" action="{{ route('op.timbang-ulang.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('op.timbang-ulang.update', $jadwaltanding->id) }}"
+                        enctype="multipart/form-data">
             @endif
             @csrf
+            @method('PUT')
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFormLabel">Timbang Ulang Partai Ke-{{ $jadwaltanding->partai ?? '-' }}
                 </h5>
@@ -22,14 +25,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5">
-                        <input type="hidden" name="partai" value="{{ $jadwaltanding->partai }}">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
-                            <input type="hidden" name="sudut_biru"
-                                value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->id ?? '-' }}">
-                            <input type="text" class="form-control bg-primary" readonly
+                            <input type="text" class="form-control bg-primary" disabled
                                 value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->kontingen ?? '-' }}">
-                            <input type="text" class="form-control bg-primary" readonly
+                            <input type="text" class="form-control bg-primary" disabled
                                 value="{{ $jadwaltanding->PengundianTandingBiru->Tanding->nama ?? '-' }}">
                         </div>
                     </div>
@@ -37,11 +37,9 @@
                     <div class="col-md-5">
                         <div class="mb-2">
                             <label class="form-label">Partai</label>
-                            <input type="hidden" name="sudut_merah"
-                                value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->id ?? '-' }}">
-                            <input type="text" class="form-control bg-danger" readonly
+                            <input type="text" class="form-control bg-danger" disabled
                                 value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->kontingen ?? '-' }}">
-                            <input type="text" class="form-control bg-danger" readonly
+                            <input type="text" class="form-control bg-danger" disabled
                                 value="{{ $jadwaltanding->PengundianTandingMerah->Tanding->nama ?? '-' }}">
                         </div>
                     </div>

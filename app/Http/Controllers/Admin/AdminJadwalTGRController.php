@@ -16,7 +16,7 @@ class AdminJadwalTGRController extends Controller
     {
         $gelanggangs = Gelanggang::all();
         $pengundiantgrs = PengundianTGR::latest('id')->get();
-        $jadwaltgrs = JadwalTGR::latest('id')->get();
+        $jadwaltgrs = JadwalTGR::orderBy('partai')->get();
         return view('admin.jadwal-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs'));
     }
 
@@ -24,13 +24,31 @@ class AdminJadwalTGRController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
+            'golongan' => 'required|max:255',
+            'jenis_kelamin' => 'required|max:255',
+            'kategori' => 'required|max:255',
         ]);
+
+        $golongan = $request->golongan;
+        $jenis_kelamin = $request->jenis_kelamin;
+        $kategori = $request->kategori;
 
         $file = $request->file('file');
 
-        Excel::import(new JadwalTGRImport($request->kelompok), $file);
+        $teams = PengundianTGR::with('TGR')
+            ->whereHas('TGR', function ($query) use ($golongan, $jenis_kelamin, $kategori) {
+                $query->where('golongan', $golongan)
+                    ->where('jenis_kelamin', $jenis_kelamin)
+                    ->where('kategori', $kategori);
+            })
+            ->get();
 
-        return back()->with('sukses', 'Berhasil Import Data Jadwal!');
+        if ($teams->isEmpty()) {
+            return back()->with('warning', 'Data tim kosong!');
+        } else {
+            Excel::import(new JadwalTGRImport($teams), $file);
+            return back()->with('sukses', 'Berhasil Import Data Jadwal!');
+        }
     }
 
     public function store(Request $request)
