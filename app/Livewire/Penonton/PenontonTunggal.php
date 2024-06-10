@@ -31,6 +31,7 @@ class PenontonTunggal extends Component
     public $penalty_tunggal_merah;
     public $penilaian_tunggal_juri_biru;
     public $penalty_tunggal_biru;
+    public $tampil_nilai;
     public $jenis = "tunggal";
     
 
@@ -51,6 +52,9 @@ class PenontonTunggal extends Component
         $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu;
+        if ($this->jadwal->tahap == "tampil nilai") {
+            $this->tampil_nilai = true;
+        }
     }
     public function check_gelanggang()  {
         if($this->gelanggang->jenis !== "Tunggal"){
@@ -87,11 +91,15 @@ class PenontonTunggal extends Component
         $this->tahap = $this->jadwal->tahap;
         $this->tampil = $data["sudut_tampil"];
         if($data["tahap"] == "tampil"){
+            $this->tampil_nilai = false;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
             
         }else if($data["tahap"] == "pause"){
             $this->waktu = $this->gelanggang->waktu;
+            $this->mulai = false;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->tampil_nilai = true;
             $this->mulai = false;
         }
     }
@@ -99,6 +107,7 @@ class PenontonTunggal extends Component
     #[On('echo:arena,.ganti-tampil-tunggal')]
     public function gantiTampilHandler($data){
         $this->tahap = $this->jadwal->tahap;
+        $this->tampil_nilai = false;
         $this->tampil = $data["tampil"];
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil)->get();

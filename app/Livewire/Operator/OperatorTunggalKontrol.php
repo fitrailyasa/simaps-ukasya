@@ -50,9 +50,9 @@ class OperatorTunggalKontrol extends Component
         }
         if($this->jadwal_tunggal->tahap == "persiapan"){
             $this->active = "persiapan";
-        }else if(($this->jadwal_tunggal->tahap == "tampil" || $this->jadwal_tunggal->tahap == "pause") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_biru){
+        }else if(($this->jadwal_tunggal->tahap == "tampil"|| $this->jadwal_tunggal->tahap == "pause" || $this->jadwal_tunggal->tahap == "tampil nilai") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_biru){
             $this->active = "sudutbiru";
-        }else if(($this->jadwal_tunggal->tahap == "tampil" || $this->jadwal_tunggal->tahap == "pause") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_merah){
+        }else if(($this->jadwal_tunggal->tahap == "tampil"|| $this->jadwal_tunggal->tahap == "pause" || $this->jadwal_tunggal->tahap == "tampil nilai") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_merah){
             $this->active = "sudutmerah";
         }else  if($this->jadwal_tunggal->tahap == "keputusan"){
             $this->active = "keputusan";

@@ -48,6 +48,7 @@ class JuriTunggal extends Component
                     'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
                     'juri' => Auth::user()->id
                 ]);
+                TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
             }
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

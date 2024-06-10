@@ -135,7 +135,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if ($mulai == false) 
+        @if ($tampil_nilai == true) 
             @if (count($penilaian_tunggal_juri) == $length*2)
                 @foreach ($sorted_nilai as $i => $nilai)
                     @php
@@ -150,10 +150,10 @@
                         }
                     @endphp
                     <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                     </div>
-                    <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                     </div>
                 </div>
@@ -172,10 +172,10 @@
                         }
                     @endphp
                     <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                     </div>
-                    <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                     </div>
                 </div>
@@ -326,7 +326,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if (($length *2 -1) %2 !== 0)
+        @if (count($penilaian_regu_juri) == $length*2)
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
@@ -340,10 +340,10 @@
                     }
                 @endphp
                 <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                 </div>
-                <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                 </div>
             </div>
@@ -362,10 +362,10 @@
                     }
                 @endphp
                 <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                 </div>
-                <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                 </div>
             </div>
@@ -527,10 +527,10 @@
                     }
                 @endphp
                 <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                     </div>
-                    <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                     </div>
                 </div>
@@ -704,7 +704,7 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if ($length*2 %2 == 0)
+        @if (count($penilaian_solo_juri) == $length*2)
             @foreach ($sorted_nilai as $i => $nilai)
                 @php
                     $juri_id = $nilai->juri;
@@ -718,10 +718,10 @@
                     }
                 @endphp
                 <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                 </div>
-                <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                 </div>
             </div>
@@ -740,10 +740,10 @@
                     }
                 @endphp
                 <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                 </div>
-                <div class="down-{{$i}} {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                     <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                 </div>
             </div>
