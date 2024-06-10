@@ -35,8 +35,8 @@ class PenontonGanda extends Component
 
     
 
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
@@ -52,6 +52,12 @@ class PenontonGanda extends Component
         $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
+    }
+
+    public function check_gelanggang()  {
+        if($this->gelanggang->jenis !== "Ganda"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
     }
 
     #[On('echo:poin,.tambah-skor-ganda')]

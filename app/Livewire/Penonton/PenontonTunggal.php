@@ -34,8 +34,8 @@ class PenontonTunggal extends Component
     public $jenis = "tunggal";
     
 
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Tunggal')->first();
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
@@ -51,6 +51,11 @@ class PenontonTunggal extends Component
         $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu;
+    }
+    public function check_gelanggang()  {
+        if($this->gelanggang->jenis !== "Tunggal"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
     }
 
     public function kurangiWaktu(){

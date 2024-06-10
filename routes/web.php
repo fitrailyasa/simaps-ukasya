@@ -58,11 +58,11 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 //CMS PENONTON
 Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');
 Route::get('/penonton/{gelanggang_id}', [PenontonController::class, 'auth']);
-Route::get('/tanding', PenontonTanding::class)->name('tanding');
-Route::get('/tunggal', PenontonTunggal::class)->name('tunggal');
-Route::get('/regu', PenontonRegu::class)->name('regu');
-Route::get('/ganda', PenontonGanda::class)->name('ganda');
-Route::get('/solo', PenontonSolo::class)->name('solo');
+Route::get('/tanding/{gelanggang_id}', PenontonTanding::class)->name('tanding');
+Route::get('/tunggal/{gelanggang_id}', PenontonTunggal::class)->name('tunggal');
+Route::get('/regu/{gelanggang_id}', PenontonRegu::class)->name('regu');
+Route::get('/ganda/{gelanggang_id}', PenontonGanda::class)->name('ganda');
+Route::get('/solo/{gelanggang_id}', PenontonSolo::class)->name('solo');
 
 
 
@@ -185,14 +185,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kontrol-tanding', [AdminKontrolTandingController::class, 'index'])->name('kontrol-tanding.index');
     Route::post('/ubah/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'ubahtahap']);
     Route::post('/stop/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'stop_pertandingan']);
+    Route::post('/reset/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'reset']);
     Route::get('/kontrol-tanding/{jadwal_tanding_id}', OperatorTandingKontrol::class);
 
 
     // Kontrol Tgr
     Route::get('/kontrol-tgr', [AdminKontrolTGRController::class, 'index'])->name('kontrol-tgr.index');
+    Route::post('/ubah-tgr/{jadwal_tgr_id}/{jenis}', [AdminKontrolTGRController::class, 'ubahtahap']);
+    Route::post('/stop-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
+    Route::post('/reset-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'reset']);
     //tunggal
-    Route::post('/ubahtunggal/{jadwal_tunggal_id}', [AdminKontrolTGRController::class, 'ubahtahap']);
-    Route::post('/stoptunggal/{jadwal_tunggal_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
     Route::get('/kontrol-tgr/tunggal/{jadwal_tunggal_id}', OperatorTunggalKontrol::class);
     //ganda
     Route::get('/kontrol-tgr/ganda/{jadwal_tgr_id}', OperatorGandaKontrol::class);

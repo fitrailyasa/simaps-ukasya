@@ -9,7 +9,7 @@ class PenilaianRegu extends Model
 {
     use HasFactory;
     protected $table = 'penilaian_regu';
-    protected $fillable = ['uuid','jadwal_regu','sudut_merah','sudut_biru','skor','salah','flow_skor','juri'];
+    protected $fillable = ['uuid','jadwal_regu','sudut','skor','salah','flow_skor','juri'];
 
     public function TGR_1()
     {

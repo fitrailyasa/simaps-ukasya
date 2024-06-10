@@ -11,7 +11,22 @@
                     <h5 class="pt-2 fw-bold">PENCAK SILAT</h5>
                 </div>
                 <div class="nav-down mt-2">
-                    <h5 class="fw-bold">{{$gelanggang->nama}} - {{$jadwal->partai}} {{$jadwal->babak}} TANDING - CLASS {{$jadwal->kelas}}</h5>
+                    <h5 class="fw-bold">{{$gelanggang->nama}} - {{$jadwal->partai}} {{$jadwal->babak}} @switch($jenis)
+                        @case("regu")
+                            REGU
+                            @break
+                        @case("tunggal")
+                            TUNGGAL
+                            @break
+                        @case("solo")
+                            SOLO
+                            @break
+                        @case("ganda")
+                            GANDA
+                            @break
+                        @default
+                            
+                    @endswitch - CLASS {{$jadwal->kelas}}</h5>
                 </div>
               </a>
               <a class="navbar-brand" href="#">

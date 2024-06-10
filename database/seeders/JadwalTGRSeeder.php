@@ -26,7 +26,8 @@ class JadwalTGRSeeder extends Seeder
                 'skor_biru' => 0,
                 'skor_merah' => 0,
                 'tampil' => 2,
-                'pemenang' => 1
+                'pemenang' => 1,
+                'jenis'=>'Regu'
             ],
             [
                 'id' => 2,
@@ -40,7 +41,8 @@ class JadwalTGRSeeder extends Seeder
                 'skor_biru' => 0,
                 'skor_merah' => 0,
                 'tampil' => 2,
-                'pemenang' => 1
+                'pemenang' => 1,
+                'jenis'=>'Tunggal'
             ],
             [
                 'id' => 3,
@@ -54,7 +56,8 @@ class JadwalTGRSeeder extends Seeder
                 'skor_biru' => 0,
                 'skor_merah' => 0,
                 'tampil' => 2,
-                'pemenang' => 1
+                'pemenang' => 1,
+                'jenis'=>'Ganda'
             ],
             [
                 'id' => 4,
@@ -68,7 +71,8 @@ class JadwalTGRSeeder extends Seeder
                 'skor_biru' => 0,
                 'skor_merah' => 0,
                 'tampil' => 1,
-                'pemenang' => 1
+                'pemenang' => 1,
+                'jenis'=>'Solo_Kreatif'
             ]
         ];
         JadwalTGR::query()->insert($JadwalTGR);

@@ -19,3 +19,4 @@
         <h1>{{$sudut_merah->kontingen}}</h1>
     </div>
 </div>
+

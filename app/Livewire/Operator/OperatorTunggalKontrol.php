@@ -29,6 +29,7 @@ class OperatorTunggalKontrol extends Component
     public $penalty_tunggal_biru;
     public $waktu;
     public $pemenang;
+    public $active;
     public $mulai = false;
 
     public function mount($jadwal_tunggal_id){
@@ -47,6 +48,15 @@ class OperatorTunggalKontrol extends Component
         if(Auth::user()->gelanggang !== $this->jadwal_tunggal->Gelanggang->id){
             return redirect('/auth');
         }
+        if($this->jadwal_tunggal->tahap == "persiapan"){
+            $this->active = "persiapan";
+        }else if(($this->jadwal_tunggal->tahap == "tampil" || $this->jadwal_tunggal->tahap == "pause") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_biru){
+            $this->active = "sudutbiru";
+        }else if(($this->jadwal_tunggal->tahap == "tampil" || $this->jadwal_tunggal->tahap == "pause") && $this->jadwal_tunggal->tampil == $this->jadwal_tunggal->sudut_merah){
+            $this->active = "sudutmerah";
+        }else  if($this->jadwal_tunggal->tahap == "keputusan"){
+            $this->active = "keputusan";
+        }
     }
      //operator start
      public function kurangiWaktu(){
@@ -57,11 +67,15 @@ class OperatorTunggalKontrol extends Component
         $this->gelanggang->waktu = 3;
         $this->gelanggang->save();
         if($sudut == "merah"){
+            $this->active = "sudutmerah";
             $this->tampil = $this->sudut_merah;
+            $this->jadwal_tunggal->tahap = "tampil";
             $this->jadwal_tunggal->tampil = $this->pengundian_merah->id;
             $this->jadwal_tunggal->save();
         }else if($sudut == "biru"){
+            $this->active = "sudutbiru";
             $this->tampil = $this->sudut_biru;
+            $this->jadwal_tunggal->tahap = "tampil";
             $this->jadwal_tunggal->tampil = $this->pengundian_biru->id;
             $this->jadwal_tunggal->save();
         }
@@ -69,17 +83,35 @@ class OperatorTunggalKontrol extends Component
     }
     public function gantiTahap($tahap,$tampil){
         if($tahap == "keputusan"){
+            $this->active = "keputusan";
             $this->mulai = false;
             if($tampil == "merah"){
                 $this->jadwal_tunggal->pemenang = $this->pengundian_merah->id;
             }else if($tampil == "biru"){
                 $this->jadwal_tunggal->pemenang = $this->pengundian_biru->id;
             }
+            $next_partai = JadwalTGR::find($this->jadwal_tunggal->next_partai);
+            if($this->jadwal_tunggal->next_sudut == 1){
+                $next_partai->sudut_biru = $this->jadwal_tunggal->pemenang;
+            }else{
+                $next_partai->sudut_merah = $this->jadwal_tunggal->pemenang;
+            }
         }else if($tahap == "tampil"){
             $this->waktu = $this->gelanggang->waktu;
             $this->mulai = true;
+        }else if($tahap == "tampil nilai"){
+            $this->jadwal_tunggal->tahap = "tampil nilai";
+            $this->jadwal_tunggal->save();
         }else if($tahap == "pause"){
             $this->mulai = false;
+        }else if($tahap == "persiapan"){
+            $this->active = "persiapan";
+            $this->mulai = false;
+            $this->gelanggang->waktu = 3;
+            $this->waktu = $this->gelanggang->waktu;
+            $this->jadwal_tunggal->tahap = "persiapan";
+            $this->gelanggang->save();
+            $this->jadwal_tunggal->save();
         }
         $this->jadwal_tunggal->tahap = $tahap;
         $this->jadwal_tunggal->save();

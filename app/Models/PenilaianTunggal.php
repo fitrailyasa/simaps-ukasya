@@ -10,7 +10,7 @@ class PenilaianTunggal extends Model
     use HasFactory;
 
     protected $table = 'penilaian_tunggal';
-    protected $fillable = ['uuid','jadwal_tunggal','sudut','skor','salah','flow_skor','juri','standard_deviation'];
+    protected $fillable = ['uuid','penilaian_waktu','jadwal_tunggal','sudut','skor','salah','flow_skor','juri','standard_deviation'];
 
     public function TGR()
     {

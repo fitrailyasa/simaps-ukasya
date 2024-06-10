@@ -126,7 +126,7 @@
                 </div>
                 <div class="standard-deviation d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
+                        <p class="fw-bold" style="font-size: 1.2rem;">Standar Deviasi</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
@@ -139,7 +139,7 @@
                 </div>  
                 <div class="performance-time d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
+                        <p class="fw-bold" style="font-size: 1.2rem;">Performa Waktu</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
@@ -152,14 +152,14 @@
                 </div>
                 <div class="penalty d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
+                        <p class="fw-bold" style="font-size: 1.2rem;">Penalty</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_merah == 0 ? 0 : $penalty_merah * -0.5}}</p>
                             </div>
                             <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_biru == 0 ? 0 : $penalty_biru * -0.5}}</p>
                             </div>
                     </div>
                 </div>

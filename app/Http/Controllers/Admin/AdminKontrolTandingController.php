@@ -18,7 +18,12 @@ class AdminKontrolTandingController extends Controller
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantandings = PengundianTanding::latest('id')->get();
         $timbangulangs = TimbangUlang::latest('id')->get();
-        return view('admin.kontrol-tanding.index', compact('timbangulangs', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
+        $jadwaltandings = JadwalTanding::latest('id')->get();
+        if(auth()->user()->roles_id == 1){
+            return view('admin.kontrol-tanding.index', compact('timbangulangs', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
+        }else if(auth()->user()->roles_id == 2){
+            return view('operator.kontrol-tanding.index', compact('jadwaltandings', 'gelanggangs', 'pengundiantandings', 'gelanggang_operator'));
+        }
     }
 
     public function ubahtahap(Request $request, $jadwal_tanding_id)
@@ -28,7 +33,7 @@ class AdminKontrolTandingController extends Controller
         if ($jadwaltanding) {
             $gelanggang->jenis = "Tanding";
             $gelanggang->jadwal = $jadwaltanding->id;
-            $jadwaltanding->tahap = 'persiapan';
+            $jadwaltanding->tahap = 'menunggu';
             $gelanggang->save();
             $jadwaltanding->save();
             MulaiPertandingan::dispatch('ganti jadwal gelanggang');
@@ -45,6 +50,17 @@ class AdminKontrolTandingController extends Controller
             $jadwaltanding->tahap = "hasil";
             $jadwaltanding->save();
             return back()->with('sukses', 'Berhasil Menghentikan Pertandingan!');
+        } else {
+            return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
+        }
+    }
+    public function reset(Request $request, $jadwal_tanding_id)
+    {
+        $jadwaltanding = JadwalTanding::find($jadwal_tanding_id);
+        if ($jadwaltanding) {
+            $jadwaltanding->tahap = "persiapan";
+            $jadwaltanding->save();
+            return back()->with('sukses', 'Berhasil Mengulang Pertandingan!');
         } else {
             return back()->withErrors(['error' => 'Gagal mengubah tahap jadwal.']);
         }

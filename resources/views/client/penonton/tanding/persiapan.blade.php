@@ -19,3 +19,10 @@
         <h1>{{$sudut_merah->kontingen}}</h1>
     </div>
 </div>
+@section('script')
+    <script>
+        setInterval(() => {
+            @this.call(`check_gelanggang`)
+        }, 1000);
+    </script>
+@endsection

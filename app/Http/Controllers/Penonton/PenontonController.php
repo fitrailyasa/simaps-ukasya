@@ -18,19 +18,19 @@ class PenontonController extends Controller
         $gelanggang = Gelanggang::find($gelanggang_id);
         switch ($gelanggang->jenis) {
             case 'Tanding':
-                return redirect('/tanding');
+                return redirect('/tanding/'.$gelanggang_id);
                 break;
             case 'Tunggal':
-                return redirect('/tunggal');
+                return redirect('/tunggal/'.$gelanggang_id);
                 break;
             case 'Regu':
-                return redirect('/regu');
+                return redirect('/regu/'.$gelanggang_id);
                 break;
             case 'Ganda':
-                return redirect('/ganda');
+                return redirect('/ganda/'.$gelanggang_id);
                 break;
             case 'Solo_Kreatif':
-                return redirect('/solo');
+                return redirect('/solo/'.$gelanggang_id);
                 break;
         }
     }

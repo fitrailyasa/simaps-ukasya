@@ -24,8 +24,10 @@ class PenontonTanding extends Component
     public $tendangan_merah;
     public $waktu ;
     public $mulai = false;
-    public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
+    public $gel_id;
+    public function mount($gelanggang_id){
+        $this->gelanggang = Gelanggang::find($gelanggang_id);
+        $this->gel_id = $this->gelanggang->id;
         $this->waktu = $this->gelanggang->waktu;
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
@@ -34,7 +36,7 @@ class PenontonTanding extends Component
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
     public function resetIndikator(){
-        $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
+        $this->gelanggang = Gelanggang::find($this->gel_id);
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
@@ -46,7 +48,11 @@ class PenontonTanding extends Component
             $this->waktu = ($this->waktu * 60 - 0.1) / 60;
         }
     }
-
+    public function check_gelanggang()  {
+        if($this->gelanggang->jenis !== "Tanding"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
+    }
      #[On('echo:arena,.ganti-babak')]
     public function GantiBabakHandler($data){
         $this->waktu = $this->gelanggang->waktu;
@@ -113,8 +119,9 @@ class PenontonTanding extends Component
             $this->mulai = false;
             $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
             $this->waktu = $this->gelanggang->waktu;
-        }else{
+        }else if($data['event'] == 'ganti jadwal gelanggang'){
             $this->mulai = false;
+            return redirect('/penonton/'.$this->gelanggang->id);
         }
         $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);

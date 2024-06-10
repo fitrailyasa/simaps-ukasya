@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('penilaian_regu', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->foreignId('sudut_biru');
-            $table->foreignId('sudut_merah');
+            $table->foreignId('sudut');
             $table->foreignId('jadwal_regu');
             $table->foreignId('juri');
             $table->integer('salah')->default(0);

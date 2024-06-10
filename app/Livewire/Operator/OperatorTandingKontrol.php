@@ -24,6 +24,7 @@ class OperatorTandingKontrol extends Component
     public $mulai = false;
     public $pemenang;
     public $error = "";
+    public $active;
 
 
     public function mount($jadwal_tanding_id){
@@ -37,6 +38,17 @@ class OperatorTandingKontrol extends Component
         if(Auth::user()->gelanggang !== $this->jadwal_tanding->Gelanggang->id){
             return redirect('/auth');
         }
+        if($this->jadwal_tanding->tahap == "persiapan"){
+            $this->active = "persiapan";
+        }else if($this->jadwal_tanding->tahap == "tanding" || $this->jadwal_tanding->tahap == "pause" && $this->jadwal_tanding->babak_tanding == 1){
+            $this->active = "babak_1";
+        }else if($this->jadwal_tanding->tahap == "tanding" || $this->jadwal_tanding->tahap == "pause" && $this->jadwal_tanding->babak_tanding == 2){
+            $this->active = "babak_2";
+        }else if($this->jadwal_tanding->tahap == "tanding" || $this->jadwal_tanding->tahap == "pause" && $this->jadwal_tanding->babak_tanding ==3){
+            $this->active = "babak_3";
+        }else if ($this->jadwal_tanding->tahap == "hasil"){
+            $this->active = "hasil";
+        }
     }
 
     //operator start
@@ -46,6 +58,7 @@ class OperatorTandingKontrol extends Component
     } 
     public function keputusanMenang($sudut){
         $this->jadwal_tanding->tahap = 'hasil';
+        $this->active = "hasil";
         $this->jadwal_tanding->pemenang = $sudut;
         $this->jadwal_tanding->save();
         $next_partai = JadwalTanding::find($this->jadwal_tanding->next_partai);
@@ -58,6 +71,7 @@ class OperatorTandingKontrol extends Component
     }
     public function mulaiPertandingan($state){
         if($state == "persiapan"){
+            $this->active = "persiapan";
             $this->jadwal_tanding->tahap = "persiapan";
             $this->mulai = false;
             $this->jadwal_tanding->save();
@@ -98,6 +112,7 @@ class OperatorTandingKontrol extends Component
             $this->gelanggang->save();
         }
         $this->jadwal_tanding->babak_tanding = $babak;
+        $this->active = "babak_".$babak;
         $this->jadwal_tanding->tahap = "tanding";
         $this->jadwal_tanding->save();   
         GantiBabak::dispatch($babak);

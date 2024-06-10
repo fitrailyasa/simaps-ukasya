@@ -20,9 +20,14 @@ regu
             <h3 class="fw-bold">Regu/Regu</h3>
         </div>
     </div>
+    <div class="row d-flex flex-row justify-content-center">
+        <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
+            <i class="fa-solid fa-expand"></i>
+        </button>
+    </div>
     <div class="content">
         <div
-            class="header text-center mt-5 border border-secondary p-1"
+            class="header text-center mt-3 border border-secondary p-1"
             style="width: 100%; font-weight: 600; font-size: 1.3rem"
         >
             Regu Jurus 1 Tangan Kosong Movement 1
@@ -219,6 +224,33 @@ regu
         // Bind event listener
         $(window).resize(checkWidth);
     });
+
+    // Ambil tombol fullscreen
+        const fullscreenButton = document.getElementById('fullscreen-btn');
+        const fullscreenIcon = fullscreenButton.querySelector('i');
+
+        // Tambahkan event listener untuk tombol
+        fullscreenButton.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                // Masuk ke mode fullscreen
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenIcon.classList.remove('fa-expand');
+                    fullscreenIcon.classList.add('fa-compress');
+                }).catch((err) => {
+                    console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                // Keluar dari mode fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().then(() => {
+                        fullscreenIcon.classList.remove('fa-compress');
+                        fullscreenIcon.classList.add('fa-expand');
+                    }).catch((err) => {
+                        console.error(`Error attempting to exit fullscreen mode: ${err.message} (${err.name})`);
+                    });
+                }
+            }
+        });
 </script>
 @endsection
 </div>

@@ -5,10 +5,15 @@
                 SCORING ELEMENT
             </h5>
         </div>
-        <div class="main bg-abu text-center border border-secondary" style="width: 85%;">
+        <div class="main bg-abu text-center border border-secondary" style="width: 75%;">
             <h5 class="pt-2 fw-bold" style="height: 100%">
                 SCORE
             </h5>
+        </div>
+        <div class="bg-abu border border-secondary text-center d-flex flex-column justify-content-center align-items-center" style="width: 7%;">
+            <button id="fullscreen-btn" class="btn btn-primary d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; padding: 0;">
+                <i class="fa-solid fa-expand"></i>
+            </button>
         </div>
     </div>
     <div class="content d-flex gap-1" style="width: 100%; height: 100">
@@ -232,3 +237,34 @@
         </div>
     </div>
 </div>
+
+@section('script')
+    <script>
+        // Ambil tombol fullscreen
+        const fullscreenButton = document.getElementById('fullscreen-btn');
+        const fullscreenIcon = fullscreenButton.querySelector('i');
+
+        // Tambahkan event listener untuk tombol
+        fullscreenButton.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                // Masuk ke mode fullscreen
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenIcon.classList.remove('fa-expand');
+                    fullscreenIcon.classList.add('fa-compress');
+                }).catch((err) => {
+                    console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                // Keluar dari mode fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().then(() => {
+                        fullscreenIcon.classList.remove('fa-compress');
+                        fullscreenIcon.classList.add('fa-expand');
+                    }).catch((err) => {
+                        console.error(`Error attempting to exit fullscreen mode: ${err.message} (${err.name})`);
+                    });
+                }
+            }
+        });
+    </script>
+@endsection

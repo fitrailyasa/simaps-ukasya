@@ -69,12 +69,12 @@
                     {{$tampil['nama']}}
                 </p>
                 <p class="fw-bold" style="font-size: 2rem;{{$jadwal->tampil == $sudut_biru->id?"color: #0053a6" : "color: #db3545"}}">
-                    {{$tampil['region']}}    
+                    {{$tampil['kontingen']}}    
                 </p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($mulai == true)
+            @if ($mulai == true || $jadwal->tahap == "tampil")
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
@@ -194,31 +194,55 @@
 @endsection
 @elseif($jenis == "regu")
     @php
-    if(count($penilaian_regu_juri) %2 == 0){
-        $length = count($penilaian_regu_juri)/2;
-    }else{
+    if(count($penilaian_regu_juri) % 2 == 0){
+        $length = count($penilaian_regu_juri) / 2;
+    } else if(count($penilaian_regu_juri)%2==1){
         $length = (count($penilaian_regu_juri)+1)/2;
+    }else{
+        $length = 1;
     }
-    $penalty = $penalty_regu->toleransi_waktu+$penalty_regu->keluar_arena+$penalty_regu->menyentuh_lantai+$penalty_regu->pakaian+$penalty_regu->tidak_bergerak;
+    
+    if($penalty_regu){
+        $penalty = $penalty_regu->toleransi_waktu + $penalty_regu->keluar_arena + $penalty_regu->menyentuh_lantai + $penalty_regu->pakaian + $penalty_regu->tidak_bergerak;
+    } else {
+        $penalty = 0;
+    }
+
     $total = 0;
     foreach ($penilaian_regu_juri as $penilaian_juri) {
         $total += $penilaian_juri->skor;
     }
-    $mean = $total / count($penilaian_regu_juri);
-    
-    // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
-    $total_diff_squared = 0;
-    foreach ($penilaian_regu_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
-    }
 
-    // Menghitung standar deviasi
-    $standard_deviation = sqrt($total_diff_squared / count($penilaian_regu_juri));
-    
-    $sorted_nilai =  json_decode($penilaian_regu_juri);
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai = json_decode($penilaian_regu_juri);
     usort($sorted_nilai, function($a, $b) {
         return $a->skor <=> $b->skor;
     });
+
+    // Menghitung median
+    $count = count($sorted_nilai);
+    if ($count % 2 == 0 && $count !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median = ($sorted_nilai[$count / 2 - 1]->skor + $sorted_nilai[$count / 2]->skor) / 2;
+    } else if($count % 2 == 1 && $count !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median = $sorted_nilai[floor($count / 2)]->skor;
+    }else{
+        $median = 0;
+    }
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    $total_diff_squared = 0;
+    foreach ($penilaian_regu_juri as $penilaian_juri) {
+        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+    }
+
+    // Menghitung standar deviasi
+    if (count($penilaian_regu_juri) !== 0) {
+        $standard_deviation = sqrt($total_diff_squared / $count);
+    } else {
+        $standard_deviation = 0;
+    }
 @endphp
 
 @section('style')
@@ -239,11 +263,11 @@
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}, {{$sudut_merah->nama}}</p>
-                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->region}}</p>
+                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->kontingen}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($nilai_masuk == false)
+            @if ($mulai == false)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
@@ -426,7 +450,7 @@
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
-                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['region']}}</p>
+                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['kontingen']}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
@@ -551,31 +575,55 @@
 
 @elseif($jenis == "solo")
 @php
-    if(count($penilaian_solo_juri)%2==0){
-        $length = count($penilaian_solo_juri)/2;
-    }else{
+    if(count($penilaian_solo_juri) % 2 == 0){
+        $length = count($penilaian_solo_juri) / 2;
+    } else if(count($penilaian_solo_juri)%2==1){
         $length = (count($penilaian_solo_juri)+1)/2;
+    }else{
+        $length = 1;
     }
-    $penalty = $penalty_solo->toleransi_waktu+$penalty_solo->keluar_arena+$penalty_solo->menyentuh_lantai+$penalty_solo->pakaian+$penalty_solo->tidak_bergerak;
+    
+    if($penalty_solo){
+        $penalty = $penalty_solo->toleransi_waktu + $penalty_solo->keluar_arena + $penalty_solo->menyentuh_lantai + $penalty_solo->pakaian + $penalty_solo->tidak_bergerak;
+    } else {
+        $penalty = 0;
+    }
+
     $total = 0;
     foreach ($penilaian_solo_juri as $penilaian_juri) {
         $total += $penilaian_juri->skor;
     }
-    $mean = $total / count($penilaian_solo_juri);
-    
-    // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
-    $total_diff_squared = 0;
-    foreach ($penilaian_solo_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
-    }
 
-    // Menghitung standar deviasi
-    $standard_deviation = sqrt($total_diff_squared / count($penilaian_solo_juri));
-    
-    $sorted_nilai =  json_decode($penilaian_solo_juri);
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai = json_decode($penilaian_solo_juri);
     usort($sorted_nilai, function($a, $b) {
         return $a->skor <=> $b->skor;
     });
+
+    // Menghitung median
+    $count = count($sorted_nilai);
+    if ($count % 2 == 0 && $count !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median = ($sorted_nilai[$count / 2 - 1]->skor + $sorted_nilai[$count / 2]->skor) / 2;
+    } else if($count % 2 == 1 && $count !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median = $sorted_nilai[floor($count / 2)]->skor;
+    }else{
+        $median = 0;
+    }
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    $total_diff_squared = 0;
+    foreach ($penilaian_solo_juri as $penilaian_juri) {
+        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+    }
+
+    // Menghitung standar deviasi
+    if (count($penilaian_solo_juri) !== 0) {
+        $standard_deviation = sqrt($total_diff_squared / $count);
+    } else {
+        $standard_deviation = 0;
+    }
 @endphp
 
 @section('style')
@@ -593,11 +641,11 @@
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut->nama}}</p>
-                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut->region}}</p>
+                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut->kontingen}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($nilai_masuk == false)
+            @if ($mulai == true)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
@@ -612,11 +660,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                @if (count($penilaian_solo_juri) % 2 == 0 )
-                                    {{($penilaian_solo_juri[$length-1]->skor + $penilaian_solo_juri[$length]->skor)/2}}
-                                @else
-                                    {{$penilaian_solo_juri[$length-1]->skor}}
-                                @endif
+                                {{$median}}
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -640,7 +684,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$mean - $penalty *  0.5}}
+                                {{$median - $penalty *  0.5}}
                             </div>
                         </div>
                         

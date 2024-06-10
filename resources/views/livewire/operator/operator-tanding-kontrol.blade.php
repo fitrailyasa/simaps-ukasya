@@ -50,14 +50,22 @@
     @section('title')
         kontrol-tanding
     @endsection
-   <div class="header justify-content-center d-flex flex-row m-2 p-2">
-        <h4 class="fw-bold text-center">
+    <div class="header d-flex justify-content-between align-items-center m-2 p-2">
+        <a href="/op/kontrol-tanding" class="btn" style="border: none;">
+            <i class="fa-solid fa-arrow-left bg-dark p-3" style="color: white; font-size: 2rem;"></i>
+        </a>
+        <h4 class="fw-bold text-center flex-grow-1 m-0">
             BABAK {{$jadwal_tanding->babak}} {{$jadwal_tanding->class}} {{$sudut_biru->kelas}} {{$sudut_biru->golongan}} {{$sudut_biru->jenis_kelamin == 'L' ? "Laki-Laki" : "Perempuan"}}
-            <br/>
+            <br />
             {{$gelanggang->nama}} Partai {{$jadwal_tanding->partai}}
         </h4>
-   </div>
+    </div>
+
    <hr style="height: 5px; background-color: #000;border: none;">
+   <div class="time text-center d-flex justify-content-center" style="width:100%">
+        <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($gelanggang->waktu), ($gelanggang->waktu*60)%60) }}</span></div>
+    </div>
+   <br>
    <div class="body d-flex flex-row" style="width: 100%">
     <div class="sudut-biru text-center" style="width: 25%">
         <div class="lambang-kontingen">
@@ -74,25 +82,25 @@
     <div class="tombol" style="width: 50%">
         <div class="row-1 d-flex flex-row justify-content-between">
             <button wire:click='mulaiPertandingan("mulai pertandingan")' class="mulai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Mulai</button>
-            <button wire:click='mulaiPertandingan("persiapan")' class="persiapan" style="border:#9BB8CD ;background-color: #9BB8CD; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
+            <button wire:click='mulaiPertandingan("persiapan")' class="persiapan" style="border:#9BB8CD ;{{$active == "persiapan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
             <button wire:click='pausePertandingan()' class="stop" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Stop</button>
         </div>
         <div class="row-2 d-flex flex-row justify-content-center mt-3">
-            <button wire:click='gantiBabak(1)' class="mulai" style="border:#9BB8CD ;background-color: #9BB8CD; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 1</button>
+            <button wire:click='gantiBabak(1)' class="mulai" style="border:#9BB8CD ;{{$active == "babak_1" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 1</button>
         </div>
         <div class="row-3 d-flex flex-row justify-content-center  mt-3">
-            <button wire:click='gantiBabak(2)' class="mulai" style="border:#9BB8CD ;background-color: #9BB8CD; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 2</button>
+            <button wire:click='gantiBabak(2)' class="mulai" style="border:#9BB8CD ;{{$active == "babak_2" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 2</button>
         </div>
         <div class="row-4 d-flex flex-row justify-content-center  mt-3">
-            <button wire:click='gantiBabak(3)' class="mulai" style="border:#9BB8CD ;background-color: #9BB8CD; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 3</button>
+            <button wire:click='gantiBabak(3)' class="mulai" style="border:#9BB8CD ;{{$active == "babak_3" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Round 3</button>
         </div>
         <div class="row-5 d-flex flex-row justify-content-center  mt-3">
-            <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#keputusan-modal" class="keputusan" style="border:#9BB8CD ;background-color: #9BB8CD; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Keputusan</button>
+            <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#keputusan-modal" class="keputusan" style="border:#9BB8CD ;{{$active == "hasil" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Keputusan</button>
         </div>
         <div class="row-6 d-flex flex-row justify-content-between gap-2 mt-3">
             <button class="btn" wire:click='hapusNilai()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
-            <button class="btn" wire:click='keputusanMenang({{$jadwal_tanding->PengundianTandingMerah->id}})' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <button class="btn" wire:click='keputusanMenang({{$jadwal_tanding->PengundianTandingBiru->id}})' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
+            <button class="btn" wire:click='keputusanMenang({{$jadwal_tanding->PengundianTandingMerah->id}})' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <a href="/op/kontrol-tanding" class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</a>
         </div>
     </div>

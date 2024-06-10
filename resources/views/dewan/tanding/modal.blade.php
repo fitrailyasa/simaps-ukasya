@@ -7,10 +7,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       @if ($verifikasi_jatuhan && $verifikasi_jatuhan['juri'] && $verifikasi_jatuhan['verifikasi_jatuhan']['status'] == 1)   
-          @foreach ($verifikasi_jatuhan['juri'] as $juri)
+       @if ($verifikasi_jatuhan && $verifikasi_jatuhan->status == 1)   
+          @foreach ($juri as $jjuri)
               <div class="juri">
-                {{$juri['name']}} : {{$verifikasi_jatuhan_data[$juri['name']]}}
+                {{$jjuri['name']}} : {{$verifikasi_jatuhan_data[$jjuri['name']]}}
               </div>
           @endforeach
           <div class="date">
@@ -35,10 +35,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        @if ($verifikasi_pelanggaran && $verifikasi_pelanggaran['juri'] && $verifikasi_pelanggaran['verifikasi_pelanggaran']['status'] == 1)   
-          @foreach ($verifikasi_pelanggaran['juri'] as $juri)
+       @if ($verifikasi_pelanggaran && $verifikasi_pelanggaran->status == 1)   
+          @foreach ($juri as $jjuri)
               <div class="juri">
-                {{$juri['name']}} : {{$verifikasi_pelanggaran_data[$juri['name']]}}
+                {{$jjuri['name']}} : {{$verifikasi_pelanggaran_data[$jjuri['name']]}}
               </div>
           @endforeach
           <div class="date">

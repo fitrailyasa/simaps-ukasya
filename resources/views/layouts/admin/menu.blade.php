@@ -167,7 +167,7 @@
                     </p>
                 </a>
             </li>
-            @if (auth()->user()->Gelanggang->jenis == 'Tanding')
+            
                 <li class="nav-item">
                     <a href="{{ route('op.kontrol-tanding.index') }}" class="nav-link text-white @yield('table-kontrol-tanding')">
                         <i class="nav-icon fas fa-tv"></i>
@@ -176,7 +176,7 @@
                         </p>
                     </a>
                 </li>
-            @elseif (auth()->user()->Gelanggang->nama != 'Tanding')
+           
                 <li class="nav-item">
                     <a href="{{ route('op.kontrol-tgr.index') }}" class="nav-link text-white @yield('table-kontrol-tgr')">
                         <i class="nav-icon fas fa-tv"></i>
@@ -185,7 +185,7 @@
                         </p>
                     </a>
                 </li>
-            @endif
+            
             <li class="nav-item">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                     @csrf

@@ -4,6 +4,9 @@ namespace App\Livewire\Dewan;
 
 use App\Events\Tanding\MulaiPertandingan;
 use App\Models\PengundianTanding;
+use App\Models\User;
+use App\Models\VerifikasiJatuhan;
+use App\Models\VerifikasiPelanggaran;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -38,6 +41,9 @@ class DewanTanding extends Component
     public $created_at;
     public $error = "";
     public $mulai = false;
+    public $juri_verifikasi_jatuhan = [];
+    public $juri_verifikasi_pelanggaran = [];
+    public $juri;
 
     public function mount()
     {
@@ -188,10 +194,38 @@ class DewanTanding extends Component
     }
 
     public function VerifikasiJatuhanTrigger(){
-        VerifikasiJatuhanEvent::dispatch($this->gelanggang->id,$this->jadwal->id,Auth::user()->id,null);
+            $this->juri = User::where('roles_id', 4)
+                ->where('gelanggang', $this->gelanggang->id)
+                ->whereIn('permissions', ['Juri 1', 'Juri 2', 'Juri 3'])
+                ->get();
+                foreach ($this->juri as $key => $juri) {
+                    $this->juri_verifikasi_jatuhan[$juri['name']] = null ;
+                }
+                $this->verifikasi_jatuhan = VerifikasiJatuhan::Create([
+                    'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
+                    'dewan' => Auth::user()->id,
+                    'jadwal_tanding' => $this->jadwal->id,
+                    'data'=>json_encode($this->juri_verifikasi_jatuhan)
+                ]);
+        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        VerifikasiJatuhanEvent::dispatch($this->verifikasi_jatuhan);
     }
     public function VerifikasiPelanggaranTrigger(){
-        VerifikasiPelanggaranEvent::dispatch($this->gelanggang->id,$this->jadwal->id,Auth::user()->id,null);
+                $this->juri = User::where('roles_id', 4)
+                ->where('gelanggang', $this->gelanggang->id)
+                ->whereIn('permissions', ['Juri 1', 'Juri 2', 'Juri 3'])
+                ->get();
+                foreach ($this->juri as $key => $juri) {
+                    $this->juri_verifikasi_pelanggaran[$juri['name']] = null ;
+                }
+                $this->verifikasi_pelanggaran = VerifikasiPelanggaran::Create([
+                    'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
+                    'dewan' => Auth::user()->id,
+                    'jadwal_tanding' => $this->jadwal->id,
+                    'data'=>json_encode($this->juri_verifikasi_pelanggaran)
+                ]);
+            VerifikasiPelanggaranEvent::dispatch($this->verifikasi_pelanggaran);
     }
 
     #[On('echo:poin,.tambah-peringatan')]
@@ -216,20 +250,21 @@ class DewanTanding extends Component
     }
     #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler(){
-        $this->recent = [[],[]];
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
     }
     #[On('echo:verifikasi,.verifikasi-jatuhan')]
     public function verifikasiJatuhanHandler($data){
-       $this->verifikasi_jatuhan = $data;
-       $this->verifikasi_jatuhan_data = json_decode($this->verifikasi_jatuhan['verifikasi_jatuhan']['data'], true);
-       $this->created_at = Carbon::parse($data['verifikasi_jatuhan']['created_at'])->setTimezone('Asia/Jakarta')->format('d F Y H:i');
+        $this->verifikasi_jatuhan_data = json_decode($this->verifikasi_jatuhan['data'], true);
+        $this->created_at = Carbon::parse($data['verifikasi_jatuhan']['created_at'])->setTimezone('Asia/Jakarta')->format('d F Y H:i');
+        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
     #[On('echo:verifikasi,.verifikasi-pelanggaran')]
     public function verifikasiPelanggaranHandler($data){
-       $this->verifikasi_pelanggaran = $data;
-       $this->verifikasi_pelanggaran_data = json_decode($this->verifikasi_pelanggaran['verifikasi_pelanggaran']['data'], true);
+       $this->verifikasi_pelanggaran_data = json_decode($this->verifikasi_pelanggaran['data'], true);
        $this->created_at = Carbon::parse($data['verifikasi_pelanggaran']['created_at'])->setTimezone('Asia/Jakarta')->format('d F Y H:i');
+       $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
     
     public function render()

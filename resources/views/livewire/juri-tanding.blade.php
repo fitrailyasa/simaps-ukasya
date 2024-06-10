@@ -15,17 +15,22 @@
     
     <div class="d-flex flex-row justify-content-between  p-1 m-1 row" style="width:100%; margin-top: 76px !important; margin-bottom: -28px !important">
         <div class=" col-md-3 text-center">
-            <h5 class="fw-bold bg-danger p-3 rounded kontingen" style="margin-left: 14px">{{$sudut_merah->kontingen}}</h5>
+            <h5 class="fw-bold bg-danger p-3 rounded kontingen" style="margin-left: 14px">{{$sudut_biru->nama}}, {{$sudut_merah->kontingen}}</h5>
         </div>
         <div class="col-md-3 d-flex justify-content-center">
             <h4 class="fw-bold">{{$gelanggang->nama}}</h4>
         </div>
         <div class="mr-4 col-md-3 text-center">
-            <h5 class="fw-bold p-3 rounded text-white kontingen" style="background-color: #0053a6; margin-right: 12px">{{$sudut_biru->kontingen}}</h5>
+            <h5 class="fw-bold p-3 rounded text-white kontingen" style="background-color: #0053a6; margin-right: 12px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
         </div>
     </div>
     <div class="row m-3" style="margin-top: 0px !important; width:100%">
-        <div class="row mt-5">
+        <div class="row mt-3 d-flex flex-row justify-content-center">
+            <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+        <div class="row mt-1">
             <div class="col">
                 <table
                     class="table table-bordered"
@@ -243,5 +248,32 @@
             }
         @this.call('batasSkorMasukCek')
     }, 3000);
+
+    // Ambil tombol fullscreen
+        const fullscreenButton = document.getElementById('fullscreen-btn');
+        const fullscreenIcon = fullscreenButton.querySelector('i');
+
+        // Tambahkan event listener untuk tombol
+        fullscreenButton.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                // Masuk ke mode fullscreen
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenIcon.classList.remove('fa-expand');
+                    fullscreenIcon.classList.add('fa-compress');
+                }).catch((err) => {
+                    console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                // Keluar dari mode fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().then(() => {
+                        fullscreenIcon.classList.remove('fa-compress');
+                        fullscreenIcon.classList.add('fa-expand');
+                    }).catch((err) => {
+                        console.error(`Error attempting to exit fullscreen mode: ${err.message} (${err.name})`);
+                    });
+                }
+            }
+        });
 </script>
 @endsection
