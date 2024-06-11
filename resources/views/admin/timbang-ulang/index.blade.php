@@ -28,11 +28,11 @@
                 @if ($jadwaltanding->berat_merah == null && $jadwaltanding->berat_biru == null)
                     @php
                         $waitingPartaiMerah = $jadwaltandings
-                            ->where('next_sudut', 1)
+                            ->where('next_sudut', 2)
                             ->where('next_partai', $jadwaltanding->partai)
                             ->first();
                         $waitingPartaiBiru = $jadwaltandings
-                            ->where('next_sudut', 2)
+                            ->where('next_sudut', 1)
                             ->where('next_partai', $jadwaltanding->partai)
                             ->first();
                     @endphp
