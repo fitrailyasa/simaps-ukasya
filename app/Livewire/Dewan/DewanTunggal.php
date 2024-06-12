@@ -36,9 +36,9 @@ class DewanTunggal extends Component
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
-        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
-        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($this->jadwal->tampil == $this->pengundian_biru->id){
             $this->penalty_tunggal = PenaltyTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
             if(!$this->penalty_tunggal){
@@ -143,8 +143,8 @@ class DewanTunggal extends Component
 
     #[On('echo:arena,.ganti-tampil-tunggal')]
     public function gantiTampilHandler($data){
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
-        if($this->jadwal->tampil == $this->pengundian_biru->id){
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($this->tampil->id == $this->sudut_biru->id){
             $this->penalty_tunggal = PenaltyTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
             if(!$this->penalty_tunggal){
                 $this->penalty_tunggal = PenaltyTunggal::create([

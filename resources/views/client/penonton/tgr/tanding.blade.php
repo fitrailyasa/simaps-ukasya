@@ -61,25 +61,24 @@
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <p class="fw-bold" style="font-size: 2rem;">
-                    {{$tampil['nama']}}
-                </p>
-                <p class="fw-bold" style="font-size: 2rem;{{$jadwal->tampil == $sudut_biru->id?"color: #0053a6" : "color: #db3545"}}">
-                    {{$tampil['kontingen']}}    
-                </p>
+                <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
+                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['kontingen']}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true || $jadwal->tahap == "tampil")
+            @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
-                <div class="timer-clock">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
-                </div>
+                    <div class="timer-clock">
+                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                    </div>
+                @endif
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -104,10 +103,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                @php
-                                    $performance_time = 3-$waktu;
-                                @endphp
-                                {{ sprintf("%02d:%02d", floor($performance_time), ($performance_time*60)%60) }}
+                                {{ sprintf("%02d:%02d", floor($penalty_tunggal->performa_waktu), ($penalty_tunggal->performa_waktu*60)%60) }}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -189,7 +185,7 @@
     <script>
         setInterval(() => {
             @this.call('kurangiWaktu')
-        }, 100);
+        }, 1000);
     </script>
 @endsection
 @elseif($jenis == "regu")
@@ -255,25 +251,24 @@
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
-            </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}, {{$sudut_merah->nama}}</p>
-                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->kontingen}}</p>
+                <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
+                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['kontingen']}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($mulai == false)
+            @if ($mulai == true || $jadwal->tahap == "tampil")
+            @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
-                <div class="timer-clock">
-                    <p class="text-hasil" style="font-size: 3rem;">00:00</p>
-                </div>
+                    <div class="timer-clock">
+                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                    </div>
+                @endif
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -298,7 +293,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($waktu / 60), $waktu % 60) }}
+                                {{ sprintf("%02d:%02d", floor($penalty_regu->performa_waktu), ($penalty_regu->performa_waktu*60)%60) }}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -326,57 +321,61 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if (count($penilaian_regu_juri) == $length*2)
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+        @if ($tampil_nilai == true)
+            @if (count($penilaian_regu_juri) == $length*2)
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
-        @else
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+                @endforeach
+            @else
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
+                    <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    </div>
+                    <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                    </div>
                 </div>
-                <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
+                @endforeach
+            @endif
         @endif
     </div>
 </div>
 
 @section('script')
     <script>
-        
+        setInterval(() => {
+            @this.call('kurangiWaktu')
+        }, 1000);
     </script>
 @endsection
 @elseif($jenis == "ganda")
@@ -442,11 +441,8 @@
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
-            </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -455,12 +451,14 @@
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true)
+            @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
-                <div class="timer-clock">
-                    <p class="text-hasil" style="font-size: 3rem;">00:00</p>
-                </div>
+                    <div class="timer-clock">
+                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                    </div>
+                @endif
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -485,7 +483,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($waktu / 60), $waktu % 60) }}
+                                {{ sprintf("%02d:%02d", floor($penalty_ganda->performa_waktu), ($penalty_ganda->performa_waktu*60)%60) }}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -563,13 +561,9 @@
 
 @section('script')
     <script>
-        // let rand = Math.floor(Math.random() * 10) + 1;
-        // if($(`.box-nilai`)){
-        //     $(`.down-${rand}`).removeClass('bg-primary')
-        //     $(`.up-${rand}`).removeClass('bg-primary')
-        //     $(`.down-${rand}`).addClass('bg-success')
-        //     $(`.up-${rand}`).addClass('bg-success')
-        // }
+        setInterval(() => {
+            @this.call('kurangiWaktu')
+        }, 1000);
     </script>
 @endsection
 
@@ -636,22 +630,24 @@
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 8px">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <p class="fw-bold" style="font-size: 2rem;">{{$sudut->nama}}</p>
-                <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut->kontingen}}</p>
+                <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
+                <p class="fw-bold" style="font-size: 2rem;{{$tampil['id'] == $sudut_biru['id'] ? "color: #0053a6" : "color: #db3545"}}">{{$tampil['kontingen']}}</p>
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true)
+            @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil" style="font-size: 2rem;">Timer</p>
                 </div>
-                <div class="timer-clock">
-                    <p class="text-hasil" style="font-size: 3rem;">00:00</p>
-                </div>
+                    <div class="timer-clock">
+                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                    </div>
+                @endif
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -676,7 +672,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($waktu / 60), $waktu % 60) }}
+                                {{ sprintf("%02d:%02d", floor($penalty_solo->performa_waktu), ($penalty_solo->performa_waktu*60)%60) }}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -758,13 +754,9 @@
 
 @section('script')
     <script>
-        // let rand = Math.floor(Math.random() * 10) + 1;
-        // if($(`.box-nilai`)){
-        //     $(`.down-${rand}`).removeClass('bg-primary')
-        //     $(`.up-${rand}`).removeClass('bg-primary')
-        //     $(`.down-${rand}`).addClass('bg-success')
-        //     $(`.up-${rand}`).addClass('bg-success')
-        // }
+        setInterval(() => {
+            @this.call('kurangiWaktu')
+        }, 1000);
     </script>
 @endsection
 @endif

@@ -48,7 +48,7 @@ class OperatorGandaKontrol extends Component
         $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_merah->id)->first();
         $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->first();
-        $this->waktu = $this->gelanggang->waktu;
+        $this->waktu = 0;
         if(Auth::user()->gelanggang !== $this->jadwal_ganda->Gelanggang->id){
             return redirect('/auth');
         }
@@ -65,12 +65,13 @@ class OperatorGandaKontrol extends Component
 
     //operator start
      public function kurangiWaktu(){
-        $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
-        $this->gelanggang->save();
+        if($this->waktu == $this->gelanggang->waktu){
+            return;
+        }
+        $this->waktu = ($this->waktu * 60 + 1) / 60;
     }
     public function gantiTampil($sudut){
-        $this->gelanggang->waktu = 3;
-        $this->gelanggang->save();
+        $this->waktu = 0;
         if($sudut == "merah"){
             $this->active = "sudutmerah";
             $this->tampil = $this->sudut_merah;
@@ -97,25 +98,31 @@ class OperatorGandaKontrol extends Component
             }
             $this->jadwal_ganda->jenis_kemenangan = $keputusan_pemenang;
             $this->jadwal_ganda->save();
-            $next_partai = JadwalTGR::find($this->jadwal_ganda->next_partai);
-            if($next_partai && $this->jadwal_ganda->next_sudut == 1){
+            $next_partai = JadwalTGR::where("partai",$this->jadwal_ganda->next_partai)->first();
+            if($this->jadwal_ganda->next_sudut == 1){
                 $next_partai->sudut_biru = $this->jadwal_ganda->pemenang;
-            }else if($next_partai && $this->jadwal_ganda->next_sudut == 2){
+            }else{
                 $next_partai->sudut_merah = $this->jadwal_ganda->pemenang;
             }
         }else if($tahap == "tampil"){
-            $this->waktu = $this->gelanggang->waktu;
+            $this->waktu = 0;
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
             $this->jadwal_ganda->tahap = "tampil nilai";
             $this->jadwal_ganda->save();
         }else if($tahap == "pause"){
+            if($this->tampil->id == $this->jadwal_ganda->PengundianTGRBiru->id){
+                $this->penalty_ganda_biru->performa_waktu = $this->waktu;
+                $this->penalty_ganda_biru->save();
+            }else{
+                $this->penalty_ganda_merah->performa_waktu = $this->waktu;
+                $this->penalty_ganda_merah->save();
+            }
             $this->mulai = false;
         }else if($tahap == "persiapan"){
             $this->active = "persiapan";
             $this->mulai = false;
-            $this->gelanggang->waktu = 3;
-            $this->waktu = $this->gelanggang->waktu;
+            $this->waktu = 0;
             $this->jadwal_ganda->tahap = "persiapan";
             $this->gelanggang->save();
             $this->jadwal_ganda->save();
@@ -123,7 +130,7 @@ class OperatorGandaKontrol extends Component
         $this->jadwal_ganda->tahap = $tahap;
         $this->jadwal_ganda->save();
         $this->tampil = $this->jadwal_ganda->TampilTGR;
-        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_ganda);
+        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_ganda,$this->waktu);
     }
     //operator endpublic function render()
 

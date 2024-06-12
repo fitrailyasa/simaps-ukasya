@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('sudut');
             $table->foreignId('jadwal_tunggal');
             $table->foreignId('dewan');
+            $table->float('performa_waktu')->default(0);
             $table->integer('toleransi_waktu')->default(0);
             $table->integer('keluar_arena')->default(0);
             $table->integer('menyentuh_lantai')->default(0);

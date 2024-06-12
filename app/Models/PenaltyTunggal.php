@@ -9,7 +9,7 @@ class PenaltyTunggal extends Model
 {
     use HasFactory;
     protected $table = 'penalty_tunggal';
-    protected $fillable = ['uuid','jadwal_tunggal','sudut','dewan','toleransi_waktu','keluar_arena','menyentuh_lantai','pakaian','tidak_bergerak'];
+    protected $fillable = ['uuid','performa_waktu','jadwal_tunggal','sudut','dewan','toleransi_waktu','keluar_arena','menyentuh_lantai','pakaian','tidak_bergerak'];
 
     public function TGR()
     {

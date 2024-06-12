@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('sudut');
             $table->foreignId('jadwal_tunggal');
             $table->foreignId('juri');
-            $table->integer('performa_waktu')->default(180);
             $table->integer('salah')->default(0);
             $table->integer('penalty')->default(0);
             $table->float('flow_skor')->default(0);

@@ -37,6 +37,6 @@ class GantiTampil implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'ganti-tampil-ganda';
+        return 'ganti-tampil-regu';
     }
 }

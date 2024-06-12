@@ -41,7 +41,7 @@ class PenontonSolo extends Component
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
         $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->tahap = $this->jadwal->tahap;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
@@ -61,6 +61,8 @@ class PenontonSolo extends Component
 
     #[On('echo:poin,.tambah-skor-solo')]
     public function tambahNilaiHandler(){
+        $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
     #[On('echo:poin,.salah-gerakan-solo')]
     public function salahGerakanHandler(){
@@ -72,6 +74,23 @@ class PenontonSolo extends Component
     public function hapusPenaltyHandler(){
     }
 
+    #[On('echo:arena,.ganti-tahap-solo')]
+    public function gantiTahapHandler($data){
+        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+        $this->tahap = $this->jadwal->tahap;
+        $this->tampil = $data["sudut_tampil"];
+        if($data["tahap"] == "tampil"){
+            if($data["tampil"] == "merah"){
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }else if($data["tampil"] == "biru"){
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }
+        }else if($data["tahap"] == "keputusan"){
+            $this->tahap = $this->jadwal->tahap;
+        }
+    }
     public function render()
     {
         return view('livewire.penonton-solo')->extends('layouts.client.app')->section('content');

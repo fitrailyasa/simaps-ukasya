@@ -45,11 +45,11 @@ class OperatorReguKontrol extends Component
             $this->jadwal_regu->tampil = $this->jadwal_regu->PengundianTGRBiru->id;
         }
         $this->tampil = $this->jadwal_regu->TampilTGR->TGR;
-        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
         $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
-        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
-        $this->waktu = $this->gelanggang->waktu;
+        $this->waktu = 0;
         if(Auth::user()->gelanggang !== $this->jadwal_regu->Gelanggang->id){
             return redirect('/auth');
         }
@@ -65,12 +65,13 @@ class OperatorReguKontrol extends Component
     }
      //operator start
      public function kurangiWaktu(){
-        $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
-        $this->gelanggang->save();
+        if($this->waktu == $this->gelanggang->waktu){
+            return;
+        }
+        $this->waktu = ($this->waktu * 60 + 1) / 60;
     }
     public function gantiTampil($sudut){
-        $this->gelanggang->waktu = 3;
-        $this->gelanggang->save();
+        $this->waktu = 0;
         if($sudut == "merah"){
             $this->active = "sudutmerah";
             $this->tampil = $this->sudut_merah;
@@ -97,25 +98,29 @@ class OperatorReguKontrol extends Component
             }
             $this->jadwal_regu->jenis_kemenangan = $keputusan_pemenang;
             $this->jadwal_regu->save();
-            $next_partai = JadwalTGR::find($this->jadwal_regu->next_partai);
-            if($next_partai && $this->jadwal_regu->next_sudut == 1){
+            $next_partai = JadwalTGR::where("partai",$this->jadwal_regu->next_partai)->first();
+            if($this->jadwal_regu->next_sudut == 1){
                 $next_partai->sudut_biru = $this->jadwal_regu->pemenang;
-            }else if($next_partai && $this->jadwal_regu->next_sudut == 2){
+            }else{
                 $next_partai->sudut_merah = $this->jadwal_regu->pemenang;
             }
         }else if($tahap == "tampil"){
-            $this->waktu = $this->gelanggang->waktu;
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
             $this->jadwal_regu->tahap = "tampil nilai";
             $this->jadwal_regu->save();
         }else if($tahap == "pause"){
+            if($this->tampil->id == $this->jadwal_regu->PengundianTGRBiru->id){
+                $this->penalty_regu_biru->performa_waktu = $this->waktu;
+                $this->penalty_regu_biru->save();
+            }else{
+                $this->penalty_regu_merah->performa_waktu = $this->waktu;
+                $this->penalty_regu_merah->save();
+            }
             $this->mulai = false;
         }else if($tahap == "persiapan"){
             $this->active = "persiapan";
             $this->mulai = false;
-            $this->gelanggang->waktu = 3;
-            $this->waktu = $this->gelanggang->waktu;
             $this->jadwal_regu->tahap = "persiapan";
             $this->gelanggang->save();
             $this->jadwal_regu->save();
@@ -123,7 +128,7 @@ class OperatorReguKontrol extends Component
         $this->jadwal_regu->tahap = $tahap;
         $this->jadwal_regu->save();
         $this->tampil = $this->jadwal_regu->TampilTGR;
-        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_regu);
+        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_regu,$this->waktu);
     }
     //operator endpublic function render()
 

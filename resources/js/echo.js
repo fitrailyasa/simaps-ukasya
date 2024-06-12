@@ -89,6 +89,12 @@ window.Echo.channel("arena").listen(".ganti-tampil-tunggal", (e) => {
 window.Echo.channel("arena").listen(".ganti-tahap-ganda", (e) => {
     console.log(e);
 });
+window.Echo.channel("arena").listen(".ganti-tahap-regu", (e) => {
+    console.log(e);
+});
+window.Echo.channel("arena").listen(".ganti-tampil-regu", (e) => {
+    console.log(e);
+});
 window.Echo.channel("arena").listen(".ganti-tampil-ganda", (e) => {
     console.log(e);
 });

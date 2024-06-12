@@ -64,7 +64,7 @@ class AdminJadwalTGRController extends Controller
             ->whereHas('TGR', function ($query) use ($request) {
                 $query->where('golongan', $request->golongan)
                     ->where('jenis_kelamin', $request->jenis_kelamin)
-                    ->where('kategori', $request->kategori);
+                    ->where('kategori', $request->jenis);
             })
             ->get();
 
@@ -78,8 +78,6 @@ class AdminJadwalTGRController extends Controller
             return $team->no_undian == $request->sudut_merah;
         });
 
-        // dd($sudutBiru, $sudutMerah);
-
         $jadwal_tgr = JadwalTGR::create([
             'partai' => $request->partai,
             'gelanggang' => $request->gelanggang,
@@ -87,8 +85,12 @@ class AdminJadwalTGRController extends Controller
             'sudut_biru' => $sudutBiru ? $sudutBiru->id : null,
             'sudut_merah' => $sudutMerah ? $sudutMerah->id : null,
             'next_sudut' => $request->next_sudut,
+            'jenis'=>$request->jenis,
+            'tampil' => $sudutBiru->id,
             'next_partai' => $request->next_partai,
         ]);
+
+
 
         // dd($jadwal_tgr);
 

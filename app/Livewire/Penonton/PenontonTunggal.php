@@ -42,7 +42,7 @@ class PenontonTunggal extends Component
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
         $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->tahap = $this->jadwal->tahap;
         $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
@@ -51,7 +51,6 @@ class PenontonTunggal extends Component
         $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
-        $this->waktu = $this->gelanggang->waktu;
         if ($this->jadwal->tahap == "tampil nilai") {
             $this->tampil_nilai = true;
         }
@@ -59,7 +58,7 @@ class PenontonTunggal extends Component
 
     public function kurangiWaktu(){
         if($this->mulai == true){
-            $this->waktu = ($this->waktu * 60 - 0.1) / 60;
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
 
@@ -83,6 +82,7 @@ class PenontonTunggal extends Component
     }
     #[On('echo:arena,.ganti-tahap-tunggal')]
     public function gantiTahapHandler($data){
+        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tahap = $this->jadwal->tahap;
         $this->tampil = $data["sudut_tampil"];
         if($data["tahap"] == "tampil"){
@@ -91,7 +91,6 @@ class PenontonTunggal extends Component
         }else if($data["tahap"] == "keputusan"){
             
         }else if($data["tahap"] == "pause"){
-            $this->waktu = $this->gelanggang->waktu;
             $this->mulai = false;
         }else if($data["tahap"] == "tampil nilai"){
             $this->tampil_nilai = true;
@@ -115,7 +114,7 @@ class PenontonTunggal extends Component
     
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        return redirect('/penonton/'.$this->gelanggang->id);
     }
 
     public function render()

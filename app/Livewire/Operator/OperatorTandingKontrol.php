@@ -36,7 +36,7 @@ class OperatorTandingKontrol extends Component
         $this->sudut_merah = Tanding::where('id',$this->jadwal_tanding->PengundianTandingMerah->atlet_id)->first();
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();  
-        $this->waktu = $this->gelanggang->waktu;
+        $this->waktu = 0;
         if(Auth::user()->gelanggang !== $this->jadwal_tanding->Gelanggang->id){
             return redirect('/auth');
         }
@@ -59,8 +59,10 @@ class OperatorTandingKontrol extends Component
         $this->poin_merah->delete();
     }
     public function kurangiWaktu(){
-        $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
-        $this->gelanggang->save();
+        if($this->waktu == $this->gelanggang->waktu){
+            return;
+        }
+        $this->waktu = ($this->waktu * 60 + 1) / 60;
     } 
     public function keputusanMenang($sudut,$keputusan){
         $this->jadwal_tanding->tahap = 'hasil';
@@ -74,13 +76,14 @@ class OperatorTandingKontrol extends Component
         }
         $this->jadwal_tanding->jenis_kemenangan = $keputusan;
         $this->jadwal_tanding->save();
-        $next_partai = JadwalTanding::where("partai",$this->jadwal_tanding->next_partai);
+        $next_partai = JadwalTanding::where("partai",$this->jadwal_tanding->next_partai)->first();
         if($this->jadwal_tanding->next_sudut == 1){
             $next_partai->sudut_biru = $this->jadwal_tanding->pemenang;
         }else{
             $next_partai->sudut_merah = $this->jadwal_tanding->pemenang;
         }
-        MulaiPertandingan::dispatch('keputusan pemenang',$this->jadwal_tanding);
+        $next_partai->save();
+        MulaiPertandingan::dispatch('keputusan pemenang',$this->jadwal_tanding,$this->waktu);
     }
     public function mulaiPertandingan($state){
         if($state == "persiapan"){
@@ -88,7 +91,7 @@ class OperatorTandingKontrol extends Component
             $this->jadwal_tanding->tahap = "persiapan";
             $this->mulai = false;
             $this->jadwal_tanding->save();
-            MulaiPertandingan::dispatch($state,$this->jadwal_tanding);
+            MulaiPertandingan::dispatch($state,$this->jadwal_tanding,$this->waktu);
         }else{
             //ganti dari persiapan ke mulai pertandingan
             if($this->jadwal_tanding->tahap == "persiapan"){
@@ -97,7 +100,7 @@ class OperatorTandingKontrol extends Component
             };
             $this->mulai = true;
             $this->jadwal_tanding->save();
-            MulaiPertandingan::dispatch($state,$this->jadwal_tanding);
+            MulaiPertandingan::dispatch($state,$this->jadwal_tanding,$this->waktu);
         }
     }
 
@@ -115,13 +118,12 @@ class OperatorTandingKontrol extends Component
         $this->jadwal_tanding->tahap = 'pause';
         $this->mulai = false;
         $this->jadwal_tanding->save();
-        MulaiPertandingan::dispatch('pause pertandingan',$this->jadwal_tanding);
+        MulaiPertandingan::dispatch('pause pertandingan',$this->jadwal_tanding,$this->waktu);
     }
     public function gantiBabak($babak){
         //ganti babak 
         if($this->jadwal_tanding->babak_tanding != $babak){
             $this->mulai = false;
-            $this->gelanggang->waktu = 3;
             $this->gelanggang->save();
         }
         $this->jadwal_tanding->babak_tanding = $babak;

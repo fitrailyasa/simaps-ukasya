@@ -63,7 +63,9 @@
 
    <hr style="height: 5px; background-color: #000;border: none;">
    <div class="time text-center d-flex justify-content-center" style="width:100%">
-        <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($gelanggang->waktu), ($gelanggang->waktu*60)%60) }}</span></div>
+        @if ($gelanggang->waktu != 0)
+            <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
+        @endif    
     </div>
    <br>
    <div class="body d-flex flex-row" style="width: 100%">

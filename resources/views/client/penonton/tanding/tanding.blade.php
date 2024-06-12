@@ -28,23 +28,25 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 12%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 4px">
+                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 4px;width: 80%;border-radius: 50%;">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <h5 class="fw-bold">{{$sudut_merah->nama}}</h5>
-                <h3 class="fw-bold" style="color: #db3545">{{$sudut_merah->negara}}</h3>
+                <h5 class="fw-bold">{{$sudut_biru->nama}}</h5>
+                <h3 class="fw-bold" style="color: #0053a6">{{$sudut_biru->kontingen}}</h3>
             </div>
         </div>
         <div class="time text-center d-flex flex-column justify-content-center" style="width:20%">
-            <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
+            @if ($gelanggang->waktu != 0)
+                <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
+            @endif
         </div>
         <div class="sudut-biru d-flex" style="width: 40%">
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
-                <h5 class="fw-bold">{{$sudut_biru->nama}}</h5>
-                <h3 class="fw-bold" style="color: #0053a6">{{$sudut_biru->negara}}</h3>
+                <h5 class="fw-bold">{{$sudut_merah->nama}}</h5>
+                <h3 class="fw-bold" style="color: #db3545">{{$sudut_biru->kontingen}}</h3>
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 12%;border-radius: 50%; background-color: #db3545">
-                <img src="{{url('/assets/profile/default.png')}}" alt="" style="height: 90%; margin-top: 4px">
+                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 4px;width: 80%;border-radius: 50%;">
             </div>
              <div class="bendera d-flex justify-content-end" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
@@ -103,8 +105,8 @@
                     
                 </div>
             </div>
-            <div class="poin d-flex justify-content-center"  style="width: 60%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/merah.jpg')}}); ">
-                <p class="text" style="font-size: 375px ; color: #fff ;margin-top: -20%">{{$total_merah}}</p>            
+            <div class="poin d-flex justify-content-center"  style="width: 60%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/biru.jpg')}}); ">
+                <p class="text" style="font-size: 325px ; color: #fff ;margin-top: -20%">{{$total_merah}}</p>            
             </div>
         </div>
         <div class="round d-flex flex-column justify-content-center border" style="width: 10%;height: 100%;">
@@ -138,8 +140,8 @@
             </div>
         </div>
         <div class="sudut-biru d-flex" style="width: 45%">
-            <div class="poin d-flex justify-content-center"  style="width: 60%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/biru.jpg')}}); ">
-                <p class="text" style="font-size: 375px ; color: #fff ;margin-top: -20%">{{$total_biru}}</p>
+            <div class="poin d-flex justify-content-center"  style="width: 60%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/merah.jpg')}}); ">
+                <p class="text" style="font-size: 325px ; color: #fff ;margin-top: -20%">{{$total_biru}}</p>
             </div>
             <div class="indikator border" style="width: 40%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">

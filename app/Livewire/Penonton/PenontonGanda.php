@@ -42,7 +42,7 @@ class PenontonGanda extends Component
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
         $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->tahap = $this->jadwal->tahap;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
@@ -77,6 +77,7 @@ class PenontonGanda extends Component
 
     #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
+        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tahap = $this->jadwal->tahap;
         $this->tampil = $data["sudut_tampil"];
         if($data["tahap"] == "tampil"){

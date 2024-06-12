@@ -28,23 +28,49 @@
         <tbody>
                 @foreach ($jadwaltgrs as $jadwaltgr)
                     @if (auth()->user()->Gelanggang->id == $jadwaltgr->Gelanggang->id)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $jadwaltgr->partai ?? '-' }}</td>
-                            <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
-                            <td>{{ $jadwaltgr->babak ?? '-' }}</td>
-                            <td>{{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? '-' }}
-                                {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin == 'L' ? 'Putra' : 'Putri' ?? '-' }}
-                                {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? '-' }}</td>
-                            <td class="bg-primary">{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
+                        @php
+                    $waitingPartaiMerah = $jadwaltgrs
+                        ->where('next_sudut', 1)
+                        ->where('next_partai', $jadwaltgr->partai)
+                        ->first();
+                    $waitingPartaiBiru = $jadwaltgrs
+                        ->where('next_sudut', 2)
+                        ->where('next_partai', $jadwaltgr->partai)
+                        ->first();
+                @endphp
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $jadwaltgr->partai ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->Gelanggang->nama ?? '-' }}</td>
+                    <td>{{ $jadwaltgr->babak ?? '-' }}</td>
+                    <td>
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->kategori ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->kategori ?? '-') }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->jenis_kelamin ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->jenis_kelamin ?? '-') }}
+                        {{ $jadwaltgr->PengundianTGRBiru->TGR->golongan ?? ($waitingPartaiBiru->PengundianTGRBiru->TGR->golongan ?? '-') }}
+                    </td>
+                    <td class="bg-primary">
+                        @if ($jadwaltgr->sudut_biru)
+                            <b>{{ $jadwaltgr->PengundianTGRBiru->TGR->nama ?? '-' }}
                                 ({{ $jadwaltgr->PengundianTGRBiru->TGR->kontingen ?? '-' }})
-                            </td>
-                            <td class="bg-danger">{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
-                                ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})</td>
-                            <td>{{ $jadwaltgr->PemenangTGR->TGR->nama ?? '' }}
-                                ({{ $jadwaltgr->PemenangTGR->TGR->kontingen ?? 'Belum Bertanding' }})
-                            </td>
-                            <td>{{ $jadwaltgr->skor_biru ?? '0' }} - {{ $jadwaltgr->skor_merah ?? '0' }}</td>
+                            </b><br>({{ $jadwaltgr->status_biru ?? 'Belum Ditimbang Ulang' }})
+                        @else
+                            Pemenang Partai ke-{{ $waitingPartaiBiru ? $waitingPartaiBiru->partai : '1' }}
+                        @endif
+                    </td>
+                    <td class="bg-danger">
+                        @if ($jadwaltgr->sudut_merah)
+                            <b>{{ $jadwaltgr->PengundianTGRMerah->TGR->nama ?? '-' }}
+                                ({{ $jadwaltgr->PengundianTGRMerah->TGR->kontingen ?? '-' }})
+                            </b><br>({{ $jadwaltgr->status_merah ?? 'Belum Ditimbang Ulang' }})
+                        @else
+                            Pemenang Partai ke-{{ $waitingPartaiMerah ? $waitingPartaiMerah->partai : '1' }}
+                        @endif
+                    </td>
+                    <td>{{ $jadwaltgr->PemenangTgr->TGR->nama ?? '' }}
+                        ({{ $jadwaltgr->PemenangTgr->TGR->kontingen ?? 'Belum Bertanding' }})
+                    </td>
+                    <td>{{ $jadwaltgr->skor_biru ?? '0' }} -
+                        {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                             <td class="manage-row">
                                 @if ($gelanggang_operator->Jadwal_TGR && $jadwaltgr->partai == $gelanggang_operator->Jadwal_TGR->partai  && $jadwaltgr->tahap == 'persiapan'  && $gelanggang_operator->jenis !== "Tanding")
                                     @switch($jadwaltgr->jenis)

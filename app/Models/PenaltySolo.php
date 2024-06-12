@@ -9,7 +9,7 @@ class PenaltySolo extends Model
 {
     use HasFactory;
     protected $table = 'penalty_solo';
-    protected $fillable = ['uuid','jadwal_solo','sudut','dewan','toleransi_waktu','keluar_arena','menyentuh_lantai','pakaian','tidak_bergerak','senjata_jatuh'];
+    protected $fillable = ['uuid','performa_waktu','jadwal_solo','sudut','dewan','toleransi_waktu','keluar_arena','menyentuh_lantai','pakaian','tidak_bergerak','senjata_jatuh'];
 
     public function TGR()
     {

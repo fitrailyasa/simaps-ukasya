@@ -47,7 +47,7 @@ class OperatorsoloKontrol extends Component
         $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->first();
         $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->first();
-        $this->waktu = $this->gelanggang->waktu;
+        $this->waktu = 0;
         if(Auth::user()->gelanggang !== $this->jadwal_solo->Gelanggang->id){
             return redirect('/auth');
         }
@@ -70,12 +70,13 @@ class OperatorsoloKontrol extends Component
         PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->delete();
     }
      public function kurangiWaktu(){
-        $this->gelanggang->waktu = ($this->gelanggang->waktu * 60 - 1) / 60;
-        $this->gelanggang->save();
+        if($this->waktu == $this->gelanggang->waktu){
+            return;
+        }
+        $this->waktu = ($this->waktu * 60 + 1) / 60;
     }
     public function gantiTampil($sudut){
-        $this->gelanggang->waktu = 3;
-        $this->gelanggang->save();
+        $this->waktu = 0;
         if($sudut == "merah"){
             $this->active = "sudutmerah";
             $this->tampil = $this->sudut_merah;
@@ -102,25 +103,29 @@ class OperatorsoloKontrol extends Component
             }
             $this->jadwal_solo->jenis_kemenangan = $keputusan_pemenang;
             $this->jadwal_solo->save();
-            $next_partai = JadwalTGR::find($this->jadwal_solo->next_partai);
-            if($next_partai && $this->jadwal_solo->next_sudut == 1){
+            $next_partai = JadwalTGR::where("partai",$this->jadwal_solo->next_partai)->first();
+            if($this->jadwal_solo->next_sudut == 1){
                 $next_partai->sudut_biru = $this->jadwal_solo->pemenang;
-            }else if($next_partai && $this->jadwal_solo->next_sudut == 2){
+            }else{
                 $next_partai->sudut_merah = $this->jadwal_solo->pemenang;
             }
         }else if($tahap == "tampil"){
-            $this->waktu = $this->gelanggang->waktu;
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
             $this->jadwal_solo->tahap = "tampil nilai";
             $this->jadwal_solo->save();
         }else if($tahap == "pause"){
+            if($this->tampil->id == $this->jadwal_solo->PengundianTGRBiru->id){
+                $this->penalty_solo_biru->performa_waktu = $this->waktu;
+                $this->penalty_solo_biru->save();
+            }else{
+                $this->penalty_solo_merah->performa_waktu = $this->waktu;
+                $this->penalty_solo_merah->save();
+            }
             $this->mulai = false;
         }else if($tahap == "persiapan"){
             $this->active = "persiapan";
             $this->mulai = false;
-            $this->gelanggang->waktu = 3;
-            $this->waktu = $this->gelanggang->waktu;
             $this->jadwal_solo->tahap = "persiapan";
             $this->gelanggang->save();
             $this->jadwal_solo->save();
@@ -128,7 +133,7 @@ class OperatorsoloKontrol extends Component
         $this->jadwal_solo->tahap = $tahap;
         $this->jadwal_solo->save();
         $this->tampil = $this->jadwal_solo->TampilTGR;
-        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_solo);
+        GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_solo,$this->waktu);
     }
     //operator endpublic function render()
 

@@ -25,6 +25,7 @@ class PenontonRegu extends Component
     public $penalty_regu;
     public $juris;
     public $mulai = false;
+    public $tampil_nilai= false;
     public $tahap;
     public $tampil;
     public $penilaian_regu_juri_merah;
@@ -41,7 +42,7 @@ class PenontonRegu extends Component
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
         $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->tahap = $this->jadwal->tahap;
         $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
@@ -50,18 +51,24 @@ class PenontonRegu extends Component
         $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
-        $this->waktu = $this->gelanggang->waktu;
+        $this->waktu = 0;
     }
 
-    public function check_gelanggang()  {
-        if($this->gelanggang->jenis !== "Regu"){
-            return redirect('/penonton/'.$this->gelanggang->id);
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
 
     #[On('echo:poin,.tambah-skor-regu')]
     public function tambahNilaiHandler(){
-    }
+        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+       }
     #[On('echo:poin,.salah-gerakan-regu')]
     public function salahGerakanHandler(){
     }
@@ -70,6 +77,44 @@ class PenontonRegu extends Component
     }
     #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler(){
+    }
+    #[On('echo:arena,.ganti-tahap-regu')]
+    public function gantiTahapHandler($data){
+        $this->tahap = $this->jadwal->tahap;
+        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+        $this->tampil = $data["sudut_tampil"];
+        if($data["tahap"] == "tampil"){
+            $this->tampil_nilai = false;
+            $this->mulai = true;
+        }else if($data["tahap"] == "keputusan"){
+            
+        }else if($data["tahap"] == "pause"){
+            $this->mulai = false;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->tampil_nilai = true;
+            $this->mulai = false;
+        }else{
+
+        }
+    }
+
+    #[On('echo:arena,.ganti-tampil-regu')]
+    public function gantiTampilHandler($data){
+        $this->tahap = $this->jadwal->tahap;
+        $this->tampil_nilai = false;
+        $this->tampil = $data["tampil"];
+        if($data["tampil"]['id'] == $this->sudut_merah->id){
+                $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }else{
+                $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }
+    }
+    public function check_gelanggang()  {
+        if($this->gelanggang->jenis !== "Regu"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
     }
 
     public function render()
