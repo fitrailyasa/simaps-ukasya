@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\GantiGelanggang;
 use App\Http\Controllers\Controller;
 use App\Models\Gelanggang;
 use App\Models\JadwalTanding;
@@ -55,6 +56,7 @@ class AdminGelanggangController extends Controller
         $gelanggang = Gelanggang::findOrFail($id);
         $gelanggang->update($request->all());
 
+        GantiGelanggang::dispatch($gelanggang);
         return back()->with('sukses', 'Berhasil Edit Undian!');
     }
 

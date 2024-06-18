@@ -54,6 +54,12 @@ class PenontonGanda extends Component
         $this->waktu = $this->gelanggang->waktu * 60;
     }
 
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
+    }
+
     public function check_gelanggang()  {
         if($this->gelanggang->jenis !== "Ganda"){
             return redirect('/penonton/'.$this->gelanggang->id);
@@ -91,6 +97,19 @@ class PenontonGanda extends Component
         }else if($data["tahap"] == "keputusan"){
             $this->tahap = $this->jadwal->tahap;
         }
+    }
+    #[On('echo:arena,.ganti-tampil-ganda')]
+    public function gantiTampilHandler($data){
+        $this->tahap = $this->jadwal->tahap;
+        $this->tampil_nilai = false;
+        $this->tampil = $data["tampil"];
+        if($data["tampil"]['id'] == $this->sudut_merah->id){
+                $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }else{
+                $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }
     }
 
     public function render()

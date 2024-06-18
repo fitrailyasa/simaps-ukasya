@@ -33,13 +33,21 @@ class JuriTunggal extends Component
             return redirect('dashboard');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
-        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
-        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->waktu = $this->gelanggang->waktu * 60;
-        if($this->tampil->id == $this->sudut_biru->id){
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }else{
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }
+    }
+
+    public function buatPenilaian(){
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
             if(!$this->penilaian_tunggal){
                 $this->penilaian_tunggal = PenilaianTunggal::create([
@@ -63,11 +71,10 @@ class JuriTunggal extends Component
             }
         }
     }
-
     public function tambahNilaiTrigger($id,$value){
         $value/=100;
-        $this->penilaian_tunggal->skor += $value;
-        $this->penilaian_tunggal->flow_skor += $value;
+        $this->penilaian_tunggal->flow_skor = $value;
+        $this->penilaian_tunggal->skor = (9.90 - $this->penilaian_tunggal->salah*0.01) + $this->penilaian_tunggal->flow_skor;
         $this->penilaian_tunggal->save();
         TambahNilai::dispatch($this->jadwal,$id == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penilaian_tunggal,Auth::user());
     }
@@ -92,32 +99,17 @@ class JuriTunggal extends Component
 
     #[On('echo:arena,.ganti-tampil-tunggal')]
     public function gantiTampilHandler($data){
-        if($this->jadwal->tampil == $this->pengundian_biru->id){
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-            if(!$this->penilaian_tunggal){
-                $this->penilaian_tunggal = PenilaianTunggal::create([
-                    'jadwal_tunggal'=>$this->jadwal->id,
-                    'sudut' => $this->sudut_biru->id,
-                    'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
-                    'juri' => Auth::user()->id
-                ]);
-            }
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-            if(!$this->penilaian_tunggal){
-                $this->penilaian_tunggal = PenilaianTunggal::create([
-                    'jadwal_tunggal'=>$this->jadwal->id,
-                    'sudut' => $this->sudut_merah->id,
-                    'uuid'=>date('Ymd-His').'-'.$this->sudut_merah->id.Auth::user()->id.'-'.$this->jadwal->id,
-                    'juri' => Auth::user()->id
-                ]);
-            }
         }
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
-        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
-        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
     }
 
     public function render()

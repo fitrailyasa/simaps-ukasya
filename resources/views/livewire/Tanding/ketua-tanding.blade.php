@@ -3,8 +3,13 @@
     $jatuhan_biru = 0;
     $binaan_biru = 0;
     $teguran_biru = 0;
-    $peringatan_biru = 0;
+    $peringatan_biru_total = 0;
     $pukulan_tendangan_biru = 0;
+    if($peringatan_biru){
+        foreach ($peringatan_biru as $penilaian) {
+            $peringatan_biru_total += $penilaian->dewan;
+        }
+    }
     foreach ($penilaian_tanding_biru->where('status','sah') as $penilaian) {
         switch ($penilaian->jenis) {
             case 'jatuhan':
@@ -16,9 +21,6 @@
             case 'teguran':
                 $teguran_biru += $penilaian->dewan;
                 break;
-            case 'peringatan':
-                $peringatan_biru += $penilaian->dewan;
-                break;
             case 'pukulan':
                 $pukulan_tendangan_biru += 1;
                 break;
@@ -27,13 +29,18 @@
                 break;
         }
     }
-    $total_poin_sementara_biru = $jatuhan_biru + $binaan_biru + $teguran_biru + $peringatan_biru + $pukulan_tendangan_biru ;
+    $total_poin_sementara_biru = $jatuhan_biru + $binaan_biru + $teguran_biru + $peringatan_biru_total + $pukulan_tendangan_biru ;
 
     $jatuhan_merah = 0;
     $binaan_merah = 0;
     $teguran_merah = 0;
-    $peringatan_merah = 0;
+    $peringatan_merah_total = 0;
     $pukulan_tendangan_merah = 0;
+    if($peringatan_merah){
+        foreach ($peringatan_merah as $penilaian) {
+            $peringatan_merah_total += $penilaian->dewan;
+        }
+    }
     foreach ($penilaian_tanding_merah->where('status','sah') as $penilaian) {
         switch ($penilaian->jenis) {
             case 'jatuhan':
@@ -45,9 +52,6 @@
             case 'teguran':
                 $teguran_merah += $penilaian->dewan;
                 break;
-            case 'peringatan':
-                $peringatan_merah += $penilaian->dewan;
-                break;
             case 'pukulan':
                 $pukulan_tendangan_merah += 1;
                 break;
@@ -56,7 +60,7 @@
                 break;
         }
     }
-    $total_poin_sementara_merah = $jatuhan_merah + $binaan_merah + $teguran_merah + $peringatan_merah + $pukulan_tendangan_merah ;
+    $total_poin_sementara_merah = $jatuhan_merah + $binaan_merah + $teguran_merah + $peringatan_merah_total + $pukulan_tendangan_merah ;
 
     $total_poin_merah = 0;
     foreach ($poin_merah->where('status','sah') as $index => $poin) {
@@ -114,7 +118,7 @@
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 40%">
                 <div class="biru-nama">
-                    <h5 class="ml-4 fw-bold">{{ $sudut_biru->negara }}</h5>
+                    <h5 class="ml-4 fw-bold">{{ $sudut_biru->kontingen }}</h5>
                     <h4 class="fw-bold mt-4" style="color:#252c94">{{ $sudut_biru->nama}}</h4>
                 </div>
                 <div class="biru-score d-flex flex-column justify-content-center" style="height: 100%">
@@ -129,7 +133,7 @@
                     <h3 class="fw-bold" style="color: #db3545 ">{{$total_poin_merah }}</h3>
                 </div>
                 <div class="merah-nama text-end">
-                    <h5 class="mr-4 fw-bold">{{ $sudut_merah->negara }}</h5>
+                    <h5 class="mr-4 fw-bold">{{ $sudut_merah->kontingen }}</h5>
                     <h4 class="fw-bold mt-4" style="color: #db3545 ">{{ $sudut_merah->nama }}</h4>
                 </div>
             </div>
@@ -180,7 +184,7 @@
                                 </div>
                                 <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;">
                                     <h5 style="margin-left: 15px; font-weight: bold">
-                                        {{$peringatan_biru}}
+                                        {{$peringatan_biru_total}}
                                     </h5>
                                 </div>
                             </div>
@@ -266,7 +270,7 @@
                                 </div>
                                 <div class="nilai-peringatan border border-dark d-flex" style="width: 100%; height: 12.5%;">
                                     <h5 class="fw-bold ml-1">
-                                        @foreach ($penilaian_tanding_biru as $penilaian)
+                                        @foreach ($peringatan_biru as $penilaian)
                                             @if ($penilaian->jenis == 'peringatan' && $penilaian->status == 'sah')
                                                 {{$penilaian->dewan}}
                                             @endif        
@@ -436,7 +440,7 @@
                                 </div>
                                 <div class="nilai-peringatan border border-dark d-flex" style="width: 100%; height: 12.5%;">
                                     <h5 class="fw-bold ml-1">
-                                        @foreach ($penilaian_tanding_merah as $penilaian)
+                                        @foreach ($peringatan_merah as $penilaian)
                                             @if ($penilaian->jenis == 'peringatan' && $penilaian->status == 'sah')
                                                 {{$penilaian->dewan}}
                                             @endif        
@@ -467,7 +471,7 @@
                                 </div>
                                 <div class="total-sementara-peringatan border border-dark" style="width: 100%; height: 12.5%;">
                                     <h5 style="margin-left: 15px; font-weight: bold">
-                                        {{$peringatan_merah}}
+                                        {{$peringatan_merah_total}}
                                     </h5>
                                 </div>
                             </div>
@@ -495,7 +499,7 @@
 @section('script')
      <script>
         setInterval(() => {
-            @this.call('resetIndikator')
+            @this.call('kurangiWaktu')
             if(@this.get('tahap') == 'hasil'){
                 $('#keputusan-ketua').modal('show')
             }

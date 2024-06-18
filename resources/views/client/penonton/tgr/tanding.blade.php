@@ -51,6 +51,7 @@
     }
 @endphp
 
+
 @section('style')
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
@@ -61,8 +62,8 @@
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
-                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%; ">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="border-radius: 50%; margin-top: 8px;{{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}" height="200" width="200">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -73,10 +74,10 @@
             @if ($mulai == true || $jadwal->tahap == "tampil")
             @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
-                    <p class="text-hasil" style="font-size: 2rem;">Timer</p>
+                    <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
-                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                        <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
                 @endif
             @else
@@ -87,7 +88,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                {{$median}}
+                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -95,7 +96,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                </h3>
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -103,7 +106,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($penalty_tunggal->performa_waktu), ($penalty_tunggal->performa_waktu*60)%60) }}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty_tunggal ? sprintf("%02d:%02d", floor($penalty_tunggal->performa_waktu), ($penalty_tunggal->performa_waktu*60)%60) : "00:00"}}
+                                </h3>
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -111,7 +116,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$median - $penalty *  0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$median - $penalty *  0.5}}
+                                </h3>
                             </div>
                         </div>
                         
@@ -122,7 +129,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1rem; color: #fff;margin-top: ;">Standard Deviation</p>
                             </div>
                             <div class="standard-nilai">
-                                {{$standard_deviation}}
+                                <h3 class="fw-bold mt-1" style="">
+                                    {{$standard_deviation}}
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -130,7 +139,7 @@
             @endif
         </div>
     </div>
-    <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
+    <div class="tgr-content d-flex text-center" style="width: 100%;height: 40%;margin-top: 80px !important">
         @if ($tampil_nilai == true) 
             @if (count($penilaian_tunggal_juri) == $length*2)
                 @foreach ($sorted_nilai as $i => $nilai)
@@ -146,10 +155,10 @@
                         }
                     @endphp
                     <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
                     </div>
-                    <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                    <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
                         <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
                     </div>
                 </div>
@@ -483,7 +492,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($penalty_ganda->performa_waktu), ($penalty_ganda->performa_waktu*60)%60) }}
+                                {{$penalty_ganda ? sprintf("%02d:%02d", floor($penalty_ganda->performa_waktu), ($penalty_ganda->performa_waktu*60)%60) : "00:00"}}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -672,7 +681,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ sprintf("%02d:%02d", floor($penalty_solo->performa_waktu), ($penalty_solo->performa_waktu*60)%60) }}
+                                {{ $penalty_solo ? sprintf("%02d:%02d", floor($penalty_solo->performa_waktu), ($penalty_solo->performa_waktu*60)%60) : "00:00"}}
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">

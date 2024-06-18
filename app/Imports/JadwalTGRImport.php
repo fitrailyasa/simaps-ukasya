@@ -11,10 +11,14 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class JadwalTGRImport implements ToModel, WithHeadingRow
 {
     public $teams;
+    public $request;
 
-    public function __construct($teams)
+
+    public function __construct($teams,$request)
     {
         $this->teams = $teams;
+        $this->request = $request;
+
     }
 
     public function model(array $row)
@@ -47,6 +51,8 @@ class JadwalTGRImport implements ToModel, WithHeadingRow
             'sudut_merah' => $sudutMerah ? $sudutMerah->id : null, // Gunakan id sudut merah jika ditemukan, jika tidak, gunakan null
             'next_sudut' => $row['next_sudut'],
             'next_partai' => $row['next_partai'],
+            'jenis' => $this->request->jenis,
+            'tampil' => $sudutBiru ? $sudutBiru->id : null,
         ]);
     }
 }

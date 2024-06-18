@@ -44,6 +44,7 @@ class DewanTanding extends Component
     public $juri_verifikasi_jatuhan = [];
     public $juri_verifikasi_pelanggaran = [];
     public $juri;
+    public $waktu = 0;
 
     public function mount()
     {
@@ -54,10 +55,16 @@ class DewanTanding extends Component
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
-        $this->sudut_merah = Tanding::find($this->pengundian_merah->atlet_id);
-        $this->sudut_biru = Tanding::find($this->pengundian_biru->atlet_id);
+        $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
+        $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+    }
+
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+             $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
     }
     public function hapusTrigger($id){
         if($this->jadwal->sudut_biru == $id){
@@ -80,11 +87,11 @@ class DewanTanding extends Component
         if($this->jadwal->tahap == 'tanding'){
             $nilai = -5;
             if($id == $this->jadwal->sudut_biru){
-                if(count($this->penilaian_tanding_biru->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
+                if(count($this->penilaian_tanding_biru->where('jenis', 'peringatan'))>=1){
                 $nilai = -10;
                 };
             }else{
-                if(count($this->penilaian_tanding_merah->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
+                if(count($this->penilaian_tanding_merah->where('jenis', 'peringatan'))>=1){
                 $nilai = -10;
                 }
             }
@@ -253,6 +260,21 @@ class DewanTanding extends Component
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         }
     }
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function gantiGelanggangHandler($data){
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
+                return redirect('dashboard');
+            }
+            $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+            $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
+            $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
+            $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
+            $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
+            $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+            $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        }
+    }
     #[On('echo:verifikasi,.verifikasi-jatuhan')]
     public function verifikasiJatuhanHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
@@ -271,7 +293,22 @@ class DewanTanding extends Component
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
         }
     }
-    
+    #[On('echo:arena,.mulai-pertandingan')]
+    public function mulaiPertandinganHandler($data){
+        if($this->jadwal->id == $data["jadwal"]["id"]){
+            $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+            if($data['event'] == 'mulai pertandingan'){
+                $this->mulai = true;
+            }else if($data['event'] == 'pause pertandingan'){
+                $this->mulai = false;
+                $this->waktu = $data['waktu'];
+            }else if($data['event'] == 'keputusan pemenang'){
+                $this->tahap = 'hasil';
+            }else{
+                $this->mulai = false;
+            }
+        }
+    }
     public function render()
     {
         return view('livewire.dewan-tanding')->extends('layouts.dewan.app')->section('content');

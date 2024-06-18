@@ -18,16 +18,9 @@ class AdminKontrolTGRController extends Controller
         $gelanggangs = Gelanggang::all();
         $gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $pengundiantgrs = PengundianTGR::latest('id')->get();
-        if(auth()->user()->roles_id == 1){
-            $jadwaltgrs = JadwalTGR::latest('id')->get();
-        }else if(auth()->user()->roles_id == 2){
-            $jadwaltgrs = JadwalTGR::latest('id')->where('jenis',$gelanggang_operator->jenis)->get();
-        }
-        if (auth()->user()->roles_id == 1) {
-            return view('admin.kontrol-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs', 'gelanggang_operator'));
-        } else if (auth()->user()->roles_id == 2) {
-            return view('operator.kontrol-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs', 'gelanggang_operator'));
-        }
+
+        $jadwaltgrs = JadwalTGR::latest('id')->get();
+        return view('admin.kontrol-tgr.index', compact('jadwaltgrs', 'gelanggangs', 'pengundiantgrs', 'gelanggang_operator'));
     }
 
     public function ubahtahap(Request $request, $jadwal_tunggal_id, $jenis)

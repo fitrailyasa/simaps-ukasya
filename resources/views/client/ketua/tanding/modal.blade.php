@@ -79,7 +79,7 @@
             <div class="modal-content-body border border-dark">
                 <div class="modal-body-header text-center">
                     <h5 class="fw-bold">Pertandingan Ini Dimenangkan Oleh Pesilat dari Sudut</h5>
-                    @if($jadwal->pemenang == $sudut_merah->id)
+                    @if($jadwal->Ppemenang == $sudut_merah->id)
                     <h5 class="fw-bold" style="color: #db3545">Merah</h5>
                     @else
                         <h5 class="fw-bold" style="color: #252c94">Biru</h5>

@@ -38,7 +38,7 @@ class JuriGanda extends Component
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
         $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
-        $this->tampil = TGR::find($this->jadwal->tampil == $this->pengundian_merah->atlet_id ? $this->sudut_merah->id : $this->sudut_biru->id);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->tampil->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         if(!$this->penilaian_ganda){
@@ -48,7 +48,7 @@ class JuriGanda extends Component
                 'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
                 'juri' => Auth::user()->id
             ]);
-            TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user());
+            TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
         }
     }
 
@@ -70,7 +70,7 @@ class JuriGanda extends Component
         }
         $this->penilaian_ganda->skor += $value;
         $this->penilaian_ganda->save();
-        TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user());
+        TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
 
     #[On('echo:poin,.tambah-skor-ganda')]

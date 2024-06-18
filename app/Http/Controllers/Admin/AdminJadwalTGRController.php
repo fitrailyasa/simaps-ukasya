@@ -26,7 +26,7 @@ class AdminJadwalTGRController extends Controller
             'file' => 'required|mimes:xlsx,xls',
             'golongan' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
-            'kategori' => 'required|max:255',
+            'jenis' => 'required|max:255',
         ]);
 
         $file = $request->file('file');
@@ -35,14 +35,14 @@ class AdminJadwalTGRController extends Controller
             ->whereHas('TGR', function ($query) use ($request) {
                 $query->where('golongan', $request->golongan)
                     ->where('jenis_kelamin', $request->jenis_kelamin)
-                    ->where('kategori', $request->kategori);
+                    ->where('kategori', $request->jenis);
             })
             ->get();
 
         if ($teams->isEmpty()) {
             return back()->with('warning', 'Data tim kosong!');
         } else {
-            Excel::import(new JadwalTGRImport($teams), $file);
+            Excel::import(new JadwalTGRImport($teams,$request), $file);
             return back()->with('sukses', 'Berhasil Import Data Jadwal!');
         }
     }

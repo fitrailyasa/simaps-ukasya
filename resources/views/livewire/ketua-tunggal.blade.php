@@ -1,9 +1,8 @@
 
 <div>
-    {{-- @if ($tahap == "persiapan" || $tahap == "tampil" || $tahap == )
-        
-    @else
-    <div class="hasil-container text-center p-3" style="height: 50vh">
+    @include('client.penonton.tgr.navbar')
+    @if ($tahap == "keputusan")
+        <div class="hasil-container text-center p-3" style="height: 50vh">
 @php
     if(count($penilaian_tunggal_juri_merah)%2==0){
         $length = count($penilaian_tunggal_juri_merah)/2;
@@ -19,7 +18,7 @@
     foreach ($penilaian_tunggal_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
     }
-    if(!count($penilaian_tunggal_juri) == 0){
+    if(!count($penilaian_tunggal_juri_merah) == 0){
         $mean_merah = $total_merah / count($penilaian_tunggal_juri_merah);
     }else{
         $mean_merah = 0;
@@ -72,29 +71,29 @@
     }
 @endphp
      <div class="hasil-header d-flex" style="height: 40%; width: 100%">
-        <div class="pesilat-a d-flex" style="width: 50%">
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
+        <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
+            {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
                 <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
-            </div>
+            </div> --}}
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->kontingen}}</p>
             </div>
         </div>
-         <div class="pesilat-b d-flex" style="width: 50%">
+         <div class="pesilat-b d-flex justify-content-center" style="width: 50%">
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_merah->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #db3545">{{$sudut_merah->kontingen}}</p>
             </div>
-            <div class="bendera" style="width: 30%;">
+            {{-- <div class="bendera" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #db3545">
-                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
-            </div>
+                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url($sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 8px">
+            </div> --}}
         </div>
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
@@ -143,10 +142,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{ $penalty_tunggal_merah ? sprintf("%02d:%02d", floor($penalty_tunggal_merah->performa_waktu), ($penalty_tunggal_merah->performa_waktu*60)%60) : "00:00"  }}</p>
                             </div>
                             <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_tunggal_biru ? sprintf("%02d:%02d", floor($penalty_tunggal_biru->performa_waktu), ($penalty_tunggal_biru->performa_waktu*60)%60) : "00:00" }}</p>
                             </div>
                     </div>
                 </div>
@@ -183,7 +182,7 @@
         </div>
     </div>
 </div>
-    @endif --}}
+    @else
     @php
     if(count($penilaian_tunggal_juri) % 2 == 0){
         $length = count($penilaian_tunggal_juri) / 2;
@@ -289,11 +288,8 @@
                     </div>
                     <div class="nilai-1-body mt-1">
                         <div class="nilai-1-movement d-flex justify-content-between " style="gap: 4px !important">
-                            <div class="merah text-center border border-dark pt-2" style="width: 50%">
+                            <div class="merah text-center border border-dark pt-2" style="width: 100%">
                                 <h6 class="fw-bold" style="color:#db3545">-</h6>
-                            </div>
-                            <div class="biru text-center border border-dark pt-2" style="width: 50%">
-                                <h6 class="fw-bold" style="color: #252c94">-</h6>
                             </div>
                         </div>
                         <div class="nilai-1-correctness mt-1">
@@ -330,11 +326,8 @@
                     </div>
                     <div class="nilai-1-body mt-1">
                         <div class="nilai-1-movement d-flex justify-content-between " style="gap: 4px !important">
-                            <div class="merah text-center border border-dark pt-2" style="width: 50%">
-                                <h6 class="fw-bold" style="color:#db3545">{{number_format($penilaian_juri->salah*0.01,2)}}</h6>
-                            </div>
-                            <div class="biru text-center border border-dark pt-2" style="width: 50%">
-                                <h6 class="fw-bold" style="color: #252c94">0</h6>
+                            <div class="merah text-center border border-dark pt-2" style="width: 100%">
+                                <h6 class="fw-bold" style="{{$tampil->id == $sudut_merah->id}}color:#db3545 : color: #252c94">{{number_format($penilaian_juri->salah*0.01,2)}}</h6>
                             </div>
                         </div>
                         <div class="nilai-1-correctness mt-1">
@@ -428,13 +421,13 @@
                                 }
                             @endphp
                         <div class="juri-1 text-center" style="width: {{100/$length}}%">
-                            <div class="juri-1-header border border-dark {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}"
+                            <div class="juri-1-header border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}"
                                 style="width: 100%; background-color: #ececec; height: 40%;">
                                 <h6 class="fw-bold">
                                     {{$juri_name}}
                                 </h6>
                             </div>
-                            <div class="juri-1-value border border-dark {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
+                            <div class="juri-1-value border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
                                     {{$nilai->skor}}
                                 </h6>
@@ -455,13 +448,13 @@
                                 }
                             @endphp
                         <div class="juri-1 text-center" style="width: {{100/$length}}%">
-                            <div class="juri-1-header border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}"
+                            <div class="juri-1-header border border-dark {{( $i  == $length) ? "bg-success" : "bg-primary"}}"
                                 style="width: 100%; background-color: #ececec; height: 40%;">
                                 <h6 class="fw-bold">
                                     {{$juri_name}}
                                 </h6>
                             </div>
-                            <div class="juri-1-value border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
+                            <div class="juri-1-value border border-dark {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
                                     {{$nilai->skor}}
                                 </h6>
@@ -543,11 +536,12 @@
         </div>
         <div class="content-left text-center" style="width:50%;">
             <div class="final-score border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$median}}</h6>
+                <h6 class="fw-bold mt-1">{{$median - $penalty *  0.5}}</h6>
             </div>
             <div class="standart-dev border border-dark" style="width:100%;">
                 <h6 class="fw-bold mt-1">{{$standard_deviation}}</h6>
             </div>
         </div>
     </div>
+    @endif
 </div>

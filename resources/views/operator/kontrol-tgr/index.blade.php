@@ -27,6 +27,7 @@
         </thead>
         <tbody>
                 @foreach ($jadwaltgrs as $jadwaltgr)
+                @if ($jadwaltgr->jenis == $gelanggang_operator->jenis)
                     @if (auth()->user()->Gelanggang->id == $jadwaltgr->Gelanggang->id)
                         @php
                     $waitingPartaiMerah = $jadwaltgrs
@@ -121,6 +122,7 @@
                             </td>
                         </tr>
                     @endif
+                @endif
                 @endforeach
         </tbody>
         <tfoot>

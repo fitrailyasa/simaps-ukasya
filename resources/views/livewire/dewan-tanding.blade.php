@@ -8,6 +8,13 @@
     @include('dewan.tanding.header')
     @include('dewan.tanding.body')
     @include('dewan.tanding.tombol')
+    @section('script')
+        <script>
+            setInterval(() => {
+                @this.call('kurangiWaktu')
+            }, 1000);
+        </script>
+    @endsection
 </div>
 
 

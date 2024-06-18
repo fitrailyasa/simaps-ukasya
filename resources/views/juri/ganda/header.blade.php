@@ -1,8 +1,8 @@
 <div class="header d-flex justify-content-between p-3" style="width: 100%">
     <div class="left" style="width: 50%">
-        <span class="ml-5 fw-bold">{{$sudut_biru->region}}, {{$sudut_merah->region}}</span>
+        <span class="ml-5 fw-bold">{{$tampil->kontingen}}</span>
         <h5 class="fw-bold" style="color:#252c94">
-            {{$sudut_biru->nama}}, {{$sudut_merah->nama}}
+            {{$tampil->nama}}
         </h5>
     </div>
     <div class="right  text-end mt-3" style="width: 50%">

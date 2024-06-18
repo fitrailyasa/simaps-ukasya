@@ -15,13 +15,13 @@
     
     <div class="d-flex flex-row justify-content-between  p-1 m-1 row" style="width:100%; margin-top: 76px !important; margin-bottom: -28px !important">
         <div class=" col-md-3 text-center">
-            <h5 class="fw-bold bg-danger p-3 rounded kontingen" style="margin-left: 14px">{{$sudut_biru->nama}}, {{$sudut_merah->kontingen}}</h5>
+            <h5 class="fw-bold text-white  p-3 rounded kontingen" style="background-color: #0053a6; margin-left: 14px">{{$sudut_biru->nama}}, {{$sudut_merah->kontingen}}</h5>
         </div>
         <div class="col-md-3 d-flex justify-content-center">
             <h4 class="fw-bold">{{$gelanggang->nama}}</h4>
         </div>
         <div class="mr-4 col-md-3 text-center">
-            <h5 class="fw-bold p-3 rounded text-white kontingen" style="background-color: #0053a6; margin-right: 12px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
+            <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 12px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
         </div>
     </div>
     <div class="row mt-3 d-flex flex-row justify-content-center">
@@ -40,8 +40,8 @@
                         <tr>
                             <th
                                 scope="col"
-                                class="bg-danger text-center text-white tabel-head mw-40"
-                                style="border: 2px solid #000; width:40%"
+                                class="text-center text-white tabel-head mw-40"
+                                style="background-color: #0053a6;border: 2px solid #000; width:40%"
                             >
                                 Nilai
                             </th>
@@ -54,9 +54,8 @@
                             </th>
                             <th
                                 scope="col"
-                                class="text-center text-white tabel-head mw-40"
+                                class="bg-danger text-center text-white tabel-head mw-40"
                                 style="
-                                    background-color: #0053a6;
                                     border: 2px solid #000;
                                     width:40%
                                 "
@@ -72,7 +71,7 @@
                                 style="border: 2px solid #000"
                             > 
                              <h5 class="fw-bold p-1">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1)
                                         {{$penilaian->$juri}}
                                     @endif
@@ -91,7 +90,7 @@
                                 style="border: 2px solid #000"
                             >
                                 <h5 class="fw-bold p-1">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1)
                                         {{$penilaian->$juri}}
                                     @endif
@@ -104,7 +103,7 @@
                                 class="tabel-2-1 fw-bold fs-5 text-end"
                                 style="border: 2px solid #000"
                             >
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2)
                                         {{$penilaian->$juri}}
                                     @endif
@@ -121,7 +120,7 @@
                                 class="tabel-2-2 fw-bold fs-5"
                                 style="border: 2px solid #000"
                             >
-                           @foreach ($penilaian_tanding_biru as $penilaian)
+                           @foreach ($penilaian_tanding_merah as $penilaian)
                                 @if ($penilaian->babak == 2)
                                     {{$penilaian->$juri}}
                                 @endif
@@ -133,7 +132,7 @@
                                 class="tabel-3-1 fw-bold fs-5 text-end"
                                 style="border: 2px solid #000"
                             >
-                            @foreach ($penilaian_tanding_merah as $penilaian)
+                            @foreach ($penilaian_tanding_biru as $penilaian)
                                 @if ($penilaian->babak == 3)
                                     {{$penilaian->$juri}}
                                 @endif
@@ -150,7 +149,7 @@
                                 class="tabel-3-2 fw-bold fs-5"
                                 style="border: 2px solid #000"
                             >
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3)
                                         {{$penilaian->$juri}}
                                     @endif
@@ -167,9 +166,9 @@
             <div class="poin p-1 m-1" style="width: 50%">
                 <div class="poin p-1 m-1" style="width: 100%">
                     <button
-                        wire:click = "tambahPukulanTrigger({{$sudut_merah->id}})"
-                        class="btn btn-danger text-white p-3 mb-2 tombol-pukulan-a"
-                        style="width: 100%; border-radius: 10px"
+                        wire:click = "tambahPukulanTrigger({{$sudut_biru->id}})"
+                        class="btn text-white p-3 mb-2 "
+                        style="width: 100%; border-radius: 10px ;background-color: #0053a6;"
                         onclick=""
                     >
                         Pukulan
@@ -177,9 +176,9 @@
                 </div>
                 <div class="poin p-1 m-1" style="width: 100%">
                     <button
-                        wire:click="tambahTendanganTrigger({{$sudut_merah->id}})"
-                        class="btn btn-danger text-white p-3 tombol-tendangan-a"
-                        style="width: 100%; border-radius: 10px"
+                        wire:click="tambahTendanganTrigger({{$sudut_biru->id}})"
+                        class="btn text-white p-3 tombol-tendangan-a"
+                        style="width: 100%; border-radius: 10px;background-color: #0053a6;"
                     >
                         Tendangan
                     </button>
@@ -188,9 +187,9 @@
             <div class="hapus-poin d-flex  p-1 m-1 " style="width: 200px;">
                 <div class="tombol-hapus-a" style="width: 100%; height:100%">
                     <button
-                        wire:click = "hapusTrigger({{$sudut_merah->id}})"
-                        class="btn btn-danger text-white "
-                        style="border-radius: 10px; width:100% !important; height:100% !important;"
+                        wire:click = "hapusTrigger({{$sudut_biru->id}})"
+                        class="btn text-white "
+                        style="border-radius: 10px; width:100% !important; height:100% !important;;background-color: #0053a6;"
                     >
                         Hapus
                     </button>
@@ -201,9 +200,9 @@
             <div class="hapus-poin d-flex justify-content-start p-1 m-1" style="width:200px">
                 <div class="tombol-hapus-b" style="margin:0 !important;width: 100%; height:100%">
                     <button
-                        wire:click = "hapusTrigger({{$sudut_biru->id}})"
-                        class="btn btn-biru text-white"
-                        style=" border-radius: 10px; height:100% ;width:100% ;background-color: #0053a6;"
+                        wire:click = "hapusTrigger({{$sudut_merah->id}})"
+                        class="btn bg-danger btn-biru text-white"
+                        style=" border-radius: 10px; height:100% ;width:100% ;"
                     >
                         Hapus
                     </button>
@@ -212,18 +211,18 @@
             <div class="poin p-1 m-1" style="width: 50%">
                 <div class="" style="width: 100%; height:50%">
                     <button
-                        wire:click = "tambahPukulanTrigger({{$sudut_biru->id}})"
-                        class="btn btn-biru text-white p-3 mb-2 tombol-pukulan-b"
-                        style="width: 100%; border-radius: 10px;background-color: #0053a6;"
+                        wire:click = "tambahPukulanTrigger({{$sudut_merah->id}})"
+                        class="btn bg-danger btn-biru text-white p-3 mb-2 tombol-pukulan-b"
+                        style="width: 100%; border-radius: 10px;"
                     >
                         Pukulan
                     </button>
                 </div>
                 <div class="" style="width: 100%; height:50%">
                     <button
-                        wire:click = "tambahTendanganTrigger({{$sudut_biru->id}})"
-                        class="btn btn-biru text-white p-3 tombol-tendangan-b"
-                        style="width: 100%; border-radius: 10px ;background-color: #0053a6;"
+                        wire:click = "tambahTendanganTrigger({{$sudut_merah->id}})"
+                        class="btn bg-danger btn-biru text-white p-3 tombol-tendangan-b"
+                        style="width: 100%; border-radius: 10px ;"
                     >
                         Tendangan
                     </button>

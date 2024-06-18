@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Livewire\Operator\OperatorGandaKontrol;
+use App\Livewire\Operator\OperatorJadwalTanding;
+use App\Livewire\Operator\OperatorJadwalTGR;
 use App\Livewire\Operator\OperatorReguKontrol;
 use App\Livewire\Operator\OperatorSoloKontrol;
 use App\Livewire\Operator\OperatorTandingKontrol;
@@ -183,7 +185,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/timbang-ulang/{id}/destroy', [AdminTimbangUlangController::class, 'destroy'])->name('timbang-ulang.destroy');
 
     // Kontrol Tanding
-    Route::get('/kontrol-tanding', [AdminKontrolTandingController::class, 'index'])->name('kontrol-tanding.index');
+    Route::get('/kontrol-tanding', OperatorJadwalTanding::class)->name('kontrol-tanding.index');
     Route::post('/ubah/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'ubahtahap']);
     Route::post('/stop/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'stop_pertandingan']);
     Route::post('/reset/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'reset']);
@@ -191,7 +193,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Kontrol Tgr
-    Route::get('/kontrol-tgr', [AdminKontrolTGRController::class, 'index'])->name('kontrol-tgr.index');
+    Route::get('/kontrol-tgr', OperatorJadwalTGR::class)->name('kontrol-tgr.index');
+;
     Route::post('/ubah-tgr/{jadwal_tgr_id}/{jenis}', [AdminKontrolTGRController::class, 'ubahtahap']);
     Route::post('/stop-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
     Route::post('/reset-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'reset']);

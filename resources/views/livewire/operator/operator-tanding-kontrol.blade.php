@@ -71,7 +71,7 @@
    <div class="body d-flex flex-row" style="width: 100%">
     <div class="sudut-biru text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{url('assets/img/ipsi.png')}}" alt="" height="200" width="200">
+            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_biru->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #0053a6">{{$sudut_biru->nama}}</h4>
@@ -103,12 +103,12 @@
             <button class="btn" wire:click='Hapus()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
             <button {{$total_poin_merah == $total_poin_biru ? "disabled" : ""}} class="btn" wire:click='keputusanMenang("Sudut Biru","Menang Angka")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
             <button {{$total_poin_merah == $total_poin_biru ? "disabled" : ""}} class="btn" wire:click='keputusanMenang("Sudut Merah","Menang Angka")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
-            <a href="/op/kontrol-tanding" class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</a>
+            <button wire:click='nextPartai()' class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</button>
         </div>
     </div>
     <div class="sudut-merah text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{url('assets/img/ipsi.png')}}" alt="" height="200" width="200">
+            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_merah->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #db3545">{{$sudut_merah->nama}}</h4>
@@ -138,14 +138,9 @@
             <div class="p-2 bg-danger text-white" style="width: 40%">{{$sudut_merah->nama}}</div>
           </div>
         </div>
-        <div class="text-center my-3" style="width: 100%"> 
-          <img src="https://via.placeholder.com/100" alt="Team 1" style="width: 40%">
-          <span class="mx-3 border" style="width: 10%">VS</span>
-          <img src="https://via.placeholder.com/100" alt="Team 2" style="width: 40%">
-        </div>
         <div class="d-flex justify-content-center mb-3 text-center">
             <div class="p-2 bg-primary text-white" style="width: 40%">{{$sudut_biru->kontingen}}</div>
-            <div class="p-2 bg-light text-dark border" style="width: 10%">VS</div>
+            <div class="p-2 text-dark" style="width: 10%"> </div>
             <div class="p-2 bg-danger text-white" style="width: 40%">{{$sudut_merah->kontingen}}</div>
         </div>
         <div class="mb-3">
@@ -160,7 +155,7 @@
             </select>
         </div>
         <div class="mb-3">
-          <label for="pemenang" class="form-label">{{$pemenang}}</label>
+          <label for="pemenang" class="form-label">Pemenang</label>
           <select class="form-select" id="pemenang" wire:model.change='pemenang'>
             <option value="" selected>Pilih Sudut</option>
             <option value="Sudut Biru">Sudut Biru</option>

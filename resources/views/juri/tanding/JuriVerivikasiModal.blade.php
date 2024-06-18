@@ -14,10 +14,10 @@
                 <h5>Drop Verification</h5>
             </div>
             <div class="modal-second-line border border-secondary text-center" style="background-color: #EEEEEE;">
-                <h5>Judge 3 Choice</h5>
+                <h5>Pilihan {{$user->name}}</h5>
             </div>
             <div class="modal-third-line border border-secondary text-center ">
-                <h5 class="waiting">Waiting</h5>
+                <h5 class="waiting">{{$pilihan}}</h5>
             </div>
            </div>
         </div>
@@ -46,10 +46,10 @@
                 <h5>Penalty Verification</h5>
             </div>
             <div class="modal-second-line border border-secondary text-center" style="background-color: #EEEEEE;">
-                <h5>Judge 3 Choice</h5>
+                <h5>Pilihan {{$user->name}}</h5>
             </div>
-            <div class="modal-third-line border border-secondary text-center">
-                <h5 class="waiting">Waiting</h5>
+            <div class="modal-third-line border border-secondary text-center ">
+                <h5 class="waiting">{{$pilihan}}</h5>
             </div>
            </div>
         </div>

@@ -102,11 +102,11 @@
                 @if ($timbangulang->berat_merah != null && $timbangulang->berat_biru != null)
                     @php
                         $waitingPartaiMerah = $timbangulangs
-                            ->where('next_sudut', 1)
+                            ->where('next_sudut', 2)
                             ->where('next_partai', $timbangulang->partai)
                             ->first();
                         $waitingPartaiBiru = $timbangulangs
-                            ->where('next_sudut', 2)
+                            ->where('next_sudut', 1)
                             ->where('next_partai', $timbangulang->partai)
                             ->first();
                     @endphp
@@ -124,7 +124,7 @@
                                 {{ $timbangulang->PengundianTandingBiru->Tanding->nama ?? '' }}
                                 ({{ $timbangulang->PengundianTandingBiru->Tanding->kontingen ?? '' }})
                             @else
-                                Pemenang Partai ke-{{ $waitingPartaiBiru ? $waitingPartaiBiru->partai : '1' }}
+                                Pemenang Partai ke-{{ $waitingPartaiBiru ? $waitingPartaiBiru->partai : $waitingPartaiMerah->partai }}
                             @endif
                         </td>
                         <td class="bg-danger">

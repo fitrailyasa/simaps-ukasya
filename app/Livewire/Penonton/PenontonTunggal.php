@@ -38,10 +38,10 @@ class PenontonTunggal extends Component
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
-        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
-        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
         $this->tahap = $this->jadwal->tahap;
@@ -84,7 +84,7 @@ class PenontonTunggal extends Component
     public function gantiTahapHandler($data){
         $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tahap = $this->jadwal->tahap;
-        $this->tampil = $data["sudut_tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
             $this->tampil_nilai = false;
             $this->mulai = true;
@@ -102,13 +102,13 @@ class PenontonTunggal extends Component
     public function gantiTampilHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->tampil_nilai = false;
-        $this->tampil = $data["tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
-                $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil)->get();
-                $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+                $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
             }else{
-                $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil)->get();
-                $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+                $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
             }
     }
     

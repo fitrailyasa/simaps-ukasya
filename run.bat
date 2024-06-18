@@ -9,7 +9,7 @@ start "Reverb" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan 
 
 :: Menjalankan PHP artisan queue:listen
 start "Queue Listener" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && php artisan queue:listen"
-
+-
 :: Menjalankan npm run dev
 start "NPM Run Dev" cmd /k "cd /d C:\Users\fadil\Desktop\simaps-ukaya && npm run dev"
 

@@ -19,7 +19,7 @@
     foreach ($penilaian_tunggal_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
     }
-    if(!count($penilaian_tunggal_juri) == 0){
+    if(!count($penilaian_tunggal_juri_merah) == 0){
         $mean_merah = $total_merah / count($penilaian_tunggal_juri_merah);
     }else{
         $mean_merah = 0;

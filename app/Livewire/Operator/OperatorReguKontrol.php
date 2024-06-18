@@ -45,9 +45,9 @@ class OperatorReguKontrol extends Component
             $this->jadwal_regu->tampil = $this->jadwal_regu->PengundianTGRBiru->id;
         }
         $this->tampil = $this->jadwal_regu->TampilTGR->TGR;
-        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
-        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->waktu = 0;
         if(Auth::user()->gelanggang !== $this->jadwal_regu->Gelanggang->id){

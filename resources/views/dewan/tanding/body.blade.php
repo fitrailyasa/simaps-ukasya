@@ -1,20 +1,23 @@
 <div class="dewan-tanding-body" style="width: 100%">
     <div class="dewan-tanding-body-header d-flex" style="width: 100%">
-        <div class="kontingen-merah" style="width: 50%">
-            <h4 class="fw-bold" style="color: #db3545">
-                {{$sudut_merah->nama}}
-            </h4>
-        </div>
-        <div class="kontingen-biru text-end" style="width: 50%">
+        <div class="kontingen-biru" style="width: 50%">
             <h4 class="fw-bold" style="color: #252c94">
                 {{$sudut_biru->nama}}
+            </h4>
+        </div>
+        <div class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
+                <h2 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</h2>
+            </div>
+        <div class="kontingen-merah text-end" style="width: 50%">
+            <h4 class="fw-bold" style="color: #db3545">
+                {{$sudut_merah->nama}}
             </h4>
         </div>
     </div>
     <div class="dewan-tanding-body-content d-flex">
         <div class="pesilat-a d-flex " style="width: 45%; height: 100%;">
             <div class="peringatan" style="width: 23%">
-                <div class="peringatan-header border border-dark bg-danger text-center" >
+                <div class="peringatan-header border border-dark text-center" style="background-color: #0053a6">
                     <h5 class="fw-bold p-1 text-white">Peringatan</h5>
                 </div>
                 <div class="peringatan-content " style="height: 75%">
@@ -25,7 +28,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'peringatan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -40,7 +43,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if (($penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3 || $jadwal->babak_tanding == 2))
                                     @php
                                         $nilai += $penilaian->dewan
@@ -54,7 +57,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if (($penilaian->babak == 3 || $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3))
                                     @php
                                         $nilai += $penilaian->dewan
@@ -69,7 +72,7 @@
                 </div>
             </div>
             <div class="teguran" style="width: 23%">
-                <div class="teguran-header border border-dark bg-danger text-center" >
+                <div class="teguran-header border border-dark text-center" style="background-color: #0053a6">
                     <h5 class="fw-bold p-1 text-white">Teguran</h5>
                 </div>
                 <div class="teguran-content" style="height: 75%">
@@ -80,7 +83,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -95,7 +98,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -109,7 +112,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -124,7 +127,7 @@
                 </div>
             </div>
             <div class="binaan" style="width: 23%">
-                <div class="binaan-header border border-dark bg-danger text-center">
+                <div class="binaan-header border border-dark text-center" style="background-color: #0053a6">
                     <h5 class="fw-bold p-1 text-white">Binaan</h5>
                 </div>
                 <div class="binaan-content" style="height: 75%">
@@ -135,7 +138,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'binaan')
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -149,7 +152,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'binaan')
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -162,7 +165,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'binaan')
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -176,7 +179,7 @@
                 </div>
             </div>
             <div class="jatuhan" style="width: 31%">
-                <div class="jatuhan-header border border-dark bg-danger text-center">
+                <div class="jatuhan-header border border-dark text-center" style="background-color: #0053a6">
                     <h5 class="fw-bold p-1 text-white">Jatuhan</h5>
                 </div>
                   <div class="jatuhan-content" style="height: 75%">
@@ -187,7 +190,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -202,7 +205,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -216,7 +219,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_merah as $penilaian)
+                                @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -251,7 +254,7 @@
         </div>
         <div class="pesilat-b d-flex" style="width: 45%">
             <div class="jatuhan" style="width: 31%">
-                <div class="jatuhan-header border border-dark" style="background-color: #0053a6">
+                <div class="jatuhan-header border border-dark text-center bg-danger" >
                     <h5 class="fw-bold p-1 text-white">Jatuhan</h5>
                 </div>
                   <div class="jatuhan-content" style="height: 75%">
@@ -262,7 +265,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -277,7 +280,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -291,7 +294,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'jatuhan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -306,7 +309,7 @@
                 </div>
             </div>
             <div class="binaan" style="width: 23%">
-                <div class="binaan-header border border-dark " style="background-color: #0053a6">
+                <div class="binaan-header border border-dark text-center bg-danger" >
                     <h5 class="fw-bold p-1 text-white">Binaan</h5>
                 </div>
                 <div class="binaan-content" style="height: 75%">
@@ -317,7 +320,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru ?? null as $penilaian)
+                                @foreach ($penilaian_tanding_merah ?? null as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'binaan')
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -331,7 +334,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'binaan')
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -344,7 +347,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 binaan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'binaan')                                       
                                         @if ($penilaian ?? null)
                                             {{$penilaian->dewan !== null ? $penilaian->dewan:""}}
@@ -358,7 +361,7 @@
                 </div>
             </div>
              <div class="teguran" style="width: 23%">
-                <div class="teguran-header border border-dark " style="background-color: #0053a6" >
+                <div class="teguran-header border border-dark text-center bg-danger"  >
                     <h5 class="fw-bold p-1 text-white">Teguran</h5>
                 </div>
                 <div class="teguran-content" style="height: 75%">
@@ -369,7 +372,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -384,7 +387,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -398,7 +401,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'teguran')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -413,7 +416,7 @@
                 </div>
             </div>
             <div class="peringatan" style="width: 23%">
-                <div class="peringatan-header border border-dark " style="background-color: #0053a6">
+                <div class="peringatan-header border border-dark text-center bg-danger" >
                     <h5 class="fw-bold p-1 text-white">Peringatan</h5>
                 </div> 
                 <div class="peringatan-content" style="height: 75%">
@@ -424,7 +427,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'peringatan')
                                     @php
                                         $nilai += $penilaian->dewan
@@ -439,7 +442,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if (( $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3 || $jadwal->babak_tanding == 2))
                                     @php
                                         $nilai += $penilaian->dewan
@@ -453,7 +456,7 @@
                                $nilai = 0
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
-                                @foreach ($penilaian_tanding_biru as $penilaian)
+                                @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if (($penilaian->babak == 3 || $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3))
                                     @php
                                         $nilai += $penilaian->dewan

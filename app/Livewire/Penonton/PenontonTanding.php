@@ -36,8 +36,6 @@ class PenontonTanding extends Component
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
     public function resetIndikator(){
-        $this->gelanggang = Gelanggang::find($this->gel_id);
-        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->pukulan_merah = $this->penilaian_tanding_merah->where('jenis','pukulan')->where('aktif',true)->last();
@@ -45,7 +43,7 @@ class PenontonTanding extends Component
         $this->pukulan_biru = $this->penilaian_tanding_biru->where('jenis','pukulan')->where('aktif',true)->last();
         $this->tendangan_biru = $this->penilaian_tanding_biru->where('jenis','tendangan')->where('aktif',true)->last();
         if($this->mulai == true){
-            $this->waktu = ($this->waktu * 60 + 0.1) / 60;
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
     public function check_gelanggang()  {
@@ -126,8 +124,8 @@ class PenontonTanding extends Component
             }
             $this->gelanggang = Gelanggang::where('jenis','Tanding')->first();
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
-            $this->sudut_merah = Tanding::find($this->jadwal->sudut_merah);
-            $this->sudut_biru = Tanding::find($this->jadwal->sudut_biru);
+            $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
+            $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
         }
     }
 
