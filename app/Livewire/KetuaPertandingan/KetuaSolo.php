@@ -14,29 +14,53 @@ use App\Models\User;
 class KetuaSolo extends Component
 {
     public $jadwal;
-    public $sudut;
+    public $sudut_merah;
+    public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
     public $waktu ;
+    public $penilaian_solo_juri_merah;
+    public $penalty_solo_merah;
+    public $penilaian_solo_juri_biru;
+    public $penalty_solo_biru;
     public $penilaian_solo_juri;
     public $penalty_solo;
     public $juris;
     public $mulai = false;
-    public $tahap = 'tampil';
-    public $nilai_masuk = true;
+    public $tahap ;
+    public $tampil;
+    public $jenis = "solo";
     
 
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Solo Kreatif"){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->sudut = TGR::find($this->jadwal->sudut_merah);
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->tahap = $this->jadwal->tahap;
         $this->juris = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
-        $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->get();
-        $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut->id)->first();
+        $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
     }
 
     #[On('echo:poin,.tambah-skor-solo')]
-    public function tambahNilaiHandler(){
+    public function tambahNilaiHandler($data){
+         if($this->gelanggang->id == $data["gelanggang"]["id"]){
+             $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+             $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+         }
     }
     #[On('echo:poin,.salah-gerakan-solo')]
     public function salahGerakanHandler(){
@@ -46,6 +70,37 @@ class KetuaSolo extends Component
     }
     #[On('echo:poin,.hapus-penalty-solo')]
     public function hapusPenaltyHandler(){
+    }
+    #[On('echo:arena,.ganti-tampil-solo')]
+    public function gantiTampilHandler($data){
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($data["tampil"]['id'] == $this->sudut_merah->id){
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+            }else{
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+            }
+    }
+    
+    #[On('echo:arena,.ganti-tahap-solo')]
+    public function gantiTahapHandler($data){
+        $this->tahap = $data["tahap"];
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            $this->tahap = $this->jadwal->tahap;
+            $this->tampil = $this->jadwal->TampilTGR->TGR;
+            if($data["tahap"] == "tampil"){
+                if($data["tampil"] == "merah"){
+                    $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                    $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+                }else if($data["tampil"] == "biru"){
+                    $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+                    $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+                }
+            }else if($data["tahap"] == "keputusan"){
+                
+            }
+        }
     }
 
     #[On('echo:arena,.ganti-gelanggang')]

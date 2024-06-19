@@ -32,6 +32,7 @@ class PenontonGanda extends Component
     public $tahap ;
     public $tampil;
     public $jenis = "ganda";
+    public $tampil_nilai = false;
 
     
 
@@ -51,7 +52,7 @@ class PenontonGanda extends Component
         $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
-        $this->waktu = $this->gelanggang->waktu * 60;
+        $this->waktu = 0;
     }
 
     public function kurangiWaktu(){
@@ -83,10 +84,11 @@ class PenontonGanda extends Component
 
     #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
-        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tahap = $this->jadwal->tahap;
-        $this->tampil = $data["sudut_tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+            $this->mulai = true;
             if($data["tampil"] == "merah"){
                 $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
                 $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
@@ -96,13 +98,20 @@ class PenontonGanda extends Component
             }
         }else if($data["tahap"] == "keputusan"){
             $this->tahap = $this->jadwal->tahap;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->tampil_nilai = true;
+            $this->mulai = false;
+        }else if($data["tahap"] == "pause"){
+            $this->waktu = ($data["waktu"] * 60) / 60;
+            $this->mulai = false;
         }
     }
     #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){
         $this->tahap = $this->jadwal->tahap;
+        $this->waktu = 0;
         $this->tampil_nilai = false;
-        $this->tampil = $data["tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->get();
                 $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();

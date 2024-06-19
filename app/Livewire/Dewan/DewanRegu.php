@@ -143,10 +143,9 @@ class DewanRegu extends Component
     }
     #[On('echo:arena,.ganti-tahap-regu')]
     public function gantiTahapHandler($data){
-        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
-            $this->tampil_nilai = false;
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
             
@@ -154,7 +153,6 @@ class DewanRegu extends Component
             $this->mulai = false;
             $this->waktu = ($data["waktu"] * 60) / 60;
         }else if($data["tahap"] == "tampil nilai"){
-            $this->tampil_nilai = true;
             $this->mulai = false;
         }
     }
@@ -169,7 +167,7 @@ class DewanRegu extends Component
                 $this->penalty_regu = PenaltyRegu::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_biru->id,
+                    'sudut'=>$this->jadwal->sudut_biru,
                     'jadwal_regu'=>$this->jadwal->id
                 ]);
             }
@@ -179,7 +177,7 @@ class DewanRegu extends Component
                 $this->penalty_regu = PenaltyRegu::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_merah->id,
+                    'sudut'=>$this->jadwal->sudut_merah,
                     'jadwal_regu'=>$this->jadwal->id
                 ]);
             }
@@ -188,7 +186,7 @@ class DewanRegu extends Component
 
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        if(Auth::user()->Gelanggang->jenis != "Regu"){
+        if(Auth::user()->Gelanggang->jenis != "Regu" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }

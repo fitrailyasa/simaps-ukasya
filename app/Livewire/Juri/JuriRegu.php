@@ -113,7 +113,7 @@ class JuriRegu extends Component
 
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        if(Auth::user()->Gelanggang->jenis != "Regu"){
+        if(Auth::user()->Gelanggang->jenis != "Regu" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }

@@ -72,12 +72,6 @@
 @endphp
      <div class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
-            {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
-            </div>
-            <div class="bendera" style="width: 30%;">
-                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
-            </div> --}}
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->kontingen}}</p>
@@ -88,12 +82,6 @@
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_merah->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #db3545">{{$sudut_merah->kontingen}}</p>
             </div>
-            {{-- <div class="bendera" style="width: 30%;">
-                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
-            </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #db3545">
-                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url($sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 8px">
-            </div> --}}
         </div>
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">

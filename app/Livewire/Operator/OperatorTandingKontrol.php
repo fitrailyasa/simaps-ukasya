@@ -36,15 +36,15 @@ class OperatorTandingKontrol extends Component
     public function mount($jadwal_tanding_id){
         $this->jadwal_tandings = JadwalTanding::orderBy('partai')->get();
         $this->jadwal_tanding = JadwalTanding::find($jadwal_tanding_id);
-            foreach ($this->jadwal_tandings as $key=>$jadwal) {     
-                if ($this->jadwal_tanding->id == $jadwal->id) {
-                    if($key+1 == count($this->jadwal_tandings)){
-                        $this->next = $this->jadwal_tandings[$key]->id;
-                }else{
-                    $this->next = $this->jadwal_tandings[$key+1]->id;
-                }
-                }
+        foreach ($this->jadwal_tandings as $key=>$jadwal) {     
+            if ($this->jadwal_tanding->id == $jadwal->id) {
+                if($key+1 == count($this->jadwal_tandings)){
+                    $this->next = $this->jadwal_tandings[$key]->id;
+            }else{
+                $this->next = $this->jadwal_tandings[$key+1]->id;
             }
+            }
+        }
         $this->gelanggang = $this->jadwal_tanding->Gelanggang;
         $this->sudut_biru = Tanding::where('id',$this->jadwal_tanding->PengundianTandingBiru->atlet_id)->first();
         $this->sudut_merah = Tanding::where('id',$this->jadwal_tanding->PengundianTandingMerah->atlet_id)->first();

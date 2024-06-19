@@ -1,7 +1,7 @@
 <div class="header d-flex justify-content-between p-3" style="width: 100%">
     <div class="left" style="width: 50%">
         <span class="ml-5 fw-bold">{{$tampil->kontingen}}</span>
-        <h5 class="fw-bold" style="color:#252c94">
+        <h5 class="fw-bold" style="{{$tampil->id == $sudut_biru->id ? "color: #0053a6 !important" : "color:  red!important"}}">
             {{$tampil->nama}}
         </h5>
     </div>

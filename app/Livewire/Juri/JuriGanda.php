@@ -38,10 +38,10 @@ class JuriGanda extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
-        $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
-        $this->sudut_merah = TGR::find($this->pengundian_merah->atlet_id);
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->waktu = $this->gelanggang->waktu * 60;
         $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->tampil->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -90,9 +90,32 @@ class JuriGanda extends Component
     public function salahGerakanHandler(){
     }
 
+    #[On('echo:arena,.ganti-tahap-ganda')]
+    public function gantiTahapHandler($data){
+        
+    }
+
+    #[On('echo:arena,.ganti-tampil-ganda')]
+    public function gantiTampilHandler($data){
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
+            $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }else{
+            $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
+        $this->attack_active = $this->penilaian_ganda->attack_skor;
+        $this->firmness_active = $this->penilaian_ganda->firmness_skor;
+        $this->soulfulness_active = $this->penilaian_ganda->soulfulness_skor;
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+    }
+
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        if(Auth::user()->Gelanggang->jenis != "Ganda"){
+        if(Auth::user()->Gelanggang->jenis != "Ganda" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }

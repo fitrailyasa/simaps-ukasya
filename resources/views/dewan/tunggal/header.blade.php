@@ -12,7 +12,7 @@
     </div>
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">
-            {{$gelanggang->nama}}, Match {{$jadwal->partai}}
+            {{$gelanggang->nama}}, Partai {{$jadwal->partai}}
         </h5>
         <h4 class="fw-bold">
             Tunggal

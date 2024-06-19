@@ -84,14 +84,16 @@ class PenontonRegu extends Component
     #[On('echo:arena,.ganti-tahap-regu')]
     public function gantiTahapHandler($data){
         $this->tahap = $this->jadwal->tahap;
-        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
             $this->tampil_nilai = false;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
             
         }else if($data["tahap"] == "pause"){
+            $this->penalty_solo = PenaltyRegu::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+            $this->waktu = ($data["waktu"]) / 60;
             $this->mulai = false;
         }else if($data["tahap"] == "tampil nilai"){
             $this->tampil_nilai = true;
@@ -105,6 +107,7 @@ class PenontonRegu extends Component
     public function gantiTampilHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->tampil_nilai = false;
+        $this->waktu = 0;
         $this->tampil = $data["tampil"];
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->get();

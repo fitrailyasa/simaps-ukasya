@@ -44,8 +44,8 @@ class DewanTanding extends Component
     public function mount()
     {
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        if(Auth::user()->Gelanggang->jenis != "Tanding"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
@@ -273,8 +273,8 @@ class DewanTanding extends Component
     #[On('echo:arena,.ganti-gelanggang')]
     public function gantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
-            if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-                return redirect('dashboard');
+            if(Auth::user()->Gelanggang->jenis != "Tanding" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
+                return redirect('auth');
             }
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
             $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);

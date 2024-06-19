@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Operator;
 
+use App\Events\GantiGelanggang;
 use App\Events\Tunggal\GantiTahap;
 use App\Events\Tunggal\GantiTampil;
 use App\Models\JadwalTGR;
@@ -17,6 +18,8 @@ class OperatorTunggalKontrol extends Component
 {
 
     public $jadwal_tunggal;
+    public $jadwal_tunggals;
+    public $next;
     public $gelanggang;
     public $sudut_biru;
     public $sudut_merah;
@@ -34,7 +37,17 @@ class OperatorTunggalKontrol extends Component
     public $mulai = false;
 
     public function mount($jadwal_tunggal_id){
+        $this->jadwal_tunggals= JadwalTGR::orderBy('partai')->where('jenis',"Tunggal")->get();
         $this->jadwal_tunggal = JadwalTGR::find($jadwal_tunggal_id);
+        foreach ($this->jadwal_tunggals as $key => $jadwal) {     
+            if ($this->jadwal_tunggal->id == $jadwal->id) {
+                if($key+1 == count($this->jadwal_tunggals)){
+                    $this->next = $this->jadwal_tunggals[$key]->id;
+            }else{
+                $this->next = $this->jadwal_tunggals[$key+1]->id;
+            }
+            }
+        }
         $this->gelanggang = $this->jadwal_tunggal->Gelanggang;
         $this->sudut_biru = TGR::where('id',$this->jadwal_tunggal->PengundianTGRBiru->atlet_id)->first();
         $this->sudut_merah = TGR::where('id',$this->jadwal_tunggal->PengundianTGRMerah->atlet_id)->first();
@@ -63,6 +76,17 @@ class OperatorTunggalKontrol extends Component
         }
     }
      //operator start
+     public function nextPartai(){
+        $jadwaltunggal = JadwalTGR::find($this->next);
+        if($jadwaltunggal){
+            $this->gelanggang->jadwal = $this->next;
+            $jadwaltunggal->tahap = 'persiapan';
+            $jadwaltunggal->save();
+            $this->gelanggang->save();
+            GantiGelanggang::dispatch($jadwaltunggal->Gelanggang);
+        }
+        return redirect('op/kontrol-tgr/tunggal/'.$this->next);
+    }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){
             return;
@@ -99,18 +123,19 @@ class OperatorTunggalKontrol extends Component
             $this->jadwal_tunggal->save();
             $next_partai = JadwalTGR::where("partai",$this->jadwal_tunggal->next_partai)->first();
             if($this->jadwal_tunggal->next_sudut == 1){
+                $next_partai->tampil = $this->jadwal_tunggal->pemenang;
                 $next_partai->sudut_biru = $this->jadwal_tunggal->pemenang;
             }else{
                 $next_partai->sudut_merah = $this->jadwal_tunggal->pemenang;
             }
-        $next_partai->save();
+            $next_partai->save();
         }else if($tahap == "tampil"){
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
             $this->jadwal_tunggal->tahap = "tampil nilai";
             $this->jadwal_tunggal->save();
         }else if($tahap == "pause"){
-            if($this->tampil->id == $this->jadwal_tunggal->PengundianTGRBiru->id){
+            if($this->tampil->id == $this->sudut_biru->id){
                 $this->penalty_tunggal_biru->performa_waktu = $this->waktu;
                 $this->penalty_tunggal_biru->save();
             }else{

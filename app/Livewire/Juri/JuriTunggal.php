@@ -114,7 +114,7 @@ class JuriTunggal extends Component
 
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+        if(Auth::user()->Gelanggang->jenis != "Tunggal" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }

@@ -18,23 +18,27 @@ use App\Models\PenaltySolo;
 class DewanSolo extends Component
 {
     public $jadwal;
+    public $sudut_merah;
+    public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
     public $waktu ;
-    public $tampil;
-    public $sudut_biru;
-    public $sudut_merah;
     public $mulai = false;
     public $penalty_solo;
+    public $tampil;
 
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Solo Kreatif')->first();
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->Gelanggang->jenis != "Solo Kreatif"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
-        $this->tampil = $this->sudut_merah;
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->penalty_solo = PenaltySolo::where('sudut',$this->tampil->id)->where('jadwal_solo',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
         if(!$this->penalty_solo){
             $this->penalty_solo = PenaltySolo::create([
@@ -43,6 +47,13 @@ class DewanSolo extends Component
                 'sudut'=>$this->tampil->id,
                 'jadwal_solo'=>$this->jadwal->id
             ]);
+        }
+        $this->waktu = 0;
+    }
+
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
 
@@ -67,7 +78,7 @@ class DewanSolo extends Component
                 $this->penalty_solo->increment('senjata_jatuh');
                 break;
         }
-        PenaltyDewan::dispatch($this->jadwal, $this->tampil->id == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_solo,Auth::user());
+        PenaltyDewan::dispatch($this->jadwal, [$this->sudut_biru , $this->sudut_merah],$this->penalty_solo,Auth::user());
     }
     public function hapusPenaltyTrigger($jenis_penalty){
         switch ($jenis_penalty) {
@@ -120,7 +131,7 @@ class DewanSolo extends Component
                 }
                 break;
         }
-        HapusPenalty::dispatch($this->jadwal, $this->tampil->id == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_solo,Auth::user());
+        HapusPenalty::dispatch($this->jadwal, [$this->sudut_biru , $this->sudut_merah],$this->penalty_solo,Auth::user());
     }
 
     #[On('echo:poin,.penalty-solo')]
@@ -128,6 +139,56 @@ class DewanSolo extends Component
     }
     #[On('echo:poin,.hapus-penalty-solo')]
     public function hapusPenaltyHandler(){
+    }
+
+    #[On('echo:arena,.ganti-tahap-solo')]
+    public function gantiTahapHandler($data){
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($data["tahap"] == "tampil"){
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+            $this->mulai = true;
+        }else if($data["tahap"] == "keputusan"){
+            
+        }else if($data["tahap"] == "pause"){
+            $this->mulai = false;
+            $this->waktu = ($data["waktu"] * 60) / 60;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->mulai = false;
+        }
+    }
+
+    #[On('echo:arena,.ganti-tampil-solo')]
+    public function gantiTampilHandler($data){
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->waktu = 0;
+        if($this->tampil->id == $this->sudut_biru->id){
+            $this->penalty_solo = PenaltySolo::where('sudut',$this->sudut_biru->id)->where('jadwal_solo',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_solo){
+                $this->penalty_solo = PenaltySolo::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->jadwal->sudut_biru->id,
+                    'jadwal_solo'=>$this->jadwal->id
+                ]);
+            }
+        }else{
+            $this->penalty_solo = PenaltySolo::where('sudut',$this->sudut_merah->id)->where('jadwal_solo',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_solo){
+                $this->penalty_solo = PenaltySolo::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->jadwal->sudut_merah,
+                    'jadwal_solo'=>$this->jadwal->id
+                ]);
+            }
+        }
+    }
+
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Solo Kreatif" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
+            return redirect('auth');
+        }
     }
 
     public function render()

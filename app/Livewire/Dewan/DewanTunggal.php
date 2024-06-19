@@ -141,10 +141,9 @@ class DewanTunggal extends Component
     }
     #[On('echo:arena,.ganti-tahap-tunggal')]
     public function gantiTahapHandler($data){
-        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
-            $this->tampil_nilai = false;
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
             
@@ -152,7 +151,6 @@ class DewanTunggal extends Component
             $this->mulai = false;
             $this->waktu = ($data["waktu"] * 60) / 60;
         }else if($data["tahap"] == "tampil nilai"){
-            $this->tampil_nilai = true;
             $this->mulai = false;
         }
     }
@@ -167,7 +165,7 @@ class DewanTunggal extends Component
                 $this->penalty_tunggal = PenaltyTunggal::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_biru->id,
+                    'sudut'=>$this->jadwal->sudut_biru,
                     'jadwal_tunggal'=>$this->jadwal->id
                 ]);
             }
@@ -177,7 +175,7 @@ class DewanTunggal extends Component
                 $this->penalty_tunggal = PenaltyTunggal::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_merah->id,
+                    'sudut'=>$this->jadwal->sudut_merah,
                     'jadwal_tunggal'=>$this->jadwal->id
                 ]);
             }
@@ -186,7 +184,7 @@ class DewanTunggal extends Component
 
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
-        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+        if(Auth::user()->Gelanggang->jenis != "Tunggal" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }

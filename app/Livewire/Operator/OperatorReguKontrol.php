@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Operator;
 
+use App\Events\GantiGelanggang;
 use App\Events\Regu\GantiTahap;
 use App\Events\Regu\GantiTampil;
 use App\Models\JadwalTGR;
@@ -17,6 +18,8 @@ class OperatorReguKontrol extends Component
 {
 
     public $jadwal_regu;
+    public $jadwal_regus;
+    public $next;
     public $gelanggang;
     public $sudut_biru;
     public $sudut_merah;
@@ -35,7 +38,17 @@ class OperatorReguKontrol extends Component
     public $mulai = false;
 
     public function mount($jadwal_regu_id){
+        $this->jadwal_regus= JadwalTGR::orderBy('partai')->where('jenis',"Regu")->get();
         $this->jadwal_regu = JadwalTGR::find($jadwal_regu_id);
+        foreach ($this->jadwal_regus as $key => $jadwal) {     
+            if ($this->jadwal_regu->id == $jadwal->id) {
+                if($key+1 == count($this->jadwal_regus)){
+                    $this->next = $this->jadwal_regus[$key]->id;
+            }else{
+                $this->next = $this->jadwal_regus[$key+1]->id;
+            }
+            }
+        }
         $this->gelanggang = $this->jadwal_regu->Gelanggang;
         $this->sudut_biru = TGR::where('id',$this->jadwal_regu->PengundianTGRBiru->atlet_id)->first();
         $this->sudut_merah = TGR::where('id',$this->jadwal_regu->PengundianTGRMerah->atlet_id)->first();
@@ -64,6 +77,17 @@ class OperatorReguKontrol extends Component
         }
     }
      //operator start
+     public function nextPartai(){
+        $jadwalsolo = JadwalTGR::find($this->next);
+        if($jadwalsolo){
+            $this->gelanggang->jadwal = $this->next;
+            $jadwalsolo->tahap = 'persiapan';
+            $jadwalsolo->save();
+            $this->gelanggang->save();
+            GantiGelanggang::dispatch($jadwalsolo->Gelanggang);
+        }
+        return redirect('op/kontrol-tgr/regu/'.$this->next);
+    }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){
             return;
@@ -100,17 +124,19 @@ class OperatorReguKontrol extends Component
             $this->jadwal_regu->save();
             $next_partai = JadwalTGR::where("partai",$this->jadwal_regu->next_partai)->first();
             if($this->jadwal_regu->next_sudut == 1){
+                $next_partai->tampil = $this->jadwal_regu->pemenang;
                 $next_partai->sudut_biru = $this->jadwal_regu->pemenang;
             }else{
                 $next_partai->sudut_merah = $this->jadwal_regu->pemenang;
             }
+            $next_partai->save();
         }else if($tahap == "tampil"){
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){
             $this->jadwal_regu->tahap = "tampil nilai";
             $this->jadwal_regu->save();
         }else if($tahap == "pause"){
-            if($this->tampil->id == $this->jadwal_regu->PengundianTGRBiru->id){
+            if($this->tampil->id == $this->sudut_biru->id){
                 $this->penalty_regu_biru->performa_waktu = $this->waktu;
                 $this->penalty_regu_biru->save();
             }else{

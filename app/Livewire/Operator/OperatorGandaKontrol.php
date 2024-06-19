@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Operator;
 
+use App\Events\GantiGelanggang;
 use Livewire\Component;
 use App\Events\Ganda\GantiTahap;
 use App\Events\Ganda\GantiTampil;
@@ -17,6 +18,8 @@ use Livewire\Attributes\On;
 class OperatorGandaKontrol extends Component
 {
     public $jadwal_ganda;
+    public $jadwal_gandas;
+    public $next;
     public $gelanggang;
     public $sudut_biru;
     public $sudut_merah;
@@ -34,7 +37,17 @@ class OperatorGandaKontrol extends Component
     public $active;
     public $mulai = false;
     public function mount($jadwal_ganda_id){
+        $this->jadwal_gandas = JadwalTGR::orderBy('partai')->where('jenis',"Ganda")->get();
         $this->jadwal_ganda = JadwalTGR::find($jadwal_ganda_id);
+        foreach ($this->jadwal_gandas as $key => $jadwal) {     
+            if ($this->jadwal_ganda->id == $jadwal->id) {
+                if($key+1 == count($this->jadwal_gandas)){
+                    $this->next = $this->jadwal_gandas[$key]->id;
+            }else{
+                $this->next = $this->jadwal_gandas[$key+1]->id;
+            }
+            }
+        }
         $this->gelanggang = $this->jadwal_ganda->Gelanggang;
         $this->sudut_biru = TGR::where('id',$this->jadwal_ganda->PengundianTGRBiru->atlet_id)->first();
         $this->sudut_merah = TGR::where('id',$this->jadwal_ganda->PengundianTGRMerah->atlet_id)->first();
@@ -64,6 +77,18 @@ class OperatorGandaKontrol extends Component
     }
 
     //operator start
+
+    public function nextPartai(){
+        $jadwalganda = JadwalTGR::find($this->next);
+        if($jadwalganda){
+            $this->gelanggang->jadwal = $this->next;
+            $jadwalganda->tahap = 'persiapan';
+            $jadwalganda->save();
+            $this->gelanggang->save();
+            GantiGelanggang::dispatch($jadwalganda->Gelanggang);
+        }
+        return redirect('op/kontrol-tgr/ganda/'.$this->next);
+    }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){
             return;
@@ -100,10 +125,12 @@ class OperatorGandaKontrol extends Component
             $this->jadwal_ganda->save();
             $next_partai = JadwalTGR::where("partai",$this->jadwal_ganda->next_partai)->first();
             if($this->jadwal_ganda->next_sudut == 1){
+                $next_partai->tampil = $this->jadwal_ganda->pemenang;
                 $next_partai->sudut_biru = $this->jadwal_ganda->pemenang;
             }else{
                 $next_partai->sudut_merah = $this->jadwal_ganda->pemenang;
             }
+            $next_partai->save();
         }else if($tahap == "tampil"){
             $this->waktu = 0;
             $this->mulai = true;
@@ -111,7 +138,7 @@ class OperatorGandaKontrol extends Component
             $this->jadwal_ganda->tahap = "tampil nilai";
             $this->jadwal_ganda->save();
         }else if($tahap == "pause"){
-            if($this->tampil->id == $this->jadwal_ganda->PengundianTGRBiru->id){
+            if($this->tampil->id == $this->sudut_biru->id){
                 $this->penalty_ganda_biru->performa_waktu = $this->waktu;
                 $this->penalty_ganda_biru->save();
             }else{

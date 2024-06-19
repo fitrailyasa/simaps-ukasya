@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Operator;
 
+use App\Events\GantiGelanggang;
 use App\Models\PenaltySolo;
 use App\Models\PenilaianSolo;
 use Livewire\Component;
@@ -17,6 +18,8 @@ use Livewire\Attributes\On;
 class OperatorsoloKontrol extends Component
 {
     public $jadwal_solo;
+    public $jadwal_solos;
+    public $next;
     public $gelanggang;
     public $sudut_biru;
     public $sudut_merah;
@@ -33,7 +36,17 @@ class OperatorsoloKontrol extends Component
     public $active;
     public $mulai = false;
     public function mount($jadwal_solo_id){
+        $this->jadwal_solos = JadwalTGR::orderBy('partai')->where('jenis',"Solo Kreatif")->get();
         $this->jadwal_solo = JadwalTGR::find($jadwal_solo_id);
+        foreach ($this->jadwal_solos as $key => $jadwal) {     
+            if ($this->jadwal_solo->id == $jadwal->id) {
+                if($key+1 == count($this->jadwal_solos)){
+                    $this->next = $this->jadwal_solos[$key]->id;
+            }else{
+                $this->next = $this->jadwal_solos[$key+1]->id;
+            }
+            }
+        }
         $this->gelanggang = $this->jadwal_solo->Gelanggang;
         $this->sudut_biru = TGR::where('id',$this->jadwal_solo->PengundianTGRBiru->atlet_id)->first();
         $this->sudut_merah = TGR::where('id',$this->jadwal_solo->PengundianTGRMerah->atlet_id)->first();
@@ -63,6 +76,18 @@ class OperatorsoloKontrol extends Component
     }
 
     //operator start
+
+    public function nextPartai(){
+        $jadwalsolo = JadwalTGR::find($this->next);
+        if($jadwalsolo){
+            $this->gelanggang->jadwal = $this->next;
+            $jadwalsolo->tahap = 'persiapan';
+            $jadwalsolo->save();
+            $this->gelanggang->save();
+            GantiGelanggang::dispatch($jadwalsolo->Gelanggang);
+        }
+        return redirect('op/kontrol-tgr/solo/'.$this->next);
+    }
     public function Hapus(){
         PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->delete();
         PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->delete();
@@ -105,10 +130,12 @@ class OperatorsoloKontrol extends Component
             $this->jadwal_solo->save();
             $next_partai = JadwalTGR::where("partai",$this->jadwal_solo->next_partai)->first();
             if($this->jadwal_solo->next_sudut == 1){
+                $next_partai->tampil = $this->jadwal_solo->pemenang;
                 $next_partai->sudut_biru = $this->jadwal_solo->pemenang;
             }else{
                 $next_partai->sudut_merah = $this->jadwal_solo->pemenang;
             }
+            $next_partai->save();
         }else if($tahap == "tampil"){
             $this->mulai = true;
         }else if($tahap == "tampil nilai"){

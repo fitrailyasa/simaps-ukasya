@@ -25,9 +25,11 @@ class TambahNilai implements ShouldBroadcastNow
     public $penilaian_solo;
     public $sudut;
     public $juri;
+    public $gelanggang;
 
-    public function __construct($jadwal,$sudut,$penilaian,$juri)
+    public function __construct($jadwal,$sudut,$penilaian,$juri,$gelanggang)
     {
+        $this->gelanggang = $gelanggang;
         $this->juri = $juri;
         $this->sudut = $sudut;
         $this->penilaian_solo = $penilaian;

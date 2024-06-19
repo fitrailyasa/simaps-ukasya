@@ -467,13 +467,13 @@
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($mulai == true)
+            @if ($mulai == true  || $jadwal->tahap == "tampil")
             @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
-                    <p class="text-hasil" style="font-size: 2rem;">Timer</p>
+                    <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
-                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                        <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
                 @endif
             @else
@@ -484,7 +484,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                {{$median}}
+                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -492,7 +492,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                </h3>
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -500,7 +502,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{$penalty_ganda ? sprintf("%02d:%02d", floor($penalty_ganda->performa_waktu), ($penalty_ganda->performa_waktu*60)%60) : "00:00"}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty_ganda ? sprintf("%02d:%02d", floor($penalty_ganda->performa_waktu), ($penalty_ganda->performa_waktu*60)%60) : "00:00"}}
+                                </h3>
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -508,7 +512,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$median - $penalty *  0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$median - $penalty *  0.5}}
+                                </h3>
                             </div>
                         </div>
                         
@@ -519,7 +525,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1rem; color: #fff;margin-top: ;">Standard Deviation</p>
                             </div>
                             <div class="standard-nilai">
-                                {{$standard_deviation}}
+                                <h3 class="fw-bold mt-1" style="">
+                                    {{$standard_deviation}}
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -528,50 +536,53 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if (count($penilaian_ganda_juri) == $length*2)
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+        @if ($tampil_nilai == true)
+            
+            @if (count($penilaian_ganda_juri) == $length*2)
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                        <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                        </div>
+                        <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                        </div>
                     </div>
-                    <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                    </div>
-                </div>
-            @endforeach
-        @else
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+                @endforeach
+            @else
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
-                    <div class="up-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                        <div class="up-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                        </div>
+                        <div class="down-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                        </div>
                     </div>
-                    <div class="down-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                        <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
         @endif
     </div>
 </div>
@@ -656,13 +667,13 @@
             </div>
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
-            @if ($mulai == true)
+            @if ($mulai == true  || $jadwal->tahap == "tampil")
             @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
-                    <p class="text-hasil" style="font-size: 2rem;">Timer</p>
+                    <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
-                        <p class="text-hasil" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
+                        <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
                 @endif
             @else
@@ -673,7 +684,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                {{$median}}
+                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -681,7 +692,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Penalty</p>
                             </div>
                             <div class="penalty-nilai">
-                                {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty == 0 ? "0" : $penalty * -0.5}}
+                                </h3>
                             </div>
                         </div>
                         <div class="time-performance border border-dark" style="height: 100%;width: 40%">
@@ -689,7 +702,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Time Performance</p>
                             </div>
                             <div class="time-nilai">
-                                {{ $penalty_solo ? sprintf("%02d:%02d", floor($penalty_solo->performa_waktu), ($penalty_solo->performa_waktu*60)%60) : "00:00"}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$penalty_solo ? sprintf("%02d:%02d", floor($penalty_solo->performa_waktu), ($penalty_solo->performa_waktu*60)%60) : "00:00"}}
+                                </h3>
                             </div>
                         </div>
                         <div class="total border border-dark" style="height: 100%;width: 20%">
@@ -697,7 +712,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Total</p>
                             </div>
                             <div class="total-nilai">
-                                {{$median - $penalty *  0.5}}
+                                <h3 class="fw-bold" style="margin-top: -16px">
+                                    {{$median - $penalty *  0.5}}
+                                </h3>
                             </div>
                         </div>
                         
@@ -708,7 +725,9 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1rem; color: #fff;margin-top: ;">Standard Deviation</p>
                             </div>
                             <div class="standard-nilai">
-                                {{$standard_deviation}}
+                                <h3 class="fw-bold mt-1" style="">
+                                    {{$standard_deviation}}
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -717,55 +736,54 @@
         </div>
     </div>
     <div class="tgr-content mt-5 d-flex text-center" style="width: 100%;height: 40%;">
-        @if (count($penilaian_solo_juri) == $length*2)
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-                    
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+        @if ($tampil_nilai == true)
+            
+            @if (count($penilaian_solo_juri) == $length*2)
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{($i == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
-                </div>
-                <div class="down-{{$i}} {{($i  == $length || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
-        @else
-            @foreach ($sorted_nilai as $i => $nilai)
-                @php
-                    $juri_id = $nilai->juri;
-        
-                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                    $juri_name = '';
-                    foreach ($juris as $j) {
-                        if ($j->id == $juri_id) {
-                            $juri_name = $j->name;
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                        <div class="up-{{$i}} {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                        </div>
+                        <div class="down-{{$i}} {{($i  == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                @foreach ($sorted_nilai as $i => $nilai)
+                    @php
+                        $juri_id = $nilai->juri;
+            
+                        // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                        $juri_name = '';
+                        foreach ($juris as $j) {
+                            if ($j->id == $juri_id) {
+                                $juri_name = $j->name;
+                            }
                         }
-                    }
-                @endphp
-                <div class="box gap-1 p-1 d-flex flex-column jsutfy-content-center" style="width: {{100/$length*2}}%">
-                <div class="up-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
-                </div>
-                <div class="down-{{$i}} {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
-                    <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
-                </div>
-            </div>
-            @endforeach
+                    @endphp
+                    <div class="box gap-1 p-1 d-flex flex-column justify-content-center" style="width: {{100/$length*2}}%">
+                        <div class="up-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{$juri_name}}</p>
+                        </div>
+                        <div class="down-{{$i}} {{( $i  == $length -1) ? "bg-success" : "bg-primary"}}" style="height: 50%;width: 100%">
+                            <p class="text-hasil fw-bold mt-1" style="font-size: 2rem;">{{number_format($nilai->skor,2)}}</p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         @endif
-        
-        @for ($i = 1; $i <= 10; $i++)
-        
-        @endfor
     </div>
 </div>
 

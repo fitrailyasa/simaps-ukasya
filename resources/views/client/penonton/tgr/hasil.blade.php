@@ -455,7 +455,7 @@
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
         <p class="text-hasil fw-bold" style="font-size: 1.5rem;">Winner</p>
-        @if ($jadwal->pemenang == $sudut_biru->id)
+        @if ($jadwal->pemenang == $pengundian_biru->id)
             <p class="fw-bold" style="font-size: 1.2rem; color: #0053a6; margin-top: -24px;">Biru</p>
         @else
             <p class="fw-bold" style="font-size: 1.2rem; color: #db3545;">Merah</p>
@@ -511,13 +511,10 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #db3545;">
+                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
                             </div>
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 10%;height: 100%;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">-</p>
-                            </div>
-                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #0053a6">
+                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
                             </div>
                     </div>
@@ -567,7 +564,11 @@
     }else{
         $length = (count($penilaian_solo_juri_biru)+1)/2;
     }
-    $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo->keluar_arena+$penalty_solo->menyentuh_lantai+$penalty_solo->pakaian+$penalty_solo->tidak_bergerak;
+    if($penalty_solo_biru){
+        $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo_biru->keluar_arena+$penalty_solo_biru->menyentuh_lantai+$penalty_solo_biru->pakaian+$penalty_solo_biru->tidak_bergerak;
+    }else{
+        $penalty_biru = 0;
+    }    
     $total_biru = 0;
     foreach ($penilaian_solo_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
@@ -619,7 +620,7 @@
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
         <p class="text-hasil fw-bold" style="font-size: 1.5rem;">Winner</p>
-        @if ($jadwal->pemenang == $sudut_biru->id)
+        @if ($jadwal->pemenang == $pengundian_biru->id)
             <p class="fw-bold" style="font-size: 1.2rem; color: #0053a6; margin-top: -24px;">Biru</p>
         @else
             <p class="fw-bold" style="font-size: 1.2rem; color: #db3545;">Merah</p>
@@ -675,13 +676,10 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #db3545;">
+                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
                             </div>
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 10%;height: 100%;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">-</p>
-                            </div>
-                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #0053a6">
+                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
                             </div>
                     </div>

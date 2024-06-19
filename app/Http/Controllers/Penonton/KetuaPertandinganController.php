@@ -18,19 +18,18 @@ class KetuaPertandinganController extends Controller
         switch ($gelanggang->jenis) {
             case 'Tanding':
                 return redirect('/ketuapertandingan/tanding/'.$gelanggang_id);
-                break;
             case 'Tunggal':
                 return redirect('/ketuapertandingan/tunggal/'.$gelanggang_id);
-                break;
+            
             case 'Regu':
                 return redirect('/ketuapertandingan/regu/'.$gelanggang_id);
-                break;
+            
             case 'Ganda':
                 return redirect('/ketuapertandingan/ganda/'.$gelanggang_id);
-                break;
+            
             case 'Solo Kreatif':
                 return redirect('/ketuapertandingan/solo/'.$gelanggang_id);
-                break;
+            
         }
     }
 }

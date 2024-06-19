@@ -31,6 +31,7 @@ class PenontonSolo extends Component
     public $tahap ;
     public $tampil;
     public $jenis = "solo";
+    public $tampil_nilai = false;
 
     
 
@@ -50,7 +51,13 @@ class PenontonSolo extends Component
         $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
-        $this->waktu = $this->gelanggang->waktu * 60;
+        $this->waktu = 0;
+    }
+
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
     }
 
     public function check_gelanggang()  {
@@ -76,10 +83,11 @@ class PenontonSolo extends Component
 
     #[On('echo:arena,.ganti-tahap-solo')]
     public function gantiTahapHandler($data){
-        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
         $this->tahap = $this->jadwal->tahap;
-        $this->tampil = $data["sudut_tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
+            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+            $this->mulai = true;
             if($data["tampil"] == "merah"){
                 $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->get();
                 $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
@@ -89,7 +97,28 @@ class PenontonSolo extends Component
             }
         }else if($data["tahap"] == "keputusan"){
             $this->tahap = $this->jadwal->tahap;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->tampil_nilai = true;
+            $this->mulai = false;
+        }else if($data["tahap"] == "pause"){
+            $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
+            $this->waktu = ($data["waktu"] * 60) / 60;
+            $this->mulai = false;
         }
+    }
+    #[On('echo:arena,.ganti-tampil-solo')]
+    public function gantiTampilHandler($data){
+        $this->tahap = $this->jadwal->tahap;
+        $this->waktu = 0;
+        $this->tampil_nilai = false;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($data["tampil"]['id'] == $this->sudut_merah->id){
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }else{
+                $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->get();
+                $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
+            }
     }
 
     #[On('echo:arena,.ganti-gelanggang')]

@@ -326,7 +326,7 @@ class JuriTanding extends Component
 
     #[On('echo:arena,.ganti-gelanggang')]
     public function gantiGelanggangHandler($data){
-        if($data['gelanggang']['jenis'] != "Tanding"){
+        if($data['gelanggang']['jenis'] != "Tanding" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
