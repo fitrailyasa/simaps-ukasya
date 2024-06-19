@@ -184,6 +184,13 @@ class DewanTunggal extends Component
         }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+            return redirect('auth');
+        }
+    }
+
     public function render()
     {
         

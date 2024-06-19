@@ -20,7 +20,7 @@ class OperatorJadwalTGR extends Component
     {
         $this->gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang);
         $this->pengundiantgrs = PengundianTGR::latest('id')->get();
-        $this->jadwaltgrs = JadwalTGR::latest('id')->where('jenis',$this->gelanggang_operator->jenis)->get();
+        $this->jadwaltgrs = JadwalTGR::orderBy('partai')->where('jenis',$this->gelanggang_operator->jenis)->get();
 
     }
 

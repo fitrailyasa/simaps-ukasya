@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Livewire\Dewan;
-
-use App\Events\Tanding\MulaiPertandingan;
 use App\Models\PengundianTanding;
 use App\Models\User;
 use App\Models\VerifikasiJatuhan;
@@ -17,10 +15,7 @@ use App\Events\Tanding\TambahPeringatan;
 use App\Events\Tanding\TambahTeguran;
 use App\Events\Tanding\TambahJatuhan;
 use App\Events\Tanding\TambahBinaan;
-use App\Events\Tanding\GantiBabak;
-use App\Events\Tanding\Hapus;
 use App\Models\JadwalTanding;
-use App\Models\Tanding;
 use App\Models\Gelanggang;
 use App\Models\PenilaianTanding;
 
@@ -86,7 +81,7 @@ class DewanTanding extends Component
     public function tambahPeringatanTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
             $nilai = -5;
-            if($id == $this->jadwal->sudut_biru){
+            if($id == $this->sudut_biru->id){
                 if(count($this->penilaian_tanding_biru->where('jenis', 'peringatan'))>=1){
                 $nilai = -10;
                 };
@@ -120,13 +115,13 @@ class DewanTanding extends Component
     public function tambahTeguranTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
             $nilai = -1;
-            if($id == $this->jadwal->sudut_biru){
-                if(count($this->penilaian_tanding_biru->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'teguran'))>=1){
-                $nilai = -2;
+            if($id == $this->sudut_biru->id){
+                if(count($this->penilaian_tanding_biru->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'teguran')) >= 1){
+                    $nilai = -2;
                 };
             }else{
-                if(count($this->penilaian_tanding_merah->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'teguran'))>=1){
-                $nilai = -2;
+                if(count($this->penilaian_tanding_merah->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'teguran')) >= 1){
+                    $nilai = -2;
                 }
             }
             PenilaianTanding::create([
@@ -199,6 +194,18 @@ class DewanTanding extends Component
         }  
     }
 
+    public function resetVerifikasiJatuhan(){
+        $this->juri_verifikasi_jatuhan=[];
+        $this->created_at = null;
+        $this->verifikasi_jatuhan;
+    }
+
+    public function resetVerifikasiPelanggaran(){
+        $this->juri_verifikasi_pelanggaran=[];
+        $this->created_at = null;
+        $this->verifikasi_pelanggaran = null;
+    }
+
     public function VerifikasiJatuhanTrigger(){
             $this->juri = User::where('roles_id', 4)
                 ->where('gelanggang', $this->gelanggang->id)
@@ -213,8 +220,8 @@ class DewanTanding extends Component
                     'jadwal_tanding' => $this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_jatuhan)
                 ]);
-        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
-        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->verifikasi_jatuhan_data = $this->juri_verifikasi_jatuhan;
+        $this->created_at = $this->verifikasi_jatuhan->created_at->setTimezone('Asia/Jakarta')->format('d F Y H:i');
         VerifikasiJatuhanEvent::dispatch($this->verifikasi_jatuhan,$this->jadwal);
     }
     public function VerifikasiPelanggaranTrigger(){
@@ -231,6 +238,8 @@ class DewanTanding extends Component
                     'jadwal_tanding' => $this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_pelanggaran)
                 ]);
+            $this->verifikasi_pelanggaran_data = $this->juri_verifikasi_pelanggaran;
+            $this->created_at = $this->verifikasi_pelanggaran->created_at->setTimezone('Asia/Jakarta')->format('d F Y H:i');
             VerifikasiPelanggaranEvent::dispatch($this->verifikasi_pelanggaran,$this->jadwal);
     }
 
@@ -252,12 +261,13 @@ class DewanTanding extends Component
     }
     #[On('echo:poin,.hapus')]
     public function hapusHandler(){
-        
+        $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
+        $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
     #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
-            $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+            
         }
     }
     #[On('echo:arena,.ganti-gelanggang')]

@@ -27,14 +27,21 @@ class KetuaTanding extends Component
     public $poin_biru;
     public $peringatan_biru;
     public $peringatan_merah;
+    public $pengundian_merah;
+    public $pengundian_biru;
 
         
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Tanding"){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        }
         $this->juris = User::where('gelanggang', $this->gelanggang->id)->where('roles_id',4)->where('status',true)->whereIn('permissions',["Juri 1","Juri 2","Juri 3"])->get();
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
         $this->tahap = $this->jadwal->tahap;
         $this->waktu = 0;
+        $this->pengundian_merah = $this->jadwal->PengundianTandingMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTandingBiru;
         $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
         $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
         $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();

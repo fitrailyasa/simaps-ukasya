@@ -16,7 +16,7 @@
         $banyak_pukulan_biru = 0;
         $banyak_tendangan_biru = 0;
 
-        foreach ($poin_merah as $poin) {
+        foreach ($poin_merah->where('status','sah') as $poin) {
             switch ($poin->jenis) {
                 case 'jatuhan':
                     $jatuhan_merah += 1;
@@ -44,7 +44,7 @@
             }
         }
         
-        foreach ($poin_biru as $poin) {
+        foreach ($poin_biru->where('status','sah') as $poin) {
             switch ($poin->jenis) {
                 case 'jatuhan':
                     $jatuhan_biru += 1;
@@ -79,7 +79,7 @@
             <div class="modal-content-body border border-dark">
                 <div class="modal-body-header text-center">
                     <h5 class="fw-bold">Pertandingan Ini Dimenangkan Oleh Pesilat dari Sudut</h5>
-                    @if($jadwal->Ppemenang == $sudut_merah->id)
+                    @if($jadwal->pemenang == $pengundian_merah->id)
                     <h5 class="fw-bold" style="color: #db3545">Merah</h5>
                     @else
                         <h5 class="fw-bold" style="color: #252c94">Biru</h5>

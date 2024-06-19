@@ -122,7 +122,7 @@
                     <h4 class="fw-bold mt-4" style="color:#252c94">{{ $sudut_biru->nama}}</h4>
                 </div>
                 <div class="biru-score d-flex flex-column justify-content-center" style="height: 100%">
-                    <h3 class="fw-bold" style="color:#252c94">{{$total_poin_biru}}</h3>
+                    <h3 class="fw-bold" style="color:#252c94; font-size: 5rem">{{$total_poin_biru}}</h3>
                 </div>
             </div>
             <div class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
@@ -130,7 +130,7 @@
             </div>
             <div class="merah  d-flex justify-content-between p-2" style="width: 40%">
                 <div class="merah-score d-flex flex-column justify-content-center">
-                    <h3 class="fw-bold" style="color: #db3545 ">{{$total_poin_merah }}</h3>
+                    <h3 class="fw-bold" style="color: #db3545; font-size: 5rem">{{$total_poin_merah }}</h3>
                 </div>
                 <div class="merah-nama text-end">
                     <h5 class="mr-4 fw-bold">{{ $sudut_merah->kontingen }}</h5>

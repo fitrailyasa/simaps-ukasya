@@ -27,6 +27,9 @@ class PenontonTanding extends Component
     public $gel_id;
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Tanding"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
         $this->gel_id = $this->gelanggang->id;
         $this->waktu = 0;
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
@@ -126,6 +129,13 @@ class PenontonTanding extends Component
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
             $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
             $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
+        }
+    }
+
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler($data){
+        if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            return redirect('/penonton/'.$this->gelanggang->id);
         }
     }
 

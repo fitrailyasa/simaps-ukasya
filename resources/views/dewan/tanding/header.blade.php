@@ -7,7 +7,7 @@
     <div class="jenis text-center" style="width: 40%">
         <div class="row-1">
             <h4 class="fw-bold">
-                DEWAN <br/> PERTANDINGAN
+                DEWAN PERTANDINGAN
             </h4>
         </div>
         <div class="row-2">

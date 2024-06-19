@@ -53,11 +53,11 @@
                         @if (auth()->user()->Gelanggang->id == $jadwaltgr->Gelanggang->id && $gelanggang_operator->jenis == $jadwaltgr->jenis)
                             @php
                         $waitingPartaiMerah = $jadwaltgrs
-                            ->where('next_sudut', 1)
+                            ->where('next_sudut', 2)
                             ->where('next_partai', $jadwaltgr->partai)
                             ->first();
                         $waitingPartaiBiru = $jadwaltgrs
-                            ->where('next_sudut', 2)
+                            ->where('next_sudut', 1)
                             ->where('next_partai', $jadwaltgr->partai)
                             ->first();
                     @endphp

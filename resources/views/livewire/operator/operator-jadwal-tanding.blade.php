@@ -53,11 +53,11 @@
                         @if (auth()->user()->Gelanggang->jenis == $jadwaltanding->Gelanggang->jenis)
                         @php
                             $waitingPartaiMerah = $jadwaltandings
-                                ->where('next_sudut', 1)
+                                ->where('next_sudut', 2)
                                 ->where('next_partai', $jadwaltanding->partai)
                                 ->first();
                             $waitingPartaiBiru = $jadwaltandings
-                                ->where('next_sudut', 2)
+                                ->where('next_sudut', 1)
                                 ->where('next_partai', $jadwaltanding->partai)
                                 ->first();
                         @endphp
@@ -95,7 +95,7 @@
                             <td>{{ $jadwaltanding->skor_biru ?? '0' }} -
                                 {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                             <td class="manage-row justify-content-center d-flex flex-row">
-                                @if ($gelanggang_operator->Jadwal_Tanding && $jadwaltanding->partai == $gelanggang_operator->Jadwal_Tanding->partai &&  $jadwaltanding->tahap == "persiapan"  && $gelanggang_operator->jenis == "Tanding")
+                                @if ($gelanggang_operator->Jadwal_Tanding && $jadwaltanding->partai == $gelanggang_operator->Jadwal_Tanding->partai &&  ($jadwaltanding->tahap == "persiapan" || $jadwaltanding->tahap == "tanding" )  && $gelanggang_operator->jenis == "Tanding")
                                     <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tanding/{{$jadwaltanding->id}}">
                                         <i class="fa fa-tv"></i>
                                     </a>

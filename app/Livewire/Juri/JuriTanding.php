@@ -166,7 +166,10 @@ class JuriTanding extends Component
 
     public function verifikasiJatuhanTrigger($verifikasi){
         $this->pilihan = $verifikasi;
-                $verifikasi_jatuhan = VerifikasiJatuhan::where('jadwal_tanding',$this->jadwal->id)->where('status',1)->first();
+        $verifikasi_jatuhan = VerifikasiJatuhan::where('jadwal_tanding', $this->jadwal->id)
+        ->where('status', 1)
+        ->orderBy('created_at', 'desc') // Misalnya menggunakan 'created_at' atau kolom lain yang relevan
+        ->first();
                 $this->user = User::where('id',Auth::user()->id)->first();
                 $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
                 $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
@@ -223,7 +226,10 @@ class JuriTanding extends Component
     }
     public function verifikasiPelanggaranTrigger($verifikasi){
         $this->pilihan = $verifikasi;
-        $verifikasi_pelanggaran = VerifikasiPelanggaran::where('jadwal_tanding',$this->jadwal->id)->where('status',1)->first();
+        $verifikasi_pelanggaran = VerifikasiPelanggaran::where('jadwal_tanding', $this->jadwal->id)
+        ->where('status', 1)
+        ->latest('created_at')
+        ->first();
                 $this->user = User::where('id',Auth::user()->id)->first();
                 $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
                 $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
@@ -310,6 +316,8 @@ class JuriTanding extends Component
     }
     #[On('echo:poin,.hapus')]
     public function hapusHandler(){
+        $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+        $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
     }
      #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler(){

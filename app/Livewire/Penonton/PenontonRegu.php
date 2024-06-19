@@ -37,6 +37,9 @@ class PenontonRegu extends Component
 
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Regu"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);

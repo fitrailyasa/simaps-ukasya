@@ -186,6 +186,13 @@ class DewanRegu extends Component
         }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Regu"){
+            return redirect('auth');
+        }
+    }
+
     public function render()
     {
         

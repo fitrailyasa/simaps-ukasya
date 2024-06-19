@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('attack_skor')->default(0);
             $table->float('firmness_skor')->default(0);
             $table->float('soulfulness_skor')->default(0);
-            $table->float('skor')->default(0);
+            $table->float('skor')->default(0.1);
             $table->timestamps();
         });
     }

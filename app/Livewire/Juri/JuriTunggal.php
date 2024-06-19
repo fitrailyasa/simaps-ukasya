@@ -29,8 +29,8 @@ class JuriTunggal extends Component
     
     public function mount(){
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
@@ -110,6 +110,13 @@ class JuriTunggal extends Component
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
         $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+    }
+
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+            return redirect('auth');
+        }
     }
 
     public function render()

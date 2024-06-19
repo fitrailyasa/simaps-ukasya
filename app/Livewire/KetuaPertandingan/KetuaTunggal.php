@@ -35,6 +35,9 @@ class KetuaTunggal extends Component
 
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Tunggal"){
+            return redirect('/ketuapertandingan/'.$this->gelanggang->id);
+        }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;

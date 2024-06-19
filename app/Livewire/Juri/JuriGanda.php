@@ -27,11 +27,15 @@ class JuriGanda extends Component
     public $mulai = false;
     public $penilaian_ganda;
     public $tampil;
+    public $attack_active;
+    public $firmness_active;
+    public $soulfulness_active;
+
     
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Ganda')->first();
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->Gelanggang->jenis != "Ganda"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
@@ -50,25 +54,31 @@ class JuriGanda extends Component
             ]);
             TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
         }
+        $this->attack_active = $this->penilaian_ganda->attack_skor;
+        $this->firmness_active = $this->penilaian_ganda->firmness_skor;
+        $this->soulfulness_active = $this->penilaian_ganda->soulfulness_skor;
     }
 
     public function tambahNilaiTrigger($value,$jenis_skor){
         $value/=100;
         switch ($jenis_skor) {
             case 'attack_skor':
-                $this->penilaian_ganda->attack_skor+=$value;
+                $this->attack_active = $value;
+                $this->penilaian_ganda->attack_skor = $value;
                 $this->penilaian_ganda->save();
                 break;
             case 'firmness_skor':
-                $this->penilaian_ganda->firmness_skor+=$value;
+                $this->firmness_active = $value;
+                $this->penilaian_ganda->firmness_skor = $value;
                 $this->penilaian_ganda->save();
                 break;
             case 'soulfulness_skor':
-                $this->penilaian_ganda->soulfulness_skor+=$value;
+                $this->soulfulness_active = $value;
+                $this->penilaian_ganda->soulfulness_skor = $value;
                 $this->penilaian_ganda->save();
                 break;
         }
-        $this->penilaian_ganda->skor += $value;
+        $this->penilaian_ganda->skor = 0.1 + $this->penilaian_ganda->attack_skor + $this->penilaian_ganda->firmness_skor + $this->penilaian_ganda->soulfulness_skor;
         $this->penilaian_ganda->save();
         TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
@@ -78,6 +88,13 @@ class JuriGanda extends Component
     }
     #[On('echo:poin,.salah-gerakan-ganda')]
     public function salahGerakanHandler(){
+    }
+
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Ganda"){
+            return redirect('auth');
+        }
     }
 
     public function render()

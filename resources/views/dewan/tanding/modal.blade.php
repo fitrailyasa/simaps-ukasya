@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       @if ($verifikasi_jatuhan && $verifikasi_jatuhan->status == 1)   
+       @if ($verifikasi_jatuhan)   
           @foreach ($juri as $jjuri)
               <div class="juri">
                 {{$jjuri['name']}} : {{$verifikasi_jatuhan_data[$jjuri['name']]}}
@@ -35,7 +35,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       @if ($verifikasi_pelanggaran && $verifikasi_pelanggaran->status == 1)   
+       @if ($verifikasi_pelanggaran)   
           @foreach ($juri as $jjuri)
               <div class="juri">
                 {{$jjuri['name']}} : {{$verifikasi_pelanggaran_data[$jjuri['name']]}}

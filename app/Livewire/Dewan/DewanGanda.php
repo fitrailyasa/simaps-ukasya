@@ -191,6 +191,13 @@ class DewanGanda extends Component
     public function hapusPenaltyHandler(){
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        if(Auth::user()->Gelanggang->jenis != "Ganda"){
+            return redirect('auth');
+        }
+    }
+
     public function render()
     {
         

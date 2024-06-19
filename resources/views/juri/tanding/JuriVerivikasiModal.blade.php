@@ -16,8 +16,8 @@
             <div class="modal-second-line border border-secondary text-center" style="background-color: #EEEEEE;">
                 <h5>Pilihan {{$user->name}}</h5>
             </div>
-            <div class="modal-third-line border border-secondary text-center ">
-                <h5 class="waiting">{{$pilihan}}</h5>
+            <div style="{{$pilihan == "biru" ? "background-color:#252c94" : ""}} {{$pilihan == "merah" ? "background-color:#db3545" : ""}}" class="modal-third-line border border-secondary text-center {{$pilihan == "invalid" ? "bg-warning" : ""}}">
+                <h5 class="waiting text-white">{{$pilihan}}</h5>
             </div>
            </div>
         </div>
@@ -48,8 +48,8 @@
             <div class="modal-second-line border border-secondary text-center" style="background-color: #EEEEEE;">
                 <h5>Pilihan {{$user->name}}</h5>
             </div>
-            <div class="modal-third-line border border-secondary text-center ">
-                <h5 class="waiting">{{$pilihan}}</h5>
+            <div style="{{$pilihan == "biru" ? "background-color:#252c94" : ""}} {{$pilihan == "merah" ? "background-color:#db3545" : ""}}" class="modal-third-line border border-secondary text-center {{$pilihan == "invalid" ? "bg-warning" : ""}}">
+                <h5 class="waiting text-white">{{$pilihan}}</h5>
             </div>
            </div>
         </div>

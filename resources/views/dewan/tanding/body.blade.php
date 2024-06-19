@@ -30,12 +30,9 @@
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'peringatan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -45,12 +42,9 @@
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if (($penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3 || $jadwal->babak_tanding == 2))
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -59,12 +53,9 @@
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if (($penilaian->babak == 3 || $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3))
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>
@@ -85,12 +76,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -100,12 +88,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -114,12 +99,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>
@@ -192,12 +174,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -207,12 +186,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -221,12 +197,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_biru as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>
@@ -267,12 +240,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -282,12 +252,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -296,12 +263,9 @@
                              <h5 class="fw-bold p-1 jatuhan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'jatuhan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>
@@ -374,12 +338,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 1 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -389,12 +350,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 2 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -403,12 +361,9 @@
                              <h5 class="fw-bold p-1 teguran-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if ($penilaian->babak == 3 && $penilaian->jenis == 'teguran')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                        {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>
@@ -428,13 +383,10 @@
                             @endphp
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
-                                    @if ($penilaian->babak == 1 && $penilaian->jenis == 'peringatan')
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    @if ($penilaian->babak == 1 && $penilaian->jenis == 'peringatan')      
+                                        {{$penilaian->dewan}}
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              </h5>
                             @elseif(2 == $i)
@@ -444,12 +396,9 @@
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if (( $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3 || $jadwal->babak_tanding == 2))
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                        {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>  
                              @elseif(3 == $i)
                              @php
@@ -458,12 +407,9 @@
                              <h5 class="fw-bold p-1 peringatan-{{$i}}">
                                 @foreach ($penilaian_tanding_merah as $penilaian)
                                     @if (($penilaian->babak == 3 || $penilaian->babak == 1 || $penilaian->babak == 2) && $penilaian->jenis == 'peringatan' && ($jadwal->babak_tanding == 3))
-                                    @php
-                                        $nilai += $penilaian->dewan
-                                    @endphp                                        
+                                    {{$penilaian->dewan}}                                        
                                     @endif
                                 @endforeach
-                                {{$nilai == 0 ? " " : $nilai}}
                              </h5>    
                             @endif
                         </div>

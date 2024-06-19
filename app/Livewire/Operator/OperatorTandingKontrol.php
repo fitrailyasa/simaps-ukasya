@@ -4,6 +4,7 @@ namespace App\Livewire\Operator;
 
 use App\Events\GantiGelanggang;
 use App\Events\Tanding\GantiBabak;
+use App\Events\Tanding\Hapus;
 use App\Events\Tanding\MulaiPertandingan;
 use App\Models\JadwalTanding;
 use App\Models\PengundianTanding;
@@ -80,7 +81,17 @@ class OperatorTandingKontrol extends Component
         return redirect('op/kontrol-tanding/'.$this->next);
     }
     public function Hapus(){
-        $this->poin_merah->delete();
+        PenilaianTanding::where('sudut', $this->sudut_merah->id)
+        ->where('jadwal_tanding', $this->jadwal_tanding->id)
+        ->delete();
+
+        PenilaianTanding::where('sudut', $this->sudut_biru->id)
+        ->where('jadwal_tanding', $this->jadwal_tanding->id)
+        ->delete();
+
+        $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+        $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();  
+        Hapus::dispatch($this->jadwal_tanding);
     }
     public function kurangiWaktu(){
         if($this->waktu >= $this->gelanggang->waktu){
@@ -149,13 +160,13 @@ class OperatorTandingKontrol extends Component
     }
     public function gantiBabak($babak){
         //ganti babak 
+        $this->active = "babak_".$babak;
         $this->waktu = 0;
         if($this->jadwal_tanding->babak_tanding != $babak){
             $this->mulai = false;
             $this->gelanggang->save();
         }
         $this->jadwal_tanding->babak_tanding = $babak;
-        $this->active = "babak_".$babak;
         $this->jadwal_tanding->tahap = "tanding";
         $this->jadwal_tanding->save();   
         GantiBabak::dispatch($babak,$this->jadwal_tanding);

@@ -6,28 +6,26 @@
         position: relative;
     "
 >
-    <div class="row justify-content-md-center m-2">
+    <div class="row justify-content-md-center ml-2 mr-2 mt-2" >
         <div class="col-md-4 d-flex justify-content-center">
             <h3 class="fw-bold">{{$user->name}}</h3>
         </div>
     </div>
-    
-    
-    <div class="d-flex flex-row justify-content-between  p-1 m-1 row" style="width:100%; margin-top: 76px !important; margin-bottom: -28px !important">
+    <div class="d-flex flex-row justify-content-between  p-1 m-1 row" style="width:100%;">
         <div class=" col-md-3 text-center">
             <h5 class="fw-bold text-white  p-3 rounded kontingen" style="background-color: #0053a6; margin-left: 14px">{{$sudut_biru->nama}}, {{$sudut_merah->kontingen}}</h5>
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
-            <h4 class="fw-bold">{{$gelanggang->nama}}</h4>
+        <div class="col-md-3 d-flex justify-content-center align-items-center"> 
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <h4 class="fw-bold text-center">{{$gelanggang->nama}}</h4>
+                    <button id="fullscreen-btn" class="btn btn-primary border d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        <div class="col-md-3 text-center">
+            <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 2px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
         </div>
-        <div class="mr-4 col-md-3 text-center">
-            <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 12px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
-        </div>
-    </div>
-    <div class="row mt-3 d-flex flex-row justify-content-center">
-        <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
-            <i class="fa fa-expand"></i>
-        </button>
     </div>
     <div class="row m-3" style="margin-top: 0px !important; width:100%">
         <div class="row mt-1" style=" width:100%">
@@ -161,7 +159,7 @@
             </div>
         </div>
     </div>
-    <div class="row m-3 ">
+    <div class="row ml-3 mr-3 " style="margin-top: -24px">
         <div class="col d-flex justify-content-between" style="margin-left: -8px">
             <div class="poin p-1 m-1" style="width: 50%">
                 <div class="poin p-1 m-1" style="width: 100%">
