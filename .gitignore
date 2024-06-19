@@ -17,5 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-run.bat
-vite.config.js
+/run.bat
+/vite.config.js
