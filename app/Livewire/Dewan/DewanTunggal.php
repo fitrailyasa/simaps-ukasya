@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Dewan;
 
-use App\Events\Tunggal\GantiTampil;
-use App\Models\PengundianTGR;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
@@ -29,13 +27,13 @@ class DewanTunggal extends Component
     public $penalty_tunggal;
 
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Tunggal')->first();
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->Gelanggang->jenis != "Tunggal"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
         $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
         $this->tampil = $this->jadwal->TampilTGR->TGR;

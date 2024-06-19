@@ -183,14 +183,9 @@
             <div class="p-2 bg-danger text-white" style="width: 40%">{{$sudut_merah->nama}}</div>
           </div>
         </div>
-        <div class="text-center my-3" style="width: 100%"> 
-          <img src="https://via.placeholder.com/100" alt="Team 1" style="width: 40%">
-          <span class="mx-3 border" style="width: 10%">VS</span>
-          <img src="https://via.placeholder.com/100" alt="Team 2" style="width: 40%">
-        </div>
         <div class="d-flex justify-content-center mb-3 text-center">
             <div class="p-2 bg-primary text-white" style="width: 40%">{{$sudut_biru->kontingen}}</div>
-            <div class="p-2 bg-light text-dark border" style="width: 10%">VS</div>
+            <div class="p-2 text-dark" style="width: 10%"> </div>
             <div class="p-2 bg-danger text-white" style="width: 40%">{{$sudut_merah->kontingen}}</div>
         </div>
         <div class="mb-3">

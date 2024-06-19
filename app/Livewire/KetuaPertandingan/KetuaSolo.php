@@ -51,6 +51,8 @@ class KetuaSolo extends Component
     #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
+            $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+            $this->tahap = $this->jadwal->tahap;
             return redirect('/ketuapertandingan/'.$this->gelanggang->id);
         }
     }

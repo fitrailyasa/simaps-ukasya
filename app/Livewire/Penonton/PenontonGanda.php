@@ -112,6 +112,12 @@ class PenontonGanda extends Component
             }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        $this->tahap = $this->jadwal->tahap;
+        return redirect('/penonton/'.$this->gelanggang->id);
+    }
     public function render()
     {
         return view('livewire.penonton-ganda')->extends('layouts.client.app')->section('content');

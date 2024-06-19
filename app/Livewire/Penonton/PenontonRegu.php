@@ -82,7 +82,7 @@ class PenontonRegu extends Component
     public function gantiTahapHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
-        $this->tampil = $data["sudut_tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
             $this->tampil_nilai = false;
             $this->mulai = true;
@@ -115,6 +115,12 @@ class PenontonRegu extends Component
         if($this->gelanggang->jenis !== "Regu"){
             return redirect('/penonton/'.$this->gelanggang->id);
         }
+    }
+    #[On('echo:arena,.ganti-gelanggang')]
+    public function GantiGelanggangHandler(){
+        $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        $this->tahap = $this->jadwal->tahap;
+        return redirect('/penonton/'.$this->gelanggang->id);
     }
 
     public function render()

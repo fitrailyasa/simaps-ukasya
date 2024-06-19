@@ -20,34 +20,53 @@ class DewanRegu extends Component
     public $jadwal;
     public $sudut_merah;
     public $sudut_biru;
+    public $pengundian_merah;
+    public $pengundian_biru;
     public $gelanggang;
-    public $waktu ;
+    public $waktu = 0;
     public $tampil;
     public $mulai = false;
     public $penalty_regu;
 
     public function mount(){
-        $this->gelanggang = Gelanggang::where('jenis','Regu')->first();
-        if(Auth::user()->status !== 1 || Auth::user()->gelanggang !== $this->gelanggang->id){
-            return redirect('dashboard');
+        $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
+        if(Auth::user()->Gelanggang->jenis != "Regu"){
+            return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
-        $this->sudut_merah = TGR::find($this->jadwal->sudut_merah);
-        $this->sudut_biru = TGR::find($this->jadwal->sudut_biru);
-        $this->tampil = $this->sudut_biru->id;
-        $this->penalty_regu = PenaltyRegu::where('sudut_biru',$this->sudut_biru->id)->where('sudut_merah',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
-        if(!$this->penalty_regu){
-            $this->penalty_regu = PenaltyRegu::create([
-                'dewan'=>Auth::user()->id,
-                'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->sudut_merah->id.'-'.$this->jadwal->id,
-                'sudut_merah'=>$this->sudut_merah->id,
-                'sudut_biru'=>$this->sudut_biru->id,
-                'jadwal_regu'=>$this->jadwal->id
-            ]);
+        $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
+        $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($this->jadwal->tampil == $this->pengundian_biru->id){
+            $this->penalty_regu = PenaltyRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_regu){
+                $this->penalty_regu = PenaltyRegu::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->sudut_biru->id,
+                    'jadwal_regu'=>$this->jadwal->id
+                ]);
+            }
+        }else{
+            $this->penalty_regu = PenaltyRegu::where('sudut',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_regu){
+                $this->penalty_regu = PenaltyRegu::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->sudut_merah->id,
+                    'jadwal_regu'=>$this->jadwal->id
+                ]);
+            }
         }
-
     }
 
+    public function kurangiWaktu(){
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
+    }
     public function penaltyTrigger($jenis_penalty){
         switch ($jenis_penalty) {
             case 'toleransi_waktu':
@@ -66,7 +85,7 @@ class DewanRegu extends Component
                 $this->penalty_regu->increment('tidak_bergerak');
                 break;
         }
-        PenaltyDewan::dispatch($this->jadwal,[$this->sudut_biru , $this->sudut_merah],$this->penalty_regu,Auth::user());    
+        PenaltyDewan::dispatch($this->jadwal,$this->jadwal->tampil == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_regu,Auth::user());
     }
     public function hapusPenaltyTrigger($jenis_penalty){
         switch ($jenis_penalty) {
@@ -111,14 +130,60 @@ class DewanRegu extends Component
                 }
                 break;
         }
-        HapusPenalty::dispatch($this->jadwal,[$this->sudut_biru , $this->sudut_merah],$this->penalty_regu,Auth::user());    
+        HapusPenalty::dispatch($this->jadwal,$this->jadwal->tampil == $this->sudut_biru->id ? $this->sudut_biru : $this->sudut_merah,$this->penalty_regu,Auth::user());
     }
+
+   
 
     #[On('echo:poin,.penalty-regu')]
     public function tambahNilaiHandler(){
     }
     #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler(){
+    }
+    #[On('echo:arena,.ganti-tahap-regu')]
+    public function gantiTahapHandler($data){
+        $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if($data["tahap"] == "tampil"){
+            $this->tampil_nilai = false;
+            $this->mulai = true;
+        }else if($data["tahap"] == "keputusan"){
+            
+        }else if($data["tahap"] == "pause"){
+            $this->mulai = false;
+            $this->waktu = ($data["waktu"] * 60) / 60;
+        }else if($data["tahap"] == "tampil nilai"){
+            $this->tampil_nilai = true;
+            $this->mulai = false;
+        }
+    }
+
+    #[On('echo:arena,.ganti-tampil-regu')]
+    public function gantiTampilHandler($data){
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->waktu = 0;
+        if($this->tampil->id == $this->sudut_biru->id){
+            $this->penalty_regu = PenaltyRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_regu){
+                $this->penalty_regu = PenaltyRegu::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->jadwal->sudut_biru->id,
+                    'jadwal_regu'=>$this->jadwal->id
+                ]);
+            }
+        }else{
+            $this->penalty_regu = PenaltyRegu::where('sudut',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_regu){
+                $this->penalty_regu = PenaltyRegu::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->jadwal->sudut_merah->id,
+                    'jadwal_regu'=>$this->jadwal->id
+                ]);
+            }
+        }
     }
 
     public function render()

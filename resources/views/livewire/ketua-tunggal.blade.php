@@ -1,7 +1,7 @@
 
 <div>
-    @include('client.penonton.tgr.navbar')
     @if ($tahap == "keputusan")
+    @include('client.penonton.tgr.navbar')
         <div class="hasil-container text-center p-3" style="height: 50vh">
 @php
     if(count($penilaian_tunggal_juri_merah)%2==0){
@@ -18,7 +18,7 @@
     foreach ($penilaian_tunggal_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
     }
-    if(!count($penilaian_tunggal_juri_merah) == 0){
+    if(count($penilaian_tunggal_juri_merah) != 0){
         $mean_merah = $total_merah / count($penilaian_tunggal_juri_merah);
     }else{
         $mean_merah = 0;
@@ -125,14 +125,14 @@
                 </div>
                 <div class="standard-deviation d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Standar Deviasi</p>
+                        <p class="fw-bold" style="font-size: 1.2rem;">Nilai</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_merah != 0 ? $mean_merah - $penalty_merah * 0.5 : "0"}}</p>
                             </div>
                             <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_biru != 0 ? $mean_biru - $penalty_biru * 0.5 : "0"}}</p>
                             </div>
                     </div>
                 </div>  
@@ -167,13 +167,10 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #db3545;">
+                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
                             </div>
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 10%;height: 100%;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">-</p>
-                            </div>
-                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 45%;height: 100%;color: #0053a6">
+                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
                             </div>
                     </div>

@@ -1,65 +1,38 @@
 <div class="pt-4">
 @section('title')
-regu 
+Regu
 @endsection 
-<div class="container-fluid pb-4" style="width: 100%; border: solid 2px black;">
+<div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
         class="header d-flex justify-content-between p-1 m-1"
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
-            <span class="fw-bold" style="font-size: 1.3rem">{{$sudut_biru->region}}, {{$sudut_merah->region}}</span>
-            <h3 class="fw-bold" style="color: #0053a6 !important">
-                {{$sudut_biru->nama}}, {{$sudut_merah->nama}}
+            <span class="fw-bold" style="font-size: 1.3rem">{{$tampil->region}}</span>
+            <h3 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
+                {{$tampil->nama}} , {{$tampil->kontingen}}
             </h3>
+            <br>
+            <h3 class="fw-bold">{{$juri->name}}</h3>
         </div>
         <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
-            <h3 class="fw-bold">Regu/Regu</h3>
+            <h3 class="fw-bold">regu Single</h3>
         </div>
-    </div>
-    <div class="row d-flex flex-row justify-content-center">
-        <button id="fullscreen-btn" class="btn btn-primary" style="width: 30px; height: 30px;display: flex;align-items: center;justify-content: center;">
-            <i class="fa-solid fa-expand"></i>
-        </button>
     </div>
     <div class="content">
         <div
             class="header text-center mt-3 border border-secondary p-1"
             style="width: 100%; font-weight: 600; font-size: 1.3rem"
         >
-            Regu Jurus 1 Tangan Kosong Movement 1
+            regu Jurus 1 Tangan Kosong Movement 1
         </div>
-        <div class="content mt-1">
-            <div
-                class="skor d-flex justify-content-between"
-                style="width: 100%"
-            >
-                <div
-                    class="skor-salah text-center border border-dark"
-                    style="width: 50%"
-                >
-                    <h4
-                        class="fw-bold"
-                        style="color: #db3545 !important; margin-top: 8px"
-                    >
-                        {{$penilaian_regu->salah}}
-                    </h4>
-                </div>
-                <div
-                    class="skor-siap text-center border border-dark"
-                    style="width: 50%"
-                >
-                    <h4 class="fw-bold" style="color: #0053a6; margin-top: 8px">
-                        0
-                    </h4>
-                </div>
-            </div>
+        <div class="content">
             <div
                 class="tombol d-flex gap-1"
-                style="width: 100%; min-height: 40vh"
+                style="width: 100%; min-height: 20vh"
             >
                 <div
                     class="tombol-salah d-flex justify-content-center border border-secondary"
@@ -70,7 +43,7 @@ regu
                     "
                 >
                     <button
-                        wire:click='salahGerakanTrigger()'
+                        wire:click='salahGerakanTrigger({{$tampil->id}})'
                         class="btn tombol-regu"
                         style="
                             width: 100%;
@@ -89,20 +62,21 @@ regu
                     </button>
                 </div>
                 <div
-                    class="requirement text-center d-flex flex-column justify-content-center fw-bold border border-secondary"
+                    class="requirement text-center d-flex flex-column  justify-content-center fw-bold border border-secondary"
                     style="width: 20%"
                 >
-                    <span> Movement Details </span>
-                    <span> Movement </span>
-                    <span> Sequences </span>
-                    <span> Movement has Not Shown </span>
-                    <span> Style Sequences </span>
+                    <div class="tombol d-flex  justify-content-center">
+                        <button id="fullscreen-btn" class="btn btn-primary" style="width: 85px; height: 85px;display: flex;align-items: center;justify-content: center;">
+                            <i style="font-size: 3rem" class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
                 </div>
                 <div
                     class="tombol-salah d-flex justify-content-center border border-secondary"
                     style="width: 40% ;font-size: 100% background-color: #ECECEC"
                 >
                     <button
+                        wire:click='buatPenilaian()'
                         class="btn tombol-regu"
                         style="
                             width: 100%;
@@ -137,47 +111,50 @@ regu
                     class="aside fw-bold text-center border border-dark"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">{{number_format(9.90 - $penilaian_regu->salah*0.01,2)}}</span>
+                    <span style="color: #0053a6">{{$penilaian_regu ? number_format(9.90 - $penilaian_regu->salah*0.01,2) : "9.90"}}</span>
                 </div>
             </div>
-            <div class="range-score d-flex gap-1">
+            <div class="range-score d-flex gap-1" style="min-height: 25vh">
                 <div
-                    class="main text-center fw-bold border border-dark"
+                    class="main text-center fw-bold border border-dark d-flex flex-column justify-content-center"
                     style="width: 90%"
                 >
-                    <span
-                        >FLOW OF MOVEMENT / STAMINA RANGE SCORE: 0.01 -
-                        0.10</span
-                    >
+                        <h3 class="fw-bold">
+                        FLOW OF MOVEMENT / STAMINA RANGE SCORE: 0.01 -
+                        0.10</h3>
                     <div
-                        class="score-detail d-flex gap-1 justify-content-center pb-1"
+                        class="score-detail d-flex gap-2 justify-content-center pb-1"
                     >
                         @for ($i = 1; $i <= 10; $i++)
                             @if ($i == 10)
                                 <button
-                                wire:click='tambahNilaiTrigger({{$i}})'
+                                wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1"
-                                style="background-color: #ececec;width:5%"
+                                style="background-color: #ececec; width:8%; height: 100px"
                                 >
-                                0.10
+                                <h3 class="fw-bold">
+                                    0.10
+                                </h3>
                                 </button>
                             @else
                                 <button
-                                wire:click='tambahNilaiTrigger({{$i}})'
+                                wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1"
-                                style="background-color: #ececec;width:5%"
+                                style="background-color: #ececec;width:8%; height: 100px"
                                 >
-                                0.0{{$i}}
+                                <h3 class="fw-bold">
+                                    0.0{{$i}}
+                                </h3>
                                 </button>
                             @endif
                         @endfor
                     </div>
                 </div>
                 <div
-                    class="aside fw-bold text-center border border-dark"
+                    class="aside fw-bold text-center border border-dark d-flex flex-column justify-content-center"
                     style="width: 10%; font-size: 1.25rem"
                 >
-                    <span style="color: #0053a6">{{number_format($penilaian_regu->flow_skor,2)}}</span>
+                    <h3 class="fw-bold" style="color: #0053a6">{{$penilaian_regu ? number_format($penilaian_regu->flow_skor,2) : "0"}} </h3>
                 </div>
             </div>
             <div class="total-score d-flex gap-1">
@@ -192,7 +169,7 @@ regu
                     style="width: 10%; font-size: 1.25rem"
                 >
                     <span style="color: #0053a6">
-                        {{number_format($penilaian_regu->skor,2)}} 
+                        {{$penilaian_regu ? number_format($penilaian_regu->skor,2) : "9.90"}} 
                     </span>
                 </div>
             </div>
