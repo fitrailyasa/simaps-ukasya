@@ -244,7 +244,7 @@
                 })
             }
         @this.call('batasSkorMasukCek')
-    }, 3000);
+    }, 2000);
 
     // Ambil tombol fullscreen
         const fullscreenButton = document.getElementById('fullscreen-btn');
