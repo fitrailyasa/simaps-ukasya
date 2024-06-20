@@ -95,7 +95,7 @@
                         <td>{{ $jadwaltgr->skor_biru ?? '0' }} -
                             {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                                 <td class="manage-row">
-                                    @if ($gelanggang_operator->Jadwal_TGR && $jadwaltgr->partai == $gelanggang_operator->Jadwal_TGR->partai  && $jadwaltgr->tahap == 'persiapan'  && $gelanggang_operator->jenis !== "Tanding")
+                                    @if ($gelanggang_operator->Jadwal_TGR && $jadwaltgr->partai == $gelanggang_operator->Jadwal_TGR->partai  && ($jadwaltgr->tahap == 'persiapan' || $jadwaltgr->tahap == "tampil") && $gelanggang_operator->jenis !== "Tanding")
                                         @switch($jadwaltgr->jenis)
                                             @case("Tunggal")
                                                 <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/tunggal/{{$jadwaltgr->id}}">

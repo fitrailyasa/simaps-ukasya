@@ -71,7 +71,52 @@
                     <td>{{ $jadwaltgr->skor_biru ?? '0' }} -
                         {{ $jadwaltgr->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
-
+                        @if ( $jadwaltgr->tahap == 'persiapan' || $jadwaltgr->tahap == "tampil")
+                                        @switch($jadwaltgr->jenis)
+                                            @case("Tunggal")
+                                                <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/tunggal/{{$jadwaltgr->id}}">
+                                                    <i class="fa fa-tv"></i>
+                                                </a>
+                                                @break
+                                            @case("Ganda")
+                                                <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/ganda/{{$jadwaltgr->id}}">
+                                                    <i class="fa fa-tv"></i>
+                                                </a>
+                                                @break
+                                            @case("Regu")
+                                                <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/regu/{{$jadwaltgr->id}}">
+                                                    <i class="fa fa-tv"></i>
+                                                </a>
+                                                @break
+                                            @case("Solo Kreatif")
+                                                <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tgr/solo/{{$jadwaltgr->id}}">
+                                                    <i class="fa fa-tv"></i>
+                                                </a>
+                                                @break
+                                            @default
+                                                
+                                        @endswitch
+                                        <form method="POST" action="stop-tgr/{{$jadwaltgr->id}}" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn-sm btn-danger">
+                                                <i class=" fa fa-stop"></i>
+                                            </button>
+                                        </form>
+                                    @elseif($jadwaltgr->tahap == "menunggu")
+                                        <form method="POST" action="ubah-tgr/{{$jadwaltgr->id}}/{{$jadwaltgr->jenis}}" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn-sm btn-primary mr-2">
+                                                <i class=" fa fa-play"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                    <form method="POST" action="reset-tgr/{{$jadwaltgr->id}}" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn-sm btn-primary mr-2">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                     </td>
                 </tr>
             @endforeach

@@ -96,7 +96,7 @@
         kontrol-ganda
     @endsection
    <div class="d-flex justify-content-between align-items-center p-2">
-    <a href="/op/kontrol-tgr" class="btn" style="border: none;">
+    <a {{$user->roles_id != 1 ? "href=/op/kontrol-tgr" : "href=/admin/kontrol-tgr"}} class="btn" style="border: none;">
         <i class="fa-solid fa-arrow-left bg-dark p-3" style="color: white; font-size: 2rem;"></i>
     </a>
     <h4 class="fw-bold text-center flex-grow-1 m-0" >

@@ -171,9 +171,24 @@ Route::middleware(['auth'])->group(function () {
 
     // Kontrol Tanding
     Route::get('/kontrol-tanding', [AdminKontrolTandingController::class, 'index'])->name('kontrol-tanding.index');
+    Route::post('/ubah/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'ubahtahap']);
+    Route::post('/stop/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'stop_pertandingan']);
+    Route::post('/reset/{jadwal_tanding_id}', [AdminKontrolTandingController::class, 'reset']);
+    Route::get('/kontrol-tanding/{jadwal_tanding_id}', OperatorTandingKontrol::class);
 
     // Kontrol Tgr
     Route::get('/kontrol-tgr', [AdminKontrolTGRController::class, 'index'])->name('kontrol-tgr.index');
+    Route::post('/ubah-tgr/{jadwal_tgr_id}/{jenis}', [AdminKontrolTGRController::class, 'ubahtahap']);
+    Route::post('/stop-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
+    Route::post('/reset-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'reset']);
+    //tunggal
+    Route::get('/kontrol-tgr/tunggal/{jadwal_tunggal_id}', OperatorTunggalKontrol::class);
+    //ganda
+    Route::get('/kontrol-tgr/ganda/{jadwal_ganda_id}', OperatorGandaKontrol::class);
+    //regu
+    Route::get('/kontrol-tgr/regu/{jadwal_regu_id}', OperatorReguKontrol::class);
+    //solo
+    Route::get('/kontrol-tgr/solo/{jadwal_solo_id}', OperatorSoloKontrol::class);
   });
 
   // CMS Operator

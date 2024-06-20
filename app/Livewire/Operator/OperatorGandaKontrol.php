@@ -37,9 +37,26 @@ class OperatorGandaKontrol extends Component
 
     public $active;
     public $mulai = false;
+    public $user;
     public function mount($jadwal_ganda_id){
+        $this->user = Auth::user();
         $this->jadwal_gandas = JadwalTGR::orderBy('partai')->where('jenis',"Ganda")->get();
+        if(Auth::user()->roles_id == 1){
+            $this->jadwal_gandas= JadwalTGR::orderBy('partai')->get();
+        }else{
+            $this->jadwal_gandas= JadwalTGR::orderBy('partai')->where('jenis',"Ganda")->get();
+        }
         $this->jadwal_ganda = JadwalTGR::find($jadwal_ganda_id);
+        if($this->jadwal_ganda->jenis != "Ganda" && Auth::user()->roles_id == 1) {
+            switch ($this->jadwal_ganda->jenis) {
+                case 'ganda':
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_ganda_id);
+                case "Tunggal":
+                    return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_ganda_id);
+                case "Solo Kreatif":
+                    return redirect('admin/kontrol-tgr/solo/'.$jadwal_ganda_id);
+            }
+        }
         foreach ($this->jadwal_gandas as $key => $jadwal) {     
             if ($this->jadwal_ganda->id == $jadwal->id) {
                 if($key+1 == count($this->jadwal_gandas)){
@@ -63,7 +80,7 @@ class OperatorGandaKontrol extends Component
         $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->waktu = 0;
-        if(Auth::user()->gelanggang !== $this->jadwal_ganda->Gelanggang->id){
+        if(Auth::user()->roles_id != 1 && Auth::user()->gelanggang != $this->jadwal_ganda->Gelanggang->id){
             return redirect('/auth');
         }
         if($this->jadwal_ganda->tahap == "persiapan"){
@@ -126,7 +143,11 @@ class OperatorGandaKontrol extends Component
             $this->gelanggang->save();
             GantiGelanggang::dispatch($jadwalganda->Gelanggang);
         }
-        return redirect('op/kontrol-tgr/ganda/'.$this->next);
+        if(Auth::user()->roles_id != 1){
+            return redirect('op/kontrol-tgr/ganda/'.$this->next);
+        }else{
+            return redirect('admin/kontrol-tgr/ganda/'.$this->next);
+        }
     }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){

@@ -36,9 +36,26 @@ class OperatorsoloKontrol extends Component
     public $keputusan_pemenang;
     public $active;
     public $mulai = false;
+    public $user;
     public function mount($jadwal_solo_id){
+        $this->user = Auth::user();
         $this->jadwal_solos = JadwalTGR::orderBy('partai')->where('jenis',"Solo Kreatif")->get();
+        if(Auth::user()->roles_id == 1){
+            $this->jadwal_solos= JadwalTGR::orderBy('partai')->get();
+        }else{
+            $this->jadwal_solos= JadwalTGR::orderBy('partai')->where('jenis',"Solo Kreatif")->get();
+        }
         $this->jadwal_solo = JadwalTGR::find($jadwal_solo_id);
+        if($this->jadwal_solo->jenis != "Solo Kreatif" && Auth::user()->roles_id == 1) {
+            switch ($this->jadwal_solo->jenis) {
+                case 'solo':
+                    return redirect('admin/kontrol-tgr/solo/'.$jadwal_solo_id);
+                case "Tunggal":
+                    return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_solo_id);
+                case "Ganda":
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_solo_id);
+            }
+        }
         foreach ($this->jadwal_solos as $key => $jadwal) {     
             if ($this->jadwal_solo->id == $jadwal->id) {
                 if($key+1 == count($this->jadwal_solos)){
@@ -62,7 +79,7 @@ class OperatorsoloKontrol extends Component
         $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->waktu = 0;
-        if(Auth::user()->gelanggang !== $this->jadwal_solo->Gelanggang->id){
+        if(Auth::user()->roles_id != 1 && Auth::user()->gelanggang != $this->jadwal_solo->Gelanggang->id){
             return redirect('/auth');
         }
         if($this->jadwal_solo->tahap == "persiapan"){
@@ -87,7 +104,11 @@ class OperatorsoloKontrol extends Component
             $this->gelanggang->save();
             GantiGelanggang::dispatch($jadwalsolo->Gelanggang);
         }
-        return redirect('op/kontrol-tgr/solo/'.$this->next);
+        if(Auth::user()->roles_id != 1){
+            return redirect('op/kontrol-tgr/solo/'.$this->next);
+        }else{
+            return redirect('admin/kontrol-tgr/solo/'.$this->next);
+        }
     }
     public function hapus(){
        foreach ($this->penilaian_solo_juri_merah as $penilaian) {

@@ -31,9 +31,11 @@ class OperatorTandingKontrol extends Component
     public $error = "";
     public $active;
     public $next;
+    public $user;
 
 
     public function mount($jadwal_tanding_id){
+        $this->user = Auth::user();
         $this->jadwal_tandings = JadwalTanding::orderBy('partai')->get();
         $this->jadwal_tanding = JadwalTanding::find($jadwal_tanding_id);
         foreach ($this->jadwal_tandings as $key=>$jadwal) {     
@@ -53,7 +55,7 @@ class OperatorTandingKontrol extends Component
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();  
         $this->waktu = 0;
-        if(Auth::user()->gelanggang !== $this->jadwal_tanding->Gelanggang->id){
+        if(Auth::user()->roles_id != 1 && Auth::user()->gelanggang != $this->jadwal_tanding->Gelanggang->id){
             return redirect('/auth');
         }
         if($this->jadwal_tanding->tahap == "persiapan"){
@@ -80,7 +82,11 @@ class OperatorTandingKontrol extends Component
             $this->gelanggang->save();
             GantiGelanggang::dispatch($jadwaltanding->Gelanggang);
         }
-        return redirect('op/kontrol-tanding/'.$this->next);
+        if($this->user->roles_id != 1){
+            return redirect('op/kontrol-tanding/'.$this->next);
+        }else{
+            return redirect('admin/kontrol-tanding/'.$this->next);
+        }
     }
     public function Hapus(){
         PenilaianTanding::where('sudut', $this->sudut_merah->id)

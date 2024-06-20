@@ -37,10 +37,27 @@ class OperatorReguKontrol extends Component
 
     public $active;
     public $mulai = false;
+    public $user;
 
     public function mount($jadwal_regu_id){
+        $this->user = Auth::user();
         $this->jadwal_regus= JadwalTGR::orderBy('partai')->where('jenis',"Regu")->get();
+        if(Auth::user()->roles_id == 1){
+            $this->jadwal_regus= JadwalTGR::orderBy('partai')->get();
+        }else{
+            $this->jadwal_regus= JadwalTGR::orderBy('partai')->where('jenis',"Regu")->get();
+        }
         $this->jadwal_regu = JadwalTGR::find($jadwal_regu_id);
+        if($this->jadwal_regu->jenis != "Regu" && Auth::user()->roles_id == 1) {
+            switch ($this->jadwal_regu->jenis) {
+                case 'Tunggal':
+                    return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_regu_id);
+                case "Ganda":
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_regu_id);
+                case "Solo Kreatif":
+                    return redirect('admin/kontrol-tgr/solo/'.$jadwal_regu_id);
+            }
+        }
         foreach ($this->jadwal_regus as $key => $jadwal) {     
             if ($this->jadwal_regu->id == $jadwal->id) {
                 if($key+1 == count($this->jadwal_regus)){
@@ -64,7 +81,7 @@ class OperatorReguKontrol extends Component
         $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->waktu = 0;
-        if(Auth::user()->gelanggang !== $this->jadwal_regu->Gelanggang->id){
+        if(Auth::user()->roles_id != 1 && Auth::user()->gelanggang != $this->jadwal_regu->Gelanggang->id){
             return redirect('/auth');
         }
         if($this->jadwal_regu->tahap == "persiapan"){
@@ -123,7 +140,11 @@ class OperatorReguKontrol extends Component
             $this->gelanggang->save();
             GantiGelanggang::dispatch($jadwalsolo->Gelanggang);
         }
-        return redirect('op/kontrol-tgr/regu/'.$this->next);
+        if(Auth::user()->roles_id != 1){
+            return redirect('op/kontrol-tgr/regu/'.$this->next);
+        }else{
+            return redirect('admin/kontrol-tgr/regu/'.$this->next);
+        }
     }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){

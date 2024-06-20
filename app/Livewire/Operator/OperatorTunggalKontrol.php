@@ -36,10 +36,26 @@ class OperatorTunggalKontrol extends Component
     public $keputusan_pemenang;
     public $active;
     public $mulai = false;
+    public $user;
 
     public function mount($jadwal_tunggal_id){
-        $this->jadwal_tunggals= JadwalTGR::orderBy('partai')->where('jenis',"Tunggal")->get();
+        $this->user = Auth::user();
+        if(Auth::user()->roles_id == 1){
+            $this->jadwal_tunggals= JadwalTGR::orderBy('partai')->get();
+        }else{
+            $this->jadwal_tunggals= JadwalTGR::orderBy('partai')->where('jenis',"Tunggal")->get();
+        }
         $this->jadwal_tunggal = JadwalTGR::find($jadwal_tunggal_id);
+        if($this->jadwal_tunggal->jenis != "Tunggal" && Auth::user()->roles_id == 1) {
+            switch ($this->jadwal_tunggal->jenis) {
+                case 'Regu':
+                    return redirect('admin/kontrol-tgr/regu/'.$jadwal_tunggal_id);
+                case "Ganda":
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_tunggal_id);
+                case "Solo Kreatif":
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_tunggal_id);
+            }
+        }
         foreach ($this->jadwal_tunggals as $key => $jadwal) {     
             if ($this->jadwal_tunggal->id == $jadwal->id) {
                 if($key+1 == count($this->jadwal_tunggals)){
@@ -63,7 +79,7 @@ class OperatorTunggalKontrol extends Component
         $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
         $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->waktu = 0;
-        if(Auth::user()->gelanggang !== $this->jadwal_tunggal->Gelanggang->id){
+        if(Auth::user()->roles_id != 1 && Auth::user()->gelanggang != $this->jadwal_tunggal->Gelanggang->id){
             return redirect('/auth');
         }
         if($this->jadwal_tunggal->tahap == "persiapan"){
@@ -122,7 +138,11 @@ class OperatorTunggalKontrol extends Component
             $this->gelanggang->save();
             GantiGelanggang::dispatch($jadwaltunggal->Gelanggang);
         }
-        return redirect('op/kontrol-tgr/tunggal/'.$this->next);
+        if(Auth::user()->roles_id != 1){
+            return redirect('op/kontrol-tgr/tunggal/'.$this->next);
+        }else{
+            return redirect('admin/kontrol-tgr/tunggal/'.$this->next);
+        }
     }
      public function kurangiWaktu(){
         if($this->waktu == $this->gelanggang->waktu){

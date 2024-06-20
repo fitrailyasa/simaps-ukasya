@@ -71,7 +71,31 @@
                     <td>{{ $jadwaltanding->skor_biru ?? '0' }} -
                         {{ $jadwaltanding->skor_merah ?? '0' }}</td>
                     <td class="manage-row">
-
+                        @if (($jadwaltanding->tahap == "persiapan" || $jadwaltanding->tahap == "tanding" ))
+                                    <a role="button" class="btn-sm btn-primary mr-2" href="kontrol-tanding/{{$jadwaltanding->id}}">
+                                        <i class="fa fa-tv"></i>
+                                    </a>
+                                    <form method="POST" action="stop/{{$jadwaltanding->id}}" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn-sm btn-danger">
+                                            <i class=" fa fa-stop"></i>
+                                        </button>
+                                    </form>
+                                @elseif ($jadwaltanding->tahap == "menunggu")
+                                    <form method="POST" action="ubah/{{$jadwaltanding->id}}" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn-sm btn-primary mr-2">
+                                            <i class="fa fa-play"></i>
+                                        </button>
+                                    </form>
+                                    @else
+                                    <form method="POST" action="reset/{{$jadwaltanding->id}}" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn-sm btn-primary mr-2">
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+                                    </form>
+                                @endif
                     </td>
                 </tr>
             @endforeach
