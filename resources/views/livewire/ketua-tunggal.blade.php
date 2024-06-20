@@ -70,7 +70,7 @@
         $standard_deviation_biru = 0;
     }
 @endphp
-     <div class="hasil-header d-flex" style="height: 40%; width: 100%">
+    <div class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
             {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
                 <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
@@ -114,11 +114,11 @@
                          <p class="fw-bold" style="font-size: 1.2rem;">Score Result</p>
                         </div>
                         <div class="result d-flex gap-1" style="width: 100%;height: 50%;">
-                            <div class="merah border border-dark" style="width: 50%;height: 90%;background-color: #db3545;">
-                                 <p class="fw-bold text-white" style="font-size: 1.2rem;">Merah</p>
-                            </div>
                             <div class="biru border border-dark" style="width: 50%;height: 90%;background-color: #0053a6">
                                  <p class="fw-bold text-white" style="font-size: 1.2rem;">Biru</p>
+                            </div>
+                            <div class="merah border border-dark" style="width: 50%;height: 90%;background-color: #db3545;">
+                                 <p class="fw-bold text-white" style="font-size: 1.2rem;">Merah</p>
                             </div>
                         </div>
                     </div>
@@ -128,11 +128,11 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Nilai</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
+                        <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
+                             <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_biru != 0 ? $mean_biru - $penalty_merah * 0.5 : "0"}}</p>
+                        </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_merah != 0 ? $mean_merah - $penalty_merah * 0.5 : "0"}}</p>
-                            </div>
-                            <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_biru != 0 ? $mean_biru - $penalty_biru * 0.5 : "0"}}</p>
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$mean_merah != 0 ? $mean_merah - $penalty_biru * 0.5 : "0"}}</p>
                             </div>
                     </div>
                 </div>  
@@ -141,11 +141,11 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Performa Waktu</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
+                            <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
+                                <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_tunggal_biru ? sprintf("%02d:%02d", floor($penalty_tunggal_biru->performa_waktu), ($penalty_tunggal_biru->performa_waktu*60)%60) : "00:00" }}</p>
+                            </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{ $penalty_tunggal_merah ? sprintf("%02d:%02d", floor($penalty_tunggal_merah->performa_waktu), ($penalty_tunggal_merah->performa_waktu*60)%60) : "00:00"  }}</p>
-                            </div>
-                            <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_tunggal_biru ? sprintf("%02d:%02d", floor($penalty_tunggal_biru->performa_waktu), ($penalty_tunggal_biru->performa_waktu*60)%60) : "00:00" }}</p>
                             </div>
                     </div>
                 </div>
@@ -154,11 +154,11 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Penalty</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
-                            <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_merah == 0 ? 0 : $penalty_merah * -0.5}}</p>
-                            </div>
-                            <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
+                            <div class="merah border border-dark" style="width: 50%;height: 100%;color: #0053a6;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_biru == 0 ? 0 : $penalty_biru * -0.5}}</p>
+                            </div>
+                            <div class="biru border border-dark" style="width: 50%;height: 100%;color: #db3545">
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_merah == 0 ? 0 : $penalty_merah * -0.5}}</p>
                             </div>
                     </div>
                 </div>
@@ -167,11 +167,11 @@
                         <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
-                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
-                            </div>
-                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6">
+                            <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6;">
                                  <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
+                            </div>
+                            <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545">
+                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
                             </div>
                     </div>
                 </div>

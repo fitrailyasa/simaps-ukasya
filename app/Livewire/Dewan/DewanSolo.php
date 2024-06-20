@@ -191,7 +191,7 @@ class DewanSolo extends Component
                 $this->penalty_solo = PenaltySolo::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_biru->id,
+                    'sudut'=>$this->sudut_biru->id,
                     'jadwal_solo'=>$this->jadwal->id
                 ]);
             }
@@ -201,7 +201,7 @@ class DewanSolo extends Component
                 $this->penalty_solo = PenaltySolo::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_merah,
+                    'sudut'=>$this->sudut_merah->id,
                     'jadwal_solo'=>$this->jadwal->id
                 ]);
             }

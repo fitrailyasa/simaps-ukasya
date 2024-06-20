@@ -1,4 +1,27 @@
 <div>
+@section('style')
+    <style>
+        .btn-custom {
+            border-radius: 10px;
+            width: 100%;
+            margin: 0; /* Menghapus margin default */
+        }
+        .btn-primary {
+            background-color: #0053a6;
+        }
+        .btn-danger {
+            background-color: #db3545;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; /* Jarak antara tombol */
+        }
+        .p-1 {
+            padding: 0.5rem !important;
+        }
+    </style>
+@endsection
 @section('title', 'Tanding')
     <div
     class="p-3 "
@@ -27,7 +50,7 @@
             <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 2px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>
         </div>
     </div>
-    <div class="row m-3" style="margin-top: 0px !important; width:100%">
+    <div class="row ml-1" style="margin-top: 0px !important; width:100%">
         <div class="row mt-1" style=" width:100%">
             <div class="col">
                 <table
@@ -159,75 +182,78 @@
             </div>
         </div>
     </div>
-    <div class="row ml-3 mr-3 " style="margin-top: -24px">
-        <div class="col d-flex justify-content-between" style="margin-left: -8px">
-            <div class="poin p-1 m-1" style="width: 50%">
-                <div class="poin p-1 m-1" style="width: 100%">
+    <div class="row justify-content-center">
+    <!-- Kolom Sudut Biru -->
+    <div class="col-md-6">
+        <div class="d-flex gap-1">
+            <div class="d-flex flex-column" style="width: 50%">
+                <div class="mb-2">
                     <button
-                        wire:click = "tambahPukulanTrigger({{$sudut_biru->id}})"
-                        class="btn text-white p-3 mb-2 "
-                        style="width: 100%; border-radius: 10px ;background-color: #0053a6;"
-                        onclick=""
+                        wire:click="tambahPukulanTrigger({{$sudut_biru->id}})"
+                        class="btn btn-primary text-white btn-custom"
+                        style="height: 70px;"
                     >
                         Pukulan
                     </button>
                 </div>
-                <div class="poin p-1 m-1" style="width: 100%">
+                <div class="mb-2">
                     <button
                         wire:click="tambahTendanganTrigger({{$sudut_biru->id}})"
-                        class="btn text-white p-3 tombol-tendangan-a"
-                        style="width: 100%; border-radius: 10px;background-color: #0053a6;"
+                        class="btn btn-primary text-white btn-custom"
+                        style="height: 70px;"
                     >
                         Tendangan
                     </button>
                 </div>
             </div>
-            <div class="hapus-poin d-flex  p-1 m-1 " style="width: 200px;">
-                <div class="tombol-hapus-a" style="width: 100%; height:100%">
-                    <button
-                        wire:click = "hapusTrigger({{$sudut_biru->id}})"
-                        class="btn text-white "
-                        style="border-radius: 10px; width:100% !important; height:100% !important;;background-color: #0053a6;"
-                    >
-                        Hapus
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="col d-flex justify-content-between">
-            <div class="hapus-poin d-flex justify-content-start p-1 m-1" style="width:200px">
-                <div class="tombol-hapus-b" style="margin:0 !important;width: 100%; height:100%">
-                    <button
-                        wire:click = "hapusTrigger({{$sudut_merah->id}})"
-                        class="btn bg-danger btn-biru text-white"
-                        style=" border-radius: 10px; height:100% ;width:100% ;"
-                    >
-                        Hapus
-                    </button>
-                </div>
-            </div>
-            <div class="poin p-1 m-1" style="width: 50%">
-                <div class="" style="width: 100%; height:50%">
-                    <button
-                        wire:click = "tambahPukulanTrigger({{$sudut_merah->id}})"
-                        class="btn bg-danger btn-biru text-white p-3 mb-2 tombol-pukulan-b"
-                        style="width: 100%; border-radius: 10px;"
-                    >
-                        Pukulan
-                    </button>
-                </div>
-                <div class="" style="width: 100%; height:50%">
-                    <button
-                        wire:click = "tambahTendanganTrigger({{$sudut_merah->id}})"
-                        class="btn bg-danger btn-biru text-white p-3 tombol-tendangan-b"
-                        style="width: 100%; border-radius: 10px ;"
-                    >
-                        Tendangan
-                    </button>
-                </div>
+            <div class="mb-2 text-right"  style="width: 50%">
+                <button
+                    wire:click="hapusTrigger({{$sudut_biru->id}})"
+                    class="btn btn-primary text-white btn-custom"
+                    style="height: 150px;"
+                >
+                    Hapus
+                </button>
             </div>
         </div>
     </div>
+
+    <!-- Kolom Sudut Merah -->
+    <div class="col-md-6">
+        <div class="d-flex gap-1">
+            <div class="mb-2 text-right" style="width: 50%">
+                <button
+                    wire:click="hapusTrigger({{$sudut_merah->id}})"
+                    class="btn btn-danger text-white btn-custom"
+                    style="height: 150px;"
+                >
+                    Hapus
+                </button>
+            </div>
+            <div class="d-flex flex-column" style="width: 50%">
+                <div class="mb-2">
+                    <button
+                        wire:click="tambahPukulanTrigger({{$sudut_merah->id}})"
+                        class="btn btn-danger text-white btn-custom"
+                        style="height: 70px;"
+                    >
+                        Pukulan
+                    </button>
+                </div>
+                <div>
+                    <button
+                        wire:click="tambahTendanganTrigger({{$sudut_merah->id}})"
+                        class="btn btn-danger text-white btn-custom"
+                        style="height: 70px;"
+                    >
+                        Tendangan
+                    </button>
+                </div>           
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 @include('juri.tanding.JuriVerivikasiModal')
 @include('juri.tanding.ErrorModal')

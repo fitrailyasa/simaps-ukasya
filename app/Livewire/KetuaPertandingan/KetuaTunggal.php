@@ -84,6 +84,7 @@ class KetuaTunggal extends Component
     #[On('echo:arena,.ganti-tampil-tunggal')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->tahap = $this->jadwal->tahap;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
                 $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();

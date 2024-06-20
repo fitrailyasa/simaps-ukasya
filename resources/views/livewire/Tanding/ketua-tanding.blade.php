@@ -501,7 +501,10 @@
         setInterval(() => {
             @this.call('kurangiWaktu')
             if(@this.get('tahap') == 'hasil'){
-                $('#keputusan-ketua').modal('show')
+                if (@this.get('show') == true) {
+                    $('#keputusan-ketua').modal('show')
+                    @this.call('ubahShow')
+                }
             }
         }, 1000);
     </script>

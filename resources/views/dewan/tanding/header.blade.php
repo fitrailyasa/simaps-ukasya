@@ -12,7 +12,7 @@
         </div>
         <div class="row-2">
             <h4 class="fw-bold">
-                {{$jadwal->babak}} - {{$sudut_merah->golongan}} -  {{$sudut_biru->kelas}} <br/> Partai {{$jadwal->partai}}
+                {{$jadwal->babak}} - {{$sudut_merah->golongan}} -  {{$sudut_biru->kelas}} Partai {{$jadwal->partai}}
             </h4>
         </div>
     </div>

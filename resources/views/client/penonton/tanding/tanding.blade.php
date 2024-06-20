@@ -36,22 +36,23 @@
             </div>
         </div>
         <div class="time text-center d-flex flex-column justify-content-center" style="width:20%">
-            @if ($gelanggang->waktu != 0)
+            {{-- @if ($gelanggang->waktu != 0)
                 <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
-            @endif
+            @endif --}}
         </div>
-        <div class="sudut-biru d-flex" style="width: 40%">
-            <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
+        <div class="sudut-biru d-flex" style="width: 40%; justify-content: flex-end;">
+            <div class="pesilat-name m-1 p-2 text-center" style="width: 43%;">
                 <h5 class="fw-bold">{{$sudut_merah->nama}}</h5>
-                <h3 class="fw-bold" style="color: #db3545">{{$sudut_biru->kontingen}}</h3>
+                <h3 class="fw-bold" style="color: #db3545;">{{$sudut_biru->kontingen}}</h3>
             </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 12%;border-radius: 50%; background-color: #db3545">
-                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 4px;width: 80%;border-radius: 50%;">
+            <div class="profile-picture m-1 p-1 text-center" style="height: 100%; width: 12%; border-radius: 50%; background-color: #db3545;">
+                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 4px; width: 80%; border-radius: 50%;">
             </div>
-             <div class="bendera d-flex justify-content-end" style="width: 30%;">
-                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
+            <div class="bendera d-flex justify-content-end" style="width: 30%;">
+                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%;">
             </div>
         </div>
+
     </div>
     <div class="tanding-content mt-5 d-flex" style="width: 100%;height: 100%;">
         <div class="sudut_biru d-flex" style="width: 45%;height: 100%;">

@@ -157,6 +157,7 @@ class OperatorsoloKontrol extends Component
     }
     public function gantiTampil($sudut){
         $this->waktu = 0;
+        $this->mulai = false;
         if($sudut == "merah"){
             $this->active = "sudutmerah";
             $this->tampil = $this->sudut_merah;

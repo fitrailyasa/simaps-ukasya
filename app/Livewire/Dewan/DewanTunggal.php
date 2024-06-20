@@ -189,7 +189,7 @@ class DewanTunggal extends Component
                 $this->penalty_tunggal = PenaltyTunggal::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_biru,
+                    'sudut'=>$this->sudut_biru->id,
                     'jadwal_tunggal'=>$this->jadwal->id
                 ]);
             }
@@ -199,7 +199,7 @@ class DewanTunggal extends Component
                 $this->penalty_tunggal = PenaltyTunggal::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_merah,
+                    'sudut'=>$this->sudut_merah->id,
                     'jadwal_tunggal'=>$this->jadwal->id
                 ]);
             }

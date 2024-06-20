@@ -197,13 +197,13 @@
                     </div>
                     <div class="hasil p-1 border border-dark text-center d-flex justify-content-center " style="width: 50%">
                         <div class="hasil-merah border border-dark" style="width:40%">
-                            <h2 class="fw-bold" style="color: #db3545">{{$total_poin_merah}}</h2>
+                            <h2 class="fw-bold" style="color: #252c94">{{$total_poin_biru}}</h2>
                         </div>
                         <div class="strip border border-dark" style="width:20%">
                             <h2 class="fw-bold">-</h2>
                         </div>
                         <div class="hasil-biru border border-dark" style="width:40%">
-                            <h2 class="fw-bold" style="color: #252c94">{{$total_poin_biru}}</h2>
+                            <h2 class="fw-bold" style="color: #db3545">{{$total_poin_merah}}</h2>
                         </div>
                     </div>
                 </div>

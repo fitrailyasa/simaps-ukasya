@@ -191,7 +191,7 @@ class DewanRegu extends Component
                 $this->penalty_regu = PenaltyRegu::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_biru,
+                    'sudut'=>$this->sudut_biru->id,
                     'jadwal_regu'=>$this->jadwal->id
                 ]);
             }
@@ -201,7 +201,7 @@ class DewanRegu extends Component
                 $this->penalty_regu = PenaltyRegu::create([
                     'dewan'=>Auth::user()->id,
                     'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
-                    'sudut'=>$this->jadwal->sudut_merah,
+                    'sudut'=>$this->sudut_merah->id,
                     'jadwal_regu'=>$this->jadwal->id
                 ]);
             }

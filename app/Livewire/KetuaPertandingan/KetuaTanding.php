@@ -29,6 +29,7 @@ class KetuaTanding extends Component
     public $peringatan_merah;
     public $pengundian_merah;
     public $pengundian_biru;
+    public $show;
 
         
     public function mount($gelanggang_id){
@@ -53,6 +54,13 @@ class KetuaTanding extends Component
         $this->peringatan_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();  
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
+        if($this->jadwal->tahap == "hasil"){
+            $this->show = true;
+        }
+    }
+
+    public function ubahShow(){
+        $this->show = false;
     }
 
     public function kurangiWaktu(){
@@ -129,6 +137,7 @@ class KetuaTanding extends Component
                 $this->waktu = $data['waktu'];
             }else if($data['event'] == 'keputusan pemenang'){
                 $this->tahap = 'hasil';
+                $this->show = true;
             }else{
                 $this->mulai = false;
             }
