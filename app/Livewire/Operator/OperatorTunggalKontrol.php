@@ -5,6 +5,7 @@ namespace App\Livewire\Operator;
 use App\Events\GantiGelanggang;
 use App\Events\Tunggal\GantiTahap;
 use App\Events\Tunggal\GantiTampil;
+use App\Events\Tunggal\HapusPenalty;
 use App\Models\JadwalTGR;
 use App\Models\PenaltyTunggal;
 use App\Models\PengundianTGR;
@@ -49,10 +50,10 @@ class OperatorTunggalKontrol extends Component
             }
         }
         $this->gelanggang = $this->jadwal_tunggal->Gelanggang;
-        $this->sudut_biru = TGR::where('id',$this->jadwal_tunggal->PengundianTGRBiru->atlet_id)->first();
-        $this->sudut_merah = TGR::where('id',$this->jadwal_tunggal->PengundianTGRMerah->atlet_id)->first();
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal_tunggal->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal_tunggal->sudut_biru);
+        $this->sudut_biru = $this->jadwal_tunggal->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal_tunggal->PengundianTGRMerah->TGR;
+        $this->pengundian_merah = $this->jadwal_tunggal->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal_tunggal->PengundianTGRBiru;
         if(!$this->jadwal_tunggal->tampil){
             $this->jadwal_tunggal->tampil = $this->jadwal_tunggal->PengundianTGRBiru->id;
         }
@@ -76,6 +77,42 @@ class OperatorTunggalKontrol extends Component
         }
     }
      //operator start
+     public function hapus(){
+         
+       foreach ($this->penilaian_tunggal_juri_merah as $penilaian) {
+        $penilaian->skor = 0;
+        $penilaian->flow_skor = 0;
+        $penilaian->salah = 0;
+        $penilaian->penalty = 0;
+        $penilaian->save();
+       }
+       foreach ($this->penilaian_tunggal_juri_biru as $penilaian) {
+        $penilaian->skor = 0;
+        $penilaian->flow_skor = 0;;
+        $penilaian->salah = 0;
+        $penilaian->penalty = 0;
+        $penilaian->save();
+       }
+       if($this->penalty_tunggal_biru){
+           $this->penalty_tunggal_biru->performa_waktu = 0;
+           $this->penalty_tunggal_biru->toleransi_waktu = 0;
+           $this->penalty_tunggal_biru->keluar_arena = 0; 
+           $this->penalty_tunggal_biru->menyentuh_lantai = 0; 
+           $this->penalty_tunggal_biru->pakaian = 0; 
+           $this->penalty_tunggal_biru->tidak_bergerak = 0;
+           $this->penalty_tunggal_biru->save(); 
+       }
+       if($this->penalty_tunggal_merah){
+           $this->penalty_tunggal_merah->performa_waktu = 0;
+           $this->penalty_tunggal_merah->toleransi_waktu = 0;
+           $this->penalty_tunggal_merah->keluar_arena = 0;
+           $this->penalty_tunggal_merah->menyentuh_lantai = 0; 
+           $this->penalty_tunggal_merah->pakaian = 0; 
+           $this->penalty_tunggal_merah->tidak_bergerak = 0; 
+            $this->penalty_tunggal_merah->save();
+       }
+        HapusPenalty::dispatch($this->jadwal_tunggal,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
+     }
      public function nextPartai(){
         $jadwaltunggal = JadwalTGR::find($this->next);
         if($jadwaltunggal){
@@ -151,7 +188,7 @@ class OperatorTunggalKontrol extends Component
         }
         $this->jadwal_tunggal->tahap = $tahap;
         $this->jadwal_tunggal->save();
-        $this->tampil = $this->jadwal_tunggal->TampilTGR;
+        $this->tampil = $this->jadwal_tunggal->TampilTGR->TGR;
         GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_tunggal,$this->waktu);
     }
     //operator endpublic function render()

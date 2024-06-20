@@ -145,7 +145,7 @@
             <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#keputusan-modal" class="keputusan" style="border:#9BB8CD ;{{$active == "keputusan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Keputusan</button>
         </div>
         <div class="row-6 d-flex flex-row justify-content-between gap-2 mt-3">
-            <button class="btn" wire:click='Hapus()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
+            <button class="btn" wire:click='hapus()' style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Hapus Nilai</button>
             <button {{$total_merah == $total_biru ? "disabled" : ""}} class="btn" wire:click='gantiTahap("keputusan","biru","Menang Angka")' style="border:none;background-color: #0053a6; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Biru</button>
             <button {{$total_merah == $total_biru ? "disabled" : ""}} class="btn" wire:click='gantiTahap("keputusan","merah","Menang Angka")' style="border:none;background-color: #db3545; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Merah</button>
             <button wire:click='nextPartai()' class="btn" style="background-color: #000; width: 25%;color: #fff;border-radius: 20px;font-size: 1.5rem">Next</button>

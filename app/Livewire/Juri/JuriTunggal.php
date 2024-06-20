@@ -33,6 +33,9 @@ class JuriTunggal extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/juri/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -56,7 +59,6 @@ class JuriTunggal extends Component
                     'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
                     'juri' => Auth::user()->id
                 ]);
-                TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
             }
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -66,10 +68,10 @@ class JuriTunggal extends Component
                     'sudut' => $this->sudut_merah->id,
                     'uuid'=>date('Ymd-His').'-'.$this->sudut_merah->id.Auth::user()->id.'-'.$this->jadwal->id,
                     'juri' => Auth::user()->id
-                ]);
-                TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
+                ]); 
             }
         }
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
     public function tambahNilaiTrigger($id,$value){
         $value/=100;
@@ -101,7 +103,9 @@ class JuriTunggal extends Component
     public function gantiTampilHandler($data){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }else{
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
@@ -117,6 +121,23 @@ class JuriTunggal extends Component
         if(Auth::user()->Gelanggang->jenis != "Tunggal" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
+    }
+
+    #[On('echo:poin,.hapus-penalty-tunggal')]
+    public function hapusPenaltyHandler(){
+        $penilaian_tunggal_biru = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        $penilaian_tunggal_merah = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if($penilaian_tunggal_biru){
+            $penilaian_tunggal_biru->delete();
+        }elseif($penilaian_tunggal_merah){
+            $penilaian_tunggal_merah->delete();
+        }
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }else{
+            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
 
     public function render()

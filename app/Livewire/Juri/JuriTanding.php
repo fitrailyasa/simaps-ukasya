@@ -49,6 +49,9 @@ class JuriTanding extends Component
             };
         }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/juri/'.$this->gelanggang->id);
+        }
         $this->pengundian_biru = $this->jadwal->PengundianTandingBiru;
         $this->pengundian_merah = $this->jadwal->PengundianTandingMerah;
         $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;

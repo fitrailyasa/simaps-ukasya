@@ -41,6 +41,9 @@ class KetuaGanda extends Component
             return redirect('/ketuapertandingan/'.$this->gelanggang->id);
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/ketua/'.$this->gelanggang->id);
+        }
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -72,6 +75,12 @@ class KetuaGanda extends Component
     }
     #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
+       $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
     #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){

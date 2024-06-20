@@ -38,6 +38,9 @@ class KetuaTanding extends Component
         }
         $this->juris = User::where('gelanggang', $this->gelanggang->id)->where('roles_id',4)->where('status',true)->whereIn('permissions',["Juri 1","Juri 2","Juri 3"])->get();
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/ketua/'.$this->gelanggang->id);
+        }
         $this->tahap = $this->jadwal->tahap;
         $this->waktu = 0;
         $this->pengundian_merah = $this->jadwal->PengundianTandingMerah;

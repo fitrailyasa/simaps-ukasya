@@ -48,6 +48,10 @@ class DewanTanding extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/dewan/'.$this->gelanggang->id);
+        }
         $this->pengundian_biru = PengundianTanding::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTanding::find($this->jadwal->sudut_merah);
         $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;

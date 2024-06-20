@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Livewire\MenungguJadwal;
 use App\Livewire\Operator\OperatorGandaKontrol;
 use App\Livewire\Operator\OperatorJadwalTanding;
 use App\Livewire\Operator\OperatorJadwalTGR;
@@ -56,6 +57,8 @@ use App\Livewire\KetuaPertandingan\KetuaSolo;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
+Route::get('/jadwal/{user}/{gelanggang}', MenungguJadwal::class)->name('menunggu-jadwal');
+
 
 //CMS PENONTON
 Route::get('/penonton', [PenontonController::class, 'index'])->name('penonton');

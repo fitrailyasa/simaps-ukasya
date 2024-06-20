@@ -38,6 +38,9 @@ class JuriGanda extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/juri/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -118,6 +121,30 @@ class JuriGanda extends Component
         if(Auth::user()->Gelanggang->jenis != "Ganda" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
+    }
+
+    #[On('echo:poin,.hapus-penalty-ganda')]
+    public function hapusPenaltyHandler(){
+        $penilaian_ganda_biru = PenilaianGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        $penilaian_ganda_merah = PenilaianGanda::where('sudut',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if($penilaian_ganda_biru){
+            $penilaian_ganda_biru->delete();
+        }elseif($penilaian_ganda_merah){
+            $penilaian_ganda_merah->delete();
+        }
+        $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->tampil->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if(!$this->penilaian_ganda){
+            $this->penilaian_ganda = PenilaianGanda::create([
+                'jadwal_ganda'=>$this->jadwal->id,
+                'sudut' => $this->tampil->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                'juri' => Auth::user()->id
+            ]);
+        }
+        $this->attack_active = $this->penilaian_ganda->attack_skor;
+        $this->firmness_active = $this->penilaian_ganda->firmness_skor;
+        $this->soulfulness_active = $this->penilaian_ganda->soulfulness_skor;
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
 
     public function render()

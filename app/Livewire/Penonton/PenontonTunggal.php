@@ -41,6 +41,9 @@ class PenontonTunggal extends Component
             return redirect('/penonton/'.$this->gelanggang->id);
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/penonton/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -82,6 +85,12 @@ class PenontonTunggal extends Component
     }
     #[On('echo:poin,.hapus-penalty-tunggal')]
     public function hapusPenaltyHandler(){
+        $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
     #[On('echo:arena,.ganti-tahap-tunggal')]
     public function gantiTahapHandler($data){

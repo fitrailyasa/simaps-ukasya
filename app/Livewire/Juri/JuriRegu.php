@@ -32,6 +32,9 @@ class JuriRegu extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/juri/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -116,6 +119,23 @@ class JuriRegu extends Component
         if(Auth::user()->Gelanggang->jenis != "Regu" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
+    }
+
+    #[On('echo:poin,.hapus-penalty-regu')]
+    public function hapusPenaltyHandler(){
+        $penilaian_regu_biru = PenilaianRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        $penilaian_regu_merah = PenilaianRegu::where('sudut',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        if($penilaian_regu_biru){
+            $penilaian_regu_biru->delete();
+        }elseif($penilaian_regu_merah){
+            $penilaian_regu_merah->delete();
+        }
+        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
+            $this->penilaian_regu = PenilaianRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }else{
+            $this->penilaian_regu = PenilaianRegu::where('sudut',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_regu,Auth::user());
     }
 
     public function render()

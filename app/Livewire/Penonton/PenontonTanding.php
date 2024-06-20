@@ -33,6 +33,9 @@ class PenontonTanding extends Component
         $this->gel_id = $this->gelanggang->id;
         $this->waktu = 0;
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/penonton/'.$this->gelanggang->id);
+        }
         $this->sudut_merah = $this->jadwal->PengundianTandingMerah->Tanding;
         $this->sudut_biru = $this->jadwal->PengundianTandingBiru->Tanding;
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();

@@ -39,6 +39,9 @@ class KetuaTunggal extends Component
             return redirect('/ketuapertandingan/'.$this->gelanggang->id);
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/ketua/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -52,7 +55,7 @@ class KetuaTunggal extends Component
         $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
-        $this->waktu = $this->gelanggang->waktu * 60;
+        $this->waktu = 0;
     }
 
     #[On('echo:poin,.tambah-skor-tunggal')]
@@ -70,6 +73,12 @@ class KetuaTunggal extends Component
     }
     #[On('echo:poin,.hapus-penalty-tunggal')]
     public function hapusPenaltyHandler(){
+        $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_tunggal_juri = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
 
     #[On('echo:arena,.ganti-tampil-tunggal')]

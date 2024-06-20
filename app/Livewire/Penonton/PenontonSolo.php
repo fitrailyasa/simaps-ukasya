@@ -37,7 +37,13 @@ class PenontonSolo extends Component
 
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Solo Kreatif"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/penonton/'.$this->gelanggang->id);
+        }
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);

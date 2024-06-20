@@ -368,7 +368,7 @@
                             </div>
                         </div>
                     @endif
-                    @if (count($penilaian_gandajuri) == $length*2)
+                    @if (count($penilaian_ganda_juri) == $length*2)
                         @foreach ($sorted_nilai as $i => $nilai)
                             @php
                                 $juri_id = $nilai->juri;

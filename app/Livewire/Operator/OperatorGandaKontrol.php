@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Operator;
 
+use App\Events\Ganda\HapusPenalty;
 use App\Events\GantiGelanggang;
 use Livewire\Component;
 use App\Events\Ganda\GantiTahap;
@@ -49,10 +50,10 @@ class OperatorGandaKontrol extends Component
             }
         }
         $this->gelanggang = $this->jadwal_ganda->Gelanggang;
-        $this->sudut_biru = TGR::where('id',$this->jadwal_ganda->PengundianTGRBiru->atlet_id)->first();
-        $this->sudut_merah = TGR::where('id',$this->jadwal_ganda->PengundianTGRMerah->atlet_id)->first();
-        $this->pengundian_merah = PengundianTGR::find($this->jadwal_ganda->sudut_merah);
-        $this->pengundian_biru = PengundianTGR::find($this->jadwal_ganda->sudut_biru);
+        $this->sudut_biru = $this->jadwal_ganda->PengundianTGRBiru->TGR;
+        $this->sudut_merah = $this->jadwal_ganda->PengundianTGRMerah->TGR;
+        $this->pengundian_merah = $this->jadwal_ganda->PengundianTGRMerah;
+        $this->pengundian_biru = $this->jadwal_ganda->PengundianTGRBiru;
         if(!$this->jadwal_ganda->tampil){
             $this->jadwal_ganda->tampil = $this->jadwal_ganda->PengundianTGRBiru->id;
         }
@@ -77,7 +78,45 @@ class OperatorGandaKontrol extends Component
     }
 
     //operator start
-
+    public function hapus(){
+       foreach ($this->penilaian_ganda_juri_merah as $penilaian) {
+        $penilaian->skor = 0;
+        $penilaian->attack_skor = 0;
+        $penilaian->firmness_skor = 0;
+        $penilaian->soulfulness_skor = 0;
+        $penilaian->penalty = 0;
+        $penilaian->save();
+       }
+       foreach ($this->penilaian_ganda_juri_biru as $penilaian) {
+        $penilaian->skor = 0;
+        $penilaian->attack_skor = 0;
+        $penilaian->firmness_skor = 0;
+        $penilaian->soulfulness_skor = 0;
+        $penilaian->penalty = 0;
+        $penilaian->save();
+       }
+       if($this->penalty_ganda_biru){
+           $this->penalty_ganda_biru->performa_waktu = 0;
+           $this->penalty_ganda_biru->toleransi_waktu = 0;
+           $this->penalty_ganda_biru->keluar_arena = 0; 
+           $this->penalty_ganda_biru->menyentuh_lantai = 0; 
+           $this->penalty_ganda_biru->pakaian = 0; 
+           $this->penalty_ganda_biru->tidak_bergerak = 0;
+           $this->penalty_ganda_biru->senjata_jatuh = 0; 
+           $this->penalty_ganda_biru->save(); 
+       }
+       if($this->penalty_ganda_merah){
+           $this->penalty_ganda_merah->performa_waktu = 0;
+           $this->penalty_ganda_merah->toleransi_waktu = 0;
+           $this->penalty_ganda_merah->keluar_arena = 0;
+           $this->penalty_ganda_merah->menyentuh_lantai = 0; 
+           $this->penalty_ganda_merah->pakaian = 0; 
+           $this->penalty_ganda_merah->tidak_bergerak = 0; 
+           $this->penalty_ganda_merah->senjata_jatuh = 0; 
+        $this->penalty_ganda_merah->save();
+       }
+        HapusPenalty::dispatch($this->jadwal_ganda,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
+     }
     public function nextPartai(){
         $jadwalganda = JadwalTGR::find($this->next);
         if($jadwalganda){
@@ -156,7 +195,7 @@ class OperatorGandaKontrol extends Component
         }
         $this->jadwal_ganda->tahap = $tahap;
         $this->jadwal_ganda->save();
-        $this->tampil = $this->jadwal_ganda->TampilTGR;
+        $this->tampil = $this->jadwal_ganda->TampilTGR->TGR;
         GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_ganda,$this->waktu);
     }
     //operator endpublic function render()

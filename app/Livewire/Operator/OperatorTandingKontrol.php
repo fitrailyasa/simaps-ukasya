@@ -46,8 +46,10 @@ class OperatorTandingKontrol extends Component
             }
         }
         $this->gelanggang = $this->jadwal_tanding->Gelanggang;
-        $this->sudut_biru = Tanding::where('id',$this->jadwal_tanding->PengundianTandingBiru->atlet_id)->first();
-        $this->sudut_merah = Tanding::where('id',$this->jadwal_tanding->PengundianTandingMerah->atlet_id)->first();
+        $this->sudut_biru = $this->jadwal_tanding->PengundianTandingBiru->Tanding;
+        $this->sudut_merah = $this->jadwal_tanding->PengundianTandingMerah->Tanding;
+        $this->pengundian_merah = $this->jadwal_tanding->PengundianTandingMerah;
+        $this->pengundian_biru = $this->jadwal_tanding->PengundianTandingBiru;
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();  
         $this->waktu = 0;

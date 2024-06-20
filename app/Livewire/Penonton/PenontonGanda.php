@@ -38,7 +38,13 @@ class PenontonGanda extends Component
 
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
+        if($this->gelanggang->jenis != "Ganda"){
+            return redirect('/penonton/'.$this->gelanggang->id);
+        }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/penonton/'.$this->gelanggang->id);
+        }
         $this->pengundian_biru = PengundianTGR::find($this->jadwal->sudut_biru);
         $this->pengundian_merah = PengundianTGR::find($this->jadwal->sudut_merah);
         $this->sudut_biru = TGR::find($this->pengundian_biru->atlet_id);
@@ -80,12 +86,20 @@ class PenontonGanda extends Component
     }
     #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
+       $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+        $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+        $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+        $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
+        $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
 
     #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
+        $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         if($data["tahap"] == "tampil"){
             $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
             $this->mulai = true;

@@ -4,6 +4,7 @@ namespace App\Livewire\Dewan;
 
 use App\Events\Ganda\GantiTahap;
 use App\Events\Ganda\GantiTampil;
+use App\Models\PenaltyGanda;
 use App\Models\PengundianTGR;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,6 @@ use App\Events\Ganda\TambahNilai;
 use App\Events\Ganda\SalahGerakan;
 use App\Events\Ganda\PenaltyDewan;
 use App\Events\Ganda\HapusPenalty;
-use App\Models\PenaltyGanda;
 
 class DewanGanda extends Component
 {
@@ -37,6 +37,9 @@ class DewanGanda extends Component
             return redirect('auth');
         }
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
+        if(!$this->jadwal){
+            return redirect('/jadwal/dewan/'.$this->gelanggang->id);
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
@@ -142,6 +145,27 @@ class DewanGanda extends Component
     }
     #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
+        if($this->jadwal->tampil == $this->pengundian_biru->id){
+            $this->penalty_ganda = PenaltyGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_ganda){
+                $this->penalty_ganda = PenaltyGanda::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->sudut_biru->id,
+                    'jadwal_ganda'=>$this->jadwal->id
+                ]);
+            }
+        }else{
+            $this->penalty_ganda = PenaltyGanda::where('sudut',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
+            if(!$this->penalty_ganda){
+                $this->penalty_ganda = PenaltyGanda::create([
+                    'dewan'=>Auth::user()->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
+                    'sudut'=>$this->sudut_merah->id,
+                    'jadwal_ganda'=>$this->jadwal->id
+                ]);
+            }
+        }
     }
 
     #[On('echo:arena,.ganti-tahap-ganda')]
