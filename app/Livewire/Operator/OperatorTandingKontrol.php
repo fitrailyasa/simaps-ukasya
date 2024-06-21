@@ -104,6 +104,10 @@ class OperatorTandingKontrol extends Component
 
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();  
+        $this->jadwal_tanding->pemenang = null;
+        $this->jadwal_tanding->skor_biru = 0;
+        $this->jadwal_tanding->skor_merah = 0;
+        $this->jadwal_tanding->save();
         Hapus::dispatch($this->jadwal_tanding);
     }
     public function kurangiWaktu(){

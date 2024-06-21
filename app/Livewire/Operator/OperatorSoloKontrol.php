@@ -147,6 +147,10 @@ class OperatorsoloKontrol extends Component
            $this->penalty_solo_merah->senjata_jatuh = 0; 
         $this->penalty_solo_merah->save();
        }
+       $this->jadwal_solo->pemenang = null;
+       $this->jadwal_solo->skor_biru = 0;
+       $this->jadwal_solo->skor_merah = 0;
+       $this->jadwal_solo->save();
         HapusPenalty::dispatch($this->jadwal_solo,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
      }
      public function kurangiWaktu(){

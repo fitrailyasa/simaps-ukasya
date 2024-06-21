@@ -6,7 +6,7 @@
 @section('tgr', 'menu-open')
 
 @section('style')
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    
     <link href="{{ asset('assets/bagan/css/jquery.bracket-world.css') }}" rel="stylesheet">
     <style>
         @media print {
@@ -70,8 +70,6 @@
 @endsection
 
 @section('script')
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/bagan/js/jquery.bracket-world.min.js') }}"></script>
     @if (isset($script))
         {!! $script !!}

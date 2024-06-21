@@ -127,6 +127,10 @@ class OperatorTunggalKontrol extends Component
            $this->penalty_tunggal_merah->tidak_bergerak = 0; 
             $this->penalty_tunggal_merah->save();
        }
+       $this->jadwal_tunggal->pemenang = null;
+       $this->jadwal_tunggal->skor_biru = 0;
+       $this->jadwal_tunggal->skor_merah = 0;
+       $this->jadwal_tunggal->save();
         HapusPenalty::dispatch($this->jadwal_tunggal,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
      }
      public function nextPartai(){

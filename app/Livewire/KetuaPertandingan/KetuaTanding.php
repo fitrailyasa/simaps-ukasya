@@ -146,6 +146,8 @@ class KetuaTanding extends Component
     #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
+            $this->waktu = 0;
+            $this->mulai = false;
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();

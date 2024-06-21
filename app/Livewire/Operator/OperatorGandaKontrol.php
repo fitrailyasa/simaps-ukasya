@@ -132,6 +132,10 @@ class OperatorGandaKontrol extends Component
            $this->penalty_ganda_merah->senjata_jatuh = 0; 
         $this->penalty_ganda_merah->save();
        }
+       $this->jadwal_ganda->pemenang = null;
+       $this->jadwal_ganda->skor_biru = 0;
+       $this->jadwal_ganda->skor_merah = 0;
+       $this->jadwal_ganda->save();
         HapusPenalty::dispatch($this->jadwal_ganda,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
      }
     public function nextPartai(){

@@ -72,14 +72,14 @@
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true || $jadwal->tahap == "tampil")
-            @if ($gelanggang->waktu != 0)
+            {{-- @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
                         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
-                @endif
+                @endif --}}
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">

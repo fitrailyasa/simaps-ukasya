@@ -54,8 +54,8 @@ class OperatorReguKontrol extends Component
                     return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_regu_id);
                 case "Ganda":
                     return redirect('admin/kontrol-tgr/ganda/'.$jadwal_regu_id);
-                case "Solo Kreatif":
-                    return redirect('admin/kontrol-tgr/solo/'.$jadwal_regu_id);
+                case "regu Kreatif":
+                    return redirect('admin/kontrol-tgr/regu/'.$jadwal_regu_id);
             }
         }
         foreach ($this->jadwal_regus as $key => $jadwal) {     
@@ -129,16 +129,20 @@ class OperatorReguKontrol extends Component
            $this->penalty_regu_merah->tidak_bergerak = 0; 
             $this->penalty_regu_merah->save();
        }
+       $this->jadwal_regu->pemenang = null;
+       $this->jadwal_regu->skor_biru = 0;
+       $this->jadwal_regu->skor_merah = 0;
+       $this->jadwal_regu->save();
         HapusPenalty::dispatch($this->jadwal_regu,[$this->sudut_merah,$this->sudut_biru],"delete",Auth::user());
      }
      public function nextPartai(){
-        $jadwalsolo = JadwalTGR::find($this->next);
-        if($jadwalsolo){
+        $jadwalregu = JadwalTGR::find($this->next);
+        if($jadwalregu){
             $this->gelanggang->jadwal = $this->next;
-            $jadwalsolo->tahap = 'persiapan';
-            $jadwalsolo->save();
+            $jadwalregu->tahap = 'persiapan';
+            $jadwalregu->save();
             $this->gelanggang->save();
-            GantiGelanggang::dispatch($jadwalsolo->Gelanggang);
+            GantiGelanggang::dispatch($jadwalregu->Gelanggang);
         }
         if(Auth::user()->roles_id != 1){
             return redirect('op/kontrol-tgr/regu/'.$this->next);

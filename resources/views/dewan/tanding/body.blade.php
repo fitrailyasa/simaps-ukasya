@@ -8,7 +8,7 @@
         {{-- <div class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
                 <h2 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</h2>
         </div> --}}
-        <div class="kontingen-merah text-end" style="width: 50%">
+        <div class="kontingen-merah text-right" style="width: 50%">
             <h4 class="fw-bold" style="color: #db3545">
                 {{$sudut_merah->nama}}
             </h4>
