@@ -52,7 +52,7 @@
     foreach ($penilaian_tunggal_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
     }
-    if(!count($penilaian_tunggal_juri) == 0){
+    if(count($penilaian_tunggal_juri_biru) != 0){
         $mean_biru = $total_biru / count($penilaian_tunggal_juri_biru);
     }else{
         $mean_biru = 0;
@@ -230,7 +230,7 @@
     foreach ($penilaian_regu_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
     }
-    if(!count($penilaian_regu_juri) == 0){
+    if(!count($penilaian_regu_juri_biru) == 0){
         $mean_biru = $total_biru / count($penilaian_regu_juri_biru);
     }else{
         $mean_biru = 0;
@@ -375,7 +375,7 @@
     foreach ($penilaian_ganda_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
     }
-    if(!count($penilaian_ganda_juri) == 0){
+    if(!count($penilaian_ganda_juri_merah) == 0){
         $mean_merah = $total_merah / count($penilaian_ganda_juri_merah);
     }else{
         $mean_merah = 0;
@@ -408,7 +408,7 @@
     foreach ($penilaian_ganda_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
     }
-    if(!count($penilaian_ganda_juri) == 0){
+    if(!count($penilaian_ganda_juri_biru) == 0){
         $mean_biru = $total_biru / count($penilaian_ganda_juri_biru);
     }else{
         $mean_biru = 0;
@@ -540,7 +540,7 @@
     foreach ($penilaian_solo_juri_merah as $penilaian_juri) {
         $total_merah += $penilaian_juri->skor;
     }
-    if(!count($penilaian_solo_juri) == 0){
+    if(!count($penilaian_solo_juri_merah) == 0){
         $mean_merah = $total_merah / count($penilaian_solo_juri_merah);
     }else{
         $mean_merah = 0;
@@ -573,7 +573,7 @@
     foreach ($penilaian_solo_juri_biru as $penilaian_juri) {
         $total_biru += $penilaian_juri->skor;
     }
-    if(!count($penilaian_solo_juri) == 0){
+    if(!count($penilaian_solo_juri_biru) == 0){
         $mean_biru = $total_biru / count($penilaian_solo_juri_biru);
     }else{
         $mean_biru = 0;

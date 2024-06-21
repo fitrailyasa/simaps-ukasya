@@ -32,6 +32,9 @@ class OperatorTandingKontrol extends Component
     public $active;
     public $next;
     public $user;
+    public $total_poin_merah;
+    public $total_poin_biru;
+
 
 
     public function mount($jadwal_tanding_id){
@@ -47,6 +50,8 @@ class OperatorTandingKontrol extends Component
             }
             }
         }
+        $this->total_poin_biru = 0;
+        $this->total_poin_merah = 0;
         $this->gelanggang = $this->jadwal_tanding->Gelanggang;
         $this->sudut_biru = $this->jadwal_tanding->PengundianTandingBiru->Tanding;
         $this->sudut_merah = $this->jadwal_tanding->PengundianTandingMerah->Tanding;
@@ -111,6 +116,50 @@ class OperatorTandingKontrol extends Component
         $this->waktu = ($this->waktu * 60 + 1) / 60;
     } 
     public function keputusanMenang($sudut,$keputusan){
+        foreach ($this->poin_merah->where('status','sah') as $index => $poin) {
+            switch ($poin->jenis) {
+                case 'jatuhan':
+                    $this->total_poin_merah += $poin->dewan;
+                    break;
+                case 'binaan':
+                    $this->total_poin_merah += $poin->dewan;
+                    break;
+                case 'teguran':
+                    $this->total_poin_merah += $poin->dewan;
+                    break;
+                case 'peringatan':
+                    $this->total_poin_merah += $poin->dewan;
+                    break;
+                case 'pukulan':
+                    $this->total_poin_merah += 1;
+                    break;
+                case 'tendangan':
+                    $this->total_poin_merah += 2;
+                    break;
+            }
+        }
+        foreach ($this->poin_biru->where('status','sah') as $index => $poin) {
+            switch ($poin->jenis) {
+                case 'jatuhan':
+                    $this->total_poin_biru += $poin->dewan;
+                    break;
+                case 'binaan':
+                    $this->total_poin_biru += $poin->dewan;
+                    break;
+                case 'teguran':
+                    $this->total_poin_biru += $poin->dewan;
+                    break;
+                case 'peringatan':
+                    $this->total_poin_biru += $poin->dewan;
+                    break;
+                case 'pukulan':
+                    $this->total_poin_biru += 1;
+                    break;
+                case 'tendangan':
+                    $this->total_poin_biru += 2;
+                    break;
+            }
+        }
         $this->jadwal_tanding->tahap = 'hasil';
         $this->active = "hasil";
         if($sudut == "Sudut Biru"){
@@ -120,15 +169,19 @@ class OperatorTandingKontrol extends Component
             $this->jadwal_tanding->pemenang = $this->jadwal_tanding->PengundianTandingMerah->id;
             $this->jadwal_tanding->save();
         }
+        $this->jadwal_tanding->skor_biru = $this->total_poin_biru;
+        $this->jadwal_tanding->skor_merah = $this->total_poin_merah;
         $this->jadwal_tanding->jenis_kemenangan = $keputusan;
         $this->jadwal_tanding->save();
         $next_partai = JadwalTanding::where("partai",$this->jadwal_tanding->next_partai)->first();
-        if($this->jadwal_tanding->next_sudut == 1){
-            $next_partai->sudut_biru = $this->jadwal_tanding->pemenang;
-        }else{
-            $next_partai->sudut_merah = $this->jadwal_tanding->pemenang;
+        if($next_partai){
+            if($this->jadwal_tanding->next_sudut == 1){
+                $next_partai->sudut_biru = $this->jadwal_tanding->pemenang;
+            }else{
+                $next_partai->sudut_merah = $this->jadwal_tanding->pemenang;
+            }
+            $next_partai->save();
         }
-        $next_partai->save();
         MulaiPertandingan::dispatch('keputusan pemenang',$this->jadwal_tanding,$this->waktu);
     }
     public function mulaiPertandingan($state){

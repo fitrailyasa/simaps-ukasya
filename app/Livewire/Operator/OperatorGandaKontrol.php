@@ -175,6 +175,73 @@ class OperatorGandaKontrol extends Component
     }
     public function gantiTahap($tahap,$tampil,$keputusan_pemenang){
         if($tahap == "keputusan"){
+            if(count($this->penilaian_ganda_juri_merah)%2==0){
+                $length = count($this->penilaian_ganda_juri_merah)/2;
+            }else{
+                $length = (count($this->penilaian_ganda_juri_merah)+1)/2;
+            }
+
+            if($this->penalty_ganda_merah){
+                $penalty_merah = $this->penalty_ganda_merah->toleransi_waktu+$this->penalty_ganda_merah->keluar_arena+$this->penalty_ganda_merah->menyentuh_lantai+$this->penalty_ganda_merah->pakaian+$this->penalty_ganda_merah->tidak_bergerak+$this->penalty_ganda_merah->senjata_jatuh;
+            }else{
+                $penalty_merah = 0;
+            }
+            $total_merah = 0;
+            foreach ($this->penilaian_ganda_juri_merah as $penilaian_juri) {
+                $total_merah += $penilaian_juri->skor;
+            }
+            // Mengurutkan array berdasarkan skor
+            $sorted_nilai_merah = json_decode($this->penilaian_ganda_juri_merah);
+            usort($sorted_nilai_merah, function($a, $b) {
+                return $a->skor <=> $b->skor;
+            });
+
+            // Menghitung median
+            $count_merah = count($sorted_nilai_merah);
+            if ($count_merah % 2 == 0 && $count_merah !==0) {
+                // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+                $median_merah = ($sorted_nilai_merah[$count_merah / 2 - 1]->skor + $sorted_nilai_merah[$count_merah / 2]->skor) / 2;
+            } else if($count_merah % 2 == 1 && $count_merah !==0) {
+                // Jika jumlah data ganjil, median adalah nilai tengah
+                $median_merah = $sorted_nilai_merah[floor($count_merah / 2)]->skor;
+            }else{
+                $median_merah = 0;
+            }
+
+            if(count($this->penilaian_ganda_juri_biru)%2==0){
+                $length = count($this->penilaian_ganda_juri_biru)/2;
+            }else{
+                $length = (count($this->penilaian_ganda_juri_biru)+1)/2;
+            }
+            if($this->penalty_ganda_biru){
+                $penalty_biru = $this->penalty_ganda_biru->toleransi_waktu+$this->penalty_ganda_biru->keluar_arena+$this->penalty_ganda_biru->menyentuh_lantai+$this->penalty_ganda_biru->pakaian+$this->penalty_ganda_biru->tidak_bergerak;
+            }else{
+                $penalty_biru = 0;
+            }
+            $total_biru = 0;
+            foreach ($this->penilaian_ganda_juri_biru as $penilaian_juri) {
+                $total_biru += $penilaian_juri->skor;
+            }
+            // Mengurutkan array berdasarkan skor
+            $sorted_nilai_biru = json_decode($this->penilaian_ganda_juri_biru);
+            usort($sorted_nilai_biru, function($a, $b) {
+                return $a->skor <=> $b->skor;
+            });
+
+            // Menghitung median
+            $count_biru = count($sorted_nilai_biru);
+            if ($count_biru % 2 == 0 && $count_biru !==0) {
+                // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+                $median_biru = ($sorted_nilai_biru[$count_biru / 2 - 1]->skor + $sorted_nilai_biru[$count_biru / 2]->skor) / 2;
+            } else if($count_biru % 2 == 1 && $count_biru !==0) {
+                // Jika jumlah data ganjil, median adalah nilai tengah
+                $median_biru = $sorted_nilai_biru[floor($count_biru / 2)]->skor;
+            }else{
+                $median_biru = 0;
+            }
+            $this->jadwal_ganda->skor_biru = $median_biru - $penalty_biru * 0.5;
+            $this->jadwal_ganda->skor_merah = $median_merah - $penalty_merah * 0.5;
+            $this->jadwal_ganda->save();
             $this->active = "keputusan";
             $this->mulai = false;
             if($tampil == "merah"){
@@ -185,13 +252,15 @@ class OperatorGandaKontrol extends Component
             $this->jadwal_ganda->jenis_kemenangan = $keputusan_pemenang;
             $this->jadwal_ganda->save();
             $next_partai = JadwalTGR::where("partai",$this->jadwal_ganda->next_partai)->first();
-            if($this->jadwal_ganda->next_sudut == 1){
-                $next_partai->tampil = $this->jadwal_ganda->pemenang;
-                $next_partai->sudut_biru = $this->jadwal_ganda->pemenang;
-            }else{
-                $next_partai->sudut_merah = $this->jadwal_ganda->pemenang;
+            if($next_partai){
+                if($this->jadwal_ganda->next_sudut == 1){
+                    $next_partai->tampil = $this->jadwal_ganda->pemenang;
+                    $next_partai->sudut_biru = $this->jadwal_ganda->pemenang;
+                }else{
+                    $next_partai->sudut_merah = $this->jadwal_ganda->pemenang;
+                }
+                $next_partai->save();
             }
-            $next_partai->save();
         }else if($tahap == "tampil"){
             $this->waktu = 0;
             $this->mulai = true;
