@@ -71,12 +71,6 @@
 @endphp
      <div class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
-            {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
-            </div>
-            <div class="bendera" style="width: 30%;">
-                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
-            </div> --}}
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_biru->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #0053a6">{{$sudut_biru->kontingen}}</p>
@@ -87,12 +81,6 @@
                 <p class="fw-bold" style="font-size: 2rem;">{{$sudut_merah->nama}}</p>
                 <p class="fw-bold" style="font-size: 2rem;color: #db3545">{{$sudut_merah->kontingen}}</p>
             </div>
-            {{-- <div class="bendera" style="width: 30%;">
-                <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
-            </div>
-            <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #db3545">
-                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url($sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 8px">
-            </div> --}}
         </div>
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
@@ -221,7 +209,7 @@
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">
 @endsection
-    <div class="content p-4" style="width:100%;height: auto">
+    <div class="content pl-4 pr-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
                 <div class="biru-nama">
@@ -346,7 +334,7 @@
                 </div>
             </div>
             <div class="value" style="width: 70%">
-                <div class="time-performance d-flex justify-content-between  pb-3" style="width: 100%">
+                <div class="time-performance d-flex justify-content-between  pb-3" style="width: 100%; height: 46%;">
                     <div class="minutes text-center" style="width: 50%">
                         <div class="minutes-header border border-dark" style="width: 100% ;height: 65%">
                             <h6 class="fw-bold">Minutes</h6>
@@ -364,7 +352,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="sorted-judge d-flex" style="margin-top: -16px;margin-bottom: -16px !important">
+                <div class="sorted-judge d-flex" style="margin-top: -16px;margin-bottom: -16px !important;height: 46%;">
                     @if (!$sorted_nilai)
                         <div class="juri-1 text-center" style="width: {{100}}%">
                             <div class="juri-1-header border border-dark"
@@ -436,14 +424,76 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="median-value text-center mt-3" style="height: 50%%">
-                    <div class="border border-dark ">
+                <div class="median-value text-center border border-dark" style="height: 28% ; margin-top: -28px">
+                    <div class="border  ">
                         <h6 class="fw-bold pt-3" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
                            {{$median}}
                         </h6>
                     </div>
                 </div>
             </div>
+            <div class="content-right border border-dark" style="width: 50%">
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">PENAMPILAN MELEWATI BATAS WAKTU</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo ||$penalty_solo->toleransi_waktu == 0 ? "0" : $penalty_solo->toleransi_waktu  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">PENAMPILAN MELEWATI AREA 10 M</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo || $penalty_solo->keluar_arena == 0 ? "0" : $penalty_solo->keluar_arena  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">MENJATUHKAN SENJATA, MENYENTUH LANTAI</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo ||$penalty_solo->menyentuh_lantai == 0 ? "0" : $penalty_solo->menyentuh_lantai  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">Pakaian tidak sesuai Aturan (Tanjak atau Samping Fallout)</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo ||$penalty_solo->pakaian == 0 ? "0" : $penalty_solo->pakaian  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">Atlet bertahan dalam satu gerakan selama lebih dari 5 detik</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo ||!$penalty_solo ||$penalty_solo->tidak_bergerak == 0 ? "0" : $penalty_solo->tidak_bergerak  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+            <div class="row-1 d-flex" style="width: 100%">
+                <div class="indikator border border-dark pt-1" style="width: 92%">
+                    <h6 class="fw-bold ml-1">Senjata Jatuh Tidak Sesuai Sinopsis</h6>
+                </div>
+                <div class="nilai border border-dark text-center" style="width: 8%">
+                    <h6 class="fw-bold mt-1" style="color: #db3545">
+                        {{!$penalty_solo ||!$penalty_solo ||$penalty_solo->senjata_jatuh == 0 ? "0" : $penalty_solo->senjata_jatuh  * -0.5}}
+                    </h6>
+                </div>
+            </div>
+        </div>
         </div>
         <div class="content-3 d-flex  gap-1" style="width:100%;height: 100%">
             <div class="content-right  text-center" style="width:50%;">
