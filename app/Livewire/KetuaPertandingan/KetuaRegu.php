@@ -84,6 +84,7 @@ class KetuaRegu extends Component
     #[On('echo:arena,.ganti-tampil-regu')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->tahap = $this->jadwal->tahap;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
                 $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();

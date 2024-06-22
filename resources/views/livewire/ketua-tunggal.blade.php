@@ -219,18 +219,21 @@
         $median = 0;
     }
 
-    // Menghitung selisih kuadrat dari setiap nilai dengan median
+    // Menghitung total skor dan rata-rata (mean)
+    $total = 0;
+    foreach ($penilaian_tunggal_juri as $penilaian_juri) {
+        $total += $penilaian_juri->skor;
+    }
+    $mean = $count ? $total / $count : 0;
+
+    // Menghitung selisih kuadrat dari setiap nilai dengan mean
     $total_diff_squared = 0;
     foreach ($penilaian_tunggal_juri as $penilaian_juri) {
-        $total_diff_squared += pow($penilaian_juri->skor - $median, 2);
+        $total_diff_squared += pow($penilaian_juri->skor - $mean, 2);
     }
 
-    // Menghitung standar deviasi
-    if (count($penilaian_tunggal_juri) !== 0) {
-        $standard_deviation = sqrt($total_diff_squared / $count);
-    } else {
-        $standard_deviation = 0;
-    }
+    // Menghitung standar deviasi populasi
+    $standard_deviation = $count ? sqrt($total_diff_squared / $count) : 0;
 @endphp
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">

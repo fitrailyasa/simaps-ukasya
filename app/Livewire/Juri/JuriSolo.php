@@ -79,7 +79,7 @@ class JuriSolo extends Component
                 $this->penilaian_solo->save();
                 break;
         }
-        $this->penilaian_solo->skor = 0.1 + $this->penilaian_solo->attack_skor + $this->penilaian_solo->firmness_skor + $this->penilaian_solo->soulfulness_skor;
+        $this->penilaian_solo->skor = 9.1 + $this->penilaian_solo->attack_skor + $this->penilaian_solo->firmness_skor + $this->penilaian_solo->soulfulness_skor;
         $this->penilaian_solo->save();
         TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_solo,Auth::user(),$this->gelanggang);
     }

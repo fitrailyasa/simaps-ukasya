@@ -83,6 +83,7 @@ class KetuaSolo extends Component
     #[On('echo:arena,.ganti-tampil-solo')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->tahap = $this->jadwal->tahap;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
                 $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();

@@ -85,6 +85,7 @@ class KetuaGanda extends Component
     #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
+        $this->tahap = $this->jadwal->tahap;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
                 $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();

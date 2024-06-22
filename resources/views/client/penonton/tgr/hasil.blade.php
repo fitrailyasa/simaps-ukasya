@@ -554,9 +554,9 @@
 
     // Menghitung standar deviasi
     if(!count($penilaian_solo_juri_merah) == 0){
-        $standard_deviation_biru = sqrt($total_diff_squared_merah / count($penilaian_solo_juri_merah));
+        $standard_deviation_merah = sqrt($total_diff_squared_merah / count($penilaian_solo_juri_merah));
     }else{
-        $standard_deviation_biru = 0;
+        $standard_deviation_merah = 0;
     }
 
     if(count($penilaian_solo_juri_biru)%2==0){
@@ -587,9 +587,9 @@
 
     // Menghitung standar deviasi
     if(!count($penilaian_solo_juri_biru) == 0){
-        $standard_deviation_merah = sqrt($total_diff_squared_biru / count($penilaian_solo_juri_biru));
+        $standard_deviation_biru = sqrt($total_diff_squared_biru / count($penilaian_solo_juri_biru));
     }else{
-        $standard_deviation_merah = 0;
+        $standard_deviation_biru = 0;
     }
 @endphp
      <div class="hasil-header d-flex" style="height: 40%; width: 100%">
