@@ -12,10 +12,7 @@
     </div>
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">
-            {{$gelanggang->nama}}, Partai {{$jadwal->partai}}
+            {{$gelanggang->nama}}, Partai {{$jadwal->partai}} Regu
         </h5>
-        <h4 class="fw-bold">
-            Regu
-        </h4>
     </div>
 </div>

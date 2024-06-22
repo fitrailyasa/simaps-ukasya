@@ -7,15 +7,12 @@
             {{$tampil->nama}}
         </h4>
     </div>
-    <div class="timer-clock">
+    {{-- <div class="timer-clock">
         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
-    </div>
+    </div> --}}
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">
-            {{$gelanggang->nama}}, Match {{$jadwal->partai}}
+            {{$gelanggang->nama}}, Match {{$jadwal->partai}} Solo
         </h5>
-        <h4 class="fw-bold">
-            Solo
-        </h4>
     </div>
 </div>

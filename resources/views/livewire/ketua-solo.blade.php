@@ -96,68 +96,68 @@
         </div>
     </div>
     <div class="hasil-body border border-dark mt-5 text-center" style="height: 120%; width: 100%">
-        <p class="text-hasil fw-bold" style="font-size: 1.5rem;">Winner</p>
+        <p class="text-hasil fw-bold" style="font-size: 1.5rem; margin-bottom: -12px">Winner</p>
         @if ($jadwal->pemenang == $pengundian_biru->id)
-            <p class="fw-bold" style="font-size: 1.2rem; color: #0053a6; margin-top: -24px;">Biru</p>
+            <p class="fw-bold" style="font-size: 2rem; color: #0053a6; margin-bottom: -4px;">Biru</p>
         @else
-            <p class="fw-bold" style="font-size: 1.2rem; color: #db3545;">Merah</p>
+            <p class="fw-bold" style="font-size: 2rem; color: #db3545; margin-bottom: -4px">Merah</p>
         @endif 
         <div class="box d-flex justify-content-center text-center" style="width: 100%;height: 80%;">
             <div class="hasil-akhir border border-dark d-flex gap-1 flex-column" style="width: 80%;height: 100%;">
                 <div class="detail-poin d-flex gap-1" style="width: 100%;height: 25%;">
                     <div class="left border border-dark d-flex justify-content-center flex-column" style="width: 50%;height: 100%;background-color: #ececec">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Detail Point</p>
+                        <p class="fw-bold" style="font-size: 1.5rem;">Detail Point</p>
                     </div>
                     <div class="right d-flex gap-1 flex-column" style="width: 50%;height: 100%;">
                         <div class="score-result border border-dark" style="width: 100%;height: 50%;background-color: #ececec">
-                         <p class="fw-bold" style="font-size: 1.2rem;">Score Result</p>
+                         <p class="fw-bold" style="font-size: 1.5rem;">Score Result</p>
                         </div>
                         <div class="result d-flex gap-1" style="width: 100%;height: 50%;">
                             <div class="biru border border-dark" style="width: 50%;height: 90%;background-color: #0053a6">
-                                 <p class="fw-bold text-white" style="font-size: 1.2rem;">Biru</p>
+                                 <p class="fw-bold text-white" style="font-size: 1.5rem;">Biru</p>
                             </div>
                             <div class="merah border border-dark" style="width: 50%;height: 90%;background-color: #db3545;">
-                                 <p class="fw-bold text-white" style="font-size: 1.2rem;">Merah</p>
+                                 <p class="fw-bold text-white" style="font-size: 1.5rem;">Merah</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="performance-time d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Performa Waktu</p>
+                        <p class="fw-bold" style="font-size: 1.5rem;">Performa Waktu</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_solo_biru ? sprintf("%02d:%02d", floor($penalty_solo_biru->performa_waktu), ($penalty_solo_biru->performa_waktu*60)%60) : "00:00" }}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{$penalty_solo_biru ? sprintf("%02d:%02d", floor($penalty_solo_biru->performa_waktu), ($penalty_solo_biru->performa_waktu*60)%60) : "00:00" }}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_solo_merah ? sprintf("%02d:%02d", floor($penalty_solo_merah->performa_waktu), ($penalty_solo_merah->performa_waktu*60)%60) : "00:00" }}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$penalty_solo_merah ? sprintf("%02d:%02d", floor($penalty_solo_merah->performa_waktu), ($penalty_solo_merah->performa_waktu*60)%60) : "00:00" }}</p>
                             </div>
                     </div>
                 </div>
                 <div class="penalty d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Penalty</p>
+                        <p class="fw-bold" style="font-size: 1.5rem;">Penalty</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_biru == 0 ? 0 : $penalty_biru * -0.5}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{$penalty_biru == 0 ? 0 : $penalty_biru * -0.5}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$penalty_merah == 0 ? 0 : $penalty_merah * -0.5}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$penalty_merah == 0 ? 0 : $penalty_merah * -0.5}}</p>
                             </div>
                     </div>
                 </div>
                 <div class="winning-point d-flex gap-1  " style="width: 100%;height: 28.6%;">
                     <div class="left border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;background-color: #ececec">
-                        <p class="fw-bold" style="font-size: 1.2rem;">Standard Deviation</p>
+                        <p class="fw-bold" style="font-size: 1.5rem;">Standard Deviation</p>
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_biru}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_biru}}</p>
                         </div>
                             <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.2rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_merah}}</p>
                             </div>
                     </div>
                 </div>
@@ -421,13 +421,13 @@
                                 }
                             @endphp
                         <div class="juri-1 text-center" style="width: {{100/$length}}%">
-                            <div class="juri-1-header border border-dark {{( $i  == $length) ? "bg-success" : "bg-primary"}}"
+                            <div class="juri-1-header border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}"
                                 style="width: 100%; background-color: #ececec; height: 40%;">
                                 <h6 class="fw-bold">
                                     {{$juri_name}}
                                 </h6>
                             </div>
-                            <div class="juri-1-value border border-dark {{( $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
+                            <div class="juri-1-value border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
                                     {{$nilai->skor}}
                                 </h6>

@@ -114,14 +114,14 @@ Regu
                     <span style="color: #0053a6">{{$penilaian_regu ? number_format(9.90 - $penilaian_regu->salah*0.01,2) : "9.90"}}</span>
                 </div>
             </div>
-            <div class="range-score d-flex gap-1" style="min-height: 25vh">
+            <div class="range-score d-flex gap-1" style="min-height: 20vh">
                 <div
                     class="main text-center fw-bold border border-dark d-flex flex-column justify-content-center"
-                    style="width: 90%"
+                    style="width: 90%;"
                 >
-                        <h3 class="fw-bold">
+                        <p class="fw-bold">
                         FLOW OF MOVEMENT / STAMINA RANGE SCORE: 0.01 -
-                        0.10</h3>
+                        0.10</p>
                     <div
                         class="score-detail d-flex gap-2 justify-content-center pb-1"
                     >
@@ -129,8 +129,8 @@ Regu
                             @if ($i == 10)
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
-                                class="p-1"
-                                style="background-color: #ececec; width:8%; height: 100px"
+                                class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
+                                style=" width:9%; height: 80px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.10
@@ -139,8 +139,8 @@ Regu
                             @else
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
-                                class="p-1"
-                                style="background-color: #ececec;width:8%; height: 100px"
+                                class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
+                                style=" width:9%; height: 80px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.0{{$i}}

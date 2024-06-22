@@ -266,7 +266,7 @@
             <div class="kotak bg-white border border-secondary mt-1" style="height: 10px;width:10px; ;margin-top: 0px !important"></div>
         </div>
         <div class="total-footer text-center bg-abu border border-secondary pt-2" style="width :17.3% ">
-            <h5 class="fw-bold" style="margin-top: 0px !important">0</h5>
+            <h5 class="fw-bold" style="margin-top: 0px !important">{{ $penilaian_ganda ? 9.1 + $penilaian_ganda->attack_skor +  $penilaian_ganda->firmness_skor +  $penilaian_ganda->soulfulness_skor : "0"}}</h5>
         </div>
     </div>
 </div>

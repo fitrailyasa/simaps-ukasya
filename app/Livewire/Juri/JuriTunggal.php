@@ -26,6 +26,7 @@ class JuriTunggal extends Component
     public $tampil;
     public $mulai = false;
     public $penilaian_tunggal;
+    public $active;
     
     public function mount(){
         $this->gelanggang = Gelanggang::find(Auth::user()->gelanggang);
@@ -46,6 +47,9 @@ class JuriTunggal extends Component
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+        }
+        if($this->penilaian_tunggal){
+            $this->active = $this->penilaian_tunggal->flow_skor;
         }
     }
 
@@ -71,10 +75,12 @@ class JuriTunggal extends Component
                 ]); 
             }
         }
+        $this->active = $this->penilaian_tunggal->flow_skor;
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
     public function tambahNilaiTrigger($id,$value){
         $value/=100;
+        $this->active = $value;
         $this->penilaian_tunggal->flow_skor = $value;
         $this->penilaian_tunggal->skor = (9.90 - $this->penilaian_tunggal->salah*0.01) + $this->penilaian_tunggal->flow_skor;
         $this->penilaian_tunggal->save();
@@ -137,6 +143,7 @@ class JuriTunggal extends Component
         }else{
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }
+        $this->active = null;
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
 

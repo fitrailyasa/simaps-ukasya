@@ -270,14 +270,14 @@
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true || $jadwal->tahap == "tampil")
-            @if ($gelanggang->waktu != 0)
+            {{-- @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
                         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
-                @endif
+                @endif --}}
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -406,7 +406,7 @@
     }
     
     if($penalty_ganda){
-        $penalty = $penalty_ganda->toleransi_waktu + $penalty_ganda->keluar_arena + $penalty_ganda->menyentuh_lantai + $penalty_ganda->pakaian + $penalty_ganda->tidak_bergerak;
+        $penalty = $penalty_ganda->toleransi_waktu + $penalty_ganda->keluar_arena + $penalty_ganda->menyentuh_lantai + $penalty_ganda->pakaian + $penalty_ganda->tidak_bergerak + $penalty_ganda->senjata_jatuh;
     } else {
         $penalty = 0;
     }
@@ -468,14 +468,14 @@
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true  || $jadwal->tahap == "tampil")
-            @if ($gelanggang->waktu != 0)
+            {{-- @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
                         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
-                @endif
+                @endif --}}
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">
@@ -606,7 +606,7 @@
     }
     
     if($penalty_solo){
-        $penalty = $penalty_solo->toleransi_waktu + $penalty_solo->keluar_arena + $penalty_solo->menyentuh_lantai + $penalty_solo->pakaian + $penalty_solo->tidak_bergerak;
+        $penalty = $penalty_solo->toleransi_waktu + $penalty_solo->keluar_arena + $penalty_solo->menyentuh_lantai + $penalty_solo->pakaian + $penalty_solo->tidak_bergerak + $penalty_solo->senjata_jatuh;
     } else {
         $penalty = 0;
     }
@@ -668,14 +668,14 @@
         </div>
         <div class="timer d-flex flex-column text-center" style="width: 50%">
             @if ($mulai == true  || $jadwal->tahap == "tampil")
-            @if ($gelanggang->waktu != 0)
+            {{-- @if ($gelanggang->waktu != 0)
                 <div class="timer-text" style="height: 40%">
                     <p class="text-hasil fw-bold" style="font-size: 2rem;">Waktu</p>
                 </div>
                     <div class="timer-clock">
                         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
                     </div>
-                @endif
+                @endif --}}
             @else
                 <div class="box-nilai"  style="height: 100%">
                     <div class="up d-flex" style="height: 50%">

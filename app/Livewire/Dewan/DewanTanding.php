@@ -60,6 +60,17 @@ class DewanTanding extends Component
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn('jenis',['teguran','binaan','peringatan','jatuhan'])->get();
     }
 
+    public function tutupVerifikasiPelanggaran(){
+        $this->verifikasi_pelanggaran->status = false;
+        $this->verifikasi_pelanggaran->save();
+        VerifikasiPelanggaranEvent::dispatch($this->verifikasi_pelanggaran,$this->jadwal);
+    }
+    public function tutupVerifikasiJatuhan(){
+        $this->verifikasi_jatuhan->status = false;
+        $this->verifikasi_jatuhan->save();
+        VerifikasiJatuhanEvent::dispatch($this->verifikasi_jatuhan,$this->jadwal);
+    }
+
     public function kurangiWaktu(){
         if($this->mulai == true){
              $this->waktu = ($this->waktu * 60 + 1) / 60;
@@ -222,7 +233,8 @@ class DewanTanding extends Component
                     'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
-                    'data'=>json_encode($this->juri_verifikasi_jatuhan)
+                    'data'=>json_encode($this->juri_verifikasi_jatuhan),
+                    'status'=>true
                 ]);
         $this->verifikasi_jatuhan_data = $this->juri_verifikasi_jatuhan;
         $this->created_at = $this->verifikasi_jatuhan->created_at->setTimezone('Asia/Jakarta')->format('d F Y H:i');
@@ -240,7 +252,8 @@ class DewanTanding extends Component
                     'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
-                    'data'=>json_encode($this->juri_verifikasi_pelanggaran)
+                    'data'=>json_encode($this->juri_verifikasi_pelanggaran),
+                    'status'=>true
                 ]);
             $this->verifikasi_pelanggaran_data = $this->juri_verifikasi_pelanggaran;
             $this->created_at = $this->verifikasi_pelanggaran->created_at->setTimezone('Asia/Jakarta')->format('d F Y H:i');

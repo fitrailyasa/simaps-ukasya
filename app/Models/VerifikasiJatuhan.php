@@ -9,7 +9,7 @@ class VerifikasiJatuhan extends Model
 {
     use HasFactory;
     protected $table = 'verifikasi_jatuhan';
-    protected $fillable = ['uuid','jadwal_tanding','dewan','data'];
+    protected $fillable = ['uuid','jadwal_tanding','dewan','data','status'];
     
     public function JadwalTanding()
     {

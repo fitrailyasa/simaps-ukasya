@@ -173,58 +173,13 @@ class JuriTanding extends Component
         ->where('status', 1)
         ->orderBy('created_at', 'desc') // Misalnya menggunakan 'created_at' atau kolom lain yang relevan
         ->first();
-                $this->user = User::where('id',Auth::user()->id)->first();
-                $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
-                $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
-                $juri_data = json_decode($verifikasi_jatuhan->data, true);
-                $juri_data[$this->user->name] = $verifikasi;
-                $verifikasi_jatuhan->data = json_encode($juri_data);
-                $verifikasi_jatuhan->save();
-                $allNotNull = true;
-                foreach ($juri_data as $key => $value) {
-                    if ($value == null) {
-                        $allNotNull = false;
-                        break;
-                    }
-                }
-                if($allNotNull){
-                    $biru = 0;
-                    $merah = 0;
-                    $invalid = 0;
-                    foreach ($juri_data as $key => $value) {
-                        if ($value == 'merah') {
-                            $merah+=1;
-                        }elseif($value == 'biru'){
-                            $biru=+1;
-                        }else{
-                            $invalid+=1;
-                        }
-                    }
-                    if($biru > $merah && $biru > $invalid){
-                        PenilaianTanding::create([
-                            'jenis'=>'jatuhan',
-                            'sudut'=>$this->sudut_biru->id,
-                            'jadwal_tanding'=>$this->jadwal->id,
-                            'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
-                            'dewan' => 3,
-                            'status'=> 'sah',
-                            'aktif'=> false,
-                            'babak'=>$this->jadwal->babak_tanding
-                        ]);
-                    }elseif($merah > $biru && $merah > $invalid){
-                        PenilaianTanding::create([
-                            'jenis'=>'jatuhan',
-                            'sudut'=>$this->sudut_merah->id,
-                            'jadwal_tanding'=>$this->jadwal->id,
-                            'uuid'=>date('Ymd-His').'-'.$this->sudut_merah->id.Auth::user()->id.'-'.$this->jadwal->id,
-                            'dewan' => 3,
-                            'status'=> 'sah',
-                            'aktif'=> false,
-                            'babak'=>$this->jadwal->babak_tanding
-                        ]);                    }
-                    $verifikasi_jatuhan->status = false;
-                    $verifikasi_jatuhan->save();
-                }
+        $this->user = User::where('id',Auth::user()->id)->first();
+        $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        $juri_data = json_decode($verifikasi_jatuhan->data, true);
+        $juri_data[$this->user->name] = $verifikasi;
+        $verifikasi_jatuhan->data = json_encode($juri_data);
+        $verifikasi_jatuhan->save();
         VerifikasiJatuhanEvent::dispatch($verifikasi_jatuhan,$this->jadwal);
     }
     public function verifikasiPelanggaranTrigger($verifikasi){
@@ -233,78 +188,26 @@ class JuriTanding extends Component
         ->where('status', 1)
         ->latest('created_at')
         ->first();
-                $this->user = User::where('id',Auth::user()->id)->first();
-                $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
-                $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
-                $juri_data = json_decode($verifikasi_pelanggaran->data, true);
-                $juri_data[$this->user->name] = $verifikasi;
-                $verifikasi_pelanggaran->data = json_encode($juri_data);
-                $verifikasi_pelanggaran->save();
-                $allNotNull = true;
-                foreach ($juri_data as $key => $value) {
-                    if ($value == null) {
-                        $allNotNull = false;
-                        break;
-                    }
-                }
-                if($allNotNull){
-                    $biru = 0;
-                    $merah = 0;
-                    $invalid = 0;
-                    foreach ($juri_data as $key => $value) {
-                        if ($value == 'merah') {
-                            $merah+=1;
-                        }elseif($value == 'biru'){
-                            $biru=+1;
-                        }else{
-                            $invalid+=1;
-                        }
-                    }
-                    $nilai = -5;
-                    if($biru > $merah && $biru > $invalid){
-                        if(count($this->penilaian_tanding_biru->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
-                        $nilai = -10;
-                        }
-                        PenilaianTanding::create([
-                            'jenis'=>'peringatan',
-                            'sudut'=>$this->sudut_biru->id,
-                            'jadwal_tanding'=>$this->jadwal->id,
-                            'uuid'=>date('Ymd-His').'-'.$this->sudut_biru->id.Auth::user()->id.'-'.$this->jadwal->id,
-                            'dewan' => $nilai,
-                            'status'=> 'sah',
-                            'aktif'=> false,
-                            'babak'=>$this->jadwal->babak_tanding
-                        ]);
-                    }elseif($merah > $biru && $merah > $invalid){
-                        if(count($this->penilaian_tanding_merah->where('babak',$this->jadwal->babak_tanding)->where('jenis', 'peringatan'))>=1){
-                        $nilai = -10;
-                        }
-                        PenilaianTanding::create([
-                            'jenis'=>'peringatan',
-                            'sudut'=>$this->sudut_merah->id,
-                            'jadwal_tanding'=>$this->jadwal->id,
-                            'uuid'=>date('Ymd-His').'-'.$this->sudut_merah->id.Auth::user()->id.'-'.$this->jadwal->id,
-                            'dewan' => $nilai,
-                            'status'=> 'sah',
-                            'aktif'=> false,
-                            'babak'=>$this->jadwal->babak_tanding
-                        ]);                    }
-                    $verifikasi_pelanggaran->status = false;
-                    $verifikasi_pelanggaran->save();
-                }
+        $this->user = User::where('id',Auth::user()->id)->first();
+        $this->juri = User::where('roles_id',4)->where('gelanggang',$this->gelanggang->id)->get();
+        $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
+        $juri_data = json_decode($verifikasi_pelanggaran->data, true);
+        $juri_data[$this->user->name] = $verifikasi;
+        $verifikasi_pelanggaran->data = json_encode($juri_data);
+        $verifikasi_pelanggaran->save();
         VerifikasiPelanggaranEvent::dispatch($verifikasi_pelanggaran,$this->jadwal);
     }
 
     #[On('echo:verifikasi,.verifikasi-jatuhan')]
     public function verifikasiJatuhanHandler($data){
-        if($this->pilihan == null){
+        if($this->pilihan == null || $data["verifikasi_jatuhan"]["status"] == false){
             $this->pilihan = "waiting";
         }
         $this->verifikasi_jatuhan = $data;
     }
     #[On('echo:verifikasi,.verifikasi-pelanggaran')]
     public function verifikasiPelanggaranHandler($data){
-        if($this->pilihan == null){
+        if($this->pilihan == null || $data["verifikasi_pelanggaran"]["status"] == false){
             $this->pilihan = "waiting";
         }
         $this->verifikasi_pelanggaran = $data;

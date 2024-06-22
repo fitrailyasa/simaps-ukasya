@@ -1,16 +1,16 @@
 <div class="tombol-container d-flex" style="width: 100%;height: 40vh;">
     <div class="tombol-pesilat-a" style="width: 45%; height: 100%">
         <div class="tombol d-flex gap-1 " style="width: 100%; height: 70%; margin-bottom: -16px">
-            <div class="tombol-1" style="width: 33%;height: 100%;margin-top: 20px">
-                <button wire:click.prevent="tambahJatuhanTrigger({{$sudut_biru->id}})" class="btn btn-biru  btn-jatuhan-a" style="margin-bottom: 4px;border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold text-white">Jatuhan</h5></button>
-                <button wire:click.prevent="tambahBinaanTrigger({{$sudut_biru->id}})" class="btn btn-biru" style=" border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">Binaan</h5></button>
+            <div class="tombol-1 " style="width: 33%;height: 100%;margin-top: 20px">
+                <button wire:click.prevent="tambahJatuhanTrigger({{$sudut_biru->id}})" class="btn btn-biru text-white  btn-jatuhan-a" style="margin-bottom: 4px;border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold text-white">Jatuhan</h5></button>
+                <button wire:click.prevent="tambahBinaanTrigger({{$sudut_biru->id}})" class="btn btn-biru text-white" style=" border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">Binaan</h5></button>
             </div>
             <div class="tombol-2" style="width: 33%;height: 100%;margin-top: 20px">
-                <button wire:click.prevent="tambahTeguranTrigger({{$sudut_biru->id}})" class="btn btn-biru " style="margin-bottom: 4px;border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">  Teguran</h5></button>
-                <button wire:click.prevent="tambahPeringatanTrigger({{$sudut_biru->id}})" class="btn btn-biru" style=" border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">Peringatan</h5></button>
+                <button wire:click.prevent="tambahTeguranTrigger({{$sudut_biru->id}})" class="btn btn-biru text-white " style="margin-bottom: 4px;border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">  Teguran</h5></button>
+                <button wire:click.prevent="tambahPeringatanTrigger({{$sudut_biru->id}})" class="btn btn-biru text-white" style=" border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">Peringatan</h5></button>
             </div>
             <div class="tombol-3" style="width: 33%;height: 100%;margin-top: 8px">
-                <button wire:click='hapusTrigger({{$sudut_biru->id}})' class="btn btn-biru mt-3" style="border-radius: 20px !important ;border: 2px solid black; height: 80%; width: 100%"><h5 class="fw-bold">Hapus</h5></button>            
+                <button wire:click='hapusTrigger({{$sudut_biru->id}})' class="btn btn-biru text-white mt-3" style="border-radius: 20px !important ;border: 2px solid black; height: 80%; width: 100%"><h5 class="fw-bold">Hapus</h5></button>            
             </div>
         </div>
         <div class="verifikasi" style="width: 100%; height: 30%" style="margin-top: -16px !important">

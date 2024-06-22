@@ -81,7 +81,7 @@ class JuriGanda extends Component
                 $this->penilaian_ganda->save();
                 break;
         }
-        $this->penilaian_ganda->skor = 0.1 + $this->penilaian_ganda->attack_skor + $this->penilaian_ganda->firmness_skor + $this->penilaian_ganda->soulfulness_skor;
+        $this->penilaian_ganda->skor = 9.1 + $this->penilaian_ganda->attack_skor + $this->penilaian_ganda->firmness_skor + $this->penilaian_ganda->soulfulness_skor;
         $this->penilaian_ganda->save();
         TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
@@ -105,7 +105,15 @@ class JuriGanda extends Component
         }else{
             $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->sudut_merah->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }
-        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if(!$this->penilaian_ganda){
+            $this->penilaian_ganda = PenilaianGanda::create([
+                'jadwal_ganda'=>$this->jadwal->id,
+                'sudut' => $this->tampil->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                'juri' => Auth::user()->id
+            ]);
+        }
         $this->attack_active = $this->penilaian_ganda->attack_skor;
         $this->firmness_active = $this->penilaian_ganda->firmness_skor;
         $this->soulfulness_active = $this->penilaian_ganda->soulfulness_skor;
@@ -113,7 +121,7 @@ class JuriGanda extends Component
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
         $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
-        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
 
     #[On('echo:arena,.ganti-gelanggang')]
