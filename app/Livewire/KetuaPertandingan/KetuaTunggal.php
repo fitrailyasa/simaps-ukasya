@@ -97,7 +97,6 @@ class KetuaTunggal extends Component
     #[On('echo:arena,.ganti-tahap-tunggal')]
     public function gantiTahapHandler($data){
         $this->tahap = $data["tahap"];
-        if($this->gelanggang->id == $data["gelanggang"]["id"]){
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
             if($data["tahap"] == "tampil"){
@@ -109,9 +108,11 @@ class KetuaTunggal extends Component
                     $this->penalty_tunggal = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
                 }
             }else if($data["tahap"] == "keputusan"){
-                
+                $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+                $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+                $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+                $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
             }
-        }
     }
 
     #[On('echo:arena,.ganti-gelanggang')]

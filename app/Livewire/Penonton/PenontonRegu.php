@@ -117,7 +117,7 @@ class PenontonRegu extends Component
         $this->tahap = $this->jadwal->tahap;
         $this->tampil_nilai = false;
         $this->waktu = 0;
-        $this->tampil = $data["tampil"];
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tampil"]['id'] == $this->sudut_merah->id){
                 $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->get();
                 $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil)->first();
