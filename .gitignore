@@ -18,4 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 /run.bat
+/package-lock.json
 
