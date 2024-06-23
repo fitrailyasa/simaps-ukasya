@@ -165,10 +165,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{($median_biru != 0 || $penalty_biru !=0) ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$median_merah != 0 ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{($median_merah != 0 || $penalty_merah !=0) ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
                             </div>
                     </div>
                 </div>  
@@ -379,10 +379,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{($median_biru != 0 || $penalty_biru !=0) ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$median_merah != 0 ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{($median_merah != 0 || $penalty_merah !=0) ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
                             </div>
                     </div>
                 </div>  
@@ -592,10 +592,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{($median_biru != 0 || $penalty_biru !=0) ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$median_merah != 0 ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{($median_merah != 0 || $penalty_merah !=0) ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
                             </div>
                     </div>
                 </div>
@@ -651,7 +651,7 @@
         $length = (count($penilaian_solo_juri_merah)+1)/2;
     }
     if($penalty_solo_biru){
-        $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo_biru->keluar_arena+$penalty_solo_biru->menyentuh_lantai+$penalty_solo_biru->pakaian+$penalty_solo_biru->tidak_bergerak +$penalty_solo_merah->senjata_jatuh;
+        $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo_biru->keluar_arena+$penalty_solo_biru->menyentuh_lantai+$penalty_solo_biru->pakaian+$penalty_solo_biru->tidak_bergerak + $penalty_solo_biru->senjata_jatuh;
     }else{
         $penalty_biru = 0;
     }
@@ -663,6 +663,23 @@
         $mean_merah = $total_merah / count($penilaian_solo_juri_merah);
     }else{
         $mean_merah = 0;
+    }
+
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai_merah = json_decode($penilaian_solo_juri_merah);
+    usort($sorted_nilai_merah, function($a, $b) {
+        return $a->skor <=> $b->skor;
+    });
+    // Menghitung median
+    $count_merah = count($sorted_nilai_merah);
+    if ($count_merah % 2 == 0 && $count_merah !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median_merah = ($sorted_nilai_merah[$count_merah / 2 - 1]->skor + $sorted_nilai_merah[$count_merah / 2]->skor) / 2;
+    } else if($count_merah % 2 == 1 && $count_merah !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median_merah = $sorted_nilai_merah[floor($count_merah / 2)]->skor;
+    }else{
+        $median_merah = 0;
     }
     
     // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
@@ -696,6 +713,24 @@
         $mean_biru = $total_biru / count($penilaian_solo_juri_biru);
     }else{
         $mean_biru = 0;
+    }
+
+    // Mengurutkan array berdasarkan skor
+    $sorted_nilai_biru = json_decode($penilaian_solo_juri_biru);
+    usort($sorted_nilai_biru, function($a, $b) {
+        return $a->skor <=> $b->skor;
+    });
+
+    // Menghitung median
+    $count_biru = count($sorted_nilai_biru);
+    if ($count_biru % 2 == 0 && $count_biru !==0) {
+        // Jika jumlah data genap, median adalah rata-rata dari dua nilai tengah
+        $median_biru = ($sorted_nilai_biru[$count_biru / 2 - 1]->skor + $sorted_nilai_biru[$count_biru / 2]->skor) / 2;
+    } else if($count_biru % 2 == 1 && $count_biru !==0) {
+        // Jika jumlah data ganjil, median adalah nilai tengah
+        $median_biru = $sorted_nilai_biru[floor($count_biru / 2)]->skor;
+    }else{
+        $median_biru = 0;
     }
     
     // Menghitung selisih kuadrat dari setiap nilai dengan rata-rata
@@ -764,6 +799,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="standard-deviation d-flex gap-1  " style="width: 100%;height: 14.3%;">
+                    <div class="left border border-dark" style="width: 50%;height: 100%">
+                        <p class="fw-bold" style="font-size: 1.5rem;">Nilai</p>
+                    </div>
+                    <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
+                        <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{($median_biru != 0 || $penalty_biru !=0) ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
+                        </div>
+                            <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{($median_merah != 0 || $penalty_merah !=0) ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
+                            </div>
+                    </div>
+                </div>
                 <div class="performance-time d-flex gap-1  " style="width: 100%;height: 14.3%;">
                     <div class="left border border-dark" style="width: 50%;height: 100%">
                         <p class="fw-bold" style="font-size: 1.5rem;">Performa Waktu</p>
@@ -796,10 +844,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_biru}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{number_format($standard_deviation_biru,9)}}</p>
                             </div>
                             <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{number_format($standard_deviation_merah,9)}}</p>
                             </div>
                     </div>
                 </div>

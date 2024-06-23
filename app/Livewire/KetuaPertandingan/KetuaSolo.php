@@ -95,7 +95,6 @@ class KetuaSolo extends Component
     
     #[On('echo:arena,.ganti-tahap-solo')]
     public function gantiTahapHandler($data){
-        $this->tahap = $data["tahap"];
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
             if($data["tahap"] == "tampil"){

@@ -97,7 +97,6 @@ class KetuaGanda extends Component
     
     #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
-        $this->tahap = $data["tahap"];
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
             if($data["tahap"] == "tampil"){

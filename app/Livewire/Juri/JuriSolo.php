@@ -103,7 +103,15 @@ class JuriSolo extends Component
         }else{
             $this->penilaian_solo = PenilaianSolo::where('sudut',$this->sudut_merah->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }
-        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_solo,Auth::user(),$this->gelanggang);
+        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        if(!$this->penilaian_solo){
+            $this->penilaian_solo = PenilaianSolo::create([
+                'jadwal_solo'=>$this->jadwal->id,
+                'sudut' => $this->tampil->id,
+                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                'juri' => Auth::user()->id
+            ]);
+        }
         $this->attack_active = $this->penilaian_solo->attack_skor;
         $this->firmness_active = $this->penilaian_solo->firmness_skor;
         $this->soulfulness_active = $this->penilaian_solo->soulfulness_skor;
@@ -111,7 +119,7 @@ class JuriSolo extends Component
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
         $this->sudut_merah = $this->jadwal->PengundianTGRMerah->TGR;
-        $this->tampil = $this->jadwal->TampilTGR->TGR;
+        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_solo,Auth::user(),$this->gelanggang);
     }
 
     #[On('echo:arena,.ganti-gelanggang')]

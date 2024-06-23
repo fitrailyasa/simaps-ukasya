@@ -52,7 +52,7 @@
         $length = (count($penilaian_solo_juri_biru)+1)/2;
     }
     if($penalty_solo_biru){
-        $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo_biru->keluar_arena+$penalty_solo_biru->menyentuh_lantai+$penalty_solo_biru->pakaian+$penalty_solo_biru->tidak_bergerak;
+        $penalty_biru = $penalty_solo_biru->toleransi_waktu+$penalty_solo_biru->keluar_arena+$penalty_solo_biru->menyentuh_lantai+$penalty_solo_biru->pakaian+$penalty_solo_biru->tidak_bergerak+$penalty_solo_biru->senjata_jatuh;
     }else{
         $penalty_biru = 0;
     }
@@ -123,17 +123,17 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_biru->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{$median_biru - $penalty_biru * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{number_format($median_biru - $penalty_biru * 0.5,3)}}</h1>
         </div>
     </div>
     <div class="tombol" style="width: 50%">
         <div class="row-1 d-flex flex-row justify-content-between">
-            <button wire:click='gantiTahap("tampil",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }}, "")' class="mulai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Mulai</button>
-            <button wire:click='gantiTahap("tampil nilai" ,{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }} , "")' class="nilai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Tampil Nilai</button>
-            <button wire:click='gantiTahap("pause",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }} , "")' class="stop" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Stop</button>
+            <button wire:click='gantiTahap("tampil",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="mulai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Mulai</button>
+            <button wire:click='gantiTahap("tampil nilai" ,{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="nilai" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Tampil Nilai</button>
+            <button wire:click='gantiTahap("pause",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="stop" style="background-color: #000; width: 30%;color: #fff;border-radius: 20px;font-size: 2rem">Stop</button>
         </div>
         <div class="row-2 d-flex flex-row justify-content-center mt-3">
-            <button wire:click='gantiTahap("persiapan",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }} , "")' class="mulai" style="border:#9BB8CD ;{{$active == "persiapan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
+            <button wire:click='gantiTahap("persiapan",{{$jadwal_solo->TampilTGR->id == $sudut_merah->id ? "'merah'" : "'biru'" }},"")' class="mulai" style="border:#9BB8CD ;{{$active == "persiapan" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Persiapan</button>
         </div>
         <div class="row-3 d-flex flex-row justify-content-center  mt-3">
             <button wire:click='gantiTampil("biru")' class="mulai" style="border:#9BB8CD ;{{$active == "sudutbiru" ? "background-color: #26e615;" : "background-color: #9BB8CD;"}} width: 50%;color: #fff;border-radius: 20px;font-size: 2rem">Penampilan Sudut Biru</button>
@@ -160,7 +160,7 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_merah->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{$median_merah - $penalty_merah * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{number_format($median_merah - $penalty_merah * 0.5,3)}}</h1>
         </div>
     </div>
    </div>
