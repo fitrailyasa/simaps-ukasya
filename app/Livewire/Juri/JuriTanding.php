@@ -77,7 +77,6 @@ class JuriTanding extends Component
     }
 
     public function tambahPukulanTrigger($id){
-        if($this->jadwal->tahap == 'tanding'){
             $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('sudut',$id)->where('aktif',true)->first();
             if($penilaian_pukulan == null){
                 PenilaianTanding::create([
@@ -86,7 +85,8 @@ class JuriTanding extends Component
                 'jadwal_tanding'=>$this->jadwal->id,
                 'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 $this->juri => 1,
-                'babak'=>$this->jadwal->babak_tanding
+                'babak'=>$this->jadwal->babak_tanding,
+                'aktif' => true
             ]);
             }else{
                 $juri = $this->juri;
@@ -99,14 +99,10 @@ class JuriTanding extends Component
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }
             TambahPukulan::dispatch($id,$this->jadwal);
-        }else{
-            $this->error = "pertandingan belum dimulai atau sedang pause";
-        }
         
     }
 
     public function tambahTendanganTrigger($id){
-        if($this->jadwal->tahap == 'tanding'){
             $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('sudut',$id)->where('aktif',true)->first();
             if($penilaian_tendangan==null){
                 PenilaianTanding::create([
@@ -115,7 +111,8 @@ class JuriTanding extends Component
                 'jadwal_tanding'=>$this->jadwal->id,
                 'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 $this->juri => 2,
-                'babak'=>$this->jadwal->babak_tanding
+                'babak'=>$this->jadwal->babak_tanding,
+                'aktif' => true
             ]);
             }else{
                 $juri =$this->juri;
@@ -129,9 +126,6 @@ class JuriTanding extends Component
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
             }
             TambahTendangan::dispatch($id,$this->jadwal);
-        }else{
-            $this->error = "pertandingan belum dimulai atau sedang pause";
-        }
         
     }
 

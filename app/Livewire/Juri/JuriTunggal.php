@@ -130,21 +130,24 @@ class JuriTunggal extends Component
     }
 
     #[On('echo:poin,.hapus-penalty-tunggal')]
-    public function hapusPenaltyHandler(){
-        $penilaian_tunggal_biru = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        $penilaian_tunggal_merah = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        if($penilaian_tunggal_biru){
-            $penilaian_tunggal_biru->delete();
-        }elseif($penilaian_tunggal_merah){
-            $penilaian_tunggal_merah->delete();
+    public function hapusPenaltyHandler($data){
+        if($data["juri"]["permissions"] == "Operator"){
+            $penilaian_tunggal_biru = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            $penilaian_tunggal_merah = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            if($penilaian_tunggal_biru){
+                $penilaian_tunggal_biru->delete();
+            }
+            if($penilaian_tunggal_merah){
+                $penilaian_tunggal_merah->delete();
+            }
+            if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
+                $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            }else{
+                $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            }
+            $this->active = null;
+            TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
         }
-        if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
-            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        }else{
-            $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_merah->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        }
-        $this->active = null;
-        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
 
     public function render()

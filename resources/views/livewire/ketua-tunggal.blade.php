@@ -62,7 +62,6 @@
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">
 @endsection
-    @include('client.ketua.tunggal.navbar')
     <div class="content p-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
@@ -76,7 +75,7 @@
                 </div>
             </div>
             <div class="merah  d-flex justify-content-end p-2" style="width: 50%">
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="fw-bold">{{$gelanggang->nama}}, Match {{ $jadwal->partai }}</h5>
                     <h4 class="fw-bold mt-4" style="">tunggal</h4>
                 </div>
@@ -145,7 +144,7 @@
                     <div class="nilai-1" style="width: {{100/$length}}%; height: 100%">
                     <div class="nilai-1-header border border-dark text-center pt-2" style="background-color: #ececec">
                         <h6 class="fw-bold">
-                            {{$juris[$i]->name}}
+                            {{$juris[$i]->permissions}}
                         </h6>
                     </div>
                     <div class="nilai-1-body mt-1">
@@ -237,10 +236,10 @@
                                 $juri_id = $nilai->juri;
             
                                 // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                                $juri_name = '';
+                                $juri_permissions = '';
                                 foreach ($juris as $j) {
                                     if ($j->id == $juri_id) {
-                                        $juri_name = $j->name;
+                                        $juri_permissions = $j->permissions;
                                     }
                                 }
                             @endphp
@@ -248,7 +247,7 @@
                             <div class="juri-1-header border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}"
                                 style="width: 100%; background-color: #ececec; height: 40%;">
                                 <h6 class="fw-bold">
-                                    {{$juri_name}}
+                                    {{$juri_permissions}}
                                 </h6>
                             </div>
                             <div class="juri-1-value border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
@@ -264,10 +263,10 @@
                                 $juri_id = $nilai->juri;
             
                                 // Cari objek juri yang memiliki id yang sesuai dalam array $juri
-                                $juri_name = '';
+                                $juri_permissions = '';
                                 foreach ($juris as $j) {
                                     if ($j->id == $juri_id) {
-                                        $juri_name = $j->name;
+                                        $juri_permissions = $j->permissions;
                                     }
                                 }
                             @endphp
@@ -275,7 +274,7 @@
                             <div class="juri-1-header border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}"
                                 style="width: 100%; background-color: #ececec; height: 40%;">
                                 <h6 class="fw-bold">
-                                    {{$juri_name}}
+                                    {{$juri_permissions}}
                                 </h6>
                             </div>
                             <div class="juri-1-value border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
@@ -290,7 +289,7 @@
                 <div class="median-value text-center">
                     <div class="border border-dark mt-2">
                         <h6 class="fw-bold pt-2" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
-                            {{$median}}
+                            {{(number_format($median,3))}}
                         </h6>
                     </div>
                 </div>
@@ -359,11 +358,11 @@
             </div>
         </div>
         <div class="content-left text-center" style="width:50%;">
-            <div class="final-score border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$median - $penalty *  0.5}}</h6>
+            <div class="final-score border border-dark" style="width:100%;">    
+                <h6 class="fw-bold mt-1">{{number_format($median - $penalty *  0.5,3)}}</h6>
             </div>
             <div class="standart-dev border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$standard_deviation}}</h6>
+                <h6 class="fw-bold mt-1">{{ number_format($standard_deviation, 9) }}</h6>
             </div>
         </div>
     </div>

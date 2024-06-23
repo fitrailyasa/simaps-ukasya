@@ -34,33 +34,33 @@
 
     <!--Favicon-->
     {{-- <link rel="icon" href="{{ asset('assets/favicon/favicon.ico') }}" type="image/x-icon"> --}}
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo.webp') }}" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" sizes="57x57"
-        href="{{ asset('assets/favicon/apple-touch-icon-57x57.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-57x57.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-        href="{{ asset('assets/favicon/apple-touch-icon-114x114.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-114x114.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="{{ asset('assets/favicon/apple-touch-icon-72x72.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-72x72.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="{{ asset('assets/favicon/apple-touch-icon-144x144.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-144x144.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="60x60"
-        href="{{ asset('assets/favicon/apple-touch-icon-60x60.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-60x60.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="120x120"
-        href="{{ asset('assets/favicon/apple-touch-icon-120x120.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-120x120.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="76x76"
-        href="{{ asset('assets/favicon/apple-touch-icon-76x76.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-76x76.webp') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="152x152"
-        href="{{ asset('assets/favicon/apple-touch-icon-152x152.png') }}" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-196x196.png') }}" sizes="196x196" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-32x32.png') }}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-16x16.png') }}" sizes="16x16" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-128.png') }}" sizes="128x128" />
-    <meta name="msapplication-TileImage" content="{{ asset('assets/favicon/mstile-144x144.png') }}" />
-    <meta name="msapplication-square70x70logo" content="{{ asset('assets/favicon/mstile-70x70.png') }}" />
-    <meta name="msapplication-square150x150logo" content="{{ asset('assets/favicon/mstile-150x150.png') }}" />
-    <meta name="msapplication-wide310x150logo" content="{{ asset('assets/favicon/mstile-310x150.png') }}" />
-    <meta name="msapplication-square310x310logo" content="{{ asset('assets/favicon/mstile-310x310.png') }}" />
+        href="{{ asset('assets/favicon/apple-touch-icon-152x152.webp') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-196x196.webp') }}" sizes="196x196" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-96x96.webp') }}" sizes="96x96" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-32x32.webp') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-16x16.webp') }}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon/favicon-128.webp') }}" sizes="128x128" />
+    <meta name="msapplication-TileImage" content="{{ asset('assets/favicon/mstile-144x144.webp') }}" />
+    <meta name="msapplication-square70x70logo" content="{{ asset('assets/favicon/mstile-70x70.webp') }}" />
+    <meta name="msapplication-square150x150logo" content="{{ asset('assets/favicon/mstile-150x150.webp') }}" />
+    <meta name="msapplication-wide310x150logo" content="{{ asset('assets/favicon/mstile-310x150.webp') }}" />
+    <meta name="msapplication-square310x310logo" content="{{ asset('assets/favicon/mstile-310x310.webp') }}" />
 
 </head>
 
@@ -87,7 +87,7 @@
                                     class="img-circle elevation-2" alt="User Image"
                                     style="width: 35px; height: 35px; object-fit: cover; object-position: center; border-radius: 50%;">
                             @else
-                                <img src="{{ asset('assets/profile/default.png') }}" class="img-circle elevation-2"
+                                <img src="{{ asset('assets/profile/default.webp') }}" class="img-circle elevation-2"
                                     alt="User Image">
                             @endif
                         </div>
@@ -109,7 +109,7 @@
         <aside class="main-sidebar elevation-4" style="background-color: #0053a6">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="{{ asset('assets/favicon/apple-icon-180x180.png') }}" alt="Logo"
+                <img src="{{ asset('logo.png') }}" alt="Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <h4 class="brand-text font-weight-bold text-white">SIMAPS</h4>
             </a>

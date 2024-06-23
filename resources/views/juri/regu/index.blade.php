@@ -14,7 +14,7 @@ Regu
                 Sheikh Alauddin / Sheikh Aladin
             </h3>
         </div>
-        <div class="jenis-lomba text-end" style="width: 40%">
+        <div class="jenis-lomba text-right" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >Arena A, Match 2, Juny 7</span
             >

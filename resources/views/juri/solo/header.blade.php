@@ -5,7 +5,7 @@
             {{$tampil->nama}}
         </h5>
     </div>
-    <div class="right  text-end mt-3" style="width: 50%">
+    <div class="right  text-right mt-3" style="width: 50%">
         <span class="fw-normal gap-2 d-flex justify-content-end"><span>{{$gelanggang->nama}},</span> <span>Partai {{$jadwal->partai}},</span> <span>{{$juri->name}}</span></span>
         <h5 class="fw-bold" style="">
             Solo Kreatif

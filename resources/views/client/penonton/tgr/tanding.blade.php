@@ -66,7 +66,7 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%; ">
-                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="border-radius: 50%; margin-top: 8px;{{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}" height="200" width="200">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.webp') : url("/assets/img/".$tampil["img"]) }}" alt="" style="border-radius: 50%; margin-top: 8px;{{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}" height="200" width="200">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -91,7 +91,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
+                                <h3 class="fw-bold" style="margin-top: -16px">{{number_format($median,3)}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="total-nilai">
                                 <h3 class="fw-bold" style="margin-top: -16px">
-                                    {{$median - $penalty *  0.5}}
+                                    {{number_format($median - $penalty * 0.5,3)}}
                                 </h3>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                             </div>
                             <div class="standard-nilai">
                                 <h3 class="fw-bold mt-1" style="">
-                                    {{$standard_deviation}}
+                                    {{number_format($standard_deviation,9)}}
                                 </h3>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
     <script>
         setInterval(() => {
             @this.call('kurangiWaktu')
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 @elseif($jenis == "regu")
@@ -267,7 +267,7 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%; ">
-                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="border-radius: 50%; margin-top: 8px;{{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}" height="200" width="200">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.webp') : url("/assets/img/".$tampil["img"]) }}" alt="" style="border-radius: 50%; margin-top: 8px;{{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}" height="200" width="200">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -292,7 +292,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
+                                <h3 class="fw-bold" style="margin-top: -16px">{{number_format($median,3)}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -321,7 +321,7 @@
                             </div>
                             <div class="total-nilai">
                                 <h3 class="fw-bold" style="margin-top: -16px">
-                                    {{$median - $penalty *  0.5}}
+                                    {{number_format($median - $penalty * 0.5,3)}}
                                 </h3>
                             </div>
                         </div>
@@ -334,7 +334,7 @@
                             </div>
                             <div class="standard-nilai">
                                 <h3 class="fw-bold mt-1" style="">
-                                    {{$standard_deviation}}
+                                    {{number_format($standard_deviation,9)}}
                                 </h3>
                             </div>
                         </div>
@@ -398,7 +398,7 @@
     <script>
         setInterval(() => {
             @this.call('kurangiWaktu')
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 @elseif($jenis == "ganda")
@@ -468,7 +468,7 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
-                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.webp') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -493,7 +493,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
+                                <h3 class="fw-bold" style="margin-top: -16px">{{number_format($median,3)}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -522,7 +522,7 @@
                             </div>
                             <div class="total-nilai">
                                 <h3 class="fw-bold" style="margin-top: -16px">
-                                    {{$median - $penalty *  0.5}}
+                                    {{number_format($median - $penalty * 0.5,3)}}
                                 </h3>
                             </div>
                         </div>
@@ -535,7 +535,7 @@
                             </div>
                             <div class="standard-nilai">
                                 <h3 class="fw-bold mt-1" style="">
-                                    {{$standard_deviation}}
+                                    {{number_format($standard_deviation,9)}}
                                 </h3>
                             </div>
                         </div>
@@ -600,7 +600,7 @@
     <script>
         setInterval(() => {
             @this.call('kurangiWaktu')
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 
@@ -673,7 +673,7 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; {{$tampil['id'] == $sudut_biru['id'] ? "background-color: #0053a6" : "background-color: #db3545"}}">
-                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.png') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
+                <img src="{{ $tampil["img"] == null ? url('/assets/profile/default.webp') : url("/assets/img/".$tampil["img"]) }}" alt="" style="height: 90%; margin-top: 8px">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <p class="fw-bold" style="font-size: 2rem;">{{$tampil['nama']}}</p>
@@ -698,7 +698,7 @@
                                 <p class="text-hasil fw-bold" style="font-size: 1.3rem; color: #fff">Median</p>
                             </div>
                             <div class="median-nilai">
-                                <h3 class="fw-bold" style="margin-top: -16px">{{$median}}</h3>
+                                <h3 class="fw-bold" style="margin-top: -16px">{{number_format($median,3)}}</h3>
                             </div>
                         </div>
                         <div class="penalty border border-dark" style="height: 100%;width: 20%">
@@ -727,7 +727,7 @@
                             </div>
                             <div class="total-nilai">
                                 <h3 class="fw-bold" style="margin-top: -16px">
-                                    {{$median - $penalty *  0.5}}
+                                    {{number_format($median - $penalty * 0.5,3)}}
                                 </h3>
                             </div>
                         </div>
@@ -740,7 +740,7 @@
                             </div>
                             <div class="standard-nilai">
                                 <h3 class="fw-bold mt-1" style="">
-                                    {{$standard_deviation}}
+                                    {{number_format($standard_deviation,9)}}
                                 </h3>
                             </div>
                         </div>
@@ -805,7 +805,7 @@
     <script>
         setInterval(() => {
             @this.call('kurangiWaktu')
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 @endif

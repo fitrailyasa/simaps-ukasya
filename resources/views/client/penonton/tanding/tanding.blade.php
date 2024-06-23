@@ -28,7 +28,7 @@
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%">
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 12%;border-radius: 50%; background-color: #0053a6">
-                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 4px;width: 80%;border-radius: 50%;">
+                <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') :  url('/assets/img/'.$sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 4px;width: 80%;border-radius: 50%;">
             </div>
             <div class="pesilat-name m-1 p-2 text-center" style="width: 43%">
                 <h5 class="fw-bold">{{$sudut_biru->nama}}</h5>
@@ -46,7 +46,7 @@
                 <h3 class="fw-bold" style="color: #db3545;">{{$sudut_biru->kontingen}}</h3>
             </div>
             <div class="profile-picture m-1 p-1 text-center" style="height: 100%; width: 12%; border-radius: 50%; background-color: #db3545;">
-                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 4px; width: 80%; border-radius: 50%;">
+                <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_merah->img) }}" alt="" style="height: 90%; margin-top: 4px; width: 80%; border-radius: 50%;">
             </div>
             <div class="bendera d-flex justify-content-end" style="width: 30%;">
                 <img src="{{url('/assets/img/indonesia.gif')}}" alt="" style="height: 100%;">
@@ -59,55 +59,55 @@
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
-                        <img src="{{url('/assets/img/tangan1.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @elseif ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @elseif ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4k.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @else
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4k.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @endif  
                 </div>
                 <div class="teguran d-flex gap-4 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 0)
-                        <img src="{{ url('/assets/img/tangan1.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
                     @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
                     @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
                     @else
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
                     @endif  
                     
                         
                 </div>
                 <div class="peringatan d-flex gap-4 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_biru->where('jenis','peringatan')->count() == 0 || $penilaian_tanding_biru->where('jenis','peringatan') == null)
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @elseif ($penilaian_tanding_biru->where('jenis','peringatan')->count() == 1)
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @elseif ($penilaian_tanding_biru->where('jenis','peringatan')->count() == 2)
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @else
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @endif  
                     
                 </div>
             </div>
             <div class="poin d-flex justify-content-center"  style="width: 80%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/biru.jpg')}}); ">
-                <p class="text" style="font-size: 30rem; color: #fff ;margin-top: -12.5rem">{{$total_biru}}</p>            
+                <p class="text" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_biru}}</p>            
             </div>
         </div>
         <div class="round d-flex flex-column justify-content-center border" style="width: 10%;height: 100%;">
@@ -142,52 +142,52 @@
         </div>
         <div class="sudut-merah d-flex" style="width: 45%">
             <div class="poin d-flex justify-content-center"  style="width: 80%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/merah.jpg')}}); ">
-                <p class="text" style="font-size: 30rem; color: #fff ;margin-top: -12.5rem">{{$total_merah}}</p>
+                <p class="text" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_merah}}</p>
             </div>
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
-                        <img src="{{url('/assets/img/tangan1.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @elseif ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @elseif ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4k.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @else
-                        <img src="{{url('/assets/img/tangan1k.png')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
-                        <img src="{{url('/assets/img/tangan4k.png')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
+                        <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75" style="margin-top: 20%">
+                        <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75" style="margin-top: 20%; margin-left: -16px">
                     @endif  
                 </div>
                 <div class="teguran d-flex gap-4 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 0)
-                        <img src="{{ url('/assets/img/tangan1.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
                     @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
                     @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
                     @else
-                        <img src="{{ url('/assets/img/tangan1k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.png') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
+                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
                     @endif                
                 </div>
                 <div class="peringatan d-flex gap-4 justify-content-center border" style="height: 33%">
                     @if ($penilaian_tanding_merah->where('jenis','peringatan')->count() == 0 || $penilaian_tanding_merah->where('jenis','peringatan') == null)
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @elseif ($penilaian_tanding_merah->where('jenis','peringatan')->count() == 1)
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @elseif ($penilaian_tanding_merah->where('jenis','peringatan')->count() == 2)
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @else
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%">
-                        <img src="{{url('/assets/img/tangan5k1.png')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%">
+                        <img src="{{url('/assets/img/tangan5k1.webp')}}" alt="" height="90" width="50" style="margin-top: 15%"> 
                     @endif  
                     
                 </div>
@@ -222,10 +222,10 @@
         </div>
         <div class="round d-flex flex-column justify-content-center" style="width: 10%;height: 100%;">
             <div class="j-1 border active-2" style="width: 100%;height: 50%;">
-                <img src="{{url('/assets/img/tinju.png')}}" alt="" style="height: 100%">
+                <img src="{{url('/assets/img/tinju.webp')}}" alt="" style="height: 100%">
             </div>
             <div class="j-2 border active" style="width: 100%;height: 50%;">
-                <img src="{{url('/assets/img/tendang.png')}}" alt="" style="height: 100%">
+                <img src="{{url('/assets/img/tendang.webp')}}" alt="" style="height: 100%">
             </div>
         </div>
         <div class="sudut-biru" style="width: 45%">
@@ -259,7 +259,7 @@
     <script>
         setInterval(() => {
             @this.call(`resetIndikator`)
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 

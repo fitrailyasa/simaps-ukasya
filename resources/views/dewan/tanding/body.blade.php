@@ -9,7 +9,7 @@
                 <h2 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</h2>
         </div> --}}
         <div class="kontingen-merah text-right" style="width: 50%">
-            <h4 class="fw-bold" style="color: #db3545">
+            <h4 class="fw-bold float-end" style="color: #db3545">
                 {{$sudut_merah->nama}}
             </h4>
         </div>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="peringatan-content " style="height: 75%">
                     @for ($i = 1; $i <= 3; $i++)
-                        <div class="peringatan-babak-{{$i}} border border-dark text-end" style="min-height:42px;" >
+                        <div class="peringatan-babak-{{$i}} border border-dark text-right" style="min-height:42px;" >
                             @if (1 == $i)
                            @php
                                $nilai = 0
@@ -68,7 +68,7 @@
                 </div>
                 <div class="teguran-content" style="height: 75%">
                     @for ($i = 1; $i <= 3; $i++)
-                        <div class="teguran-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
+                        <div class="teguran-babak-{{$i}} border border-dark text-right" style="min-height:42px" >
                             @if (1 == $i)
                            @php
                                $nilai = 0
@@ -114,7 +114,7 @@
                 </div>
                 <div class="binaan-content" style="height: 75%">
                     @for ($i = 1; $i <= 3; $i++)
-                        <div class="binaan-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
+                        <div class="binaan-babak-{{$i}} border border-dark text-right" style="min-height:42px" >
                            @if (1 == $i)
                            @php
                                $nilai = 0
@@ -166,7 +166,7 @@
                 </div>
                   <div class="jatuhan-content" style="height: 75%">
                     @for ($i = 1; $i <= 3; $i++)
-                        <div class="jatuhan-babak-{{$i}} border border-dark text-end" style="min-height:42px" >
+                        <div class="jatuhan-babak-{{$i}} border border-dark text-right" style="min-height:42px" >
                            @if (1 == $i)
                            @php
                                $nilai = 0
@@ -446,6 +446,6 @@
                 })
 
             };
-        }, 1000);
+        }, 1600);
     </script>
 @endsection

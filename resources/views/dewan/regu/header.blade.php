@@ -10,7 +10,7 @@
     <div class="timer-clock">
         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
     </div>
-    <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
+    <div class="kontingen-biru text-right d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">
             {{$gelanggang->nama}}, Partai {{$jadwal->partai}} Regu
         </h5>

@@ -74,7 +74,7 @@
     @endphp
     <div class="modal-dialog" style="max-width: 50vw !important; margin:0 auto !important">
       <div class="modal-content" style="width: 50vw !important">
-        <div class="modal-body text-end" style=" ">
+        <div class="modal-body text-right" style=" ">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-content-body border border-dark">
                 <div class="modal-body-header text-center">

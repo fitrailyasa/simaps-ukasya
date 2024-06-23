@@ -132,7 +132,7 @@
                 <div class="merah-score d-flex flex-column justify-content-center">
                     <h3 class="fw-bold" style="color: #db3545; font-size: 5rem">{{$total_poin_merah }}</h3>
                 </div>
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="mr-4 fw-bold">{{ $sudut_merah->kontingen }}</h5>
                     <h4 class="fw-bold mt-4" style="color: #db3545 ">{{ $sudut_merah->nama }}</h4>
                 </div>
@@ -506,6 +506,6 @@
                     @this.call('ubahShow')
                 }
             }
-        }, 1000);
+        }, 1600);
     </script>
 @endsection

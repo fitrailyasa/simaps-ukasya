@@ -2,7 +2,7 @@
 <div>
     @include('client.penonton.tgr.navbar')
     @if ($tahap == "keputusan")
-        @include('client.penonton.tgr.hasil')
+    @include('client.penonton.tgr.hasil')
     @else
     @php
     if(count($penilaian_regu_juri) % 2 == 0){
@@ -62,7 +62,6 @@
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-regu.css') }}">
 @endsection
-    @include('client.ketua.regu.navbar')
     <div class="content p-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
@@ -76,7 +75,7 @@
                 </div>
             </div>
             <div class="merah  d-flex justify-content-end p-2" style="width: 50%">
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="fw-bold">{{$gelanggang->nama}}, Match {{ $jadwal->partai }}</h5>
                     <h4 class="fw-bold mt-4" style="">regu</h4>
                 </div>

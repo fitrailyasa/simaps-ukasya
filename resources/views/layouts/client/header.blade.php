@@ -2,7 +2,7 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <div class="d-flex align-items-center justify-content-center">
-                <img class="img-fluid bg-white rounded mx-3" width="60" src="{{ asset('assets/img/logo.png') }}"
+                <img class="img-fluid bg-white rounded mx-3" width="60" src="{{ asset('assets/img/logo.webp') }}"
                     alt="Logo">
                 <h2 class="mb-0 font-weight-bold">SIMAPS</h2>
             </div>

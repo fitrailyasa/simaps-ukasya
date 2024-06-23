@@ -9,7 +9,7 @@
         <script>
             setInterval(() => {
                 @this.call('kurangiWaktu')
-            }, 1000);
+            }, 1600);
         </script>
     @endsection
 </div>

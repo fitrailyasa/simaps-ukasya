@@ -4,7 +4,7 @@ Tunggal
 @endsection 
 <div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
-        class="header d-flex justify-content-between p-1 m-1"
+        class="header d-flex justify-content-between p-1 mt-1"
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
@@ -12,22 +12,21 @@ Tunggal
             <h3 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
                 {{$tampil->nama}} , {{$tampil->kontingen}}
             </h3>
-            <br>
             <h3 class="fw-bold">{{$juri->name}}</h3>
         </div>
         <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
-            <h3 class="fw-bold">tunggal Single</h3>
+            <h3 class="fw-bold">Tunggal Single</h3>
         </div>
     </div>
     <div class="content">
         <div
-            class="header text-center mt-3 border border-secondary p-1"
+            class="header text-center border border-secondary p-1"
             style="width: 100%; font-weight: 600; font-size: 1.3rem"
         >
-            tunggal Jurus 1 Tangan Kosong Movement 1
+            Tunggal Jurus 1 Tangan Kosong Movement 1
         </div>
         <div class="content">
             <div
@@ -123,14 +122,14 @@ Tunggal
                         FLOW OF MOVEMENT / STAMINA RANGE SCORE: 0.01 -
                         0.10</p>
                     <div
-                        class="score-detail d-flex gap-2 justify-content-center pb-1"
+                        class="score-detail d-flex gap-1 justify-content-center pb-1"
                     >
                         @for ($i = 1; $i <= 10; $i++)
                             @if ($i == 10)
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;"
+                                style=" width:9%; height: 80px;border-radius: 20px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.10
@@ -140,7 +139,7 @@ Tunggal
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;"
+                                style=" width:9%; height: 80px;border-radius: 20px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.0{{$i}}

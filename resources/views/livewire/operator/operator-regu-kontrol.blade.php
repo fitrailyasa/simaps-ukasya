@@ -116,7 +116,7 @@
    <div class="body d-flex flex-row" style="width: 100%">
     <div class="sudut-biru text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_biru->img) }}" height="200" width="200">
+            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_biru->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #0053a6">{{$sudut_biru->nama}}</h4>
@@ -153,7 +153,7 @@
     </div>
     <div class="sudut-merah text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_merah->img) }}" height="200" width="200">
+            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_merah->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #db3545">{{$sudut_merah->nama}}</h4>
@@ -224,7 +224,7 @@
             if(@this.get('mulai') == true){
                 @this.call('kurangiWaktu')
             }
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 </div>

@@ -4,7 +4,7 @@
 
 <div class="persiapan-container d-flex text-center mt-5" style="height: 70vh ">
     <div class="pesilat-a " style="height: 100%;width:40%">
-    <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_biru->img) }}" 
+    <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_biru->img) }}" 
      class="p-4" 
      alt="Profile Image" 
      style="width: 30vw !important; height: 50vh !important; background-color: #0053a6 !important; border-radius: 50%;">
@@ -16,7 +16,7 @@
         <h1 style="font-weight: 600;font-size: 5rem" class="mt-5 fw-bold">VS</h1>
     </div>
     <div class="pesilat-b " style="height: 100%;width:40%">
-<img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_biru->img) }}" 
+<img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.webp') :  url('/assets/img/'.$sudut_biru->img) }}" 
      class="p-4" 
      alt="Profile Image" 
      style="width: 30vw !important; height: 50vh  !important; background-color: #db3545 !important; border-radius: 50%;">

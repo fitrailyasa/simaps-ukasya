@@ -15,7 +15,7 @@ Regu
             <br>
             <h3 class="fw-bold">{{$juri->name}}</h3>
         </div>
-        <div class="jenis-lomba text-end" style="width: 40%">
+        <div class="jenis-lomba text-right" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
@@ -130,7 +130,7 @@ Regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;"
+                                style=" width:9%; height: 80px;border-radius: 20px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.10
@@ -140,7 +140,7 @@ Regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;"
+                                style=" width:9%; height: 80px;border-radius: 20px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.0{{$i}}

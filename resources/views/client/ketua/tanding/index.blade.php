@@ -27,7 +27,7 @@
                 <div class="merah-score d-flex flex-column justify-content-center">
                     <h3 class="fw-bold" style="color: #db3545 ">0</h3>
                 </div>
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="mr-4 fw-bold">{{ $merah_region }}</h5>
                     <h4 class="fw-bold mt-4" style="color: #db3545 ">{{ $merah_nama }}</h4>
                 </div>

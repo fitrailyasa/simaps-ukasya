@@ -64,7 +64,7 @@
                     <tbody>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-1-1 fw-bold fs-5 text-end"
+                                class="tabel-1-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             ></td>
                             <td
@@ -81,7 +81,7 @@
                         </tr>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-2-1 fw-bold fs-5 text-end"
+                                class="tabel-2-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             ></td>
                             <td
@@ -98,7 +98,7 @@
                         </tr>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-3-1 fw-bold fs-5 text-end"
+                                class="tabel-3-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             ></td>
                             <td

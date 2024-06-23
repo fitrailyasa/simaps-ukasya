@@ -16,7 +16,7 @@
 </head>
 
 <body class="hold-transition login-page"
-    style="background-image: url('{{ asset('assets/img/bg.png') }}'); background-size: 50%; background-repeat: no-repeat; background-position: center;">
+    style="background-image: url('{{ asset('assets/img/bg.webp') }}'); background-size: 100%; background-repeat: no-repeat; background-position: center;">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -33,7 +33,7 @@
             </div>
             <div class="card-body">
                 <div class="text-center mb-4">
-                    <img src="{{ asset('logo.png') }}" alt="" width="200" class="img img-fluid">
+                    <img src="{{ asset('logo.webp') }}" alt="" width="200" class="img img-fluid">
                 </div>
 
                 <form action="{{ route('login') }}" method="post">

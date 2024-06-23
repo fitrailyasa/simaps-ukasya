@@ -43,7 +43,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if ($tanding->img == null)
-                            <img src="{{ asset('assets/profile/default.png') }}" alt="{{ $tanding->nama }}" width="100">
+                            <img src="{{ asset('assets/profile/default.webp') }}" alt="{{ $tanding->nama }}" width="100">
                         @else
                             <a href="#" data-toggle="modal" data-target="#myModal{{ $tanding->id }}">
                                 <img class="img img-fluid rounded" src="{{ asset('assets/img/' . $tanding->img) }}"
@@ -113,7 +113,7 @@
 
                 reader.readAsDataURL(input.files[0]);
             } else {
-                preview.src = '{{ asset('assets/profile/default.png') }}';
+                preview.src = '{{ asset('assets/profile/default.webp') }}';
             }
         }
 

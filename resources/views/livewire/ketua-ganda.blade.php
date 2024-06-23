@@ -1,7 +1,7 @@
 <div>
     @include('client.ketua.ganda.navbar')
     @if ($tahap == "keputusan")
-        @include('client.penonton.tgr.hasil')
+    @include('client.penonton.tgr.hasil')
     @else
 
 @php
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="merah  d-flex justify-content-end p-2" style="width: 50%">
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="fw-bold">{{ $gelanggang->nama }}, Match {{ $jadwal->partai }}</h5>
                     <h4 class="fw-bold mt-4" style="">GANDA</h4>
                 </div>

@@ -1,8 +1,8 @@
 <div>
-@include('client.ketua.solo.navbar')
-@if ($tahap == "keputusan")
+    @include('client.ketua.solo.navbar')
+    @if ($tahap == "keputusan")
     @include('client.penonton.tgr.hasil')
-@else
+    @else
 
 @php
     if(count($penilaian_solo_juri) % 2 == 0){
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="merah  d-flex justify-content-end p-2" style="width: 50%">
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="fw-bold">{{ $gelanggang->nama }}, Match {{ $jadwal->partai }}</h5>
                     <h4 class="fw-bold mt-4" style="">solo</h4>
                 </div>

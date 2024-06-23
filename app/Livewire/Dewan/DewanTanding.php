@@ -94,7 +94,6 @@ class DewanTanding extends Component
         }
     }
     public function tambahPeringatanTrigger($id){
-        if($this->jadwal->tahap == 'tanding'){
             $nilai = -5;
             if($id == $this->sudut_biru->id){
                 if(count($this->penilaian_tanding_biru->where('jenis', 'peringatan'))>=1){
@@ -123,9 +122,6 @@ class DewanTanding extends Component
             }
             
             TambahPeringatan::dispatch($id,$this->jadwal->babak_tanding,$this->jadwal);
-        }else{
-            $this->error = "pertandingan belum dimulai atau sedang di pause";
-        }
     }
     public function tambahTeguranTrigger($id){
         if($this->jadwal->tahap == 'tanding'){
@@ -161,7 +157,6 @@ class DewanTanding extends Component
         }
     }
     public function tambahBinaanTrigger($id){
-        if($this->jadwal->tahap == 'tanding'){
             PenilaianTanding::create([
                 'jenis'=>'binaan',
                 'sudut'=>$id,
@@ -180,12 +175,8 @@ class DewanTanding extends Component
             }
             
             TambahBinaan::dispatch($id,$this->jadwal->babak_tanding,$this->jadwal);
-        }else{
-            $this->error = "pertandingan belum dimulai atau sedang di pause";
-        }
     }
     public function tambahJatuhanTrigger($id){
-        if($this->jadwal->tahap == 'tanding'){
             PenilaianTanding::create([
                 'jenis'=>'jatuhan',
                 'sudut'=>$id,
@@ -204,9 +195,6 @@ class DewanTanding extends Component
             }
                     
             TambahJatuhan::dispatch($id,$this->jadwal->babak_tanding,$this->jadwal);
-        }else{
-            $this->error = "pertandingan belum dimulai atau sedang di pause";
-        }  
     }
 
     public function resetVerifikasiJatuhan(){

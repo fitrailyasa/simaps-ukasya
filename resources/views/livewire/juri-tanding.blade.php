@@ -89,7 +89,7 @@
                     <tbody>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-1-1 fw-bold fs-5 text-end"
+                                class="tabel-1-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             > 
                              <h5 class="fw-bold p-1">
@@ -122,7 +122,7 @@
                         </tr>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-2-1 fw-bold fs-5 text-end"
+                                class="tabel-2-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             >
                                 @foreach ($penilaian_tanding_biru as $penilaian)
@@ -151,7 +151,7 @@
                         </tr>
                         <tr style="border: 2px solid #000">
                             <td
-                                class="tabel-3-1 fw-bold fs-5 text-end"
+                                class="tabel-3-1 fw-bold fs-5 text-right"
                                 style="border: 2px solid #000"
                             >
                             @foreach ($penilaian_tanding_biru as $penilaian)

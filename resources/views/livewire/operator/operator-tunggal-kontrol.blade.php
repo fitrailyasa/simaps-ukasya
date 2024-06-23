@@ -1,4 +1,4 @@
-<div>
+    <div>
    @php
     if(count($penilaian_tunggal_juri_merah)%2==0){
         $length = count($penilaian_tunggal_juri_merah)/2;
@@ -116,14 +116,14 @@
    <div class="body d-flex flex-row" style="width: 100%">
     <div class="sudut-biru text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_biru->img) }}" height="200" width="200">
+            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_biru->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #0053a6">{{$sudut_biru->nama}}</h4>
             <h4 class="fw-bold" style="color: #000">{{$sudut_biru->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{$median_biru - $penalty_biru * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{number_format($median_biru - $penalty_biru * 0.5,3)}}</h1>
         </div>
     </div>
     <div class="tombol" style="width: 50%">
@@ -153,14 +153,14 @@
     </div>
     <div class="sudut-merah text-center" style="width: 25%">
         <div class="lambang-kontingen">
-            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') : url('/assets/img/'.$sudut_merah->img) }}" height="200" width="200">
+            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_merah->img) }}" height="200" width="200">
         </div>
         <div class="sudut">
             <h4 class="fw-bold" style="color: #db3545">{{$sudut_merah->nama}}</h4>
             <h4 class="fw-bold" style="color: #000">{{$sudut_merah->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{$median_merah - $penalty_merah * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{number_format($median_merah - $penalty_merah * 0.5,3)}}</h1>
         </div>
     </div>
    </div>
@@ -224,7 +224,7 @@
             if(@this.get('mulai') == true){
                 @this.call('kurangiWaktu')
             }
-        }, 1000);
+        }, 1600);
     </script>
 @endsection
 </div>

@@ -37,7 +37,7 @@
                                 class="form-control @error('img') is-invalid @enderror" placeholder="img" name="img"
                                 id="img">
                             <img class="img-fluid py-3" id="image-preview" width="100"
-                                src="{{ asset('assets/profile/default.png') }}" alt="Image Preview">
+                                src="{{ asset('assets/profile/default.webp') }}" alt="Image Preview">
                             @error('img')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

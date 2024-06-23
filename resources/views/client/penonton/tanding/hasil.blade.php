@@ -24,35 +24,35 @@
         $pemenang = $jadwal->pemenang == $jadwal->sudut_biru ? "biru":"merah";
     }
     @endphp
-     <div class="pesilat-a d-flex justify-content-center flex-column text-center" style="height: 100%;width:30%">
+     <div class="pesilat-a d-flex justify-content-center flex-column text-center" style="height: 100%;width:38%">
         <div class="image d-flex justify-content-center mb-4" style="height: 20%;width: 100%" >
-            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_biru->img) }}" alt="" style=" margin-top: 4px;height: 150px;width: 150px;border-radius: 50%; background-color: #0053a6" >
+            <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') :  url('/assets/img/'.$sudut_biru->img) }}" alt="" style=" margin-top: 4px;height: 150px;width: 150px;border-radius: 50%; background-color: #0053a6" >
         </div>
         <h1 style="color: #0053a6">{{$sudut_biru->nama}}</h1>
         <h1>{{$sudut_biru->kontingen}}</h1>
         <div class="score d-flex justify-content-center flex-column" style="height: 50%;width:100%;border: solid 3px #0053a6">
-            <p class="text-hasil" style="font-size: 25rem;color: #0053a6">{{$total_biru}}</p>
+            <p class="text-hasil p-2" style="font-size: 18rem;color: #0053a6">{{$total_biru}}</p>
         </div>
     </div>
-    <div class="hasil  d-flex justify-content-center flex-column text-center" style="height: 100%;width:40%">
+    <div class="hasil  d-flex justify-content-center flex-column text-center" style="height: 100%;width:24%">
         <p class="text-hasil fw-bold" style="font-size: 3rem;">PEMENANG</p>
         <div class="score d-flex justify-content-center" style="height: 20%;width:100%;">
             <div class="button"  style="height: 90%;width:60%">
                 <div class="" style="height: 100%;width:100%;{{$jadwal->pemenang == $jadwal->PengundianTandingMerah->id ? "border: solid 3px #db3545;background-color: #db3545;" : "border: solid 3px #0053a6;background-color: #0053a6;"}} border-radius: 20px">
-                    <p class="text-hasil" style="font-size: 4rem;color: #fff">{{$jadwal->pemenang == $jadwal->PengundianTandingMerah->id ? "MERAH" : "BIRU"}}</p>
+                    <p class="text-hasil mt-3" style="font-size: 3rem;color: #fff">{{$jadwal->pemenang == $jadwal->PengundianTandingMerah->id ? "MERAH" : "BIRU"}}</p>
                 </div>
             </div>
         </div>
         <p class="text-hasil fw-bold" style="font-size: 4rem;">SCORE</p>
     </div>
-    <div class="pesilat-b d-flex justify-content-center flex-column" style="height: 100%;width:30%">
+    <div class="pesilat-b d-flex justify-content-center flex-column" style="height: 100%;width:38%">
         <div class="image d-flex justify-content-center mb-4" style="height: 20%;width: 100%" >
-            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.png') :  url('/assets/img/'.$sudut_merah->img) }}" alt="" style=" margin-top: 4px;height: 150px;width: 150px;border-radius: 50%; background-color: #db3545" >
+            <img src="{{ $sudut_merah->img == null ? url('/assets/profile/default.webp') :  url('/assets/img/'.$sudut_merah->img) }}" alt="" style=" margin-top: 4px;height: 150px;width: 150px;border-radius: 50%; background-color: #db3545" >
         </div>
         <h1 style="color: #db3545">{{$sudut_merah->nama}}</h1>
         <h1>{{$sudut_merah->kontingen}}</h1>
         <div class="score d-flex justify-content-center flex-column" style="height: 50%;width:100%;border: solid 3px #db3545">
-            <p class="text-hasil" style="font-size: 25rem;color: #db3545">{{$total_merah}}</p>
+            <p class="text-hasil " style="font-size: 18rem;color: #db3545">{{$total_merah}}</p>
         </div>
     </div>
 </div>

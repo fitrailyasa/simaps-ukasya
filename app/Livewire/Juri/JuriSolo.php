@@ -122,27 +122,30 @@ class JuriSolo extends Component
     }
 
      #[On('echo:poin,.hapus-penalty-solo')]
-    public function hapusPenaltyHandler(){
-        $penilaian_solo_biru = PenilaianSolo::where('sudut',$this->sudut_biru->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        $penilaian_solo_merah = PenilaianSolo::where('sudut',$this->sudut_merah->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        if($penilaian_solo_biru){
-            $penilaian_solo_biru->delete();
-        }elseif($penilaian_solo_merah){
-            $penilaian_solo_merah->delete();
+    public function hapusPenaltyHandler($data){
+        if($data["juri"]["permissions"] == "Operator"){
+            $penilaian_solo_biru = PenilaianSolo::where('sudut',$this->sudut_biru->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            $penilaian_solo_merah = PenilaianSolo::where('sudut',$this->sudut_merah->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            if($penilaian_solo_biru){
+                $penilaian_solo_biru->delete();
+            }
+            if($penilaian_solo_merah){
+                $penilaian_solo_merah->delete();
+            }
+            $this->penilaian_solo = PenilaianSolo::where('sudut',$this->tampil->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
+            if(!$this->penilaian_solo){
+                $this->penilaian_solo = PenilaianSolo::create([
+                    'jadwal_solo'=>$this->jadwal->id,
+                    'sudut' => $this->tampil->id,
+                    'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
+                    'juri' => Auth::user()->id
+                ]);
+            }
+            $this->attack_active = $this->penilaian_solo->attack_skor;
+            $this->firmness_active = $this->penilaian_solo->firmness_skor;
+            $this->soulfulness_active = $this->penilaian_solo->soulfulness_skor;
+            TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_solo,Auth::user(),$this->gelanggang);
         }
-        $this->penilaian_solo = PenilaianSolo::where('sudut',$this->tampil->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
-        if(!$this->penilaian_solo){
-            $this->penilaian_solo = PenilaianSolo::create([
-                'jadwal_solo'=>$this->jadwal->id,
-                'sudut' => $this->tampil->id,
-                'uuid'=>date('Ymd-His').'-'.$this->tampil->id.Auth::user()->id.'-'.$this->jadwal->id,
-                'juri' => Auth::user()->id
-            ]);
-        }
-        $this->attack_active = $this->penilaian_solo->attack_skor;
-        $this->firmness_active = $this->penilaian_solo->firmness_skor;
-        $this->soulfulness_active = $this->penilaian_solo->soulfulness_skor;
-        TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_solo,Auth::user(),$this->gelanggang);
     }
 
     public function render()

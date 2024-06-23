@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="merah  d-flex justify-content-end p-2" style="width: 50%">
-                <div class="merah-nama text-end">
+                <div class="merah-nama text-right">
                     <h5 class="fw-bold">Arena {{ $arena }}, Match {{ $match }}</h5>
                     <h4 class="fw-bold mt-4" style="">SOLO</h4>
                 </div>

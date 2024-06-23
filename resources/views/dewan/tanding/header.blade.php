@@ -16,8 +16,8 @@
             </h4>
         </div>
     </div>
-    <div class="kontingen-merah text-right d-flex flex-column justify-content-end" style="width: 30%">
-        <h4 class="fw-bold">
+    <div class="kontingen-merah d-flex align-items-end justify-content-end" style="width: 30%">
+        <h4 class="fw-bold float-end">
             {{$sudut_merah->kontingen}}
         </h4>
     </div>
