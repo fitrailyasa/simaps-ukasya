@@ -165,7 +165,7 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format(number_format($median_biru - $penalty_biru * 0.5,9),3) : "0"}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
                                  <p class="fw-bold " style="font-size: 1.5rem;">{{$median_merah != 0 ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
@@ -379,10 +379,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                         <div class="biru border border-dark" style="width: 50%;height: 100%;color: #0053a6">
-                             <p class="fw-bold " style="font-size: 1.5rem;">{{$mean_biru != 0 ? number_format($mean_biru - $penalty_biru * 0.5,9) : "0"}}</p>
+                             <p class="fw-bold " style="font-size: 1.5rem;">{{$median_biru != 0 ? number_format($median_biru - $penalty_biru * 0.5,3) : "0"}}</p>
                         </div>
                             <div class="merah border border-dark" style="width: 50%;height: 100%;color: #db3545;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$mean_merah != 0 ? number_format($mean_merah - $penalty_merah * 0.5,9) : "0"}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$median_merah != 0 ? number_format($median_merah - $penalty_merah * 0.5,3) : "0"}}</p>
                             </div>
                     </div>
                 </div>  
@@ -418,10 +418,10 @@
                     </div>
                     <div class="right d-flex gap-1" style="width: 50%;height: 100%;">
                             <div class="merah border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #0053a6;">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_biru}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{number_format($standard_deviation_biru,9)}}</p>
                             </div>
                             <div class="biru border border-dark d-flex flex-column justify-content-center" style="width: 50%;height: 100%;color: #db3545">
-                                 <p class="fw-bold " style="font-size: 1.5rem;">{{$standard_deviation_merah}}</p>
+                                 <p class="fw-bold " style="font-size: 1.5rem;">{{number_format($standard_deviation_merah,9)}}</p>
                             </div>
                     </div>
                 </div>

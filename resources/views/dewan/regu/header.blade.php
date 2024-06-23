@@ -1,18 +1,20 @@
-<div class="dewan-tanding-header d-flex pt-5" style="width: 100%">
-    <div class="" style="width: 50%">
+<div class="dewan-tanding-header d-flex" style="width: 100%">
+    <div class="d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold ml-3" style="margin-bottom: -4px">
-            {{$tampil->kontingen}}
+            {{$tampil->kontingen}} <span class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}; font-size:1.5rem;"> {{$tampil->nama}}</span>
         </h5>
-        <h4 class="fw-bold" style="{{$tampil['id'] == $sudut_merah['id'] ? "color: #db3545" : "color: #0053a6"}}">
-            {{$tampil->nama}}
-        </h4>
     </div>
     <div class="timer-clock">
         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
     </div>
-    <div class="kontingen-biru text-right d-flex flex-column justify-content-center" style="width: 50%">
+    <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold" style="margin-bottom: -4px">
             {{$gelanggang->nama}}, Partai {{$jadwal->partai}} Regu
         </h5>
     </div>
+</div>
+<div class="tombol d-flex justify-content-center mb-3">
+    <button id="fullscreen-btn" class="btn btn-primary" style="width: 40px; height: 40px;display: flex;align-items: center;justify-content: center;">
+        <i style="font-size: 1rem" class="fa-solid fa-expand"></i>
+    </button>
 </div>

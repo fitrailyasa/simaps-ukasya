@@ -123,7 +123,7 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_biru->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{$median_biru - $penalty_biru * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{number_format($median_biru - $penalty_biru * 0.5,3)}}</h1>
         </div>
     </div>
     <div class="tombol" style="width: 50%">
@@ -160,7 +160,7 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_merah->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{$median_merah - $penalty_merah * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{number_format($median_merah - $penalty_merah * 0.5,3)}}</h1>
         </div>
     </div>
    </div>

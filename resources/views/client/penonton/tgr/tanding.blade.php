@@ -153,7 +153,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -175,7 +175,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -354,7 +354,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -376,7 +376,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -556,7 +556,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -578,7 +578,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -761,7 +761,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp
@@ -783,7 +783,7 @@
                         $juri_name = '';
                         foreach ($juris as $j) {
                             if ($j->id == $juri_id) {
-                                $juri_name = $j->name;
+                                $juri_name = $j->permissions;
                             }
                         }
                     @endphp

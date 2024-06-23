@@ -141,10 +141,21 @@
                 </div>
                 @endif
                 @foreach ($penilaian_regu_juri as $i => $penilaian_juri)
+                @php
+                    $juri_id = $penilaian_juri->juri;
+
+                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                    $juri_name = '';
+                    foreach ($juris as $j) {
+                        if ($j->id == $juri_id) {
+                            $juri_name = $j->permissions;
+                        }
+                    }
+                @endphp
                     <div class="nilai-1" style="width: {{100/$length}}%; height: 100%">
                     <div class="nilai-1-header border border-dark text-center pt-2" style="background-color: #ececec">
                         <h6 class="fw-bold">
-                            {{$juris[$i]->name}}
+                            {{$juri_name}}
                         </h6>
                     </div>
                     <div class="nilai-1-body mt-1">
@@ -239,7 +250,7 @@
                                 $juri_name = '';
                                 foreach ($juris as $j) {
                                     if ($j->id == $juri_id) {
-                                        $juri_name = $j->name;
+                                        $juri_name = $j->permissions;
                                     }
                                 }
                             @endphp
@@ -266,7 +277,7 @@
                                 $juri_name = '';
                                 foreach ($juris as $j) {
                                     if ($j->id == $juri_id) {
-                                        $juri_name = $j->name;
+                                        $juri_name = $j->permissions;
                                     }
                                 }
                             @endphp
@@ -289,7 +300,7 @@
                 <div class="median-value text-center">
                     <div class="border border-dark mt-2">
                         <h6 class="fw-bold pt-2" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}">
-                            {{$median}}
+                            {{ number_format($median,3)}}
                         </h6>
                     </div>
                 </div>
@@ -359,10 +370,10 @@
         </div>
         <div class="content-left text-center" style="width:50%;">
             <div class="final-score border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$median - $penalty *  0.5}}</h6>
+                <h6 class="fw-bold mt-1">{{ number_format($median - $penalty *  0.5,3)}}</h6>
             </div>
             <div class="standart-dev border border-dark" style="width:100%;">
-                <h6 class="fw-bold mt-1">{{$standard_deviation}}</h6>
+                <h6 class="fw-bold mt-1">{{number_format($standard_deviation,9)}}</h6>
             </div>
         </div>
     </div>

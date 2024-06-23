@@ -113,6 +113,11 @@ class JuriRegu extends Component
             $this->penilaian_regu = PenilaianRegu::where('sudut',$this->sudut_merah->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
         }
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_regu,Auth::user());
+        if($this->penilaian_regu){
+            $this->active = $this->penilaian_regu->flow_skor;
+        }else{
+            $this->active = 0;
+        }
         $this->pengundian_merah = $this->jadwal->PengundianTGRMerah;
         $this->pengundian_biru = $this->jadwal->PengundianTGRBiru;
         $this->sudut_biru = $this->jadwal->PengundianTGRBiru->TGR;
