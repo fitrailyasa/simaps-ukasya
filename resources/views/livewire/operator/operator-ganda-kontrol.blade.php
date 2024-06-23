@@ -52,7 +52,7 @@
         $length = (count($penilaian_ganda_juri_biru)+1)/2;
     }
     if($penalty_ganda_biru){
-        $penalty_biru = $penalty_ganda_biru->toleransi_waktu+$penalty_ganda_biru->keluar_arena+$penalty_ganda_biru->menyentuh_lantai+$penalty_ganda_biru->pakaian+$penalty_ganda_biru->tidak_bergerak;
+        $penalty_biru = $penalty_ganda_biru->toleransi_waktu+$penalty_ganda_biru->keluar_arena+$penalty_ganda_biru->menyentuh_lantai+$penalty_ganda_biru->pakaian+$penalty_ganda_biru->tidak_bergerak+$penalty_ganda_biru->senjata_jatuh;
     }else{
         $penalty_biru = 0;
     }
@@ -123,7 +123,7 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_biru->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{$median_biru - $penalty_biru * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #0053a6;font-size: 4rem">{{number_format($median_biru - $penalty_biru * 0.5,3)}}</h1>
         </div>
     </div>
     <div class="tombol" style="width: 50%">
@@ -160,7 +160,7 @@
             <h4 class="fw-bold" style="color: #000">{{$sudut_merah->kontingen}}</h4>
         </div>
         <div class="poin">
-            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{$median_merah - $penalty_merah * 0.5}}</h1>
+            <h1 class="fw-bold" style="color: #db3545;font-size: 4rem">{{number_format($median_merah - $penalty_merah * 0.5,3)}}</h1>
         </div>
     </div>
    </div>

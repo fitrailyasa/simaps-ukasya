@@ -141,10 +141,21 @@
                 </div>
                 @endif
                 @foreach ($penilaian_tunggal_juri as $i => $penilaian_juri)
+                @php
+                    $juri_id = $penilaian_juri->juri;
+
+                    // Cari objek juri yang memiliki id yang sesuai dalam array $juri
+                    $juri_name = '';
+                    foreach ($juris as $j) {
+                        if ($j->id == $juri_id) {
+                            $juri_name = $j->permissions;
+                        }
+                    }
+                @endphp
                     <div class="nilai-1" style="width: {{100/$length}}%; height: 100%">
                     <div class="nilai-1-header border border-dark text-center pt-2" style="background-color: #ececec">
                         <h6 class="fw-bold">
-                            {{$juris[$i]->permissions}}
+                            {{$juri_name}}
                         </h6>
                     </div>
                     <div class="nilai-1-body mt-1">

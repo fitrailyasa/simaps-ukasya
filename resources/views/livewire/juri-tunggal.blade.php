@@ -12,7 +12,7 @@ Tunggal
             <h3 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
                 {{$tampil->nama}} , {{$tampil->kontingen}}
             </h3>
-            <h3 class="fw-bold">{{$juri->name}}</h3>
+            <h3 class="fw-bold">{{$juri->permissions}}</h3>
         </div>
         <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"

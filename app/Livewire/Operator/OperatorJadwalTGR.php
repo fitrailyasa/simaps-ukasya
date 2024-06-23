@@ -29,7 +29,7 @@ class OperatorJadwalTGR extends Component
         if($data['gelanggang']['jenis'] == 'Tanding'){
             return redirect('/op/kontrol-tanding');
         }
-        $this->jadwaltgrs = JadwalTGR::latest('id')->where('jenis',$this->gelanggang_operator->jenis)->get();
+        $this->jadwaltgrs = JadwalTGR::orderBy('partai')->where('jenis',$this->gelanggang_operator->jenis)->get();
     }
     public function render()
     {
