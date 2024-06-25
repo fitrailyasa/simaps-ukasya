@@ -1,5 +1,6 @@
 <div>
 @section('style')
+    @vite('resources/js/layout.js')
     <style>
         .btn-custom {
             border-radius: 10px;
@@ -24,6 +25,7 @@
 @endsection
 @section('title', 'Tanding')
     <div
+    id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}}
     class="p-3 "
     style="
         position: relative;
@@ -34,7 +36,7 @@
             <h5 class="fw-bold text-white  p-3 rounded kontingen" style="background-color: #0053a6; margin-left: 14px">{{$sudut_biru->nama}}, {{$sudut_merah->kontingen}}</h5>
         </div>
         <div class="col-md-4 d-flex justify-content-center">
-            <h3 class="fw-bold">{{$user->name}} {{$gelanggang->nama}}</h3>
+            <h3 class="fw-bold">{{$user->permissions}} {{$gelanggang->nama}}</h3>
         </div>
         <div class="col-md-3 text-center">
             <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 2px">{{$sudut_merah->nama}}, {{$sudut_biru->kontingen}}</h5>

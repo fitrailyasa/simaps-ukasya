@@ -5,30 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Dewan | @yield('title')</title>
         @vite('resources/js/app.js')
-
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
-
-        <!-- Google Font: Source Sans Pro -->
-
-        <!-- Font Awesome -->
-        <link
-            rel="stylesheet"
-            href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}"
-        />
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}">
-        
 
         @yield('style')
 
-        <!--Favicon-->
-        {{--
-        <link
-            rel="icon"
-            href="{{ asset('assets/favicon/favicon.ico') }}"
-            type="image/x-icon"
-        />
-        --}}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}"> 
         <link rel="icon" href="{{ asset('logo.webp') }}" type="image/x-icon" />
     </head>
 
@@ -61,8 +43,8 @@
         <script>
             $.widget.bridge("uibutton", $.ui.button);
         </script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- JQVMap -->
+        <script src="{{ asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
         @yield('script')
     </body>
 </html>

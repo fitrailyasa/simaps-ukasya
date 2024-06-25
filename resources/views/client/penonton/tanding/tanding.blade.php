@@ -1,4 +1,4 @@
-<div class="tanding-container p-3 {{$mulai == true ? "mulai" : ""}}" style="height: 50vh;">
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tanding-container p-3 {{$mulai == true ? "mulai" : ""}}" style="height: 50vh;">
     @php
     $total_merah = 0;
     foreach ($penilaian_tanding_merah->where('status', 'sah') ?? null as $penilaian) {
@@ -77,14 +77,14 @@
                         <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
                         <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
                     @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
                         <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
                     @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
                     @else
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
                     @endif  
                     
                         
@@ -107,7 +107,7 @@
                 </div>
             </div>
             <div class="poin d-flex justify-content-center"  style="width: 80%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/biru.jpg')}}); ">
-                <p class="text" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_biru}}</p>            
+                <p class="text fw-bold" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_biru}}</p>            
             </div>
         </div>
         <div class="round d-flex flex-column justify-content-center border" style="width: 10%;height: 100%;">
@@ -142,7 +142,7 @@
         </div>
         <div class="sudut-merah d-flex" style="width: 45%">
             <div class="poin d-flex justify-content-center"  style="width: 80%;height: 100%;background-repeat: no-repeat;background-size: 100% 150%; background-image: url({{url('assets/img/merah.jpg')}}); ">
-                <p class="text" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_merah}}</p>
+                <p class="text fw-bold" style="font-size: 20rem; color: #fff ;margin-top: -4.6rem">{{$total_merah}}</p>
             </div>
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
@@ -165,14 +165,14 @@
                         <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
                         <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
                     @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
                         <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">               
                     @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">    
                     @else
-                        <img src="{{ url('/assets/img/tangan1k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
-                        <img src="{{ url('/assets/img/tangan4k.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
+                        <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;  transform: rotate(-90deg);">
+                        <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80" style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">          
                     @endif                
                 </div>
                 <div class="peringatan d-flex gap-4 justify-content-center border" style="height: 33%">

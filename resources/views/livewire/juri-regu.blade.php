@@ -2,8 +2,12 @@
 @section('title')
 Regu
 @endsection 
+@section('style')
+    @vite('resources/js/layout.js')
+@endsection
 <div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
+        id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}}
         class="header d-flex justify-content-between p-1 m-1"
         style="color: black"
     >

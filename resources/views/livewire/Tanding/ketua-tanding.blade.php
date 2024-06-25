@@ -1,4 +1,7 @@
 <div>
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
 @php
     $jatuhan_biru = 0;
     $binaan_biru = 0;
@@ -114,7 +117,7 @@
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tanding.css') }}">
 @endsection
     @include('client.ketua.tanding.navbar')
-    <div class="content p-4" style="width:100%;height: auto">
+    <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content p-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 40%">
                 <div class="biru-nama">
@@ -497,7 +500,7 @@
 </div>
 
 @section('script')
-     <script>
+     <script> 
         setInterval(() => {
             @this.call('kurangiWaktu')
             if(@this.get('tahap') == 'hasil'){

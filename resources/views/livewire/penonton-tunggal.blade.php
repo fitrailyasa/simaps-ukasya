@@ -1,4 +1,7 @@
 <div>
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @include('client.penonton.tgr.navbar')
     @if ($tahap == 'persiapan')
         @include('client.penonton.tgr.persiapan')

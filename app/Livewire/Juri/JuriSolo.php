@@ -60,6 +60,15 @@ class JuriSolo extends Component
         $this->soulfulness_active = $this->penilaian_solo->soulfulness_skor;
     }
 
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-solo" => 'gantiTampilHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function tambahNilaiTrigger($value,$jenis_skor){
         $value/=100;
         switch ($jenis_skor) {
@@ -84,19 +93,15 @@ class JuriSolo extends Component
         TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_solo,Auth::user(),$this->gelanggang);
     }
 
-    #[On('echo:poin,.tambah-skor-solo')]
     public function tambahNilaiHandler(){
     }
-    #[On('echo:poin,.salah-gerakan-solo')]
     public function salahGerakanHandler(){
     }
 
-    #[On('echo:arena,.ganti-tahap-solo')]
     public function gantiTahapHandler($data){
         
     }
 
-    #[On('echo:arena,.ganti-tampil-solo')]
     public function gantiTampilHandler($data){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_solo = PenilaianSolo::where('sudut',$this->sudut_biru->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -122,14 +127,12 @@ class JuriSolo extends Component
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_solo,Auth::user(),$this->gelanggang);
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Solo Kreatif" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }
 
-     #[On('echo:poin,.hapus-penalty-solo')]
     public function hapusPenaltyHandler($data){
         if($data["juri"]["permissions"] == "Operator"){
             $penilaian_solo_biru = PenilaianSolo::where('sudut',$this->sudut_biru->id)->where('jadwal_solo',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

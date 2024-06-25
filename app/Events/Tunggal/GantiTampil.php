@@ -30,9 +30,11 @@ class GantiTampil implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('arena');
+        return [
+            new PrivateChannel('arena-'.$this->jadwal->id),
+        ];
     }
     public function broadcastAs()
     {

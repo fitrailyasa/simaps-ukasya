@@ -92,6 +92,16 @@ class OperatorTunggalKontrol extends Component
             $this->active = "keputusan";
         }
     }
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal_tunggal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
+            "echo-private:poin-{$this->jadwal_tunggal->id},.tambah-skor-tunggal" => 'tambahNilaiHandler',
+            "echo-private:poin-{$this->jadwal_tunggal->id},.salah-gerakan-tunggal" => 'salahGerakanHandler',
+            "echo-private:poin-{$this->jadwal_tunggal->id},.penalty-tunggal" => 'tambahPenaltyHandler',
+        ];
+    }
      //operator start
      public function hapus(){
          
@@ -287,7 +297,6 @@ class OperatorTunggalKontrol extends Component
     }
     //operator endpublic function render()
 
-    #[On('echo:poin,.tambah-skor-tunggal')]
     public function tambahNilaiHandler($data){
         if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
             
@@ -295,7 +304,6 @@ class OperatorTunggalKontrol extends Component
             $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
-    #[On('echo:poin,.salah-gerakan-tunggal')]
     public function salahGerakanHandler($data){
         if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
             
@@ -303,7 +311,6 @@ class OperatorTunggalKontrol extends Component
             $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
-    #[On('echo:poin,.penalty-tunggal')]
     public function tambahPenaltyHandler($data){
         if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
             
@@ -311,7 +318,6 @@ class OperatorTunggalKontrol extends Component
             $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal_tunggal->id)->where('sudut',$this->sudut_biru->id)->first();
         }
     }
-    #[On('echo:poin,.hapus-penalty-tunggal')]
     public function hapusPenaltyHandler($data){
         if($this->jadwal_tunggal->id == $data["jadwal_tunggal"]["id"]){
 

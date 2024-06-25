@@ -32,11 +32,13 @@ class GantiBabak implements ShouldBroadcastNow
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel>
+     * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('arena');
+        return [
+            new PrivateChannel('arena-'.$this->jadwal->id),
+        ];
     }
     public function broadcastAs()
     {

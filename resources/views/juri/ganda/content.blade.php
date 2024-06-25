@@ -1,4 +1,4 @@
-<div class="content d-flex flex-column gap-1" style="width: 100%">
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content d-flex flex-column gap-1" style="width: 100%">
     <div class="header d-flex gap-1" style="width: 100%">
         <div class="aside bg-abu text-center border border-secondary" style="width: 9%">
             <h6 class="pt-2 fw-bold" style="height: 100%">
@@ -232,19 +232,19 @@
             <div class="border border-secondary " style="height: 35.3% !important; padding-top: 50% ">
                 <h4 class="fw-bold score">SCORE</h4>
                 <h4 class="fw-bold" style="color: #0053a6 !important;font-size: 1.5rem !important">
-                    {{number_format($penilaian_ganda->attack_skor,2)}}
+                    {{$penilaian_ganda ? number_format($penilaian_ganda->attack_skor,2) : 0}}
                 </h4>
             </div>
             <div class="border border-secondary " style="height: 33.7%;padding-top: 50%">
                 <h4 class="fw-bold score">SCORE</h4>
                 <h4 class="fw-bold" style="color: #0053a6 !important;font-size: 1.5rem !important">
-                    {{number_format($penilaian_ganda->firmness_skor,2)}}
+                    {{$penilaian_ganda ? number_format($penilaian_ganda->firmness_skor,2) : 0}}
                 </h4>
             </div>
             <div class="border border-secondary " style="height: 33.5%;padding-top: 50%">
                 <h4 class="fw-bold score">SCORE</h4>
                 <h4 class="fw-bold" style="color: #0053a6 !important;font-size: 1.5rem !important">
-                    {{number_format($penilaian_ganda->soulfulness_skor,2)}}
+                    {{$penilaian_ganda ? number_format($penilaian_ganda->soulfulness_skor,2) : 0}}
                 </h4>
             </div>
         </div>
@@ -252,7 +252,7 @@
             style="width: 5%">
             <h5 class="fw-bold">SCORE TOTAL</h5>
             <h4 class="fw-bold" style="color: #0053a6 !important;font-size: 1.5rem !important">
-                {{number_format($penilaian_ganda->skor,2)}}
+                {{$penilaian_ganda ? number_format($penilaian_ganda->skor,2) : 0}}
             </h4>
         </div>
     </div>

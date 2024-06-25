@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
 
-<div class="persiapan-container d-flex text-center mt-5" style="height: 70vh ">
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="persiapan-container d-flex text-center mt-5" style="height: 70vh ">
     <div class="pesilat-a " style="height: 100%;width:40%">
     <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url('/assets/img/'.$sudut_biru->img) }}" 
      class="p-4" 

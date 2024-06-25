@@ -1,4 +1,4 @@
-<div class="dewan-tanding-body" style="width: 100%">
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="dewan-tanding-body" style="width: 100%">
     <div class="dewan-tanding-body-header d-flex" style="width: 100%">
         <div class="kontingen-biru" style="width: 50%">
             <h4 class="fw-bold" style="color: #252c94">

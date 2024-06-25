@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Broadcast;
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('poin-{id}', function ($user, $id) {
+    return true;
+});
+Broadcast::channel('arena-{id}', function ($user, $id) {
+    return true;
+});
+Broadcast::channel('gelanggang-{id}', function ($user, $id) {
+    return true;
+});
+Broadcast::channel('verifikasi-{id}', function ($user, $id) {
+    return true;
 });

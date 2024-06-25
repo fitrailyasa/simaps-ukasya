@@ -1,9 +1,11 @@
 <div>
     @include('client.ketua.solo.navbar')
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @if ($tahap == "keputusan")
     @include('client.penonton.tgr.hasil')
     @else
-
 @php
     if(count($penilaian_solo_juri) % 2 == 0){
         $length = count($penilaian_solo_juri) / 2;
@@ -61,7 +63,7 @@
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">
 @endsection
-    <div class="content pl-4 pr-4" style="width:100%;height: auto">
+    <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content pl-4 pr-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
                 <div class="biru-nama">

@@ -2,6 +2,9 @@
     @section('title')
         Regu
     @endsection
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @include('dewan.regu.header')
     @include('dewan.regu.body')
     @include('dewan.regu.footer')

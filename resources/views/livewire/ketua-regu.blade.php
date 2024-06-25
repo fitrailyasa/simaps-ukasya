@@ -1,5 +1,8 @@
 
 <div>
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @include('client.penonton.tgr.navbar')
     @if ($tahap == "keputusan")
     @include('client.penonton.tgr.hasil')
@@ -61,8 +64,8 @@
 @endphp
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-regu.css') }}">
-@endsection
-    <div class="content p-4" style="width:100%;height: auto">
+    @endsection
+    <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content p-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
                 <div class="biru-nama">

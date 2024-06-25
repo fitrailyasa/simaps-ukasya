@@ -37,11 +37,13 @@ class SalahGerakan implements ShouldBroadcastNow
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel>
+     * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('poin');
+        return [
+            new PrivateChannel('poin-'.$this->jadwal_tunggal->id),
+        ];
     }
     public function broadcastAs()
     {

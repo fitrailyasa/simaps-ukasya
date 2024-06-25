@@ -20,28 +20,30 @@ class GantiTahap implements ShouldBroadcastNow
     public $tahap;
     public $tampil;
     public $sudut_tampil;
-    public $gelanggang;
+    public $jadwal;
     public $waktu;
-    public function __construct($tahap,$tampil,$sudut_tampil,$gelanggang,$waktu)
+    public function __construct($tahap,$tampil,$sudut_tampil,$jadwal,$waktu)
     {
         $this->waktu =$waktu;
         $this->tahap = $tahap;
         $this->sudut_tampil = $sudut_tampil;
-        $this->gelanggang = $gelanggang;
+        $this->jadwal = $jadwal;
         if($tampil !== null){
             if($tahap == "tampil"){
                 $this->tampil = $tampil;
             }
         }
     }
-    /**
+     /**
      * Get the channels the event should broadcast on.
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('arena');
+        return [
+            new PrivateChannel('arena-'.$this->jadwal->id),
+        ];
     }
     public function broadcastAs()
     {

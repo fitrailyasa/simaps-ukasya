@@ -54,6 +54,16 @@ class DewanSolo extends Component
         $this->waktu = 0;
     }
 
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-solo" => 'gantiTahapHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-solo" => 'gantiTampilHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function kurangiWaktu(){
         if($this->mulai == true){
             $this->waktu = ($this->waktu * 60 + 1) / 60;
@@ -137,7 +147,6 @@ class DewanSolo extends Component
         HapusPenalty::dispatch($this->jadwal, [$this->sudut_biru , $this->sudut_merah],$this->penalty_solo,Auth::user());
     }
 
-    #[On('echo:poin,.penalty-solo')]
     public function tambahNilaiHandler(){
     }
     #[On('echo:poin,.hapus-penalty-solo')]
@@ -165,7 +174,6 @@ class DewanSolo extends Component
         }
     }
 
-    #[On('echo:arena,.ganti-tahap-solo')]
     public function gantiTahapHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
@@ -181,7 +189,6 @@ class DewanSolo extends Component
         }
     }
 
-    #[On('echo:arena,.ganti-tampil-solo')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->waktu = 0;
@@ -208,7 +215,6 @@ class DewanSolo extends Component
         }
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Solo Kreatif" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');

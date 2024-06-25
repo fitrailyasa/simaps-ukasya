@@ -60,13 +60,25 @@ class PenontonRegu extends Component
         $this->waktu = 0;
     }
 
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.tambah-skor-regu" => 'tambahNilaiHandler',
+            "echo-private:poin-{$this->jadwal->id},.salah-gerakan-regu" => 'salahGerakanHandler',
+            "echo-private:poin-{$this->jadwal->id},.penalty-regu" => 'tambahPenaltyHandler',
+            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-regu" => 'gantiTahapHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function kurangiWaktu(){
         if($this->mulai == true){
             $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
 
-    #[On('echo:poin,.tambah-skor-regu')]
     public function tambahNilaiHandler(){
         $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
@@ -75,13 +87,6 @@ class PenontonRegu extends Component
         $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
        }
-    #[On('echo:poin,.salah-gerakan-regu')]
-    public function salahGerakanHandler(){
-    }
-    #[On('echo:poin,.penalty-regu')]
-    public function tambahPenaltyHandler(){
-    }
-    #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler(){
         $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
@@ -90,7 +95,6 @@ class PenontonRegu extends Component
         $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
-    #[On('echo:arena,.ganti-tahap-regu')]
     public function gantiTahapHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->tampil = $this->jadwal->TampilTGR->TGR;
@@ -101,7 +105,6 @@ class PenontonRegu extends Component
         }else if($data["tahap"] == "keputusan"){
             
         }else if($data["tahap"] == "pause"){
-            $this->penalty_solo = PenaltyRegu::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
             $this->waktu = ($data["waktu"]) / 60;
             $this->mulai = false;
         }else if($data["tahap"] == "tampil nilai"){
@@ -112,7 +115,6 @@ class PenontonRegu extends Component
         }
     }
 
-    #[On('echo:arena,.ganti-tampil-regu')]
     public function gantiTampilHandler($data){
         $this->tahap = $this->jadwal->tahap;
         $this->tampil_nilai = false;
@@ -131,7 +133,6 @@ class PenontonRegu extends Component
             return redirect('/penonton/'.$this->gelanggang->id);
         }
     }
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);
         $this->tahap = $this->jadwal->tahap;
