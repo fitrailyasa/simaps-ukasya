@@ -1,6 +1,7 @@
 <div>
 @section('style')
     @vite('resources/js/layout.js')
+    @vite('resources/js/tanding.js')
     <style>
         .btn-custom {
             border-radius: 10px;

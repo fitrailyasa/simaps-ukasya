@@ -13,16 +13,16 @@ Tunggal
     >
         <div class="nama-petarung" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem">{{$tampil->region}}</span>
-            <h5 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
+            <h6 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
                 {{$tampil->nama}} , {{$tampil->kontingen}}
-            </h5>
+            </h6>
         </div>
         <h3 class="fw-bold">{{$juri->permissions}}</h3>
         <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
-            <h3 class="fw-bold">Tunggal Single</h3>
+            <h3 class="fw-bold">Tunggal</h3>
         </div>
     </div>
     <div class="content">

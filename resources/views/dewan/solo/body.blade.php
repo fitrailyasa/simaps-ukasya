@@ -4,23 +4,23 @@
             <h5 class="fw-bold">Penalty</h5>
         </div>
         <div class="penalty-body" style="height: 90%;">
-            <div class="row-1 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-             <h5 class="">Performance Melewati Toleransi Waktu</h5>               
+            <div class="row-1 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%;">
+             <h5 style="font-size: 1.2rem" class="">Performance Melewati Toleransi Waktu</h5>               
             </div>
             <div class="row-2 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-                <h5 class="">Performance Keluar Arena</h5>
+                <h5 style="font-size: 1.2rem" class="">Performance Keluar Arena</h5>
             </div>
             <div class="row-3 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-                <h5 class="">Senjata Jatuh di Luar Gelanggan Saat Tim <br> Masih Harus Menggunakan</h5>
+                <h5 style="font-size: 1.2rem" class="">Senjata Jatuh di Luar Gelanggan Saat Tim <br> Masih Harus Menggunakan</h5>
             </div>
             <div class="row-4 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-                <h5 class="">Pakaian Tidak Sesuai Aturan</h5>
+                <h5 style="font-size: 1.2rem" class="">Pakaian Tidak Sesuai Aturan</h5>
             </div>
             <div class="row-5 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-                <h5 class="">Atlit Tidak Bergerak Selama 5 Detik</h5>
+                <h5 style="font-size: 1.2rem" class="">Atlit Tidak Bergerak Selama 5 Detik</h5>
             </div>
             <div class="row-5 border border-dark d-flex justify-content-center flex-column" style="height: 16.67%">
-                <h5 class="">Senjata Jatuh Tidak Sesuai Sinopsis</h5>
+                <h5 style="font-size: 1.2rem" class="">Senjata Jatuh Tidak Sesuai Sinopsis</h5>
             </div>
         </div>
     </div>

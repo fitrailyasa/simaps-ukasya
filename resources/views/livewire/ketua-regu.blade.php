@@ -266,7 +266,7 @@
                             </div>
                             <div class="juri-1-value border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
-                                    {{$nilai->skor}}
+                                    {{number_format($nilai->skor,2)}}
                                 </h6>
                             </div>
                         </div>
@@ -293,7 +293,7 @@
                             </div>
                             <div class="juri-1-value border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
-                                    {{$nilai->skor}}
+                                    {{number_format($nilai->skor,2)}}
                                 </h6>
                             </div>
                         </div>
