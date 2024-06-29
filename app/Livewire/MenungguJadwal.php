@@ -16,7 +16,13 @@ class MenungguJadwal extends Component
         $this->gelanggang = $gelanggang;
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
+    public function getListeners()
+    {
+        return [
+           "echo-private:gelanggang-{$this->gelanggang},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function GantiGelanggangHandler($data){
         if($this->gelanggang == $data["gelanggang"]["id"]){
             switch ($this->user) {

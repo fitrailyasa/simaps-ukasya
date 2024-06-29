@@ -1,9 +1,11 @@
 <div>
     @include('client.ketua.solo.navbar')
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @if ($tahap == "keputusan")
     @include('client.penonton.tgr.hasil')
     @else
-
 @php
     if(count($penilaian_solo_juri) % 2 == 0){
         $length = count($penilaian_solo_juri) / 2;
@@ -61,7 +63,7 @@
     @section('style')
     <link rel="stylesheet" href="{{ url('assets/css/ketua-pertandingan-tunggal.css') }}">
 @endsection
-    <div class="content pl-4 pr-4" style="width:100%;height: auto">
+    <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content pl-4 pr-4" style="width:100%;height: auto">
         <div class="content-header d-flex">
             <div class="biru  d-flex justify-content-between p-2 " style="width: 50%">
                 <div class="biru-nama">
@@ -173,7 +175,7 @@
                         </div>
                         <div class="nilai-1-total mt-1">
                             <div class="biru text-center border border-dark pt-2" style="width: 100%">
-                                <h6 class="fw-bold" style="color: #252c94">{{$penilaian_juri->skor}}</h6>
+                                <h6 class="fw-bold" style="color: #252c94">{{number_format($penilaian_juri->skor,2)}}</h6>
                             </div>
                         </div>
                     </div>
@@ -253,7 +255,7 @@
                             </div>
                             <div class="juri-1-value border border-dark {{($i == $length-1 || $i  == $length) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
-                                    {{$nilai->skor}}
+                                    {{number_format($nilai->skor,2)}}
                                 </h6>
                             </div>
                         </div>
@@ -280,7 +282,7 @@
                             </div>
                             <div class="juri-1-value border border-dark {{( $i  == $length-1) ? "bg-success" : "bg-primary"}}" style="width: 100%; height: 32%;">
                                 <h6 class="fw-bold">
-                                    {{$nilai->skor}}
+                                    {{number_format($nilai->skor,2)}}
                                 </h6>
                             </div>
                         </div>

@@ -38,9 +38,11 @@ class PenaltyDewan implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-   public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('poin');
+        return [
+            new PrivateChannel('poin-'.$this->jadwal_regu->id),
+        ];
     }
     public function broadcastAs()
     {

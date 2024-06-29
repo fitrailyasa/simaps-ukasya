@@ -1,4 +1,7 @@
 <div>
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @php
         $total_poin_merah = 0;
         foreach ($poin_merah->where('status','sah') as $index => $poin) {
@@ -50,7 +53,7 @@
     @section('title')
         kontrol-tanding
     @endsection
-    <div class="header d-flex justify-content-between align-items-center m-2 p-2">
+    <div id="jadwal" data-id="{{ $jadwal_tanding->id }}" gelanggang-id={{$gelanggang->id}} class="header d-flex justify-content-between align-items-center m-2 p-2">
         <a {{$user->roles_id != 1 ? "href=/op/kontrol-tanding" : "href=/admin/kontrol-tanding"}} class="btn" style="border: none;">
             <i class="fa-solid fa-arrow-left bg-dark p-3" style="color: white; font-size: 2rem;"></i>
         </a>
@@ -190,7 +193,6 @@
 </div>
 
 @section('script')
-
     <script>
         setInterval(() => {
             if(@this.get('mulai') == true){

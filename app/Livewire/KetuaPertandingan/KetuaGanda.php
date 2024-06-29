@@ -60,20 +60,27 @@ class KetuaGanda extends Component
         $this->waktu = $this->gelanggang->waktu * 60;
     }
 
-    #[On('echo:poin,.tambah-skor-ganda')]
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.tambah-skor-ganda" => 'tambahNilaiHandler',
+            "echo-private:poin-{$this->jadwal->id},.penalty-ganda" => 'tambahPenaltyHandler',
+            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-ganda" => 'gantiTahapHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-ganda" => 'gantiTampilHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function tambahNilaiHandler($data){
          if($this->gelanggang->id == $data["gelanggang"]["id"]){
              $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
              $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
          }
     }
-    #[On('echo:poin,.salah-gerakan-ganda')]
-    public function salahGerakanHandler(){
-    }
-    #[On('echo:poin,.penalty-ganda')]
+
     public function tambahPenaltyHandler(){
     }
-    #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
        $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
@@ -82,7 +89,6 @@ class KetuaGanda extends Component
         $this->penilaian_ganda_juri = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
-    #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->tahap = $this->jadwal->tahap;
@@ -95,7 +101,6 @@ class KetuaGanda extends Component
             }
     }
     
-    #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
@@ -115,7 +120,6 @@ class KetuaGanda extends Component
             }
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
             $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);

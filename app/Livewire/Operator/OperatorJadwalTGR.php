@@ -24,7 +24,13 @@ class OperatorJadwalTGR extends Component
 
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
+    public function getListeners()
+    {
+        return [
+           "echo-private:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+
     public function gantiGelanggangHandler($data){
         if($data['gelanggang']['jenis'] == 'Tanding'){
             return redirect('/op/kontrol-tanding');

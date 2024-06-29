@@ -27,9 +27,11 @@ class GantiGelanggang implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('arena');
+        return [
+            new PrivateChannel('gelanggang-'.$this->gelanggang->id),
+        ];
     }
     public function broadcastAs()
     {

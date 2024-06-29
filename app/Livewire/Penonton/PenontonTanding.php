@@ -41,6 +41,21 @@ class PenontonTanding extends Component
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
+            "echo-private:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
+            "echo-private:poin-{$this->jadwal->id},.tambah-jatuhan" => 'jatuhanHandler',
+            "echo-private:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
+            "echo-private:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
+            "echo-private:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
+            "echo-private:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
+        ];
+    }
     public function resetIndikator(){
         $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
@@ -57,12 +72,10 @@ class PenontonTanding extends Component
             return redirect('/penonton/'.$this->gelanggang->id);
         }
     }
-     #[On('echo:arena,.ganti-babak')]
     public function GantiBabakHandler($data){
         $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
     }
 
-     #[On('echo:poin,.tambah-peringatan')]
     public function peringatanHandler($data){
         if($data['sudut_id'] == $this->jadwal->sudut_biru){
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->get(); 
@@ -70,7 +83,6 @@ class PenontonTanding extends Component
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get(); 
         };
     }
-    #[On('echo:poin,.tambah-teguran')]
     public function teguranHandler($data){
         if($data['sudut_id'] == $this->jadwal->sudut_biru){
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->get(); 
@@ -78,7 +90,6 @@ class PenontonTanding extends Component
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get(); 
         };
     }
-    #[On('echo:poin,.tambah-binaan')]
     public function binaanHandler($data){
         if($data['sudut_id'] == $this->jadwal->sudut_biru){
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->get(); 
@@ -86,7 +97,6 @@ class PenontonTanding extends Component
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get(); 
         };
     }
-    #[On('echo:poin,.tambah-jatuhan')]
     public function jatuhanHandler($data){
         if($data['sudut_id'] == $this->jadwal->sudut_biru){
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->get(); 
@@ -94,7 +104,6 @@ class PenontonTanding extends Component
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get(); 
         };
     }
-    #[On('echo:poin,.tambah-pukulan')]
     public function pukulanHandler($data){
         if($data['sudut_id'] == $this->sudut_merah->id){
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get();
@@ -104,7 +113,6 @@ class PenontonTanding extends Component
             $this->pukulan_biru = $this->penilaian_tanding_biru->where('jenis','pukulan')->where('aktif',true)->last();
         };
     }
-    #[On('echo:poin,.tambah-tendangan')]
     public function tendanganHandler($data){
         if($data['sudut_id'] == $this->sudut_merah->id){
             $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->get();
@@ -114,7 +122,6 @@ class PenontonTanding extends Component
             $this->tendangan_biru = $this->penilaian_tanding_biru->where('jenis','tendangan')->where('aktif',true)->last();
         };
     }
-   #[On('echo:arena,.mulai-pertandingan')]
     public function mulaiPertandinganHandler($data){
         if($data["jadwal"]["id"] == $this->jadwal->id){
             if($data['event'] == 'mulai pertandingan'){
@@ -135,7 +142,6 @@ class PenontonTanding extends Component
         }
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
             return redirect('/penonton/'.$this->gelanggang->id);

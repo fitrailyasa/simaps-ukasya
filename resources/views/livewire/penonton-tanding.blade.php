@@ -1,5 +1,6 @@
 <div>
     @section('style')
+    @vite('resources/js/layout.js')
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tanding.css')}}">
     @endsection
     @include('client.penonton.tanding.navbar')

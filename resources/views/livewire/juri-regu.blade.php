@@ -2,24 +2,30 @@
 @section('title')
 Regu
 @endsection 
+@section('style')
+    @vite('resources/js/layout.js')
+@endsection
 <div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
         id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}}
+<<<<<<< Updated upstream
         class="header d-flex justify-content-between p-1 m-1"
+=======
+        class="header d-flex justify-content-between p-1 mt-1"
+>>>>>>> Stashed changes
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
-            <span class="fw-bold" style="font-size: 1.3rem">{{$tampil->region}}</span>
-            <h3 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
+            <h6 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
                 {{$tampil->nama}} , {{$tampil->kontingen}}
-            </h3>
-            <h3 class="fw-bold">{{$juri->permissions}}</h3>
+            </h6>
         </div>
-        <div class="jenis-lomba text-right" style="width: 40%">
+        <h3 class="fw-bold">{{$juri->permissions}}</h3>
+        <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
-            <h3 class="fw-bold">Regu Single</h3>
+            <h3 class="fw-bold">Regu</h3>
         </div>
     </div>
     <div class="content">
@@ -130,7 +136,7 @@ Regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;border-radius: 20px;"
+                                style=" width:9%; height: 50px;border-radius: 8px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.10
@@ -140,7 +146,7 @@ Regu
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;border-radius: 20px;"
+                                style=" width:9%; height: 50px;border-radius: 8px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.0{{$i}}

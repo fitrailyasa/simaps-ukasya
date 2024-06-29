@@ -5,6 +5,9 @@
     @include('dewan.ganda.header')
     @include('dewan.ganda.body')
     @include('dewan.ganda.footer')
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @section('script')
         <script>
             setInterval(() => {

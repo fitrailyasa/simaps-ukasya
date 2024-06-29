@@ -5,32 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Operator | @yield('title')</title>
         @vite('resources/js/app.js')
-
-        <!-- Google Font: Source Sans Pro -->
-        
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}">
-        
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-
+        @yield('style')
         <!--Favicon-->
         <link rel="icon" href="{{ asset('logo.webp') }}" type="image/x-icon">
-            
-
-        @yield('style')
-
-        <!--Favicon-->
-        {{--
-        <link
-            rel="icon"
-            href="{{ asset('assets/favicon/favicon.ico') }}"
-            type="image/x-icon"
-        />
-        --}}
-        <link rel="icon" href="{{ asset('logo.webp') }}" type="image/x-icon" />
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}"> 
     </head>
 
     <body class="layout-fixed">
@@ -60,14 +39,8 @@
         <script>
             $.widget.bridge("uibutton", $.ui.button);
         </script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- JQVMap -->
         <script src="{{ asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
-        {{-- script js bootstrap 5 --}}
-        @vite('resources/js/layout.js')
         @yield('script')
     </body>
 </html>

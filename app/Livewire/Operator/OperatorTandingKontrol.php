@@ -76,6 +76,19 @@ class OperatorTandingKontrol extends Component
         }
     }
 
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-jatuhan" => 'jatuhanHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-teguran" => 'teguranHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-peringatan" => 'peringatanHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-binaan" => 'binaanHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-pukulan" => 'pukulanHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-tendangan" => 'tendanganHandler',
+            "echo-private:poin-{$this->jadwal_tanding->id},.hapus" => 'hapusHandler',
+        ];
+    }
+
     //operator start
 
     public function nextPartai(){
@@ -108,7 +121,7 @@ class OperatorTandingKontrol extends Component
         $this->jadwal_tanding->skor_biru = 0;
         $this->jadwal_tanding->skor_merah = 0;
         $this->jadwal_tanding->save();
-        Hapus::dispatch($this->jadwal_tanding);
+        Hapus::dispatch($this->jadwal_tanding,Auth::user());
     }
     public function kurangiWaktu(){
         if($this->waktu >= $this->gelanggang->waktu){
@@ -207,15 +220,6 @@ class OperatorTandingKontrol extends Component
         }
     }
 
-    public function hapusNilai(){
-        foreach ($this->poin_merah as $item) {
-            $item->delete();
-        }
-        foreach ($this->poin_biru as $item) {
-            $item->delete();
-        }
-    }
-
     public function pausePertandingan(){
         //ganti dari persiapan ke mulai pertandingan
         $this->jadwal_tanding->tahap = 'pause';
@@ -238,47 +242,33 @@ class OperatorTandingKontrol extends Component
     }
 //operator end
 
-    #[On('echo:poin,.tambah-peringatan')]
+    public function hapusHandler($data){
+        $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
+        $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
+    }
     public function peringatanHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
              $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
-    #[On('echo:poin,.tambah-teguran')]
     public function teguranHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
              $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
-    #[On('echo:poin,.tambah-binaan')]
     public function binaanHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
              $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
-    #[On('echo:poin,.tambah-jatuhan')]
     public function jatuhanHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
              $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
              $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
-    #[On('echo:poin,.tambah-pukulan')]
     public function pukulanHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
-    #[On('echo:poin,.tambah-tendangan')]
     public function tendanganHandler($data){
-        if($data['jadwal']["id"] == $this->jadwal_tanding->id){
              $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal_tanding->id)->get(); 
-        }
     }
     public function render()
     {

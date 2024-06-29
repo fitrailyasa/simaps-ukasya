@@ -41,9 +41,11 @@ class TambahNilai implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('poin');
+        return [
+            new PrivateChannel('poin-'.$this->jadwal_tunggal->id),
+        ];
     }
     public function broadcastAs()
     {

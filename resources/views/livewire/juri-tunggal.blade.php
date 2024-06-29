@@ -2,22 +2,33 @@
 @section('title')
 Tunggal
 @endsection 
-<div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
+
+@section('style')
+    @vite('resources/js/layout.js')
+@endsection
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
         class="header d-flex justify-content-between p-1 mt-1"
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem">{{$tampil->region}}</span>
+<<<<<<< Updated upstream
             <h5 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
                 {{$tampil->nama}} , {{$tampil->kontingen}}
             </h5>
+=======
+            <h6 class="fw-bold" style="{{$tampil->id == $pengundian_biru->atlet_id ? "color: #0053a6 !important" : "color:  red!important"}}">
+                {{$tampil->nama}} , {{$tampil->kontingen}}
+            </h6>
+>>>>>>> Stashed changes
         </div>
+        <h3 class="fw-bold">{{$juri->permissions}}</h3>
         <div class="jenis-lomba text-end" style="width: 40%">
             <span class="fw-bold" style="font-size: 1.3rem"
                 >{{$gelanggang->nama}}, Match {{$jadwal->partai}}, Juny 7</span
             >
-            <h3 class="fw-bold">Tunggal Single</h3>
+            <h3 class="fw-bold">Tunggal</h3>
         </div>
     </div>
     <div class="content">
@@ -128,7 +139,7 @@ Tunggal
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'f
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;border-radius: 20px;"
+                                style=" width:9%; height: 50px;border-radius: 8px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.10
@@ -138,7 +149,7 @@ Tunggal
                                 <button
                                 wire:click='tambahNilaiTrigger({{$tampil->id}},{{$i}})'
                                 class="p-1 {{$active == $i/100 ? "btn-danger" : "btn-primary"}}"
-                                style=" width:9%; height: 80px;border-radius: 20px;"
+                                style=" width:9%; height: 50px;border-radius: 8px;"
                                 >
                                 <h3 class="fw-bold">
                                     0.0{{$i}}

@@ -1,7 +1,10 @@
 <div class="dewan-tanding-header d-flex" style="width: 100%">
     <div class="d-flex flex-column justify-content-center" style="width: 50%">
         <h5 class="fw-bold ml-3" style="margin-bottom: -4px">
-            {{$tampil->kontingen}} <span class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}; font-size:1.5rem;"> {{$tampil->nama}}</span>
+            {{$tampil->kontingen}} 
+        </h5>
+        <h5 class="fw-bold" style="{{$tampil['id'] == $sudut_biru['id'] ? "color:#252c94" : "color:#db3545"}}; font-size:1.5rem;"> 
+            {{$tampil->nama}}
         </h5>
     </div>
     <div class="timer-clock">

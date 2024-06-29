@@ -1,3 +1,8 @@
 <div class="text-center">
-    <h1>Menunggu</h1>
+    @section('style')
+        @vite('resources/js/menunggu.js')
+    @endsection
+    <span id="jadwal" gelanggang-id={{$gelanggang}}>
+        <h1 >Menunggu</h1>
+    </span>
 </div>

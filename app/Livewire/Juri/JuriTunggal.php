@@ -53,6 +53,15 @@ class JuriTunggal extends Component
         }
     }
 
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
+            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-tunggal" => 'gantiTampilHandler',
+           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+        ];
+    }
+    
     public function buatPenilaian(){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -94,18 +103,7 @@ class JuriTunggal extends Component
         SalahGerakan::dispatch($this->jadwal,$this->tampil->id == $this->pengundian_biru->atlet_id ? $this->sudut_biru : $this->sudut_merah,$this->penilaian_tunggal,Auth::user());
     }
 
-    #[On('echo:poin,.tambah-skor-tunggal')]
-    public function tambahNilaiHandler(){
-    }
-    #[On('echo:poin,.salah-gerakan-tunggal')]
-    public function salahGerakanHandler(){
-    }
-    #[On('echo:arena,.ganti-tahap-tunggal')]
-    public function gantiTahapHandler($data){
-        
-    }
 
-    #[On('echo:arena,.ganti-tampil-tunggal')]
     public function gantiTampilHandler($data){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_tunggal = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -125,14 +123,12 @@ class JuriTunggal extends Component
         $this->tampil = $this->jadwal->TampilTGR->TGR;
     }
 
-    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Tunggal" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }
 
-    #[On('echo:poin,.hapus-penalty-tunggal')]
     public function hapusPenaltyHandler($data){
         if($data["juri"]["permissions"] == "Operator"){
             $penilaian_tunggal_biru = PenilaianTunggal::where('sudut',$this->sudut_biru->id)->where('jadwal_tunggal',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

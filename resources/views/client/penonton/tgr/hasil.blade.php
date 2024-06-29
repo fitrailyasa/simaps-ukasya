@@ -3,7 +3,7 @@
 @endsection
 
 @if ($jenis == "tunggal")
-<div class="hasil-container text-center p-3" style="height: 50vh">
+<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="hasil-container text-center p-3" style="height: 50vh">
 @php
     if(count($penilaian_tunggal_juri_merah)%2==0){
         $length = count($penilaian_tunggal_juri_merah)/2;
@@ -319,7 +319,7 @@
         $standard_deviation_biru = 0;
     }
 @endphp
-     <div class="hasil-header d-flex" style="height: 40%; width: 100%">
+     <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
             {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
                 <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
@@ -533,7 +533,7 @@
         $standard_deviation_biru = 0;
     }
 @endphp
-     <div class="hasil-header d-flex" style="height: 40%; width: 100%">
+     <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
             {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
                 <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">
@@ -746,7 +746,7 @@
         $standard_deviation_biru = 0;
     }
 @endphp
-     <div class="hasil-header d-flex" style="height: 40%; width: 100%">
+     <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="hasil-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex justify-content-center d-flex" style="width: 50%">
             {{-- <div class="profile-picture m-1 p-1 text-center" style="height: 100%;width: 19%;border-radius: 50%; background-color: #0053a6">
                 <img src="{{ $sudut_biru->img == null ? url('/assets/profile/default.webp') : url($sudut_biru->img) }}" alt="" style="height: 90%; margin-top: 8px">

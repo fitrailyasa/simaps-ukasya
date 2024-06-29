@@ -5,6 +5,9 @@
     @include('dewan.solo.header')
     @include('dewan.solo.body')
     @include('dewan.solo.footer')
+    @section('style')
+        @vite('resources/js/layout.js')
+    @endsection
     @section('script')
         <script>
             setInterval(() => {

@@ -28,14 +28,16 @@ class TambahPukulan implements ShouldBroadcastNow
        $this->jadwal = $jadwal;
     }
 
-    /** 
+    /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel>
+     * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel('poin');
+        return [
+            new PrivateChannel('poin-'.$this->jadwal->id),
+        ];
     }
     public function broadcastAs()
     {

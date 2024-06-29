@@ -94,6 +94,16 @@ class OperatorReguKontrol extends Component
             $this->active = "keputusan";
         }
     }
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:poin-{$this->jadwal_regu->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
+            "echo-private:poin-{$this->jadwal_regu->id},.tambah-skor-regu" => 'tambahNilaiHandler',
+            "echo-private:poin-{$this->jadwal_regu->id},.salah-gerakan-regu" => 'salahGerakanHandler',
+            "echo-private:poin-{$this->jadwal_regu->id},.penalty-regu" => 'tambahPenaltyHandler',
+        ];
+    }
      //operator start
 
      public function hapus(){
@@ -289,28 +299,24 @@ class OperatorReguKontrol extends Component
     }
     //operator endpublic function render()
 
-    #[On('echo:poin,.tambah-skor-regu')]
     public function tambahNilaiHandler($data){
         if($this->jadwal_regu->id == $data["jadwal_regu"]["id"]){
             $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
-    #[On('echo:poin,.salah-gerakan-regu')]
     public function salahGerakanHandler($data){
         if($this->jadwal_regu->id == $data["jadwal_regu"]["id"]){
             $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
-    #[On('echo:poin,.penalty-regu')]
     public function tambahPenaltyHandler($data){
         if($this->jadwal_regu->id == $data["jadwal_regu"]["id"]){          
             $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
             $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_biru->id)->first();
         }
     }
-    #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler($data){
         if($this->jadwal_regu->id == $data["jadwal_regu"]["id"]){            
             $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal_regu->id)->where('sudut',$this->sudut_merah->id)->first();
