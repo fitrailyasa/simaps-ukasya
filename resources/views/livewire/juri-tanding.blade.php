@@ -1,5 +1,6 @@
 <div>
 @section('style')
+    @vite('resources/js/layout.js')
     <style>
         .btn-custom {
             border-radius: 10px;
