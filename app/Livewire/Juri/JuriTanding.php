@@ -43,10 +43,6 @@ class JuriTanding extends Component
             return redirect('auth');
         }
         $this->juris= User::where('gelanggang',$this->gelanggang->id)->where('roles_id',4)->get();
-        $validPermissions = ["Juri 1", "Juri 2", "Juri 3"];
-        if (!in_array(Auth::user()->permissions, $validPermissions)) {
-            return redirect('jadwal/juri/'.$this->gelanggang->id);
-        }
         foreach ($this->juris as $index => $juri) {
             if($juri->permissions == Auth::user()->permissions){
                 $this->juri = 'juri_'.$index + 1;
