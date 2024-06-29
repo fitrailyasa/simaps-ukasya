@@ -8,11 +8,7 @@ Regu
 <div class="container-fluid pb-4 " style="width: 100%; border: solid 2px black;min-height: 80vh;">
     <div
         id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}}
-<<<<<<< Updated upstream
-        class="header d-flex justify-content-between p-1 m-1"
-=======
         class="header d-flex justify-content-between p-1 mt-1"
->>>>>>> Stashed changes
         style="color: black"
     >
         <div class="nama-petarung" style="width: 40%">

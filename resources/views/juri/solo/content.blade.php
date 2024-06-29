@@ -1,13 +1,7 @@
 <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content d-flex flex-column gap-1" style="width: 100%">
-<<<<<<< Updated upstream
-    <div class="header d-flex gap-1" style="width: 100%">
-        <div class="aside bg-abu text-center border border-secondary" style="width: 9%">
-            <h6 class="pt-2 fw-bold" style="height: 100%">
-=======
     <div class="header d-flex gap-1" style="width: 100%;">
         <div class="aside bg-abu text-center border border-secondary d-flex align-items-center justify-content-center" style="width: 9%;">
             <h6 style="font-size: 0.8rem; margin: 0;" class="fw-bold">
->>>>>>> Stashed changes
                 SCORING ELEMENT
             </h6>
         </div>
