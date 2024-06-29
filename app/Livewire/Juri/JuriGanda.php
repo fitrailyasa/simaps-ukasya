@@ -65,9 +65,9 @@ class JuriGanda extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-ganda" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:poin-{$this->jadwal->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tampil-ganda" => 'gantiTampilHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

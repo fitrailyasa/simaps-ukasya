@@ -57,10 +57,10 @@ class DewanSolo extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-solo" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-solo" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:poin-{$this->jadwal->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tahap-solo" => 'gantiTahapHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tampil-solo" => 'gantiTampilHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

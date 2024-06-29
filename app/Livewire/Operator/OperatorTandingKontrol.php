@@ -6,6 +6,8 @@ use App\Events\GantiGelanggang;
 use App\Events\Tanding\GantiBabak;
 use App\Events\Tanding\Hapus;
 use App\Events\Tanding\MulaiPertandingan;
+use App\Events\Tanding\TambahPukulan;
+use App\Events\Tanding\TambahTendangan;
 use App\Models\JadwalTanding;
 use App\Models\PengundianTanding;
 use App\Models\PenilaianTanding;
@@ -34,6 +36,8 @@ class OperatorTandingKontrol extends Component
     public $user;
     public $total_poin_merah;
     public $total_poin_biru;
+    public $penilaian_tendangan;
+    public $penilaian_pukulan;
 
 
 
@@ -79,18 +83,49 @@ class OperatorTandingKontrol extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-jatuhan" => 'jatuhanHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-teguran" => 'teguranHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-peringatan" => 'peringatanHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-binaan" => 'binaanHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-pukulan" => 'pukulanHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.tambah-tendangan" => 'tendanganHandler',
-            "echo-private:poin-{$this->jadwal_tanding->id},.hapus" => 'hapusHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-jatuhan" => 'jatuhanHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-teguran" => 'teguranHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-peringatan" => 'peringatanHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-binaan" => 'binaanHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-pukulan" => 'pukulanHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.tambah-tendangan" => 'tendanganHandler',
+            "echo:poin-{$this->jadwal_tanding->id},.hapus" => 'hapusHandler',
         ];
     }
 
     //operator start
-
+    public function batasSkorMasukCek(){
+        $this->penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal_tanding->id)->where('jenis','tendangan')->where('aktif',true)->get();
+        $this->penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal_tanding->id)->where('jenis','pukulan')->where('aktif',true)->get();
+        if($this->penilaian_pukulan){
+            foreach ($this->penilaian_pukulan as $penilaian) {
+                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
+                $penilaian->aktif = false;
+                $penilaian->save();
+                TambahPukulan::dispatch($penilaian->sudut,$this->jadwal_tanding);
+                }else{
+                    if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 2){
+                        $penilaian->status = 'sah';
+                        $penilaian->save();
+                    };
+                }
+            }
+        }
+        if($this->penilaian_tendangan){
+            foreach ($this->penilaian_tendangan as $penilaian) {
+                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
+                $penilaian->aktif = false;
+                $penilaian->save();
+                TambahTendangan::dispatch($penilaian->sudut,$this->jadwal_tanding);
+                }else{
+                    if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 4){
+                        $penilaian->status = 'sah';
+                        $penilaian->save();
+                    };
+                }
+            }
+        }
+    }
     public function nextPartai(){
         $jadwaltanding = JadwalTanding::find($this->next);
         if($jadwaltanding){
@@ -124,6 +159,7 @@ class OperatorTandingKontrol extends Component
         Hapus::dispatch($this->jadwal_tanding,Auth::user());
     }
     public function kurangiWaktu(){
+        if($this->mulai == true){
         if($this->waktu >= $this->gelanggang->waktu){
             $this->jadwal_tanding->tahap = 'pause';
             $this->mulai = false;
@@ -131,6 +167,10 @@ class OperatorTandingKontrol extends Component
             MulaiPertandingan::dispatch('pause pertandingan',$this->jadwal_tanding,$this->waktu);
         }
         $this->waktu = ($this->waktu * 60 + 1) / 60;
+        return $this->waktu;
+        }else{
+            return 0;
+        }
     } 
     public function keputusanMenang($sudut,$keputusan){
         foreach ($this->poin_merah->where('status','sah') as $index => $poin) {

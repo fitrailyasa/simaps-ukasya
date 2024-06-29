@@ -66,10 +66,10 @@ class DewanTunggal extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-tunggal" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-tunggal" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:poin-{$this->jadwal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tahap-tunggal" => 'gantiTahapHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tampil-tunggal" => 'gantiTampilHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

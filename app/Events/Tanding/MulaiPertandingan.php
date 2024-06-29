@@ -36,11 +36,9 @@ class MulaiPertandingan implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('arena-'.$this->jadwal->id),
-        ];
+        return new Channel('arena-'.$this->jadwal->id);
     }
     public function broadcastAs()
     {

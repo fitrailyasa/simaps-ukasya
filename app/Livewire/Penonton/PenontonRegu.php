@@ -63,13 +63,13 @@ class PenontonRegu extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-skor-regu" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal->id},.salah-gerakan-regu" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal->id},.penalty-regu" => 'tambahPenaltyHandler',
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-regu" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-skor-regu" => 'tambahNilaiHandler',
+            "echo:poin-{$this->jadwal->id},.salah-gerakan-regu" => 'salahGerakanHandler',
+            "echo:poin-{$this->jadwal->id},.penalty-regu" => 'tambahPenaltyHandler',
+            "echo:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tahap-regu" => 'gantiTahapHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

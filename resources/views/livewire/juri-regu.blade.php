@@ -46,7 +46,7 @@ Regu
                 >
                     <button
                         wire:click='salahGerakanTrigger({{$tampil->id}})'
-                        class="btn tombol-regu"
+                        class="btn tombol-regu btn-hijau"
                         style="
                             width: 100%;
                             height: 100%;
@@ -79,7 +79,7 @@ Regu
                 >
                     <button
                         wire:click='buatPenilaian()'
-                        class="btn tombol-regu"
+                        class="btn tombol-regu btn-hijau"
                         style="
                             width: 100%;
                             height: 100%;

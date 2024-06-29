@@ -98,10 +98,10 @@ class OperatorReguKontrol extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal_regu->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_regu->id},.tambah-skor-regu" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_regu->id},.salah-gerakan-regu" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_regu->id},.penalty-regu" => 'tambahPenaltyHandler',
+            "echo:poin-{$this->jadwal_regu->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
+            "echo:poin-{$this->jadwal_regu->id},.tambah-skor-regu" => 'tambahNilaiHandler',
+            "echo:poin-{$this->jadwal_regu->id},.salah-gerakan-regu" => 'salahGerakanHandler',
+            "echo:poin-{$this->jadwal_regu->id},.penalty-regu" => 'tambahPenaltyHandler',
         ];
     }
      //operator start

@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Gelanggang;
+use App\Models\JadwalTanding;
+use App\Models\JadwalTGR;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -19,7 +22,7 @@ class MenungguJadwal extends Component
     public function getListeners()
     {
         return [
-           "echo-private:gelanggang-{$this->gelanggang},.ganti-gelanggang" => 'gantiGelanggangHandler',
+           "echo:gelanggang-{$this->gelanggang},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

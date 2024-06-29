@@ -75,44 +75,48 @@ class KetuaTanding extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-jatuhan" => 'jatuhanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
-            "echo-private:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
-            "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
+            "echo:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-jatuhan" => 'jatuhanHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
+            "echo:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
+            "echo:poin-{$this->jadwal->id},.hapus" => 'hapusHandler',
+            "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
         ];
+    }
+
+    public function hapusHandler(){
+       $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
+        $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
+        $this->peringatan_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();
+        $this->peringatan_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();  
+        $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
+        $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
 
 
     public function peringatanHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->peringatan_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();
-        $this->peringatan_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();  
+            $this->peringatan_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','peringatan')->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
     public function teguranHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
     public function binaanHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
     public function jatuhanHandler($data){
         $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -121,24 +125,19 @@ class KetuaTanding extends Component
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
     public function pukulanHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
     public function tendanganHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
     
     public function mulaiPertandinganHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
             if($data['event'] == 'mulai pertandingan'){
                 $this->mulai = true;
@@ -151,17 +150,14 @@ class KetuaTanding extends Component
             }else{
                 $this->mulai = false;
             }
-        }
     }
     public function gantiBabakHandler($data){
-        if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->waktu = 0;
             $this->mulai = false;
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
             $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
             $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
-        }
     }
 
     public function GantiGelanggangHandler($data){

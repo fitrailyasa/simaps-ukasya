@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let jadwalElement = document.getElementById("jadwal");
     let id = jadwalElement.getAttribute("data-id");
 
-    window.Echo.private(`verifikasi-${id}`).listen(
+    window.Echo.channel(`verifikasi-${id}`).listen(
         ".verifikasi-pelanggaran",
         (e) => {
             $("#penaltyModal").modal("show");
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
-    window.Echo.private(`verifikasi-${id}`).listen(
+    window.Echo.channel(`verifikasi-${id}`).listen(
         ".verifikasi-jatuhan",
         (e) => {
             $("#verifyModal").modal("show");

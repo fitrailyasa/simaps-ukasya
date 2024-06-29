@@ -97,10 +97,10 @@ class OperatorGandaKontrol extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal_ganda->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.tambah-skor-ganda" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.salah-gerakan-ganda" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.penalty-ganda" => 'tambahPenaltyHandler',
+            "echo:poin-{$this->jadwal_ganda->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
+            "echo:poin-{$this->jadwal_ganda->id},.tambah-skor-ganda" => 'tambahNilaiHandler',
+            "echo:poin-{$this->jadwal_ganda->id},.salah-gerakan-ganda" => 'salahGerakanHandler',
+            "echo:poin-{$this->jadwal_ganda->id},.penalty-ganda" => 'tambahPenaltyHandler',
         ];
     }
 

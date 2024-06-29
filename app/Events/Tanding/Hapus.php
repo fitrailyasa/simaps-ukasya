@@ -30,11 +30,9 @@ class Hapus implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('poin-'.$this->jadwal->id),
-        ];
+        return new Channel('poin-'.$this->jadwal->id);
     }
     public function broadcastAs()
     {

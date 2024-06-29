@@ -22,7 +22,7 @@ class OperatorJadwalTanding extends Component
     public function getListeners()
     {
         return [
-           "echo-private:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+           "echo:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

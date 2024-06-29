@@ -36,11 +36,9 @@ class VerifikasiPelanggaranEvent implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('verifikasi-'.$this->jadwal->id),
-        ];
+        return new Channel('verifikasi-'.$this->jadwal->id);
     }
 
     public function broadcastAs()

@@ -128,7 +128,7 @@
                     <h3 class="fw-bold" style="color:#252c94; font-size: 5rem">{{$total_poin_biru}}</h3>
                 </div>
             </div>
-            <div class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
+            <div wire:poll.1000ms='kurangiWaktu' class="{{$mulai == true ? "mulai" : ""}} waktu text-center d-flex flex-column justify-content-center" style="width: 20%">
                 <h2 class="">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</h2>
             </div>
             <div class="merah  d-flex justify-content-between p-2" style="width: 40%">
@@ -502,13 +502,12 @@
 @section('script')
      <script> 
         setInterval(() => {
-            @this.call('kurangiWaktu')
             if(@this.get('tahap') == 'hasil'){
                 if (@this.get('show') == true) {
                     $('#keputusan-ketua').modal('show')
                     @this.call('ubahShow')
                 }
             }
-        }, 1600);
+        }, 3000);
     </script>
 @endsection

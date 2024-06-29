@@ -55,9 +55,9 @@ class JuriRegu extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 

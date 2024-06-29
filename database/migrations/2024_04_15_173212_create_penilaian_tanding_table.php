@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('penilaian_tanding', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
             $table->foreignId('sudut')->nullable();
             $table->foreignId('jadwal_tanding')->nullable();
             $table->string('jenis');

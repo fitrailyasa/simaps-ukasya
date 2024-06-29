@@ -64,15 +64,15 @@ class DewanTanding extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
-            "echo-private:poin-{$this->jadwal->id},.hapus" => 'hapusHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
-            "echo-private:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
-            "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
-            "echo-private:verifikasi-{$this->jadwal->id},.verifikasi-jatuhan" => 'verifikasiJatuhanHandler',
-            "echo-private:verifikasi-{$this->jadwal->id},.verifikasi-pelanggaran" => 'verifikasiPelanggaranHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
+            "echo:poin-{$this->jadwal->id},.hapus" => 'hapusHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
+            "echo:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
+            "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
+            "echo:verifikasi-{$this->jadwal->id},.verifikasi-jatuhan" => 'verifikasiJatuhanHandler',
+            "echo:verifikasi-{$this->jadwal->id},.verifikasi-pelanggaran" => 'verifikasiPelanggaranHandler',
         ];
     }
 
@@ -129,7 +129,6 @@ class DewanTanding extends Component
                 'jenis'=>'peringatan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 'dewan' => $nilai,
                 'status'=> 'sah',
                 'aktif'=> false,
@@ -160,7 +159,6 @@ class DewanTanding extends Component
                 'jenis'=>'teguran',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 'dewan' => $nilai,
                 'status'=> 'sah',
                 'aktif'=> false,
@@ -182,7 +180,6 @@ class DewanTanding extends Component
                 'jenis'=>'binaan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 'dewan' => 0,
                 'status'=> 'sah',
                 'aktif'=> false,
@@ -202,7 +199,6 @@ class DewanTanding extends Component
                 'jenis'=>'jatuhan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 'dewan' => 3,
                 'status'=> 'sah',
                 'aktif'=> false,
@@ -235,7 +231,6 @@ class DewanTanding extends Component
                     $this->juri_verifikasi_jatuhan[$juri['name']] = null ;
                 }
                 $this->verifikasi_jatuhan = VerifikasiJatuhan::Create([
-                    'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_jatuhan),
@@ -254,7 +249,6 @@ class DewanTanding extends Component
                     $this->juri_verifikasi_pelanggaran[$juri['name']] = null ;
                 }
                 $this->verifikasi_pelanggaran = VerifikasiPelanggaran::Create([
-                    'uuid'=> date('YmdHis').Auth::user()->id.$this->jadwal->id,
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_pelanggaran),

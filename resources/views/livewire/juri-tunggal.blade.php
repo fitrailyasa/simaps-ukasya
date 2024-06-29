@@ -36,7 +36,7 @@
                         font-size: 100%;
                         background-color: #ececec;
                     ">
-                        <button wire:click='salahGerakanTrigger({{ $tampil->id }})' class="btn tombol-tunggal"
+                        <button wire:click='salahGerakanTrigger({{ $tampil->id }})' class="btn-hijau btn tombol-tunggal"
                             style="
                             width: 100%;
                             height: 100%;
@@ -63,7 +63,7 @@
                     </div>
                     <div class="tombol-salah d-flex justify-content-center border border-secondary"
                         style="width: 40% ;font-size: 100% background-color: #ECECEC">
-                        <button wire:click='buatPenilaian()' class="btn tombol-tunggal"
+                        <button wire:click='buatPenilaian()' class="btn tombol-tunggal btn-hijau"
                             style="
                             width: 100%;
                             height: 100%;

@@ -96,10 +96,10 @@ class OperatorTunggalKontrol extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal_tunggal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_tunggal->id},.tambah-skor-tunggal" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_tunggal->id},.salah-gerakan-tunggal" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_tunggal->id},.penalty-tunggal" => 'tambahPenaltyHandler',
+            "echo:poin-{$this->jadwal_tunggal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
+            "echo:poin-{$this->jadwal_tunggal->id},.tambah-skor-tunggal" => 'tambahNilaiHandler',
+            "echo:poin-{$this->jadwal_tunggal->id},.salah-gerakan-tunggal" => 'salahGerakanHandler',
+            "echo:poin-{$this->jadwal_tunggal->id},.penalty-tunggal" => 'tambahPenaltyHandler',
         ];
     }
      //operator start

@@ -1,107 +1,102 @@
-body{
+body {
     height: 100% !important;
 }
 
 @media only screen and (max-width: 1080px) {
-    h5{
+    h5 {
         font-size: 1rem !important;
     }
-    h6{
+    h6 {
         font-size: 0.8rem;
-        margin-top: 20% !important;
-    
     }
-    .score{
+    .score {
         margin-top: 50% !important;
     }
-    h4{
+    h4 {
         font-size: 0.6rem !important;
     }
-    .btn{
+    .btn {
         font-size: 0.5rem !important;
     }
-    .main-footer{
+    .main-footer {
         width: 77% !important;
     }
 }
 
 @media only screen and (max-width: 800px) {
-    h5{
+    h5 {
         font-size: 0.5rem !important;
     }
-    h6{
+    h6 {
         font-size: 0.35rem;
         margin-top: 60% !important;
-    
     }
-    .score{
+    .score {
         margin-top: 100% !important;
     }
-    h4{
+    h4 {
         font-size: 0.3rem !important;
     }
-    .btn{
+    .btn {
         font-size: 0.25rem !important;
-        padding: .190rem .37rem;
+        padding: 0.19rem 0.37rem;
     }
-    .btn-row{
+    .btn-row {
         gap: 2px !important;
     }
 
-    .aside{
+    .aside {
         width: 10% !important;
     }
-    .main{
+    .main {
         width: 90% !important;
     }
-    .main-footer{
+    .main-footer {
         width: 73.5% !important;
     }
-    .total-footer{
+    .total-footer {
         width: 20% !important;
-
     }
-    .footer-content{
+    .footer-content {
         margin-bottom: -20% !important;
     }
 }
 
 @media only screen and (max-width: 380px) {
-    h5{
+    h5 {
         font-size: 0.5rem !important;
     }
-    h6{
+    h6 {
         font-size: 0.35rem;
         margin-top: 60% !important;
-    
     }
-    .score{
+    .score {
         margin-top: 100% !important;
     }
-    h4{
+    h4 {
         font-size: 0.3rem !important;
     }
-    .btn{
+    .btn {
         font-size: 0.32rem !important;
-        padding: .10rem .15rem !important;
+        padding: 0.1rem 0.15rem !important;
     }
-    .btn-row{
+    .btn-row {
         gap: 1px !important;
     }
 
-    .aside{
+    .aside {
         width: 10% !important;
     }
-    .main{
+    .main {
         width: 90% !important;
     }
-    .row3{
+    .row3 {
         height: 33% !important;
     }
-    .footer-text{
+    .footer-text {
         margin-left: -15% !important;
     }
-    .footer-content{
+    .footer-content {
         margin-bottom: -30% !important;
     }
 }

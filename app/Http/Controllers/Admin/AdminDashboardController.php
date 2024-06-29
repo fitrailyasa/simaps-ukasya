@@ -15,6 +15,9 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->roles_id != 1 && auth()->user()->roles_id != 2){
+            return redirect('auth');
+        }
         $tanding = Tanding::all()->count();
         $tgr = TGR::all()->count();
         $jadwaltanding = JadwalTanding::all()->count();

@@ -96,10 +96,10 @@ class OperatorsoloKontrol extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal_solo->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.tambah-skor-solo" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.salah-gerakan-solo" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.penalty-solo" => 'tambahPenaltyHandler',
+            "echo:poin-{$this->jadwal_solo->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
+            "echo:poin-{$this->jadwal_solo->id},.tambah-skor-solo" => 'tambahNilaiHandler',
+            "echo:poin-{$this->jadwal_solo->id},.salah-gerakan-solo" => 'salahGerakanHandler',
+            "echo:poin-{$this->jadwal_solo->id},.penalty-solo" => 'tambahPenaltyHandler',
         ];
     }
 

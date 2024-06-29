@@ -67,13 +67,13 @@ class JuriTanding extends Component
     public function getListeners()
     {
         return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
-            "echo-private:poin-{$this->jadwal->id},.hapus" => 'hapusHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
-           "echo-private:verifikasi-{$this->jadwal->id},.verifikasi-jatuhan" => 'verifikasiJatuhanHandler',
-            "echo-private:verifikasi-{$this->jadwal->id},.verifikasi-pelanggaran" => 'verifikasiPelanggaranHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
+            "echo:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
+            "echo:poin-{$this->jadwal->id},.hapus" => 'hapusHandler',
+            "echo:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
+           "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
+           "echo:verifikasi-{$this->jadwal->id},.verifikasi-jatuhan" => 'verifikasiJatuhanHandler',
+            "echo:verifikasi-{$this->jadwal->id},.verifikasi-pelanggaran" => 'verifikasiPelanggaranHandler',
         ];
     }
 
@@ -100,7 +100,6 @@ class JuriTanding extends Component
                 'jenis'=>'pukulan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 $this->juri => 1,
                 'babak'=>$this->jadwal->babak_tanding,
                 'aktif' => true
@@ -112,8 +111,10 @@ class JuriTanding extends Component
             };
             if($id == $this->sudut_biru->id){
                 $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+                TambahPukulan::dispatch($this->sudut_biru->id,$this->jadwal);
             }else{
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+                TambahPukulan::dispatch($this->sudut_merah->id,$this->jadwal);
             }
     }
 
@@ -124,7 +125,6 @@ class JuriTanding extends Component
                 'jenis'=>'tendangan',
                 'sudut'=>$id,
                 'jadwal_tanding'=>$this->jadwal->id,
-                'uuid'=>date('Ymd-His').'-'.$id.Auth::user()->id.'-'.$this->jadwal->id,
                 $this->juri => 2,
                 'babak'=>$this->jadwal->babak_tanding,
                 'aktif' => true
@@ -137,8 +137,10 @@ class JuriTanding extends Component
             
             if($id == $this->sudut_biru->id){
                 $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+                TambahTendangan::dispatch($this->sudut_biru->id,$this->jadwal);
             }else{
                 $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
+                TambahTendangan::dispatch($this->sudut_merah->id,$this->jadwal);
             }
     }
 
@@ -148,13 +150,9 @@ class JuriTanding extends Component
 
         foreach ($penilaian_pukulan as $penilaian) {
             if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
-                if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 2){
-                    $penilaian->status = 'sah';
-                    $penilaian->save();
-                    TambahPukulan::dispatch($penilaian->sudut,$this->jadwal);
-                };
             $penilaian->aktif = false;
             $penilaian->save();
+            TambahPukulan::dispatch($penilaian->sudut,$this->jadwal);
             }else{
                 if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 2){
                     $penilaian->status = 'sah';
@@ -163,14 +161,14 @@ class JuriTanding extends Component
             }
         }
         foreach ($penilaian_tendangan as $penilaian) {
-            if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=3){
+            if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
             $penilaian->aktif = false;
             $penilaian->save();
+            TambahTendangan::dispatch($penilaian->sudut,$this->jadwal);
             }else{
                 if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 4){
                     $penilaian->status = 'sah';
                     $penilaian->save();
-                    TambahTendangan::dispatch($penilaian->sudut,$this->jadwal);
                 };
             }
         }
