@@ -21,14 +21,14 @@ class GantiTahap implements ShouldBroadcastNow
     public $tahap;
     public $tampil;
     public $sudut_tampil;
-    public $jadwal;
+    public $gelanggang;
     public $waktu;
-    public function __construct($tahap,$tampil,$sudut_tampil,$jadwal,$waktu)
+    public function __construct($tahap,$tampil,$sudut_tampil,$gelanggang,$waktu)
     {
         $this->waktu =$waktu;
         $this->tahap = $tahap;
         $this->sudut_tampil = $sudut_tampil;
-        $this->jadwal = $jadwal;
+        $this->gelanggang = $gelanggang;
         if($tampil !== null){
             if($tahap == "tampil"){
                 $this->tampil = $tampil;
@@ -41,11 +41,9 @@ class GantiTahap implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('arena-'.$this->jadwal->id),
-        ];
+        return new Channel('arena');
     }
     public function broadcastAs()
     {

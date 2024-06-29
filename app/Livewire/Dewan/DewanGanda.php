@@ -57,16 +57,6 @@ class DewanGanda extends Component
         $this->waktu = 0;
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-ganda" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-ganda" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
-
     public function kurangiWaktu(){
         if($this->mulai == true){
             $this->waktu = ($this->waktu * 60 + 1) / 60;
@@ -150,6 +140,10 @@ class DewanGanda extends Component
         HapusPenalty::dispatch($this->jadwal, [$this->sudut_biru , $this->sudut_merah],$this->penalty_ganda,Auth::user());
     }
 
+    #[On('echo:poin,.penalty-ganda')]
+    public function tambahNilaiHandler(){
+    }
+    #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler(){
         if($this->jadwal->tampil == $this->pengundian_biru->id){
             $this->penalty_ganda = PenaltyGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('dewan',Auth::user()->id)->first();
@@ -174,6 +168,7 @@ class DewanGanda extends Component
         }
     }
 
+    #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
@@ -189,6 +184,7 @@ class DewanGanda extends Component
         }
     }
 
+    #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->waktu = 0;
@@ -215,6 +211,7 @@ class DewanGanda extends Component
         }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Ganda" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');

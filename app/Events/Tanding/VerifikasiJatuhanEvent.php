@@ -33,13 +33,11 @@ class VerifikasiJatuhanEvent implements ShouldBroadcastNow
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('verifikasi-'.$this->jadwal->id),
-        ];
+        return new Channel("verifikasi");
     }
     public function broadcastAs()
     {

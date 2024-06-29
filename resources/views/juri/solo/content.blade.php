@@ -1,16 +1,16 @@
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content d-flex flex-column gap-1" style="width: 100%">
-    <div class="header d-flex gap-1" style="width: 100%;">
-        <div class="aside bg-abu text-center border border-secondary d-flex align-items-center justify-content-center" style="width: 9%;">
-            <h6 style="font-size: 0.8rem; margin: 0;" class="fw-bold">
+<div class="content d-flex flex-column gap-1" style="width: 100%">
+    <div class="header d-flex gap-1" style="width: 100%">
+        <div class="aside bg-abu text-center border border-secondary" style="width: 9%">
+            <h6 class="pt-2 fw-bold" style="height: 100%">
                 SCORING ELEMENT
             </h6>
         </div>
-        <div class="bg-abu border border-secondary text-center d-flex flex-column justify-content-center align-items-center" style="width: 87%;">
-            <h6 style="font-size: 0.8rem; margin: 0;" class="fw-bold">
+        <div class="main bg-abu text-center border border-secondary" style="width:87%;">
+            <h6 class="pt-2 fw-bold" style="height: 100%">
                 SCORE
             </h6>
         </div>
-        <div class="bg-abu border border-secondary text-center d-flex align-items-center justify-content-center" style="width: 4%;">
+        <div class="bg-abu border border-secondary text-center d-flex flex-column justify-content-center align-items-center" style="width: 4%;">
             <button id="fullscreen-btn" class="btn btn-primary d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; padding: 0;">
                 <i class="fa-solid fa-expand"></i>
             </button>
@@ -19,17 +19,17 @@
     <div class="content d-flex gap-1" style="width: 100%; height: 100">
         <div class="aside text-center" style="width: 10%;height: 100">
             <div class="row-1 border border-secondary" style="width: 100%; height: 33.6% !important">
-                <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
+                <h6 class="fw-bold" style="height: 100%; margin-top: 25%;">
                     ATTACK DEFENSE TECHNIQUE ( 0.01 - 0.30 )
                 </h6>
             </div>
             <div class="row-2 border border-secondary mt-1" style="height: 32.7% !important">
-                <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
+                <h6 class="fw-bold" style="height: 100%; margin-top: 25%;">
                     FIRMNESS AND HARMONY ( 0.01 - 0.30 )
                 </h6>
             </div>
             <div class="row-3 border border-secondary mt-1" style="height: 32.3% !important">
-                <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
+                <h6 class="fw-bold" style="height: 100%; margin-top: 25%;">
                     SOULFULNESS ( 0.01 - 0.30 )
                 </h6>
             </div>

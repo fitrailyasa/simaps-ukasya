@@ -59,7 +59,7 @@
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
 
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tanding-container p-3 " style="height: 50vh;">
+<div class="tanding-container p-3 " style="height: 50vh;">
     <div class="tanding-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex" style="width: 50%">
             <div class="bendera" style="width: 30%;">
@@ -260,7 +260,7 @@
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
 
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tanding-container p-3 " style="height: 50vh;">
+<div class="tanding-container p-3 " style="height: 50vh;">
     <div class="tanding-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex" style="width: 50%">
             <div class="bendera" style="width: 30%;">
@@ -461,7 +461,7 @@
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
 
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tanding-container p-3 " style="height: 50vh;">
+<div class="tanding-container p-3 " style="height: 50vh;">
     <div class="tanding-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex" style="width: 50%">
             <div class="bendera" style="width: 30%;">
@@ -666,7 +666,7 @@
     <link rel="stylesheet" href="{{url('/assets/css/dewan/tgr.css')}}">
 @endsection
 
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tanding-container p-3 " style="height: 50vh;">
+<div class="tanding-container p-3 " style="height: 50vh;">
     <div class="tanding-header d-flex" style="height: 40%; width: 100%">
         <div class="pesilat-a d-flex" style="width: 50%">
             <div class="bendera" style="width: 30%;">

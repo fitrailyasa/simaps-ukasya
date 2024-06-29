@@ -38,11 +38,9 @@ class HapusPenalty implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+   public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('poin-'.$this->jadwal_solo->id),
-        ];
+        return new Channel('poin');
     }
     public function broadcastAs()
     {

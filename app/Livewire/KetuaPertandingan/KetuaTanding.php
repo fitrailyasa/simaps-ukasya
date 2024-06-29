@@ -31,8 +31,6 @@ class KetuaTanding extends Component
     public $pengundian_biru;
     public $show;
 
-    public $jadwal_id;
-
         
     public function mount($gelanggang_id){
         $this->gelanggang = Gelanggang::find($gelanggang_id);
@@ -44,7 +42,6 @@ class KetuaTanding extends Component
         if(!$this->jadwal){
             return redirect('/jadwal/ketua/'.$this->gelanggang->id);
         }
-        $this->jadwal_id = $this->jadwal->id;
         $this->tahap = $this->jadwal->tahap;
         $this->waktu = 0;
         $this->pengundian_merah = $this->jadwal->PengundianTandingMerah;
@@ -72,22 +69,8 @@ class KetuaTanding extends Component
         }
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-pukulan" => 'pukulanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-tendangan" => 'tendanganHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-jatuhan" => 'jatuhanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-teguran" => 'teguranHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-peringatan" => 'peringatanHandler',
-            "echo-private:poin-{$this->jadwal->id},.tambah-binaan" => 'binaanHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-babak" => 'gantiBabakHandler',
-            "echo-private:arena-{$this->jadwal->id},.mulai-pertandingan" => 'mulaiPertandinganHandler',
-            "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
-        ];
-    }
 
-
+     #[On('echo:poin,.tambah-peringatan')]
     public function peringatanHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -98,6 +81,7 @@ class KetuaTanding extends Component
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
         }
     }
+    #[On('echo:poin,.tambah-teguran')]
     public function teguranHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -106,6 +90,7 @@ class KetuaTanding extends Component
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
         }
     }
+    #[On('echo:poin,.tambah-binaan')]
     public function binaanHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -114,12 +99,15 @@ class KetuaTanding extends Component
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
         }
     }
-    public function jatuhanHandler($data){
+    #[On('echo:poin,.tambah-jatuhan')]
+    public function jatuhanHandler($data){if($this->jadwal->id == $data["jadwal"]["id"]){
         $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
         $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();  
         $this->poin_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
     }
+    }
+    #[On('echo:poin,.tambah-pukulan')]
     public function pukulanHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -128,6 +116,7 @@ class KetuaTanding extends Component
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
         }
     }
+    #[On('echo:poin,.tambah-tendangan')]
     public function tendanganHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->penilaian_tanding_merah = PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->where('babak',$this->jadwal->babak_tanding)->get();
@@ -137,6 +126,7 @@ class KetuaTanding extends Component
         }
     }
     
+   #[On('echo:arena,.mulai-pertandingan')]
     public function mulaiPertandinganHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->jadwal = JadwalTanding::find($this->gelanggang->jadwal);
@@ -153,6 +143,7 @@ class KetuaTanding extends Component
             }
         }
     }
+    #[On('echo:arena,.ganti-babak')]
     public function gantiBabakHandler($data){
         if($this->jadwal->id == $data["jadwal"]["id"]){
             $this->waktu = 0;
@@ -163,7 +154,12 @@ class KetuaTanding extends Component
             $this->poin_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();  
         }
     }
+     #[On('echo:poin,.poin-masuk-keluar')]
+    public function poinHandler(){
+        ;
+    }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
             return redirect('/ketuapertandingan/'.$this->gelanggang->id);

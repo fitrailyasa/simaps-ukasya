@@ -19,13 +19,8 @@ class OperatorJadwalTanding extends Component
         $this->pengundiantandings = PengundianTanding::latest('id')->get();
         $this->jadwaltandings = JadwalTanding::orderBy('partai')->get();
     }
-    public function getListeners()
-    {
-        return [
-           "echo-private:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function gantiGelanggangHandler($data){
         if($data['gelanggang']['jenis'] != 'Tanding'){
             return redirect('/op/kontrol-tgr');

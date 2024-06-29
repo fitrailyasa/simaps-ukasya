@@ -62,15 +62,6 @@ class JuriGanda extends Component
         $this->soulfulness_active = $this->penilaian_ganda->soulfulness_skor;
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-ganda" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
-
     public function tambahNilaiTrigger($value,$jenis_skor){
         $value/=100;
         switch ($jenis_skor) {
@@ -95,10 +86,19 @@ class JuriGanda extends Component
         TambahNilai::dispatch($this->jadwal,$this->tampil,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
 
+    #[On('echo:poin,.tambah-skor-ganda')]
+    public function tambahNilaiHandler(){
+    }
+    #[On('echo:poin,.salah-gerakan-ganda')]
+    public function salahGerakanHandler(){
+    }
+
+    #[On('echo:arena,.ganti-tahap-ganda')]
     public function gantiTahapHandler($data){
         
     }
 
+    #[On('echo:arena,.ganti-tampil-ganda')]
     public function gantiTampilHandler($data){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_ganda = PenilaianGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -124,12 +124,14 @@ class JuriGanda extends Component
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_ganda,Auth::user(),$this->gelanggang);
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Ganda" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }
 
+    #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler($data){
         if($data["juri"]["permissions"] == "Operator"){
             $penilaian_ganda_biru = PenilaianGanda::where('sudut',$this->sudut_biru->id)->where('jadwal_ganda',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

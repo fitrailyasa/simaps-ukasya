@@ -10,17 +10,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Hapus implements ShouldBroadcastNow
+class PenilaianJuriEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $jadwal;
-    public function __construct($jadwal)
+    public function __construct()
     {
-        $this->jadwal = $jadwal;
+        //
     }
 
     /**
@@ -30,10 +29,11 @@ class Hapus implements ShouldBroadcastNow
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('poin');
+        return 
+            new Channel('poin');
     }
     public function broadcastAs()
     {
-        return 'hapus';
+        return 'poin-masuk-keluar';
     }
 }

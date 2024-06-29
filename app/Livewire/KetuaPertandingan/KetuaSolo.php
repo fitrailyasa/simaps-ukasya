@@ -58,26 +58,20 @@ class KetuaSolo extends Component
         $this->waktu = $this->gelanggang->waktu * 60;
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-skor-solo" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal->id},.penalty-solo" => 'tambahPenaltyHandler',
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-solo" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-solo" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
-
+    #[On('echo:poin,.tambah-skor-solo')]
     public function tambahNilaiHandler($data){
          if($this->gelanggang->id == $data["gelanggang"]["id"]){
              $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
              $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
          }
     }
+    #[On('echo:poin,.salah-gerakan-solo')]
+    public function salahGerakanHandler(){
+    }
+    #[On('echo:poin,.penalty-solo')]
     public function tambahPenaltyHandler(){
     }
+    #[On('echo:poin,.hapus-penalty-solo')]
     public function hapusPenaltyHandler(){
        $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
@@ -86,6 +80,7 @@ class KetuaSolo extends Component
         $this->penilaian_solo_juri = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->get();
         $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
+    #[On('echo:arena,.ganti-tampil-solo')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->tahap = $this->jadwal->tahap;
@@ -97,6 +92,8 @@ class KetuaSolo extends Component
                 $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
             }
     }
+    
+    #[On('echo:arena,.ganti-tahap-solo')]
     public function gantiTahapHandler($data){
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
@@ -116,6 +113,7 @@ class KetuaSolo extends Component
             }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
             $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);

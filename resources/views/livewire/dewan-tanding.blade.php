@@ -1,7 +1,6 @@
 <div>
     @section('style')
         <link rel="stylesheet" href="{{url('assets/css/dewan/tanding.css')}}">
-        @vite('resources/js/layout.js')
     @endsection
     @section('title')
         Tanding  

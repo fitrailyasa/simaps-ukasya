@@ -1,4 +1,4 @@
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="hasil-container d-flex text-center pr-3 pl-3" style="height: 80vh">
+<div class="hasil-container d-flex text-center pr-3 pl-3" style="height: 80vh">
      @php
     $total_merah = 0;
     foreach ($penilaian_tanding_merah->where('status', 'sah') ?? null as $penilaian) {

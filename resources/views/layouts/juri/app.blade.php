@@ -8,10 +8,27 @@
 
         <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
         <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
+
+        <!-- Google Font: Source Sans Pro -->
+        
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}"
+        />
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}">      
 
         @yield('style')
+
+        <!--Favicon-->
+        {{--
+        <link
+            rel="icon"
+            href="{{ asset('assets/favicon/favicon.ico') }}"
+            type="image/x-icon"
+        />
+        --}}
         <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon" />
     </head>
 
@@ -42,8 +59,6 @@
         <script>
             $.widget.bridge("uibutton", $.ui.button);
         </script>
-        <!-- JQVMap -->
-        <script src="{{ asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
         @yield('script')
     </body>
 </html>

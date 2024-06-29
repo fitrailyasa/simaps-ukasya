@@ -1,7 +1,4 @@
 <div>
-    @section('style')
-        @vite('resources/js/layout.js')
-    @endsection
    @php
     if(count($penilaian_regu_juri_merah)%2==0){
         $length = count($penilaian_regu_juri_merah)/2;
@@ -98,7 +95,7 @@
     @section('title')
         kontrol-regu
     @endsection
-   <div id="jadwal" data-id="{{ $jadwal_regu->id }}" gelanggang-id={{$gelanggang->id}} class="d-flex justify-content-between align-items-center p-2">
+   <div class="d-flex justify-content-between align-items-center p-2">
     <a {{$user->roles_id != 1 ? "href=/op/kontrol-tgr" : "href=/admin/kontrol-tgr"}} class="btn" style="border: none;">
         <i class="fa-solid fa-arrow-left bg-dark p-3" style="color: white; font-size: 2rem;"></i>
     </a>

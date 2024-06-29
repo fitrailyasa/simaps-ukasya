@@ -49,8 +49,8 @@ class OperatorGandaKontrol extends Component
         $this->jadwal_ganda = JadwalTGR::find($jadwal_ganda_id);
         if($this->jadwal_ganda->jenis != "Ganda" && Auth::user()->roles_id == 1) {
             switch ($this->jadwal_ganda->jenis) {
-                case 'Regu':
-                    return redirect('admin/kontrol-tgr/regu/'.$jadwal_ganda_id);
+                case 'ganda':
+                    return redirect('admin/kontrol-tgr/ganda/'.$jadwal_ganda_id);
                 case "Tunggal":
                     return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_ganda_id);
                 case "Solo Kreatif":
@@ -92,16 +92,6 @@ class OperatorGandaKontrol extends Component
         }else  if($this->jadwal_ganda->tahap == "keputusan"){
             $this->active = "keputusan";
         }
-    }
-
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal_ganda->id},.hapus-penalty-ganda" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.tambah-skor-ganda" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.salah-gerakan-ganda" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_ganda->id},.penalty-ganda" => 'tambahPenaltyHandler',
-        ];
     }
 
     //operator start
@@ -303,26 +293,30 @@ class OperatorGandaKontrol extends Component
         $this->tampil = $this->jadwal_ganda->TampilTGR->TGR;
         GantiTahap::dispatch($tahap,$tampil,$this->tampil->TGR,$this->jadwal_ganda,$this->waktu);
     }
-    //operator end
+    //operator endpublic function render()
 
+    #[On('echo:poin,.tambah-skor-ganda')]
     public function tambahNilaiHandler($data){
         if($this->jadwal_ganda->id == $data["jadwal_ganda"]["id"]){
             $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
+    #[On('echo:poin,.salah-gerakan-ganda')]
     public function salahGerakanHandler($data){
         if($this->jadwal_ganda->id == $data["jadwal_ganda"]["id"]){
             $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
+    #[On('echo:poin,.penalty-ganda')]
     public function tambahPenaltyHandler($data){
         if($this->jadwal_ganda->id == $data["jadwal_ganda"]["id"]){          
             $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_merah->id)->first();
             $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_biru->id)->first();
         }
     }
+    #[On('echo:poin,.hapus-penalty-ganda')]
     public function hapusPenaltyHandler($data){
         if($this->jadwal_ganda->id == $data["jadwal_ganda"]["id"]){            
             $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal_ganda->id)->where('sudut',$this->sudut_merah->id)->first();

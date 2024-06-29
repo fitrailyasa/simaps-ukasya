@@ -48,10 +48,13 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="jenis">Jenis</label>
-                            <select name="jenis" id="jenis" class="form-control @error('jenis') is-invalid @enderror">
-                                <option selected value="{{ $gelanggang->jenis }}">{{ $gelanggang->jenis ?? 'Pilih Jenis' }}</option>
+                        <div class="mb-2">
+                            <label class="form-label">Jenis</label>
+                            <select name="jenis" id="jenis"
+                                class="form-select @error('jenis') is-invalid @enderror">
+                                <option selected value="{{ $gelanggang->jenis }}">
+                                    {{ $gelanggang->jenis ?? 'Pilih Jenis' }}
+                                </option>
                                 <option value="Tanding">Tanding</option>
                                 <option value="Tunggal">Tunggal</option>
                                 <option value="Ganda">Ganda</option>

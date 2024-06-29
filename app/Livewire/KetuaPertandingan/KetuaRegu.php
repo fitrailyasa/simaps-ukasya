@@ -57,25 +57,21 @@ class KetuaRegu extends Component
         $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
         $this->waktu = $this->gelanggang->waktu * 60;
     }
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.tambah-skor-regu" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal->id},.penalty-regu" => 'tambahPenaltyHandler',
-            "echo-private:poin-{$this->jadwal->id},.salah-gerakan-regu" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-regu" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
 
+    #[On('echo:poin,.tambah-skor-regu')]
     public function tambahNilaiHandler($data){
         if($this->jadwal->id == $data["jadwal_regu"]["id"]){
             $this->penilaian_regu_juri = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->jadwal->TampilTGR->TGR->id)->get();
             $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->jadwal->TampilTGR->TGR->id)->first();
         }
     }
+    #[On('echo:poin,.salah-gerakan-regu')]
+    public function salahGerakanHandler(){
+    }
+    #[On('echo:poin,.penalty-regu')]
+    public function tambahPenaltyHandler(){
+    }
+    #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler(){
         $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
         $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
@@ -85,6 +81,7 @@ class KetuaRegu extends Component
         $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
     }
 
+    #[On('echo:arena,.ganti-tampil-regu')]
     public function gantiTampilHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         $this->tahap = $this->jadwal->tahap;
@@ -96,7 +93,9 @@ class KetuaRegu extends Component
                 $this->penalty_regu = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->tampil->id)->first();
             }
     }
-        public function gantiTahapHandler($data){
+    
+    #[On('echo:arena,.ganti-tahap-regu')]
+    public function gantiTahapHandler($data){
         $this->tahap = $data["tahap"];
             $this->tahap = $this->jadwal->tahap;
             $this->tampil = $this->jadwal->TampilTGR->TGR;
@@ -116,6 +115,7 @@ class KetuaRegu extends Component
             }
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler($data){
         if($this->gelanggang->id == $data["gelanggang"]["id"]){
             $this->jadwal = JadwalTGR::find($this->gelanggang->jadwal);

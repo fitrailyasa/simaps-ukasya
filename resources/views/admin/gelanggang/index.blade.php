@@ -19,6 +19,7 @@
 @section('formDeleteAll')
     @include('admin.gelanggang.deleteAll')
 @endsection
+
 @section('table')
     <table id="example1" class="table table-bordered table-striped">
         <thead>

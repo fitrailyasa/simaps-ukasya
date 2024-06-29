@@ -30,16 +30,9 @@ class TambahTeguran implements ShouldBroadcastNow
         $this->babak = $babak_tanding;
         $this->jadwal = $jadwal;
     }
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel('poin-'.$this->jadwal->id),
-        ];
+        return new Channel('poin');
     }
     public function broadcastAs()
     {

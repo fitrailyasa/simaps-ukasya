@@ -1,4 +1,4 @@
-<div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="tunggal-body d-flex gap-1 border text-center" style="width: 100%;height: 50vh;">
+<div class="tunggal-body d-flex gap-1 border text-center" style="width: 100%;height: 50vh;">
     <div class="penalty" style="width: 50%">
         <div class="penalty-header border border-dark" style="background-color: #ececec;height: 10%;">
             <h5 class="fw-bold">Penalty</h5>

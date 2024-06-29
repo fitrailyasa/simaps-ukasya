@@ -48,8 +48,8 @@ class OperatorsoloKontrol extends Component
         $this->jadwal_solo = JadwalTGR::find($jadwal_solo_id);
         if($this->jadwal_solo->jenis != "Solo Kreatif" && Auth::user()->roles_id == 1) {
             switch ($this->jadwal_solo->jenis) {
-                case 'Regu':
-                    return redirect('admin/kontrol-tgr/regu/'.$jadwal_solo_id);
+                case 'solo':
+                    return redirect('admin/kontrol-tgr/solo/'.$jadwal_solo_id);
                 case "Tunggal":
                     return redirect('admin/kontrol-tgr/tunggal/'.$jadwal_solo_id);
                 case "Ganda":
@@ -91,16 +91,6 @@ class OperatorsoloKontrol extends Component
         }else  if($this->jadwal_solo->tahap == "keputusan"){
             $this->active = "keputusan";
         }
-    }
-
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal_solo->id},.hapus-penalty-solo" => 'hapusPenaltyHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.tambah-skor-solo" => 'tambahNilaiHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.salah-gerakan-solo" => 'salahGerakanHandler',
-            "echo-private:poin-{$this->jadwal_solo->id},.penalty-solo" => 'tambahPenaltyHandler',
-        ];
     }
 
     //operator start
@@ -302,24 +292,28 @@ class OperatorsoloKontrol extends Component
     }
     //operator endpublic function render()
 
+    #[On('echo:poin,.tambah-skor-solo')]
     public function tambahNilaiHandler($data){
         if($this->jadwal_solo->id == $data["jadwal_solo"]["id"]){
             $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
+    #[On('echo:poin,.salah-gerakan-solo')]
     public function salahGerakanHandler($data){
         if($this->jadwal_solo->id == $data["jadwal_solo"]["id"]){
             $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->get();
             $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->get();
         }
     }
+    #[On('echo:poin,.penalty-solo')]
     public function tambahPenaltyHandler($data){
         if($this->jadwal_solo->id == $data["jadwal_solo"]["id"]){          
             $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->first();
             $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_biru->id)->first();
         }
     }
+    #[On('echo:poin,.hapus-penalty-solo')]
     public function hapusPenaltyHandler($data){
         if($this->jadwal_solo->id == $data["jadwal_solo"]["id"]){            
             $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal_solo->id)->where('sudut',$this->sudut_merah->id)->first();

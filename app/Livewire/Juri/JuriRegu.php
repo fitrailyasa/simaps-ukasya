@@ -52,15 +52,6 @@ class JuriRegu extends Component
         }
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-regu" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-regu" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
-
     public function buatPenilaian(){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_regu = PenilaianRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -103,6 +94,18 @@ class JuriRegu extends Component
         SalahGerakan::dispatch($this->jadwal,$this->tampil->id == $this->pengundian_biru->atlet_id ? $this->sudut_biru : $this->sudut_merah,$this->penilaian_regu,Auth::user());
     }
 
+    #[On('echo:poin,.tambah-skor-regu')]
+    public function tambahNilaiHandler(){
+    }
+    #[On('echo:poin,.salah-gerakan-regu')]
+    public function salahGerakanHandler(){
+    }
+    #[On('echo:arena,.ganti-tahap-regu')]
+    public function gantiTahapHandler($data){
+        
+    }
+
+    #[On('echo:arena,.ganti-tampil-regu')]
     public function gantiTampilHandler($data){
         if($this->jadwal->tampil == $this->jadwal->PengundianTGRBiru->id){
             $this->penilaian_regu = PenilaianRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();
@@ -122,12 +125,14 @@ class JuriRegu extends Component
         $this->tampil = $this->jadwal->TampilTGR->TGR;
     }
 
+    #[On('echo:arena,.ganti-gelanggang')]
     public function GantiGelanggangHandler(){
         if(Auth::user()->Gelanggang->jenis != "Regu" || Auth::user()->Gelanggang->jadwal != $this->jadwal->id){
             return redirect('auth');
         }
     }
 
+    #[On('echo:poin,.hapus-penalty-regu')]
     public function hapusPenaltyHandler($data){
         if($data["juri"]["permissions"] == "Operator"){
             $penilaian_regu_biru = PenilaianRegu::where('sudut',$this->sudut_biru->id)->where('jadwal_regu',$this->jadwal->id)->where('juri',Auth::user()->id)->first();

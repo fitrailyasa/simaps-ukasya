@@ -63,16 +63,6 @@ class DewanTunggal extends Component
         }
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:poin-{$this->jadwal->id},.hapus-penalty-tunggal" => 'hapusPenaltyHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tahap-tunggal" => 'gantiTahapHandler',
-            "echo-private:arena-{$this->jadwal->id},.ganti-tampil-tunggal" => 'gantiTampilHandler',
-           "echo-private:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
-        ];
-    }
-
     public function kurangiWaktu(){
         if($this->mulai == true){
             $this->waktu = ($this->waktu * 60 + 1) / 60;
@@ -145,6 +135,10 @@ class DewanTunggal extends Component
     }
 
    
+
+    #[On('echo:poin,.penalty-tunggal')]
+    public function tambahNilaiHandler(){
+    }
     #[On('echo:poin,.hapus-penalty-tunggal')]
     public function hapusPenaltyHandler(){
         if($this->jadwal->tampil == $this->pengundian_biru->id){

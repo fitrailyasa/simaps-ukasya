@@ -8,9 +8,6 @@
     @section('tgr')
     menu-open
     @endsection
-    @section('style')
-        @vite('resources/js/menunggu.js')
-    @endsection
     <style>
         .dataTables_filter {
             display: flex;
@@ -35,7 +32,7 @@
                         {{ session('sukses') }}
                     </div>
                 @endif
-                <div id="jadwal" gelanggang-id={{$gelanggang_operator->id}} class="table-responsive">
+                <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
