@@ -94,8 +94,18 @@ class JuriTanding extends Component
     }
 
     public function tambahPukulanTrigger($id){
-            $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('sudut',$id)->where('aktif',true)->first();
-            if($penilaian_pukulan == null){
+            $juri = $this->juri;
+            $babak = $this->jadwal->babak_tanding;
+
+            // Check if the juri has already submitted a tendangan score for this sudut in the current babak
+            $existing_penilaian = PenilaianTanding::where('jadwal_tanding', $this->jadwal->id)
+                ->where('sudut', $id)
+                ->where('jenis', 'pukulan')
+                ->where('babak', $babak)
+                ->where($juri, 0) // Changed to check for non-zero score
+                ->where('aktif', true)
+                ->first();
+            if (!$existing_penilaian) {
                 PenilaianTanding::create([
                 'jenis'=>'pukulan',
                 'sudut'=>$id,
@@ -106,8 +116,8 @@ class JuriTanding extends Component
             ]);
             }else{
                 $juri = $this->juri;
-                $penilaian_pukulan->$juri = 1;
-                $penilaian_pukulan->save();
+                $existing_penilaian->$juri = 1;
+                $existing_penilaian->save();
             };
             if($id == $this->sudut_biru->id){
                 $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->whereIn($this->juri, [1, 2])->get();
@@ -119,8 +129,18 @@ class JuriTanding extends Component
     }
 
     public function tambahTendanganTrigger($id){
-            $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('sudut',$id)->where('aktif',true)->first();
-            if($penilaian_tendangan==null){
+            $juri = $this->juri;
+            $babak = $this->jadwal->babak_tanding;
+
+            // Check if the juri has already submitted a tendangan score for this sudut in the current babak
+            $existing_penilaian = PenilaianTanding::where('jadwal_tanding', $this->jadwal->id)
+                ->where('sudut', $id)
+                ->where('jenis', 'tendangan')
+                ->where('babak', $babak)
+                ->where($juri, 0) // Changed to check for non-zero score
+                ->where('aktif', true)
+                ->first();
+            if (!$existing_penilaian) {
                 PenilaianTanding::create([
                 'jenis'=>'tendangan',
                 'sudut'=>$id,
@@ -131,8 +151,8 @@ class JuriTanding extends Component
             ]);
             }else{
                 $juri =$this->juri;
-                $penilaian_tendangan->$juri = 2;
-                $penilaian_tendangan->save();
+                $existing_penilaian->$juri = 2;
+                $existing_penilaian->save();
             };
             
             if($id == $this->sudut_biru->id){
@@ -144,35 +164,6 @@ class JuriTanding extends Component
             }
     }
 
-    public function batasSkorMasukCek(){
-        $penilaian_tendangan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','tendangan')->where('aktif',true)->get();
-        $penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal->id)->where('jenis','pukulan')->where('aktif',true)->get();
-
-        foreach ($penilaian_pukulan as $penilaian) {
-            if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
-            $penilaian->aktif = false;
-            $penilaian->save();
-            TambahPukulan::dispatch($penilaian->sudut,$this->jadwal);
-            }else{
-                if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 2){
-                    $penilaian->status = 'sah';
-                    $penilaian->save();
-                };
-            }
-        }
-        foreach ($penilaian_tendangan as $penilaian) {
-            if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
-            $penilaian->aktif = false;
-            $penilaian->save();
-            TambahTendangan::dispatch($penilaian->sudut,$this->jadwal);
-            }else{
-                if($penilaian->juri_1 + $penilaian->juri_2 + $penilaian->juri_3 >= 4){
-                    $penilaian->status = 'sah';
-                    $penilaian->save();
-                };
-            }
-        }
-    }
 
     public function verifikasiJatuhanTrigger($verifikasi){
         $this->pilihan = $verifikasi;

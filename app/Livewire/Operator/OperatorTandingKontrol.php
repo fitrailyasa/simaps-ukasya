@@ -99,7 +99,7 @@ class OperatorTandingKontrol extends Component
         $this->penilaian_pukulan = PenilaianTanding::where('jadwal_tanding',$this->jadwal_tanding->id)->where('jenis','pukulan')->where('aktif',true)->get();
         if($this->penilaian_pukulan){
             foreach ($this->penilaian_pukulan as $penilaian) {
-                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
+                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=3){
                 $penilaian->aktif = false;
                 $penilaian->save();
                 TambahPukulan::dispatch($penilaian->sudut,$this->jadwal_tanding);
@@ -113,7 +113,7 @@ class OperatorTandingKontrol extends Component
         }
         if($this->penilaian_tendangan){
             foreach ($this->penilaian_tendangan as $penilaian) {
-                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=2){
+                if(strtotime(date('Y-m-d H:i:s')) - strtotime($penilaian->created_at)>=3){
                 $penilaian->aktif = false;
                 $penilaian->save();
                 TambahTendangan::dispatch($penilaian->sudut,$this->jadwal_tanding);

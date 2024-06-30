@@ -194,7 +194,7 @@
             </div>
         </div>
     </div>
-    <div class="tanding-footer text-center d-flex" style="height: 30%">
+    <div wire:poll.1000ms='resetIndikator' class="tanding-footer text-center d-flex" style="height: 30%">
         <div class="sudut_merah" style="width: 45%;height: 100%;">
             <div class="baris-1 d-flex border" style="width: 100%; height: 50%;">
                 {{-- @dd($penilaian_tanding_merah->where('aktif',false)->last()) --}}
@@ -256,10 +256,6 @@
 </div>
 
 @section('script')
-    <script>
-        setInterval(() => {
-            @this.call(`resetIndikator`)
-        }, 1600);
-    </script>
+
 @endsection
 
