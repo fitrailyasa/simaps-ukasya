@@ -18,7 +18,7 @@
        @endif
       </div>
       <div class="modal-footer">
-        <button wire:click='VerifikasiJatuhanTrigger' type="button" class="btn btn-danger btn-verif" >Minta Verifikasi Jatuhan Juri</button>
+        <button wire:click='VerifikasiJatuhanTrigger' type="button" class="btn btn-secondary btn-verif" >Minta Verifikasi Jatuhan Juri</button>
         <button wire:click='tutupVerifikasiJatuhan' type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
@@ -45,7 +45,7 @@
        @endif
       </div>
       <div class="modal-footer">
-        <button wire:click='VerifikasiPelanggaranTrigger' type="button" class="btn btn-danger btn-verif" >Minta Verifikasi Pelanggaran Juri</button>
+        <button wire:click='VerifikasiPelanggaranTrigger' type="button" class="btn btn-secondary btn-verif" >Minta Verifikasi Pelanggaran Juri</button>
         <button wire:click='tutupVerifikasiPelanggaran' type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

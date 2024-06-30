@@ -161,20 +161,20 @@
                     <div class="d-flex flex-column" style="width: 50%">
                         <div class="mb-2">
                             <button wire:click="tambahPukulanTrigger({{ $sudut_biru->id }})"
-                                class="btn btn-primary text-white btn-custom" style="height: 70px;">
+                                class="btn text-white btn-custom btn-biru" style="height: 70px;">
                                 Pukulan
                             </button>
                         </div>
                         <div class="mb-2">
                             <button wire:click="tambahTendanganTrigger({{ $sudut_biru->id }})"
-                                class="btn btn-primary text-white btn-custom" style="height: 70px;">
+                                class="btn text-white btn-custom btn-biru" style="height: 70px;">
                                 Tendangan
                             </button>
                         </div>
                     </div>
                     <div class="mb-2 text-right" style="width: 50%">
                         <button wire:click="hapusTrigger({{ $sudut_biru->id }})"
-                            class="btn btn-primary text-white btn-custom" style="height: 150px;">
+                            class="btn btn-biru text-white btn-custom" style="height: 150px;">
                             Hapus
                         </button>
                     </div>

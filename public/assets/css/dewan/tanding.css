@@ -1,6 +1,5 @@
 .btn-biru {
     background-color: #0053a6 !important;
-    color: #fff;
 }
 
 .btn-biru:hover {
@@ -8,7 +7,13 @@
 }
 
 .btn-biru:active {
-    background-color: #0053a6 !important;
+    background-color: #db3545 !important;
+    transform: translateY(1px) !important;
+}
+
+.btn-danger:active {
+    background-color: #007bff !important;
+    transform: translateY(1px) !important;
 }
 
 .active {

@@ -13,7 +13,7 @@
                 <button wire:click='hapusTrigger({{$sudut_biru->id}})' class="btn btn-biru text-white mt-3" style="border-radius: 20px !important ;border: 2px solid black; height: 80%; width: 100%"><h5 class="fw-bold">Hapus</h5></button>            
             </div>
         </div>
-        <div class="verifikasi" style="width: 100%; height: 30%" style="margin-top: -16px !important">
+        <div class="verifikasi mt-3" style="width: 100%; height: 30%" style="margin-top: -16px !important">
             <button wire:click='resetVerifikasiJatuhan()' class="btn text-white" data-bs-toggle="modal" data-bs-target="#jatuhan" style="background-color: #70ad47; ;border-radius: 20px !important ;border: 2px solid black; height: 100%; width: 100%">
                 <h5 class="fw-bold">Verifikasi Jatuhan</h5>
             </button>
@@ -34,7 +34,7 @@
                 <button wire:click.prevent="tambahBinaanTrigger({{$sudut_merah->id}})" class="btn btn-danger" style=" border-radius: 20px !important ;border: 2px solid black; height: 40%; width: 100%"><h5 class="fw-bold">Binaan</h5></button>
             </div>
         </div>
-        <div class="verifikasi" style="width: 100%; height: 30%">
+        <div class="verifikasi mt-3" style="width: 100%; height: 30%">
             <button wire:click='resetVerifikasiPelanggaran()' class="btn text-white" data-bs-toggle="modal" data-bs-target="#pelanggaran" style="background-color: #70ad47; ;border-radius: 20px !important ;border: 2px solid black; height: 100%; width: 100%">
                 <h5 class="fw-bold">Verifikasi Pelanggaran</h5>
             </button>

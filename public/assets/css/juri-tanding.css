@@ -3,13 +3,12 @@
         font-size: 0.8rem;
     }
 }
+.babak-active {
+    background-color: #f0d500 !important;
+}
 
 .btn-biru {
     background-color: #0053a6 !important;
-}
-
-.babak-active {
-    background-color: #f0d500 !important;
 }
 
 .btn-biru:hover {
@@ -17,11 +16,11 @@
 }
 
 .btn-biru:active {
-    background-color: #0053a6 !important;
+    background-color: #db3545 !important;
     transform: translateY(1px) !important;
 }
 .btn-danger:active {
-    background-color: #db3545 !important;
+    background-color: #007bff !important;
     transform: translateY(1px) !important;
 }
 

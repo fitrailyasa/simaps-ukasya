@@ -233,6 +233,7 @@ class DewanTanding extends Component
                 $this->verifikasi_jatuhan = VerifikasiJatuhan::Create([
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
+                    'uuid' => date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_jatuhan),
                     'status'=>true
                 ]);
@@ -251,6 +252,7 @@ class DewanTanding extends Component
                 $this->verifikasi_pelanggaran = VerifikasiPelanggaran::Create([
                     'dewan' => Auth::user()->id,
                     'jadwal_tanding' => $this->jadwal->id,
+                    'uuid' => date('Ymd-His').'-'.$this->jadwal->tampil.Auth::user()->id.'-'.$this->jadwal->id,
                     'data'=>json_encode($this->juri_verifikasi_pelanggaran),
                     'status'=>true
                 ]);
