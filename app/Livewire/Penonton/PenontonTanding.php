@@ -61,31 +61,81 @@ class PenontonTanding extends Component
            "echo:gelanggang-{$this->gelanggang->id},.ganti-gelanggang" => 'gantiGelanggangHandler',            
         ];
     }
-    public function resetIndikator(){
-        if($this->pukulan_merah_masuk == true){
-            $this->pukulan_merah = PenilaianTanding::where('jenis','pukulan')->where('aktif',true)->first();
+    public function resetPoin(){
+        if ($this->pukulan_merah_masuk == true) {
+            $this->pukulan_merah = null;
             $this->pukulan_merah_masuk = false;
-            $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         }
-        if($this->pukulan_biru_masuk == true){
-            $this->pukulan_biru = PenilaianTanding::where('jenis','pukulan')->where('aktif',true)->first();
+
+        if ($this->pukulan_biru_masuk == true) {
+            $this->pukulan_biru = null;
             $this->pukulan_biru_masuk = false;
-            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         }
-        if($this->tendangan_merah_masuk == true){
-            $this->tendangan_merah = PenilaianTanding::where('jenis','tendangan')->where('aktif',true)->first();
+
+        if ($this->tendangan_merah_masuk == true) {
+            $this->tendangan_merah = null;
             $this->tendangan_merah_masuk = false;
-            $this->penilaian_tanding_merah= PenilaianTanding::where('sudut',$this->sudut_merah->id)->where('jadwal_tanding',$this->jadwal->id)->get();
         }
-        if($this->tendangan_biru_masuk == true){
-            $this->tendangan_biru = PenilaianTanding::where('jenis','tendangan')->where('aktif',true)->first();
+
+        if ($this->tendangan_biru_masuk == true) {
+            $this->tendangan_biru = null;
             $this->tendangan_biru_masuk = false;
-            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->where('jadwal_tanding',$this->jadwal->id)->get();
-        }
-        if($this->mulai == true){
-            $this->waktu = ($this->waktu * 60 + 1) / 60;
         }
     }
+    public function resetIndikator()
+    {
+        if ($this->pukulan_merah_masuk == true) {
+            $this->pukulan_merah = PenilaianTanding::where('sudut', $this->sudut_merah->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->where('jenis', 'pukulan')
+                ->where('aktif', true)
+                ->first();
+            $this->pukulan_merah_masuk = false;
+            $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->sudut_merah->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->get();
+        }
+
+        if ($this->pukulan_biru_masuk == true) {
+            $this->pukulan_biru = PenilaianTanding::where('sudut', $this->sudut_biru->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->where('jenis', 'pukulan')
+                ->where('aktif', true)
+                ->first();
+            $this->pukulan_biru_masuk = false;
+            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut', $this->sudut_biru->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->get();
+        }
+
+        if ($this->tendangan_merah_masuk == true) {
+            $this->tendangan_merah = PenilaianTanding::where('sudut', $this->sudut_merah->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->where('jenis', 'tendangan')
+                ->where('aktif', true)
+                ->first();
+            $this->tendangan_merah_masuk = false;
+            $this->penilaian_tanding_merah = PenilaianTanding::where('sudut', $this->sudut_merah->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->get();
+        }
+
+        if ($this->tendangan_biru_masuk == true) {
+            $this->tendangan_biru = PenilaianTanding::where('sudut', $this->sudut_biru->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->where('jenis', 'tendangan')
+                ->where('aktif', true)
+                ->first();
+            $this->tendangan_biru_masuk = false;
+            $this->penilaian_tanding_biru = PenilaianTanding::where('sudut', $this->sudut_biru->id)
+                ->where('jadwal_tanding', $this->jadwal->id)
+                ->get();
+        }
+
+        if ($this->mulai == true) {
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
+}
     public function check_gelanggang()  {
         if($this->gelanggang->jenis !== "Tanding"){
             return redirect('/penonton/'.$this->gelanggang->id);
@@ -139,6 +189,7 @@ class PenontonTanding extends Component
             $this->pukulan_tanding_biru = PenilaianTanding::where('sudut',$this->sudut_biru->id)->get();        
             $this->pukulan_biru = $this->penilaian_tanding_biru->where('jenis','pukulan')->where('aktif',true)->last();
         };
+        $this->resetIndikator();
     }
     public function tendanganHandler($data){
         if($data['sudut_id'] == $this->sudut_merah->id){
@@ -150,6 +201,7 @@ class PenontonTanding extends Component
             $this->penilaian_tanding_biru= PenilaianTanding::where('sudut',$this->sudut_biru->id)->get();        
             $this->tendangan_biru = $this->penilaian_tanding_biru->where('jenis','tendangan')->where('aktif',true)->last();
         };
+        $this->resetIndikator();
     }
     public function mulaiPertandinganHandler($data){
         if($data["jadwal"]["id"] == $this->jadwal->id){

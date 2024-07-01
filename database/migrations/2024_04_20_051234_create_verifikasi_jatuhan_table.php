@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('jadwal_tanding');
             $table->foreignId('dewan');
             $table->json('data')->mullable(); 
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(true)->index();
             $table->timestamps();
         });
     }

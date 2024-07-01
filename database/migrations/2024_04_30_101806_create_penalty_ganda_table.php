@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('penalty_ganda', function (Blueprint $table) {
             $table->id();
+            $table->index('id');
             $table->string('uuid')->unique();
             $table->foreignId('sudut');
             $table->foreignId('jadwal_ganda');
