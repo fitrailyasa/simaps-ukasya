@@ -62,25 +62,29 @@ class PenontonTanding extends Component
         ];
     }
     public function resetPoin(){
-        if ($this->pukulan_merah_masuk == true) {
-            $this->pukulan_merah = null;
-            $this->pukulan_merah_masuk = false;
-        }
+        // if ($this->pukulan_merah_masuk == true) {
+        //     $this->pukulan_merah = null;
+        //     $this->pukulan_merah_masuk = false;
+        // }
 
-        if ($this->pukulan_biru_masuk == true) {
-            $this->pukulan_biru = null;
-            $this->pukulan_biru_masuk = false;
-        }
+        // if ($this->pukulan_biru_masuk == true) {
+        //     $this->pukulan_biru = null;
+        //     $this->pukulan_biru_masuk = false;
+        // }
 
-        if ($this->tendangan_merah_masuk == true) {
-            $this->tendangan_merah = null;
-            $this->tendangan_merah_masuk = false;
-        }
+        // if ($this->tendangan_merah_masuk == true) {
+        //     $this->tendangan_merah = null;
+        //     $this->tendangan_merah_masuk = false;
+        // }
 
-        if ($this->tendangan_biru_masuk == true) {
-            $this->tendangan_biru = null;
-            $this->tendangan_biru_masuk = false;
-        }
+        // if ($this->tendangan_biru_masuk == true) {
+        //     $this->tendangan_biru = null;
+        //     $this->tendangan_biru_masuk = false;
+        // }
+        $this->pukulan_merah = $this->penilaian_tanding_merah->where('jenis','pukulan')->where('aktif',true)->last();
+        $this->tendangan_merah = $this->penilaian_tanding_merah->where('jenis','tendangan')->where('aktif',true)->last();
+        $this->pukulan_biru = $this->penilaian_tanding_biru->where('jenis','pukulan')->where('aktif',true)->last();
+        $this->tendangan_biru = $this->penilaian_tanding_biru->where('jenis','tendangan')->where('aktif',true)->last();
     }
     public function resetIndikator()
     {
