@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('penilaian_tanding', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sudut')->nullable()->index();
-            $table->foreignId('jadwal_tanding')->nullable()->index();
+            $table->foreignId('sudut')->nullable();
+            $table->foreignId('jadwal_tanding')->nullable();
             $table->string('jenis');
             $table->integer('juri_1')->default(0);
             $table->integer('juri_2')->default(0);

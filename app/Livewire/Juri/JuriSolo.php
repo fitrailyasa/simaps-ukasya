@@ -70,6 +70,9 @@ class JuriSolo extends Component
     }
 
     public function tambahNilaiTrigger($value,$jenis_skor){
+        if(!$this->penilaian_solo){
+            return;
+        }
         $value/=100;
         switch ($jenis_skor) {
             case 'attack_skor':

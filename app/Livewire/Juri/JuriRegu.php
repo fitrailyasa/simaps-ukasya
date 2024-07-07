@@ -88,6 +88,9 @@ class JuriRegu extends Component
         $this->active = $this->penilaian_regu->flow_skor;
     }
     public function tambahNilaiTrigger($id,$value){
+        if(!$this->penilaian_regu){
+            return;
+        }
         $value/=100;
         $this->active = $value;
         $this->penilaian_regu->flow_skor = $value;
@@ -97,6 +100,9 @@ class JuriRegu extends Component
     }
 
     public function salahGerakanTrigger($id){
+        if (!$this->penilaian_regu) {
+            return;
+        }
         $this->penilaian_regu->increment('salah');
         $this->penilaian_regu->skor -= 0.01;
         $this->penilaian_regu->save();

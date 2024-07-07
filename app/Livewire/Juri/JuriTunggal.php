@@ -88,6 +88,9 @@ class JuriTunggal extends Component
         TambahNilai::dispatch($this->jadwal,$this->tampil->id ,$this->penilaian_tunggal,Auth::user());
     }
     public function tambahNilaiTrigger($id,$value){
+        if(!$this->penilaian_tunggal){
+            return;
+        }
         $value/=100;
         $this->active = $value;
         $this->penilaian_tunggal->flow_skor = $value;
