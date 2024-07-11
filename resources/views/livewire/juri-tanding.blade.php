@@ -2,6 +2,7 @@
     @section('style')
         @vite('resources/js/layout.js')
         @vite('resources/js/tanding.js')
+        <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
         <style>
             .btn-custom {
                 border-radius: 10px;

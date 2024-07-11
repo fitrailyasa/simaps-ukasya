@@ -5,6 +5,7 @@
 
     @section('style')
         @vite('resources/js/layout.js')
+        <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
     @endsection
     <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{ $gelanggang->id }} class="container-fluid pb-4 "
         style="width: 100%; border: solid 2px black;min-height: 80vh;">

@@ -5,9 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Juri | @yield('title')</title>
         @vite('resources/js/app.js')
-
-        <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
-        <link rel="stylesheet" href="{{url('assets/css/juri-tunggal.css')}}">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}">      
 
