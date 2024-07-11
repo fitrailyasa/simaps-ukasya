@@ -10,9 +10,6 @@
     @include('dewan.tunggal.footer')
     @section('script')
         <script>
-            setInterval(() => {
-                @this.call('kurangiWaktu')
-            }, 1600);
             // Ambil tombol fullscreen
             const fullscreenButton = document.getElementById('fullscreen-btn');
             const fullscreenIcon = fullscreenButton.querySelector('i');

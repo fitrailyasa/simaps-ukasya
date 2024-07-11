@@ -177,7 +177,7 @@ class DewanGanda extends Component
     public function gantiTahapHandler($data){
         $this->tampil = $this->jadwal->TampilTGR->TGR;
         if($data["tahap"] == "tampil"){
-            $this->waktu = ($data["waktu"] * 60 + 1.1) / 60;
+            $this->waktu = ($data["waktu"]) / 60;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
             

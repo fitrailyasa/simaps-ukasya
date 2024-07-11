@@ -113,7 +113,7 @@
     <hr style="height: 5px; background-color: #000;border: none;">
     <div class="time text-center d-flex justify-content-center" style="width:100%">
         @if ($gelanggang->waktu != 0)
-            <div class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
+            <div wire:poll.1000ms='kurangiWaktu' class="d-flex justify-content-center text-center"><h3 class="fw-bold">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</span></div>
         @endif
     </div>
    <br>
@@ -223,12 +223,6 @@
   </div>
 </div>
 @section('script')
-    <script>
-        setInterval(() => {
-            if(@this.get('mulai') == true){
-                @this.call('kurangiWaktu')
-            }
-        }, 1600);
-    </script>
+
 @endsection
 </div>

@@ -7,7 +7,7 @@
             {{$tampil->nama}}
         </h5>
     </div>
-    <div class="timer-clock">
+    <div wire:poll.1000ms='kurangiWaktu' class="timer-clock">
         <p class="text-hasil fw-bold" style="font-size: 3rem;">{{ sprintf("%02d:%02d", floor($waktu), ($waktu*60)%60) }}</p>
     </div>
     <div class="kontingen-biru text-end d-flex flex-column justify-content-center" style="width: 50%">
