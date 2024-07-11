@@ -164,7 +164,9 @@ class OperatorReguKontrol extends Component
         if($this->waktu == $this->gelanggang->waktu){
             return;
         }
-        $this->waktu = ($this->waktu * 60 + 1) / 60;
+        if($this->mulai == true){
+            $this->waktu = ($this->waktu * 60 + 1) / 60;
+        }
     }
     public function gantiTampil($sudut){
         $this->waktu = 0;
