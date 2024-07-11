@@ -1,16 +1,16 @@
 <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{$gelanggang->id}} class="content d-flex flex-column gap-1" style="width: 100%">
     <div class="header d-flex gap-1" style="width: 100%;">
-        <div class="bg-abu text-center border border-secondary d-flex align-items-center justify-content-center" style="width: 9%; height: calc(1.2em + 2px);">
+        <div class="bg-abu text-center border border-secondary d-flex align-items-center justify-content-center" style="width: 9%;">
             <h6 style="font-size: 0.8rem; margin: 1px;" class="fw-bold">
                 SCORING ELEMENT
             </h6>
         </div>
-        <div class="bg-abu border border-secondary text-center d-flex justify-content-center align-items-center" style="width: 87%; height: calc(1.2em + 2px);">
+        <div class="bg-abu border flex-row border-secondary text-center d-flex justify-content-center align-items-center" style="width: 87%;">
             <h6 style="font-size: 0.8rem; margin: 1px;" class="fw-bold">
                 SCORE
             </h6>
         </div>
-        <div class="bg-abu border border-secondary text-center d-flex align-items-center justify-content-center" style="width: 4%; height: calc(1.2em + 2px);">
+        <div class="bg-abu border border-secondary text-center d-flex align-items-center justify-content-center" style="width: 4%;">
             <button id="fullscreen-btn" class="btn btn-primary d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; padding: 0;">
                 <i class="fa-solid fa-expand"></i>
             </button>
