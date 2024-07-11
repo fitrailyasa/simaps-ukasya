@@ -5,7 +5,7 @@
                 SCORING ELEMENT
             </h6>
         </div>
-        <div class="bg-abu border flex-row border-secondary text-center d-flex justify-content-center align-items-center" style="width: 87%;">
+        <div class="bg-abu text-center border border-secondary d-flex align-items-center justify-content-center" style="width: 87%;">
             <h6 style="font-size: 0.8rem; margin: 1px;" class="fw-bold">
                 SCORE
             </h6>
