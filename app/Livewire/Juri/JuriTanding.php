@@ -2,16 +2,13 @@
 
 namespace App\Livewire\Juri;
 
-use App\Models\PengundianTanding;
 use App\Models\User;
 use App\Models\VerifikasiJatuhan;
 use App\Models\VerifikasiPelanggaran;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Models\JadwalTanding;
 use App\Models\Gelanggang;
-use App\Models\Tanding;
 use App\Models\PenilaianTanding;
 use App\Events\Tanding\TambahPukulan;
 use App\Events\Tanding\TambahTendangan;

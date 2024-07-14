@@ -3,11 +3,9 @@
 namespace App\Livewire\Juri;
 
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
 use App\Models\JadwalTGR;
-use App\Models\TGR;
 use App\Events\Regu\TambahNilai;
 use App\Events\Regu\SalahGerakan;
 use App\Models\PenilaianRegu;

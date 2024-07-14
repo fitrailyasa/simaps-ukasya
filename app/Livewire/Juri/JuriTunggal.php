@@ -2,13 +2,10 @@
 
 namespace App\Livewire\Juri;
 
-use App\Models\PengundianTGR;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Gelanggang;
 use App\Models\JadwalTGR;
-use App\Models\TGR;
 use App\Events\Tunggal\TambahNilai;
 use App\Events\Tunggal\SalahGerakan;
 use App\Models\PenilaianTunggal;

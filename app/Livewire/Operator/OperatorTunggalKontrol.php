@@ -8,11 +8,8 @@ use App\Events\Tunggal\GantiTampil;
 use App\Events\Tunggal\HapusPenalty;
 use App\Models\JadwalTGR;
 use App\Models\PenaltyTunggal;
-use App\Models\PengundianTGR;
 use App\Models\PenilaianTunggal;
-use App\Models\TGR;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class OperatorTunggalKontrol extends Component
