@@ -8,7 +8,7 @@ use App\Models\PengundianTGR;
 use App\Models\Gelanggang;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\JadwaltgrImport;
+use App\Imports\JadwalTGRImport;
 
 class AdminJadwalTGRController extends Controller
 {

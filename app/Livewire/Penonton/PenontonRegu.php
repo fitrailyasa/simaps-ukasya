@@ -103,7 +103,10 @@ class PenontonRegu extends Component
             $this->tampil_nilai = false;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
-            
+            $this->penilaian_regu_juri_merah = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penalty_regu_merah = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penilaian_regu_juri_biru = PenilaianRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+            $this->penalty_regu_biru = PenaltyRegu::where('jadwal_regu',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         }else if($data["tahap"] == "pause"){
             $this->waktu = ($data["waktu"]) / 60;
             $this->mulai = false;

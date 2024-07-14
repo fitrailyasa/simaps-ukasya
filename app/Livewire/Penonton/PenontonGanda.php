@@ -113,7 +113,10 @@ class PenontonGanda extends Component
                 $this->penalty_ganda = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->tampil)->first();
             }
         }else if($data["tahap"] == "keputusan"){
-            $this->tahap = $this->jadwal->tahap;
+            $this->penilaian_ganda_juri_merah = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penalty_ganda_merah = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penilaian_ganda_juri_biru = PenilaianGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+            $this->penalty_ganda_biru = PenaltyGanda::where('jadwal_ganda',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         }else if($data["tahap"] == "tampil nilai"){
             $this->tampil_nilai = true;
             $this->mulai = false;

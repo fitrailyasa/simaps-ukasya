@@ -108,7 +108,10 @@ class PenontonTunggal extends Component
             $this->tampil_nilai = false;
             $this->mulai = true;
         }else if($data["tahap"] == "keputusan"){
-            
+            $this->penilaian_tunggal_juri_merah = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penalty_tunggal_merah = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penilaian_tunggal_juri_biru = PenilaianTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+            $this->penalty_tunggal_biru = PenaltyTunggal::where('jadwal_tunggal',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         }else if($data["tahap"] == "pause"){
             $this->mulai = false;
         }else if($data["tahap"] == "tampil nilai"){

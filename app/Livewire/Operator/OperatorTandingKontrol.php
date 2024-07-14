@@ -158,7 +158,7 @@ class OperatorTandingKontrol extends Component
         $this->jadwal_tanding->save();
         Hapus::dispatch($this->jadwal_tanding,Auth::user());
     }
-    public function kurangiWaktu(){
+     public function kurangiWaktu(){
         if($this->mulai == true){
         if($this->waktu >= $this->gelanggang->waktu){
             $this->jadwal_tanding->tahap = 'pause';

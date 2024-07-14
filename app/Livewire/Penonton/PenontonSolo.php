@@ -113,7 +113,10 @@ class PenontonSolo extends Component
                 $this->penalty_solo = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->tampil)->first();
             }
         }else if($data["tahap"] == "keputusan"){
-            $this->tahap = $this->jadwal->tahap;
+            $this->penilaian_solo_juri_merah = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->get();
+            $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_merah->id)->first();
+            $this->penilaian_solo_juri_biru = PenilaianSolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->get();
+            $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo',$this->jadwal->id)->where('sudut',$this->sudut_biru->id)->first();
         }else if($data["tahap"] == "tampil nilai"){
             $this->tampil_nilai = true;
             $this->mulai = false;
