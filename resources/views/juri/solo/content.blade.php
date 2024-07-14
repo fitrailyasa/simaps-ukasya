@@ -20,17 +20,17 @@
         <div class="aside text-center" style="width: 10%;height: 100">
             <div class="row-1 border border-secondary" style="width: 100%; height: 33.6% !important">
                 <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
-                    ATTACK DEFENSE TECHNIQUE ( 0.01 - 0.30 )
+                    TEHNIK SERANGAN PERTAHANAN ( 0.01 - 0.30 )
                 </h6>
             </div>
             <div class="row-2 border border-secondary mt-1" style="height: 32.7% !important">
                 <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
-                    FIRMNESS AND HARMONY ( 0.01 - 0.30 )
+                    KETEGASAN ( 0.01 - 0.30 )
                 </h6>
             </div>
             <div class="row-3 border border-secondary mt-1" style="height: 32.3% !important">
                 <h6 class="fw-bold" style="height: 100%; margin-top: 50%;font-size: 0.8rem">
-                    SOULFULNESS ( 0.01 - 0.30 )
+                    PENJIWAAN ( 0.01 - 0.30 )
                 </h6>
             </div>
 

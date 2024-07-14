@@ -19,8 +19,7 @@
             </div>
             <h3 class="fw-bold">{{ $juri->permissions }}</h3>
             <div class="jenis-lomba text-end" style="width: 40%">
-                <span class="fw-bold" style="font-size: 1.3rem">{{ $gelanggang->nama }}, Match {{ $jadwal->partai }},
-                    Juny 7</span>
+                <span class="fw-bold" style="font-size: 1.3rem">{{ $gelanggang->nama }}, Match {{ $jadwal->partai }}</span>
                 <h3 class="fw-bold">Tunggal</h3>
             </div>
         </div>
