@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\JadwalTGR;
 use App\Models\PengundianTGR;
 use App\Models\Gelanggang;
+use App\Models\PenilaianGanda;
+use App\Models\PenilaianRegu;
+use App\Models\PenilaianSolo;
+use App\Models\PenilaianTunggal;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\JadwalTGRImport;
@@ -42,7 +46,7 @@ class AdminJadwalTGRController extends Controller
         if ($teams->isEmpty()) {
             return back()->with('warning', 'Data tim kosong!');
         } else {
-            Excel::import(new JadwalTGRImport($teams,$request), $file);
+            Excel::import(new JadwalTGRImport($teams, $request), $file);
             return back()->with('sukses', 'Berhasil Import Data Jadwal!');
         }
     }
@@ -85,7 +89,7 @@ class AdminJadwalTGRController extends Controller
             'sudut_biru' => $sudutBiru ? $sudutBiru->id : null,
             'sudut_merah' => $sudutMerah ? $sudutMerah->id : null,
             'next_sudut' => $request->next_sudut,
-            'jenis'=>$request->jenis,
+            'jenis' => $request->jenis,
             'tampil' => $sudutBiru->id,
             'next_partai' => $request->next_partai,
         ]);
@@ -126,7 +130,10 @@ class AdminJadwalTGRController extends Controller
     public function destroyAll()
     {
         JadwalTGR::truncate();
-
+        PenilaianGanda::truncate();
+        PenilaianRegu::truncate();
+        PenilaianSolo::truncate();
+        PenilaianTunggal::truncate();
         return back()->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
     }
 }

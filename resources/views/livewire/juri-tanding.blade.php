@@ -1,53 +1,53 @@
 <div>
     @section('style')
-        @vite('resources/js/layout.js')
-        @vite('resources/js/tanding.js')
-        <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
-        <style>
-            .btn-custom {
-                border-radius: 10px;
-                width: 100%;
-                margin: 0;
-                /* Menghapus margin default */
-            }
+    @vite('resources/js/layout.js')
+    @vite('resources/js/tanding.js')
+    <link rel="stylesheet" href="{{url('assets/css/juri-tanding.css')}}" />
+    <style>
+        .btn-custom {
+            border-radius: 10px;
+            width: 100%;
+            margin: 0;
+            /* Menghapus margin default */
+        }
 
-            .btn-primary {
-                background-color: #0053a6;
-            }
+        .btn-primary {
+            background-color: #0053a6;
+        }
 
-            .btn-danger {
-                background-color: #db3545;
-            }
+        .btn-danger {
+            background-color: #db3545;
+        }
 
-            .flex-container {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                /* Jarak antara tombol */
-            }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            /* Jarak antara tombol */
+        }
 
-            .p-1 {
-                padding: 0.5rem !important;
-            }
-        </style>
+        .p-1 {
+            padding: 0.5rem !important;
+        }
+    </style>
     @endsection
     @section('title', 'Tanding')
     <div id="jadwal" data-id="{{ $jadwal->id }}" gelanggang-id={{ $gelanggang->id }} class="p-3 "
         style="
         position: relative;
-    ">
+        ">
         <div class="row justify-content-md-between ml-2 mr-2 mt-2">
             <div class=" col-md-3 text-center">
                 <h5 class="fw-bold text-white  p-3 rounded kontingen"
                     style="background-color: #0053a6; margin-left: 14px">{{ $sudut_biru->nama }},
-                    {{ $sudut_merah->kontingen }}</h5>
+                    {{ $sudut_biru->kontingen }}</h5>
             </div>
             <div class="col-md-4 d-flex justify-content-center">
                 <h3 class="fw-bold">{{ $user->permissions }} {{ $gelanggang->nama }}</h3>
             </div>
             <div class="col-md-3 text-center">
                 <h5 class="fw-bold p-3 bg-danger rounded text-white kontingen" style="margin-right: 2px">
-                    {{ $sudut_merah->nama }}, {{ $sudut_biru->kontingen }}</h5>
+                    {{ $sudut_merah->nama }}, {{ $sudut_merah->kontingen }}</h5>
             </div>
         </div>
         <div class="d-flex flex-row justify-content-center ml-2 mr-2 row" style="width:100%; margin-top: -24px">
@@ -76,8 +76,7 @@
                                 <th scope="col" class="text-center mw-20" style="border: 2px solid #000; width:20%">
                                     Babak
                                 </th>
-                                <th scope="col" class="bg-danger text-center text-white tabel-head mw-40"
-                                    style="
+                                <th scope="col" class="bg-danger text-center text-white tabel-head mw-40" style="
                                     border: 2px solid #000;
                                     width:40%
                                 ">
@@ -90,9 +89,9 @@
                                 <td class="tabel-1-1 fw-bold fs-5 text-right" style="border: 2px solid #000">
                                     <h5 class="fw-bold p-1">
                                         @foreach ($penilaian_tanding_biru as $penilaian)
-                                            @if ($penilaian->babak == 1)
-                                                {{ $penilaian->$juri }}
-                                            @endif
+                                        @if ($penilaian->babak == 1)
+                                        {{ $penilaian->$juri }}
+                                        @endif
                                         @endforeach
                                     </h5>
                                 </td>
@@ -103,9 +102,9 @@
                                 <td class="tabel-1-2 fw-bold fs-5 " style="border: 2px solid #000">
                                     <h5 class="fw-bold p-1">
                                         @foreach ($penilaian_tanding_merah as $penilaian)
-                                            @if ($penilaian->babak == 1)
-                                                {{ $penilaian->$juri }}
-                                            @endif
+                                        @if ($penilaian->babak == 1)
+                                        {{ $penilaian->$juri }}
+                                        @endif
                                         @endforeach
                                     </h5>
                                 </td>
@@ -113,9 +112,9 @@
                             <tr style="border: 2px solid #000">
                                 <td class="tabel-2-1 fw-bold fs-5 text-right" style="border: 2px solid #000">
                                     @foreach ($penilaian_tanding_biru as $penilaian)
-                                        @if ($penilaian->babak == 2)
-                                            {{ $penilaian->$juri }}
-                                        @endif
+                                    @if ($penilaian->babak == 2)
+                                    {{ $penilaian->$juri }}
+                                    @endif
                                     @endforeach
                                 </td>
                                 <td class="text-center babak-2 {{ $jadwal->babak_tanding == 2 ? 'babak-active' : '' }}"
@@ -124,18 +123,18 @@
                                 </td>
                                 <td class="tabel-2-2 fw-bold fs-5" style="border: 2px solid #000">
                                     @foreach ($penilaian_tanding_merah as $penilaian)
-                                        @if ($penilaian->babak == 2)
-                                            {{ $penilaian->$juri }}
-                                        @endif
+                                    @if ($penilaian->babak == 2)
+                                    {{ $penilaian->$juri }}
+                                    @endif
                                     @endforeach
                                 </td>
                             </tr>
                             <tr style="border: 2px solid #000">
                                 <td class="tabel-3-1 fw-bold fs-5 text-right" style="border: 2px solid #000">
                                     @foreach ($penilaian_tanding_biru as $penilaian)
-                                        @if ($penilaian->babak == 3)
-                                            {{ $penilaian->$juri }}
-                                        @endif
+                                    @if ($penilaian->babak == 3)
+                                    {{ $penilaian->$juri }}
+                                    @endif
                                     @endforeach
                                 </td>
                                 <td class="text-center babak-3 {{ $jadwal->babak_tanding == 3 ? 'babak-active' : '' }}"
@@ -144,9 +143,9 @@
                                 </td>
                                 <td class="tabel-3-2 fw-bold fs-5" style="border: 2px solid #000">
                                     @foreach ($penilaian_tanding_merah as $penilaian)
-                                        @if ($penilaian->babak == 3)
-                                            {{ $penilaian->$juri }}
-                                        @endif
+                                    @if ($penilaian->babak == 3)
+                                    {{ $penilaian->$juri }}
+                                    @endif
                                     @endforeach
                                 </td>
                             </tr>
@@ -216,8 +215,8 @@
 
 
 @section('script')
-    <script>
-        setInterval(() => {
+<script>
+    setInterval(() => {
             if (@this.get('error').length > 0) {
                 $(`#error-modal-${@this.get('juri')}`).modal("show");
                 $('#close').on('click', () => {
@@ -254,5 +253,5 @@
                 }
             }
         });
-    </script>
+</script>
 @endsection

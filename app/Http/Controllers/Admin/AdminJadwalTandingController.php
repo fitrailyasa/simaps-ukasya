@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JadwalTanding;
 use App\Models\PengundianTanding;
 use App\Models\Gelanggang;
+use App\Models\PenilaianTanding;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\JadwalTandingImport;
@@ -135,6 +136,7 @@ class AdminJadwalTandingController extends Controller
     public function destroyAll()
     {
         JadwalTanding::truncate();
+        PenilaianTanding::truncate();
 
         if (auth()->user()->roles_id == 1) {
             return redirect()->route('admin.jadwal-tanding.index')->with('sukses', 'Berhasil Hapus Semua Data Jadwal!');
