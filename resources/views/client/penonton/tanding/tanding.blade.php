@@ -65,23 +65,17 @@
         <div class="sudut_biru d-flex" style="width: 45%;height: 100%;">
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
-                    @if
-                    ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() ==
-                    0)
+                    @if($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
                     <img src="{{url('/assets/img/tangan1.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75"
                         style="margin-top: 20%; margin-left: -16px">
-                    @elseif
-                    ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() ==
-                    1)
+                    @elseif($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 1)
                     <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75"
                         style="margin-top: 20%; margin-left: -16px">
-                    @elseif
-                    ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() ==
-                    2)
+                    @elseif($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 2)
                     <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75"
@@ -94,23 +88,17 @@
                     @endif
                 </div>
                 <div class="teguran d-flex gap-4 justify-content-center border" style="height: 33%">
-                    @if
-                    ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 0)
+                    @if ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 0)
                     <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
-                    @elseif
-                    ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 1)
+                    @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
                     <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
-                    @elseif
-                    ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 2)
+                    @elseif ($penilaian_tanding_biru->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
                     <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80"
@@ -197,23 +185,17 @@
             </div>
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
-                    @if
-                    ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count()
-                    == 0)
+                    @if ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
                     <img src="{{url('/assets/img/tangan1.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75"
                         style="margin-top: 20%; margin-left: -16px">
-                    @elseif
-                    ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count()
-                    == 1)
+                    @elseif ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 1)
                     <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75"
                         style="margin-top: 20%; margin-left: -16px">
-                    @elseif
-                    ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count()
-                    == 2)
+                    @elseif ($penilaian_tanding_merah->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 2)
                     <img src="{{url('/assets/img/tangan1k.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4k.webp')}}" alt="" height="50" width="75"
@@ -226,23 +208,17 @@
                     @endif
                 </div>
                 <div class="teguran d-flex gap-4 justify-content-center border" style="height: 33%">
-                    @if
-                    ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 0)
+                    @if ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 0)
                     <img src="{{ url('/assets/img/tangan1.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
-                    @elseif
-                    ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 1)
+                    @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 1)
                     <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan4.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;margin-left: -28px; transform: rotate(-90deg);">
-                    @elseif
-                    ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count()
-                    == 2)
+                    @elseif ($penilaian_tanding_merah->where('jenis','teguran')->where('babak',$jadwal->babak_tanding)->count() == 2)
                     <img src="{{ url('/assets/img/tangan1m.webp') }}" alt="" height="40" width="80"
                         style="margin-top: 15%;  transform: rotate(-90deg);">
                     <img src="{{ url('/assets/img/tangan2m.webp') }}" alt="" height="40" width="80"
