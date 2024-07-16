@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JadwalTGR;
+use App\Models\PenaltyGanda;
+use App\Models\PenaltyRegu;
+use App\Models\PenaltySolo;
+use App\Models\PenaltyTunggal;
 use App\Models\PengundianTGR;
 use App\Models\Gelanggang;
 use App\Models\PenilaianGanda;
@@ -122,6 +126,63 @@ class AdminJadwalTGRController extends Controller
     public function destroy($id)
     {
         $jadwaltgr = JadwalTGR::findOrFail($id);
+        switch ($jadwaltgr->jenis) {
+            case 'Solo Kreatif':
+                $penilaian = PenilaianSolo::where('jadwal_solo', $id)->get();
+                $penalty = PenaltySolo::where('jadwal_solo', $id)->get();
+                if ($penilaian->count() > 0) {
+                    foreach ($penilaian as $item) {
+                        $item->delete();
+                    }
+                }
+                if ($penalty->count() > 0) {
+                    foreach ($penalty as $item) {
+                        $item->delete();
+                    }
+                }
+            case 'Tunggal':
+                $penilaian = PenilaianTunggal::where('jadwal_tunggal', $id)->get();
+                if ($penilaian->count() > 0) {
+                    foreach ($penilaian as $item) {
+                        $item->delete();
+                    }
+                }
+                $penalty = PenaltyTunggal::where('jadwal_tunggal', $id)->get();
+                if ($penalty->count() > 0) {
+                    foreach ($penalty as $item) {
+                        $item->delete();
+                    }
+                }
+                break;
+            case 'Ganda':
+                $penilaian = PenilaianGanda::where('jadwal_ganda', $id)->get();
+                if ($penilaian->count() > 0) {
+                    foreach ($penilaian as $item) {
+                        $item->delete();
+                    }
+                }
+                $penalty = PenaltyGanda::where('jadwal_ganda', $id)->get();
+                if ($penalty->count() > 0) {
+                    foreach ($penalty as $item) {
+                        $item->delete();
+                    }
+                }
+                break;
+            case 'Regu':
+                $penilaian = PenilaianRegu::where('jadwal_regu', $id)->get();
+                if ($penilaian->count() > 0) {
+                    foreach ($penilaian as $item) {
+                        $item->delete();
+                    }
+                }
+                $penalty = PenaltyRegu::where('jadwal_regu', $id)->get();
+                if ($penalty->count() > 0) {
+                    foreach ($penalty as $item) {
+                        $item->delete();
+                    }
+                }
+                break;
+        }
         $jadwaltgr->delete();
 
         return back()->with('sukses', 'Berhasil Hapus Data Jadwal!');

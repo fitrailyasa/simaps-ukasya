@@ -124,6 +124,10 @@ class AdminJadwalTandingController extends Controller
     public function destroy($id)
     {
         $jadwaltanding = JadwalTanding::findOrFail($id);
+        $penilaiantanding = PenilaianTanding::where('jadwal_tanding', $id)->get();
+        foreach ($penilaiantanding as $penilaian) {
+            $penilaian->delete();
+        }
         $jadwaltanding->delete();
 
         if (auth()->user()->roles_id == 1) {
