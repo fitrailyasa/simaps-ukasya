@@ -31,11 +31,11 @@
                 alt=""
                 style=" margin-top: 4px;height: 150px;width: 150px;border-radius: 50%; background-color: #0053a6">
         </div>
-        <h1 style="color: #0053a6">{{$sudut_biru->nama}}</h1>
-        <h1>{{$sudut_biru->kontingen}}</h1>
+        <h1 class="fw-bold" style="color: #0053a6">{{$sudut_biru->nama}}</h1>
+        <h1 class="fw-bold">{{$sudut_biru->kontingen}}</h1>
         <div class="score d-flex justify-content-center flex-column"
             style="height: 50%;width:100%;border: solid 3px #0053a6">
-            <p class="text-hasil p-2" style="font-size: 18rem;color: #0053a6">{{$total_biru}}</p>
+            <p class="text-hasil p-2 fw-bold" style="font-size: 18rem;color: #0053a6">{{$total_biru}}</p>
         </div>
     </div>
     <div class="hasil  d-flex justify-content-center flex-column text-center" style="height: 100%;width:24%">
