@@ -65,7 +65,7 @@
         <div class="sudut_biru d-flex" style="width: 45%;height: 100%;">
             <div class="indikator border" style="width: 20%; height: 100%;">
                 <div class="binaan d-flex gap-1 justify-content-center border" style="height: 33%">
-                    @if($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
+                    @if ($penilaian_tanding_biru->where('jenis','binaan')->where('babak',$jadwal->babak_tanding)->count() == 0)
                     <img src="{{url('/assets/img/tangan1.webp')}}" alt="" class="ml-4" height="50" width="75"
                         style="margin-top: 20%">
                     <img src="{{url('/assets/img/tangan4.webp')}}" alt="" height="50" width="75"
