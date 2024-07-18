@@ -14,20 +14,22 @@ class OperatorJadwalTanding extends Component
     public $pengundiantandings;
     public $jadwaltandings;
 
-    public function mount(){
+    public function mount()
+    {
         $this->gelanggang_operator = Gelanggang::find(auth()->user()->gelanggang) ?? null;
         $this->pengundiantandings = PengundianTanding::latest('id')->get();
-        $this->jadwaltandings = JadwalTanding::orderBy('partai')->get();
+        $this->jadwaltandings = JadwalTanding::orderBy('partai')->where('gelanggang', $this->gelanggang_operator->id)->get();
     }
     public function getListeners()
     {
         return [
-           "echo:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
+            "echo:gelanggang-{$this->gelanggang_operator->id},.ganti-gelanggang" => 'gantiGelanggangHandler',
         ];
     }
 
-    public function gantiGelanggangHandler($data){
-        if($data['gelanggang']['jenis'] != 'Tanding'){
+    public function gantiGelanggangHandler($data)
+    {
+        if ($data['gelanggang']['jenis'] != 'Tanding') {
             return redirect('/op/kontrol-tgr');
         }
         $this->jadwaltandings = JadwalTanding::orderBy('partai')->get();
