@@ -11,7 +11,7 @@
                     <h5 style="font-size: 2rem;font-weight: 700" class="pt-2 fw-bold">PENCAK SILAT</h5>
                 </div>
                 <div class="nav-down mt-2">
-                    <h5 style="font-size: 2rem;font-weight: 700" class="fw-bold">{{$jadwal->babak}} - Partai {{$jadwal->partai}} Tanding - {{$sudut_biru->kelas}}</h5>
+                    <h5 style="font-size: 2rem;font-weight: 700" class="fw-bold">{{$gelanggang->nama}} - {{$jadwal->babak}} - Partai {{$jadwal->partai}} - {{$sudut_biru->kelas}} - {{$sudut_biru->golongan}}</h5>
                 </div>
               </div>
               <a class="navbar-brand" href="#">

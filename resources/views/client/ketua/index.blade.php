@@ -8,13 +8,10 @@
         <div class="text-center mb-3">
             <h1 class="">Halaman Ketua Pertandingan</h1>
             <p>Selamat Datang di Aplikasi SIMAPS</p>
-            <a href="#" class="btn btn-primary">Beranda</a>
-
-            <a href="/ketuapertandingan/1" class="btn btn-primary">Arena A</a>
-            <a href="/ketuapertandingan/2" class="btn btn-primary">Arena B</a>
-            <a href="/ketuapertandingan/3" class="btn btn-primary">Arena C</a>
-            <a href="/ketuapertandingan/4" class="btn btn-primary">Arena D</a>
-            <a href="/ketuapertandingan/5" class="btn btn-primary">Arena E</a>
+            <a href="/login" class="btn btn-primary">Beranda</a>
+            @foreach ($gelanggangs as $gelanggang)
+                <a href={{'/ketuapertandingan/'.$gelanggang->id}} class="btn btn-primary">{{$gelanggang->nama}}</a>
+            @endforeach
         </div>
     </div>
 @endsection

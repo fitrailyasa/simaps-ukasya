@@ -284,6 +284,8 @@ class OperatorsoloKontrol extends Component
             }
         } else if ($tahap == "tampil") {
             $this->mulai = true;
+            $this->penalty_solo_merah = PenaltySolo::where('jadwal_solo', $this->jadwal_solo->id)->where('sudut', $this->sudut_merah->id)->first();
+            $this->penalty_solo_biru = PenaltySolo::where('jadwal_solo', $this->jadwal_solo->id)->where('sudut', $this->sudut_biru->id)->first();
         } else if ($tahap == "tampil nilai") {
             $this->jadwal_solo->tahap = "tampil nilai";
             $this->jadwal_solo->save();

@@ -1,5 +1,5 @@
 <?php
-
+// Ukasya
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
     public function index()
     {
         return view('auth.login');

@@ -1,5 +1,6 @@
 {
     "private": true,
+    "author": "Mustavid",
     "type": "module",
     "scripts": {
         "dev": "vite",

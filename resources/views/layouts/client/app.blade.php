@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{{-- Author : Mustavid --}}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mustavid" />
+    <meta name="copyright" content="Mustavid" />
     <title>SIMAPS | @yield('title')</title>
     @yield('style')
     @vite('resources/js/app.js')

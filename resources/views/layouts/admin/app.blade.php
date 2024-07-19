@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{{-- Author : Mustavid --}}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mustavid" />
+    <meta name="copyright" content="Mustavid" />
     <title>Data @yield('title')</title>
     @vite('resources/js/app.js')
 
@@ -157,7 +159,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer fixed-bottom">
-            <strong>Copyright &copy; 2024 <a href="#">SIMAPS</a>.</strong>
+            <strong>Copyright &copy; 2024 <a href="#">MKU</a>.</strong>
             All rights reserved.
         </footer>
 
