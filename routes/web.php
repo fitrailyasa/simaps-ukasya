@@ -87,7 +87,7 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::get('/logout', [LoginController::class, 'logout']);
   Route::get('/auth', [AuthController::class, 'checkUser'])->name('checkuser');
 
   // CMS ADMIN
@@ -212,7 +212,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Kontrol Tgr
     Route::get('/kontrol-tgr', OperatorJadwalTGR::class)->name('kontrol-tgr.index');
-;
+    ;
     Route::post('/ubah-tgr/{jadwal_tgr_id}/{jenis}', [AdminKontrolTGRController::class, 'ubahtahap']);
     Route::post('/stop-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'stop_pertandingan']);
     Route::post('/reset-tgr/{jadwal_tgr_id}', [AdminKontrolTGRController::class, 'reset']);
